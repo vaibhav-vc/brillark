@@ -1,0 +1,331 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://brillark.ai/schemas/business-model.schema.json",
+  "title": "Business Model",
+  "description": "The nine canvas blocks, each carrying its own evidence grade.",
+  "type": "object",
+  "required": [
+    "venture_id",
+    "version",
+    "blocks"
+  ],
+  "properties": {
+    "venture_id": {
+      "type": "string"
+    },
+    "version": {
+      "type": "integer"
+    },
+    "blocks": {
+      "type": "object",
+      "required": [
+        "customer_segments",
+        "value_propositions",
+        "channels",
+        "customer_relationships",
+        "revenue_streams",
+        "key_resources",
+        "key_activities",
+        "key_partners",
+        "cost_structure"
+      ],
+      "properties": {
+        "customer_segments": {
+          "type": "object",
+          "required": [
+            "content",
+            "evidence_grade"
+          ],
+          "properties": {
+            "content": {
+              "type": "string"
+            },
+            "evidence_grade": {
+              "type": "string",
+              "enum": [
+                "measured",
+                "sourced",
+                "benchmarked",
+                "estimated",
+                "guessed"
+              ],
+              "description": "How well this is evidenced. 'guessed' may never be load-bearing at a stage gate."
+            },
+            "source_artifacts": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "value_propositions": {
+          "type": "object",
+          "required": [
+            "content",
+            "evidence_grade"
+          ],
+          "properties": {
+            "content": {
+              "type": "string"
+            },
+            "evidence_grade": {
+              "type": "string",
+              "enum": [
+                "measured",
+                "sourced",
+                "benchmarked",
+                "estimated",
+                "guessed"
+              ],
+              "description": "How well this is evidenced. 'guessed' may never be load-bearing at a stage gate."
+            },
+            "source_artifacts": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "channels": {
+          "type": "object",
+          "required": [
+            "content",
+            "evidence_grade"
+          ],
+          "properties": {
+            "content": {
+              "type": "string"
+            },
+            "evidence_grade": {
+              "type": "string",
+              "enum": [
+                "measured",
+                "sourced",
+                "benchmarked",
+                "estimated",
+                "guessed"
+              ],
+              "description": "How well this is evidenced. 'guessed' may never be load-bearing at a stage gate."
+            },
+            "source_artifacts": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "customer_relationships": {
+          "type": "object",
+          "required": [
+            "content",
+            "evidence_grade"
+          ],
+          "properties": {
+            "content": {
+              "type": "string"
+            },
+            "evidence_grade": {
+              "type": "string",
+              "enum": [
+                "measured",
+                "sourced",
+                "benchmarked",
+                "estimated",
+                "guessed"
+              ],
+              "description": "How well this is evidenced. 'guessed' may never be load-bearing at a stage gate."
+            },
+            "source_artifacts": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "revenue_streams": {
+          "type": "object",
+          "required": [
+            "content",
+            "evidence_grade"
+          ],
+          "properties": {
+            "content": {
+              "type": "string"
+            },
+            "evidence_grade": {
+              "type": "string",
+              "enum": [
+                "measured",
+                "sourced",
+                "benchmarked",
+                "estimated",
+                "guessed"
+              ],
+              "description": "How well this is evidenced. 'guessed' may never be load-bearing at a stage gate."
+            },
+            "source_artifacts": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "key_resources": {
+          "type": "object",
+          "required": [
+            "content",
+            "evidence_grade"
+          ],
+          "properties": {
+            "content": {
+              "type": "string"
+            },
+            "evidence_grade": {
+              "type": "string",
+              "enum": [
+                "measured",
+                "sourced",
+                "benchmarked",
+                "estimated",
+                "guessed"
+              ],
+              "description": "How well this is evidenced. 'guessed' may never be load-bearing at a stage gate."
+            },
+            "source_artifacts": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "key_activities": {
+          "type": "object",
+          "required": [
+            "content",
+            "evidence_grade"
+          ],
+          "properties": {
+            "content": {
+              "type": "string"
+            },
+            "evidence_grade": {
+              "type": "string",
+              "enum": [
+                "measured",
+                "sourced",
+                "benchmarked",
+                "estimated",
+                "guessed"
+              ],
+              "description": "How well this is evidenced. 'guessed' may never be load-bearing at a stage gate."
+            },
+            "source_artifacts": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "key_partners": {
+          "type": "object",
+          "required": [
+            "content",
+            "evidence_grade"
+          ],
+          "properties": {
+            "content": {
+              "type": "string"
+            },
+            "evidence_grade": {
+              "type": "string",
+              "enum": [
+                "measured",
+                "sourced",
+                "benchmarked",
+                "estimated",
+                "guessed"
+              ],
+              "description": "How well this is evidenced. 'guessed' may never be load-bearing at a stage gate."
+            },
+            "source_artifacts": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "cost_structure": {
+          "type": "object",
+          "required": [
+            "content",
+            "evidence_grade"
+          ],
+          "properties": {
+            "content": {
+              "type": "string"
+            },
+            "evidence_grade": {
+              "type": "string",
+              "enum": [
+                "measured",
+                "sourced",
+                "benchmarked",
+                "estimated",
+                "guessed"
+              ],
+              "description": "How well this is evidenced. 'guessed' may never be load-bearing at a stage gate."
+            },
+            "source_artifacts": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "riskiest_block": {
+      "type": "string"
+    },
+    "coherence_conflicts": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "change_log": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "date",
+          "change",
+          "trigger"
+        ],
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date"
+          },
+          "change": {
+            "type": "string"
+          },
+          "trigger": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,78 @@
+name: MVP build
+stage: mvp
+owner: engineering-head
+purpose: Build the scoped slice to a quality bar that survives real users.
+steps:
+- id: data
+  agent: data-model-designer
+  skills:
+  - data-model-design
+  - access-pattern-analysis
+  - migration-planning
+  - data-classification
+  does: Design the data model around real access patterns.
+  produces: data-model.md
+  done_when: Access patterns enumerated; every field classified.
+- id: api
+  agent: api-designer
+  skills:
+  - openapi-specification
+  - error-taxonomy-design
+  - api-versioning-policy
+  - idempotency-design
+  does: Specify the interface formally, including its errors.
+  produces: openapi.yaml
+  done_when: Error responses documented with remediation; versioning policy set.
+- id: backend
+  agent: backend-implementation-agent
+  skills:
+  - service-implementation
+  - transaction-design
+  - input-validation-review
+  - structured-logging
+  does: Implement to the contract with safe retries and explicit failures.
+  produces: service-code
+  done_when: Contract conformance under test; write paths retry-safe.
+- id: frontend
+  agent: frontend-implementation-agent
+  skills:
+  - ui-implementation
+  - state-handling-review
+  - accessibility-review
+  - frontend-performance-budget
+  does: Build the interface including empty, loading, and error states.
+  produces: ui-code
+  done_when: All five states implemented; accessibility verified; bundle within budget.
+- id: infra
+  agent: infra-devops-agent
+  skills:
+  - infrastructure-as-code
+  - cicd-pipeline-design
+  - disaster-recovery-testing
+  does: Make the environment reproducible and the pipeline gate quality.
+  produces: infrastructure-code
+  done_when: No hand-created resources; restore actually tested.
+- id: test
+  agent: qa-test-strategist
+  skills:
+  - test-strategy
+  - test-pyramid-balancing
+  - test-data-management
+  - flaky-test-elimination
+  does: Test the risk, at the cheapest level that catches it.
+  produces: test-strategy.md
+  done_when: Gating suite trustworthy; no test skipped to achieve green.
+- id: observe
+  agent: observability-agent
+  skills:
+  - instrumentation-standard
+  - slo-definition
+  - alert-design
+  - distributed-tracing-setup
+  does: Make the system explain itself before real users arrive.
+  produces: slo.md
+  done_when: Critical journeys instrumented; every alert actionable.
+exit_criteria:
+- Acceptance criteria pass including unhappy paths.
+- Rollback path verified.
+- Run cost per active user reported to finance.

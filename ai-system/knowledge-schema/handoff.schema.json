@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://brillark.ai/schemas/handoff.schema.json",
+  "title": "Handoff",
+  "description": "A transfer of work between agents, validated before acceptance.",
+  "type": "object",
+  "required": [
+    "id",
+    "from_agent",
+    "to_agent",
+    "artifact",
+    "dod_met"
+  ],
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "from_agent": {
+      "type": "string"
+    },
+    "to_agent": {
+      "type": "string"
+    },
+    "artifact": {
+      "type": "string"
+    },
+    "dod_met": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "criterion",
+          "met"
+        ],
+        "properties": {
+          "criterion": {
+            "type": "string"
+          },
+          "met": {
+            "type": "boolean"
+          },
+          "evidence": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "assumptions_stated": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "open_questions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "offered",
+        "accepted",
+        "rejected"
+      ]
+    },
+    "rejection_reason": {
+      "type": "string",
+      "description": "The specific missing element. Never a general complaint."
+    }
+  },
+  "additionalProperties": false
+}

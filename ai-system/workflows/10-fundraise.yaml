@@ -1,0 +1,69 @@
+name: Fundraise
+stage: any
+owner: cfo-agent
+purpose: Raise capital against a milestone, from a position of strength rather than pressure.
+steps:
+- id: plan
+  agent: fundraising-strategist
+  skills:
+  - capital-plan
+  - fundraising-plan
+  - dilution-modeling
+  does: Size the raise to a milestone and model the dilution forward.
+  produces: capital-plan.md
+  done_when: Raise starts with nine or more months of runway.
+- id: captable
+  agent: cap-table-steward
+  skills:
+  - cap-table-reconciliation
+  - option-pool-planning
+  - convertible-conversion-modeling
+  - waterfall-analysis
+  does: Reconcile ownership to signed documents and model the pro-forma.
+  produces: cap-table-reconciliation.md
+  done_when: Every line matched to a signed document.
+- id: dataroom
+  agent: fundraising-strategist
+  skills:
+  - data-room-preparation
+  - technical-due-diligence
+  does: Assemble diligence before outreach and reconcile across documents.
+  produces: data-room-index.md
+  done_when: Known issues prepared with an explanation, not hidden.
+- id: numbers
+  agent: finance-head
+  skills:
+  - model-reconciliation
+  - figure-reconciliation
+  - scenario-analysis
+  does: Make sure no number leaves the building unreconciled.
+  produces: reconciliation-trail.md
+  done_when: Every external figure traced to source.
+- id: test
+  agent: council-economics-skeptic
+  skills:
+  - model-recomputation
+  - benchmark-comparison
+  - circular-logic-detection
+  does: Break the model before an investor does.
+  produces: recomputation-report.md
+  done_when: Arithmetic errors caught; optimistic gaps justified or corrected.
+- id: story
+  agent: fundraising-strategist
+  skills:
+  - narrative-pressure-test
+  - ask-framing
+  does: Rehearse the honest answers to the three hardest questions.
+  produces: narrative-test.md
+  done_when: Weak answers identified rather than hidden.
+- id: target
+  agent: fundraising-strategist
+  skills:
+  - investor-targeting
+  does: Target partners by thesis fit, not funds by size.
+  produces: investor-list.md
+  done_when: Targeted at partner level with conflicts checked.
+exit_criteria:
+- Data room complete before first meeting.
+- Every figure reconciled.
+- Dilution modelled two rounds forward.

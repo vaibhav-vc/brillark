@@ -1,0 +1,65 @@
+name: Legal and compliance baseline
+stage: any
+owner: general-counsel-agent
+purpose: Establish the legal and compliance floor before the venture is exposed to it.
+steps:
+- id: entity
+  agent: general-counsel-agent
+  skills:
+  - entity-structure-review
+  - legal-risk-register
+  does: Check the structure fits what the business actually does.
+  produces: entity-review.md
+  done_when: Operational presence assessed per jurisdiction.
+- id: ip
+  agent: ip-counsel-agent
+  skills:
+  - ip-assignment-check
+  - invention-disclosure
+  - trademark-clearance
+  - oss-license-compliance
+  - trade-secret-hygiene
+  does: Confirm we own what we built and may use the name.
+  produces: ip-assignment-audit.md
+  done_when: Every contributor covered; marks cleared before launch.
+- id: applicability
+  agent: chief-compliance-officer-agent
+  skills:
+  - regulatory-applicability-mapping
+  - control-framework-design
+  - policy-authoring
+  does: Determine which rules actually apply and build one control per requirement.
+  produces: applicability-map.md
+  done_when: Non-applicability recorded with a reason.
+- id: privacy
+  agent: data-protection-officer-agent
+  skills:
+  - data-inventory
+  - data-classification
+  - consent-design
+  - processor-due-diligence
+  does: Record processing, minimise it, and vet every processor.
+  produces: data-inventory.md
+  done_when: Purpose and lawful basis recorded per field.
+- id: evidence
+  agent: chief-compliance-officer-agent
+  skills:
+  - evidence-collection
+  - audit-readiness-review
+  does: Collect control evidence as it happens, not at audit time.
+  produces: evidence-register.md
+  done_when: Missing evidence treated as control failure.
+- id: governance
+  agent: corporate-secretary-agent
+  skills:
+  - minute-taking
+  - resolution-drafting
+  - signature-authority-matrix
+  - filing-calendar
+  does: Keep the corporate record current and the deadlines met.
+  produces: filing-calendar.md
+  done_when: Internal deadlines precede statutory ones.
+exit_criteria:
+- Every applicable requirement maps to a control with evidence.
+- IP assignment complete.
+- Counsel-grade items explicitly escalated.

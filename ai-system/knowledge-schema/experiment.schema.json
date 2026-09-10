@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://brillark.ai/schemas/experiment.schema.json",
+  "title": "Experiment",
+  "description": "A pre-registered test, so the analysis cannot be chosen after seeing the result.",
+  "type": "object",
+  "required": [
+    "id",
+    "hypothesis",
+    "primary_metric",
+    "threshold",
+    "sample_size",
+    "status"
+  ],
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "hypothesis": {
+      "type": "string"
+    },
+    "assumption_id": {
+      "type": "string"
+    },
+    "primary_metric": {
+      "type": "string"
+    },
+    "threshold": {
+      "type": "string",
+      "description": "Set before launch. Changing it afterwards invalidates the result."
+    },
+    "sample_size": {
+      "type": "integer"
+    },
+    "randomisation_unit": {
+      "type": "string"
+    },
+    "duration_days": {
+      "type": "integer"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "designed",
+        "running",
+        "concluded",
+        "abandoned"
+      ]
+    },
+    "result": {
+      "type": "string"
+    },
+    "decision_taken": {
+      "type": "string",
+      "description": "Recorded even when the result was inconvenient."
+    }
+  },
+  "additionalProperties": false
+}

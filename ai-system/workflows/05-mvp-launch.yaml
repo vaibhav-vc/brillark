@@ -1,0 +1,81 @@
+name: MVP launch
+stage: launch
+owner: director
+purpose: Put the slice in front of real users safely, with the learning instrumented.
+steps:
+- id: legal
+  agent: general-counsel-agent
+  skills:
+  - claims-substantiation-review
+  - contract-review
+  - ip-assignment-check
+  does: Check the claims, the terms, and that we own what we built.
+  produces: legal-risk-register.md
+  done_when: Every external claim substantiated; IP assignment complete.
+- id: privacy
+  agent: data-protection-officer-agent
+  skills:
+  - data-inventory
+  - privacy-impact-assessment
+  - consent-design
+  - data-subject-rights-process
+  does: Confirm processing is recorded, minimised, and lawfully based.
+  produces: dpia.md
+  done_when: Rights request process tested end to end.
+- id: security
+  agent: ciso-agent
+  skills:
+  - security-review
+  - vulnerability-triage
+  does: Sign off or block the release on security grounds.
+  produces: security-review.md
+  done_when: No unmitigated critical findings; accepted risks have owners and expiry.
+- id: readiness
+  agent: release-manager
+  skills:
+  - release-readiness-review
+  - rollback-verification
+  - progressive-rollout-design
+  - feature-flag-management
+  does: Run the gate honestly and stage the exposure.
+  produces: release-readiness.md
+  done_when: Rollback exercised; automatic rollback condition defined.
+- id: gtm
+  agent: gtm-strategist
+  skills:
+  - gtm-planning
+  - beachhead-selection
+  - channel-test-design
+  - motion-selection
+  does: Launch into one beachhead with channel tests that can be killed.
+  produces: gtm-plan.md
+  done_when: Every channel test has a budget and a kill criterion.
+- id: message
+  agent: positioning-messaging-agent
+  skills:
+  - positioning-statement
+  - message-hierarchy
+  - message-testing
+  does: Test the message before paying to distribute it.
+  produces: positioning.md
+  done_when: Comprehension tested with ICP-matching participants.
+- id: onboard
+  agent: customer-success-agent
+  skills:
+  - onboarding-design
+  - health-scoring
+  does: Define first value and instrument the time to reach it.
+  produces: onboarding-design.md
+  done_when: Time to first value instrumented; drop-off measured per step.
+- id: gate
+  agent: director
+  skills:
+  - stage-gate-review
+  - decision-record-writing
+  does: Decide go, no-go, pivot, or kill on the evidence.
+  produces: stage-gate-decision.md
+  done_when: Decision names its deciding evidence and its reversal condition.
+exit_criteria:
+- Real users have used it.
+- The success signal is being measured.
+- Rollback remains available.

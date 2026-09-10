@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://brillark.ai/schemas/agent-profile.schema.json",
+  "title": "Agent Profile",
+  "description": "The registry entry for one agent. Validated by tests/test_system_integrity.py.",
+  "type": "object",
+  "required": [
+    "id",
+    "title",
+    "tier",
+    "domain",
+    "reports_to",
+    "skills",
+    "memory_scopes"
+  ],
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "tier": {
+      "type": "string",
+      "enum": [
+        "director",
+        "head",
+        "executive",
+        "council",
+        "specialist"
+      ]
+    },
+    "domain": {
+      "type": "string",
+      "enum": [
+        "governance",
+        "finance",
+        "business",
+        "engineering",
+        "orchestration",
+        "council"
+      ]
+    },
+    "reports_to": {
+      "type": "string"
+    },
+    "model": {
+      "type": "string"
+    },
+    "path": {
+      "type": "string"
+    },
+    "skills": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1
+    },
+    "memory_scopes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1
+    }
+  },
+  "additionalProperties": false
+}

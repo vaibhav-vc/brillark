@@ -1,0 +1,90 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://brillark.ai/schemas/artifact.schema.json",
+  "title": "Artifact",
+  "description": "Any output produced by a skill, registered so it becomes retrievable memory.",
+  "type": "object",
+  "required": [
+    "id",
+    "path",
+    "produced_by",
+    "skill",
+    "created_at",
+    "confidence"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^art_[a-z0-9-]+$"
+    },
+    "path": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "produced_by": {
+      "type": "string"
+    },
+    "skill": {
+      "type": "string"
+    },
+    "venture_id": {
+      "type": "string"
+    },
+    "stage": {
+      "type": "string"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "confidence": {
+      "type": "string",
+      "enum": [
+        "measured",
+        "sourced",
+        "benchmarked",
+        "estimated",
+        "guessed"
+      ],
+      "description": "How well this is evidenced. 'guessed' may never be load-bearing at a stage gate."
+    },
+    "supersedes": {
+      "type": "string"
+    },
+    "reviewed_by_council": {
+      "type": "string"
+    },
+    "claims": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "claim",
+          "grade"
+        ],
+        "properties": {
+          "claim": {
+            "type": "string"
+          },
+          "grade": {
+            "type": "string",
+            "enum": [
+              "measured",
+              "sourced",
+              "benchmarked",
+              "estimated",
+              "guessed"
+            ],
+            "description": "How well this is evidenced. 'guessed' may never be load-bearing at a stage gate."
+          },
+          "source": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "additionalProperties": false
+}

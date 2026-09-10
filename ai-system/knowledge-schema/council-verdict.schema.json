@@ -1,0 +1,126 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://brillark.ai/schemas/council-verdict.schema.json",
+  "title": "Council Verdict",
+  "description": "The decision-grade output of a Council review. No stage gate advances without one.",
+  "type": "object",
+  "required": [
+    "id",
+    "subject_artifact",
+    "requested_decision",
+    "verdict",
+    "findings",
+    "issued_by",
+    "issued_at"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^ver_[a-z0-9-]+$"
+    },
+    "subject_artifact": {
+      "type": "string"
+    },
+    "requested_decision": {
+      "type": "string",
+      "description": "What the submitter wants to do. Reviews without one are refused."
+    },
+    "verdict": {
+      "type": "string",
+      "enum": [
+        "approve",
+        "approve_with_conditions",
+        "reject"
+      ]
+    },
+    "findings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "severity",
+          "finding",
+          "failure_scenario",
+          "raised_by"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "severity": {
+            "type": "string",
+            "enum": [
+              "blocker",
+              "major",
+              "minor",
+              "note"
+            ]
+          },
+          "finding": {
+            "type": "string"
+          },
+          "failure_scenario": {
+            "type": "string",
+            "minLength": 20,
+            "description": "The concrete sequence by which this causes harm. An adjective is not a finding."
+          },
+          "raised_by": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "remedy": {
+            "type": "string",
+            "description": "Required for blocker and major severities."
+          },
+          "owner": {
+            "type": "string"
+          },
+          "acceptance_criterion": {
+            "type": "string",
+            "description": "Required for blockers: what clears it."
+          }
+        }
+      }
+    },
+    "expansion_options": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "From the expansion scout: what this plan may be leaving on the table."
+    },
+    "dissent": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "agent",
+          "position"
+        ],
+        "properties": {
+          "agent": {
+            "type": "string"
+          },
+          "position": {
+            "type": "string"
+          }
+        }
+      },
+      "description": "Minority positions, verbatim. Today's dissent is often next quarter's incident."
+    },
+    "issued_by": {
+      "type": "string"
+    },
+    "issued_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "deadline_met": {
+      "type": "boolean"
+    }
+  },
+  "additionalProperties": false
+}

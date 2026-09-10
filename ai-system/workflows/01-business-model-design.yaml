@@ -1,0 +1,89 @@
+name: Business model design
+stage: business-model
+owner: business-head
+purpose: Produce an evidence-backed business model that finance and the Council both accept.
+steps:
+- id: size
+  agent: market-researcher
+  skills:
+  - market-sizing
+  - segmentation-analysis
+  - demand-signal-research
+  - source-grading
+  - why-now-analysis
+  does: Size the market bottom-up and establish why now.
+  produces: market-analysis.md
+  done_when: Every figure traceable to a counted input; SOM justified by a real channel.
+- id: competition
+  agent: competitor-intel-analyst
+  skills:
+  - competitive-landscape-mapping
+  - comparison-matrix
+  - review-mining
+  - differentiation-analysis
+  does: Map competitors, substitutes, and the status quo; state our switching reason.
+  produces: competitive-map.md
+  done_when: Status quo included; differentiation stated as a reason to switch.
+- id: jobs
+  agent: jtbd-analyst
+  skills:
+  - jtbd-analysis
+  - job-mapping
+  - switching-analysis
+  - opportunity-scoring
+  does: Frame the problem as the job customers hire a solution to do.
+  produces: jtbd.md
+  done_when: Every job traced to a customer quote; opportunities scored.
+- id: value
+  agent: value-proposition-designer
+  skills:
+  - value-proposition-canvas
+  - value-quantification
+  - fit-analysis
+  - alternative-comparison
+  does: Map evidenced pains to specific capabilities and quantify the value.
+  produces: value-proposition.md
+  done_when: Unmatched capabilities flagged as cuttable; value arithmetic shown.
+- id: model
+  agent: business-model-canvas-agent
+  skills:
+  - business-model-canvas
+  - alternative-model-generation
+  - model-coherence-check
+  - evidence-tagging
+  does: Build the canvas with evidence per block and compare two real alternatives.
+  produces: business-model-canvas.md
+  done_when: All nine blocks evidence-tagged; coherence conflicts resolved.
+- id: pricing
+  agent: pricing-strategist
+  skills:
+  - value-metric-selection
+  - willingness-to-pay-research
+  - pricing-decision
+  - packaging-design
+  does: Choose the value metric and set a price defended from floor and ceiling.
+  produces: pricing-strategy.md
+  done_when: Floor from unit economics and ceiling from value both established.
+- id: economics
+  agent: unit-economics-architect
+  skills:
+  - unit-economics-analysis
+  - cac-ltv-modeling
+  - contribution-margin-waterfall
+  - break-even-analysis
+  does: Prove one unit can make money and state when.
+  produces: unit-economics.md
+  done_when: Contribution margin derived line by line with sources.
+- id: council
+  agent: council-director
+  skills:
+  - council-debate-facilitation
+  - verdict-writing
+  - dissent-recording
+  does: Submit the model for structured attack before any spend is justified by it.
+  produces: council-verdict.md
+  done_when: Schema-valid verdict exists with severities, owners, and dissent.
+exit_criteria:
+- No canvas block resting on a guess.
+- Unit economics positive, or a named path to positive.
+- Council verdict is approve or approve_with_conditions, with blockers cleared.

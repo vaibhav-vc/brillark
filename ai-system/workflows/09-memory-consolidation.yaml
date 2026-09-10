@@ -1,0 +1,54 @@
+name: Memory consolidation
+stage: any
+owner: orchestration-head
+purpose: Make the next cycle cheaper than this one by turning events into durable knowledge.
+steps:
+- id: gather
+  agent: context-memory-curator
+  skills:
+  - memory-write-standard
+  - provenance-tracking
+  does: Collect the period's writes and reject anything without provenance.
+  produces: memory-record.json
+  done_when: Every record schema-valid with a confidence grade.
+- id: resolve
+  agent: knowledge-graph-librarian
+  skills:
+  - entity-resolution
+  - contradiction-detection
+  - link-provenance
+  does: Make each real thing one node and surface every contradiction.
+  produces: contradiction-report.md
+  done_when: No duplicate canonical entities; conflicts routed, not stored.
+- id: conflicts
+  agent: context-memory-curator
+  skills:
+  - memory-conflict-resolution
+  does: Resolve contradictions by supersession, never by keeping both.
+  produces: conflict-resolution.md
+  done_when: Losing claims superseded with a pointer to the winner.
+- id: promote
+  agent: context-memory-curator
+  skills:
+  - memory-consolidation
+  does: Promote repeated episodes into semantic and procedural memory.
+  produces: consolidation-report.md
+  done_when: Promotions backed by three or more independent episodes.
+- id: decay
+  agent: context-memory-curator
+  skills:
+  - memory-decay-policy
+  does: Expire stale context so it cannot be trusted by accident.
+  produces: decay-policy.md
+  done_when: Stale records quarantined and require re-verification.
+- id: tune
+  agent: context-memory-curator
+  skills:
+  - memory-retrieval-tuning
+  - graph-query-design
+  does: Measure whether the right memory actually reached the right agent.
+  produces: retrieval-quality-report.md
+  done_when: Rediscovery incidents logged as retrieval defects.
+exit_criteria:
+- Zero unresolved contradictions.
+- Retrieval hit rate measured on real tasks.

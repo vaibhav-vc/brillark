@@ -1,0 +1,53 @@
+name: Feedback and iteration
+stage: launch
+owner: cpo-agent
+purpose: Convert what real users did into the next decision, not into a feature list.
+steps:
+- id: signal
+  agent: evaluation-harness-agent
+  skills:
+  - regression-detection
+  - agent-scorecard
+  does: Check whether the system and the agents still perform as expected.
+  produces: regression-report.md
+  done_when: Per-case comparison performed, not just aggregate.
+- id: voc
+  agent: customer-success-agent
+  skills:
+  - voice-of-customer-synthesis
+  - churn-analysis
+  - win-loss-analysis
+  does: Turn scattered feedback into ranked problems with evidence.
+  produces: voc-digest.md
+  done_when: Problems separated from requested solutions; churn taxonomised.
+- id: measure
+  agent: chief-data-officer-agent
+  skills:
+  - metric-dictionary
+  - experiment-design
+  - data-quality-scoring
+  does: Confirm the numbers mean what we think they mean.
+  produces: metric-dictionary.md
+  done_when: One definition and one owner per metric.
+- id: review
+  agent: cpo-agent
+  skills:
+  - feature-kill-review
+  - prioritisation-framework
+  - roadmap-sequencing
+  does: Judge shipped features against their pre-set success signals.
+  produces: feature-review.md
+  done_when: Features that missed their signal are removed or explicitly re-justified.
+- id: retro
+  agent: retrospective-agent
+  skills:
+  - retrospective-facilitation
+  - root-cause-analysis
+  - action-verification
+  - lesson-to-guardrail-conversion
+  does: Convert lessons into artifact changes with owners.
+  produces: retrospective.md
+  done_when: Prior actions verified first; every lesson becomes an owned change.
+exit_criteria:
+- Each shipped item judged against its signal.
+- Lessons written into guardrails, not memos.

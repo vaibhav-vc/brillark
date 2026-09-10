@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://brillark.ai/schemas/context-package.schema.json",
+  "title": "Context Package",
+  "description": "Everything an agent needs to start a task without rediscovering known facts.",
+  "type": "object",
+  "required": [
+    "task_id",
+    "brief",
+    "definition_of_done"
+  ],
+  "properties": {
+    "task_id": {
+      "type": "string"
+    },
+    "brief": {
+      "type": "string"
+    },
+    "definition_of_done": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1
+    },
+    "input_artifacts": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "relevant_memory": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "accepted_assumptions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "constraints": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "open_questions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Carried forward across handoffs. Never trimmed for tidiness."
+    },
+    "budget": {
+      "type": "object",
+      "properties": {
+        "wall_clock_minutes": {
+          "type": "integer"
+        },
+        "tokens": {
+          "type": "integer"
+        },
+        "spend_usd": {
+          "type": "number"
+        },
+        "on_exhaustion": {
+          "type": "string",
+          "enum": [
+            "stop_and_escalate",
+            "stop_and_report",
+            "request_extension"
+          ]
+        }
+      }
+    },
+    "prior_attempts": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,60 @@
+name: Incident response
+stage: any
+owner: ciso-agent
+purpose: Contain, communicate, and convert the incident into a permanent control.
+steps:
+- id: declare
+  agent: escalation-manager
+  skills:
+  - escalation-criteria
+  - severity-triage
+  - decision-request-framing
+  does: Classify severity and route to the right decision-maker immediately.
+  produces: escalation-record.md
+  done_when: Severity assigned by consequence; owner named.
+- id: contain
+  agent: security-engineer
+  skills:
+  - incident-response-runbook
+  - vulnerability-triage
+  does: Execute the rehearsed first ten minutes.
+  produces: incident-runbook.md
+  done_when: Containment achieved and recorded with timestamps.
+- id: assess
+  agent: data-protection-officer-agent
+  skills:
+  - privacy-impact-assessment
+  - data-inventory
+  does: Determine whether personal data was affected and what that obliges.
+  produces: dpia.md
+  done_when: Notification obligations determined against real deadlines.
+- id: communicate
+  agent: general-counsel-agent
+  skills:
+  - counsel-escalation
+  - legal-risk-register
+  does: Decide external communication and escalate what needs licensed counsel.
+  produces: counsel-request.md
+  done_when: Regulator and customer thresholds assessed, not assumed.
+- id: recover
+  agent: infra-devops-agent
+  skills:
+  - disaster-recovery-testing
+  - rollback-verification
+  does: Restore service and verify data integrity after recovery.
+  produces: dr-test-report.md
+  done_when: Restore verified, not assumed.
+- id: learn
+  agent: retrospective-agent
+  skills:
+  - root-cause-analysis
+  - near-miss-analysis
+  - lesson-to-guardrail-conversion
+  - security-test-design
+  does: Convert the incident into a control and a regression test.
+  produces: root-cause-analysis.md
+  done_when: Fix targets the enabling condition; a test now guards it.
+exit_criteria:
+- Service restored and verified.
+- Root cause addressed at the enabling condition.
+- A test or control now prevents recurrence.

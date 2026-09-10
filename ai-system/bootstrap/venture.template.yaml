@@ -1,0 +1,47 @@
+# Venture intent brief.
+# The director reads this first and restates it back to you. Everything downstream is built on
+# that restatement, so be concrete about the problem and honest about what you do not know.
+
+venture_id: <venture-id>
+stage: idea          # idea | business-model | validation | mvp | launch | upgrade | scale
+
+intent:
+  problem: |
+    <What problem, for whom? Describe a specific situation someone is actually in,
+     not a market category.>
+  why_us: |
+    <What do we know or have that makes us more likely than others to solve this?>
+  why_now: |
+    <What changed that makes this possible or urgent today, and not three years ago?>
+
+constraints:
+  budget_usd: <number or "unknown">
+  runway_months: <number or "unknown">
+  team: <who is actually available>
+  hard_deadlines: []
+  non_negotiables:
+    - <anything that must or must not be true — regulatory, ethical, technical>
+
+what_we_do_not_know:
+  # The honest list. These become the hypothesis backlog, ranked by how much depends on them.
+  - <unknown>
+  - <unknown>
+
+riskiest_assumption: |
+  <If you already suspect what the plan most depends on, say so. The Council will test it anyway,
+   but starting from your own guess is faster than starting blind.>
+
+kill_criteria:
+  # Written now, while judgement is uncommitted. Each needs a threshold and a deadline.
+  - belief: <what we are betting on>
+    disproven_if: <the observation that would stop this>
+    threshold: <numeric>
+    by: <date>
+
+success_looks_like: |
+  <What is true in twelve months if this worked?>
+
+stakeholders:
+  decision_maker: <who says go or stop>
+  affected_groups:
+    - <including people who never chose to use this>

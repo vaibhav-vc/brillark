@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://brillark.ai/schemas/task.schema.json",
+  "title": "Task",
+  "description": "One unit of work an agent can finish in one run with a checkable output.",
+  "type": "object",
+  "required": [
+    "id",
+    "title",
+    "owner",
+    "definition_of_done",
+    "status"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^task_[a-z0-9-]+$"
+    },
+    "title": {
+      "type": "string"
+    },
+    "owner": {
+      "type": "string",
+      "description": "Exactly one agent id. A task with two owners has none."
+    },
+    "venture_id": {
+      "type": "string"
+    },
+    "stage": {
+      "type": "string",
+      "enum": [
+        "idea",
+        "business-model",
+        "validation",
+        "mvp",
+        "launch",
+        "upgrade",
+        "scale"
+      ]
+    },
+    "depends_on": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "definition_of_done": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1
+    },
+    "output_artifacts": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "skills": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "budget": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "not_started",
+        "in_progress",
+        "blocked",
+        "in_review",
+        "done",
+        "cancelled"
+      ]
+    },
+    "blocked_on": {
+      "type": "string",
+      "description": "The specific missing input or decision."
+    },
+    "blocked_since": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "last_observed_change": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "additionalProperties": false
+}

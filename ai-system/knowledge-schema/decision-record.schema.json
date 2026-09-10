@@ -1,0 +1,122 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://brillark.ai/schemas/decision-record.schema.json",
+  "title": "Decision Record",
+  "description": "A choice that constrains future work, written so a future reader understands why.",
+  "type": "object",
+  "required": [
+    "id",
+    "title",
+    "status",
+    "context",
+    "decision",
+    "consequences",
+    "decided_by",
+    "decided_at"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^dec_[a-z0-9-]+$"
+    },
+    "title": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "proposed",
+        "accepted",
+        "superseded",
+        "reversed"
+      ]
+    },
+    "context": {
+      "type": "string",
+      "description": "The forces and constraints in play at the time."
+    },
+    "options_considered": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "option",
+          "rejected_because"
+        ],
+        "properties": {
+          "option": {
+            "type": "string"
+          },
+          "rejected_because": {
+            "type": "string"
+          }
+        }
+      },
+      "description": "At least one genuine alternative. A decision with no rejected option was not a decision."
+    },
+    "decision": {
+      "type": "string"
+    },
+    "consequences": {
+      "type": "object",
+      "required": [
+        "accepted_costs"
+      ],
+      "properties": {
+        "benefits": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "accepted_costs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The bad parts we are knowingly accepting. Never leave empty to look decisive."
+        }
+      }
+    },
+    "revisit_trigger": {
+      "type": "string",
+      "description": "What would make this decision wrong."
+    },
+    "council_verdict": {
+      "type": "string",
+      "description": "Verdict id, where the Council reviewed this."
+    },
+    "dissent": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "agent",
+          "position"
+        ],
+        "properties": {
+          "agent": {
+            "type": "string"
+          },
+          "position": {
+            "type": "string"
+          },
+          "vindicating_evidence": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "decided_by": {
+      "type": "string"
+    },
+    "decided_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "supersedes": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": false
+}

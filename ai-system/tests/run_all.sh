@@ -12,6 +12,8 @@ for i in $(seq 1 "$N"); do
   echo "$integrity" | tail -3
   conformance="$(python3 "$ROOT/ai-system/tests/test_conformance.py" 2>&1)"
   echo "$conformance" | tail -3
+  runtime="$(python3 "$ROOT/ai-system/tests/test_runtime.py" 2>&1)"
+  echo "$runtime" | tail -3
   bench="$(python3 "$ROOT/ai-system/tests/benchmark.py")"
   echo "$bench" | tail -1
 done

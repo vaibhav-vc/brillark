@@ -23,6 +23,8 @@ jobs:
         run: python3 ai-system/tests/test_system_integrity.py
       - name: Run conformance tests
         run: python3 ai-system/tests/test_conformance.py
+      - name: Run runtime tests (memory store and orchestrator)
+        run: python3 ai-system/tests/test_runtime.py
 
   benchmark:
     name: Context benchmark

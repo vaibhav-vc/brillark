@@ -8,8 +8,9 @@ domains, 629 skills, 19 workflows, 22 schemas, and 88 tests that keep them consi
 Model-agnostic: agents declare a capability tier, never a vendor's model name. A reference loader,
 a multi-format exporter, and an eval harness make it usable from any runtime.
 
-Built to be cheap to run — a routed agent run loads about **3,155 tokens**, not the 278,000 the full
-library would cost. About 88x cheaper, verified by a benchmark that runs in CI.
+Built to stay affordable as it grows — a routed agent run loads about **3,189 tokens**, roughly what
+one good general-purpose system prompt costs. 138 specialised agents for about the price of one
+generalist, verified by a benchmark that runs in CI.
 
 Start at **[`ai-system/README.md`](ai-system/README.md)**.
 

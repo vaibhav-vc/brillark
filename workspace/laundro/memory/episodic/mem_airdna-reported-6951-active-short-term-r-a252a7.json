@@ -1,0 +1,21 @@
+{
+  "claim": "AirDNA reported 6951 active short-term rental listings in Manchester across Airbnb, Vrbo and Booking.com in August 2026.",
+  "contest_note": "AirDNA counts Airbnb+Vrbo+Booking.com; AirROI counts Airbnb only. Neither publishes its definition of 'active'. The 4.2x spread is unresolved.",
+  "contested_with": [
+    "mem_airroi-reported-1665-active-short-term-r-71c3a5"
+  ],
+  "id": "mem_airdna-reported-6951-active-short-term-r-a252a7",
+  "provenance": {
+    "author_agent": "market-researcher",
+    "created_at": "2026-09-11T05:49:41+00:00",
+    "evidence_grade": "estimated",
+    "skill": "market-sizing",
+    "source_artifacts": [
+      "laundro/market/market-analysis.md"
+    ]
+  },
+  "scope": "venture.laundro.business",
+  "shelf_life_days": 90,
+  "status": "contested",
+  "type": "episodic"
+}

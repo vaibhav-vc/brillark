@@ -14,10 +14,12 @@ smallest thing that tests the riskiest belief, build it, launch it, learn from i
 every material plan attacked by a standing Council before money is spent on it, and a self-improvement
 loop that makes the next cycle better than the last.
 
-**It is built to be cheap to run.** A routed agent run loads about **3,155 tokens**, not the 278,000
-the full library would cost — about 88x cheaper. The organisation has grown from 83 agents to 130 and
-the cost of a run has fallen by a third, because cost is driven by what gets loaded, not by what
-exists. See [`docs/token-efficiency.md`](docs/token-efficiency.md), and run the benchmark yourself.
+**It is built to stay affordable as it grows.** A routed agent run loads about **3,189 tokens** —
+roughly what one good general-purpose system prompt costs. The point is not that it is dramatically
+cheaper than an alternative; it is that 138 specialised agents stay affordable at about the price of
+one generalist. The organisation has grown 66% since v1 while per-run cost fell 59%, because cost is
+driven by what gets *loaded*, not by what exists. See
+[`docs/token-efficiency.md`](docs/token-efficiency.md) and run the benchmark yourself.
 
 ## The organisation
 
@@ -92,6 +94,8 @@ shape, or its own evaluation criteria — those need the human founder. See
 
 ```bash
 bash ai-system/tests/run_all.sh                     # everything; pass N to run it N times
+python3 ai-system/tools/run_workflow.py status --venture <v>   # drive a real workflow
+python3 ai-system/tools/memory.py stats --venture <v>          # what the org actually remembers
 python3 ai-system/tests/test_system_integrity.py    # 46 tests: does everything still line up?
 python3 ai-system/tests/test_conformance.py         # 33 tests: does the loader obey the contract?
 python3 ai-system/tests/benchmark.py                # regression gate against a committed baseline

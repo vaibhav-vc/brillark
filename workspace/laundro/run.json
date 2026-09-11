@@ -1,0 +1,152 @@
+{
+  "blocks": {
+    "economics": {
+      "declared_at": "2026-09-11T05:49:27+00:00",
+      "declared_by": "size",
+      "reason": "Sizing rests on three guessed load-bearing inputs (1-3 property share, stay length, price point). A price or a unit-economics model built on this would inherit the guess and hide it behind arithmetic.\n",
+      "resolved_by": [
+        "source-verifier",
+        "data-sourcing-analyst",
+        "customer-discovery-interviewer"
+      ]
+    },
+    "pricing": {
+      "declared_at": "2026-09-11T05:49:27+00:00",
+      "declared_by": "size",
+      "reason": "Sizing rests on three guessed load-bearing inputs (1-3 property share, stay length, price point). A price or a unit-economics model built on this would inherit the guess and hide it behind arithmetic.\n",
+      "resolved_by": [
+        "source-verifier",
+        "data-sourcing-analyst",
+        "customer-discovery-interviewer"
+      ]
+    }
+  },
+  "exit_criteria": [
+    "No canvas block resting on a guess.",
+    "Unit economics positive, or a named path to positive.",
+    "Council verdict is approve or approve_with_conditions, with blockers cleared."
+  ],
+  "name": "Business model design",
+  "owner": "business-head",
+  "started_at": "2026-09-11T05:46:34+00:00",
+  "steps": [
+    {
+      "agent": "market-researcher",
+      "artifact": "laundro/market/market-analysis.md",
+      "artifact_tokens": 1554,
+      "completed_at": "2026-09-11T05:49:27+00:00",
+      "does": "Size the market bottom-up and establish why now.",
+      "done_when": "Every figure traceable to a counted input; SOM justified by a real channel.",
+      "id": "size",
+      "produces": "market-analysis.md",
+      "run_tokens": null,
+      "skills": [
+        "market-sizing",
+        "segmentation-analysis",
+        "demand-signal-research",
+        "source-grading",
+        "why-now-analysis"
+      ],
+      "status": "done"
+    },
+    {
+      "agent": "competitor-intel-analyst",
+      "does": "Map competitors, substitutes, and the status quo; state our switching reason.",
+      "done_when": "Status quo included; differentiation stated as a reason to switch.",
+      "id": "competition",
+      "produces": "competitive-map.md",
+      "skills": [
+        "competitive-landscape-mapping",
+        "comparison-matrix",
+        "review-mining",
+        "differentiation-analysis"
+      ],
+      "status": "pending"
+    },
+    {
+      "agent": "jtbd-analyst",
+      "does": "Frame the problem as the job customers hire a solution to do.",
+      "done_when": "Every job traced to a customer quote; opportunities scored.",
+      "id": "jobs",
+      "produces": "jtbd.md",
+      "skills": [
+        "jtbd-analysis",
+        "job-mapping",
+        "switching-analysis",
+        "opportunity-scoring"
+      ],
+      "status": "pending"
+    },
+    {
+      "agent": "value-proposition-designer",
+      "does": "Map evidenced pains to specific capabilities and quantify the value.",
+      "done_when": "Unmatched capabilities flagged as cuttable; value arithmetic shown.",
+      "id": "value",
+      "produces": "value-proposition.md",
+      "skills": [
+        "value-proposition-canvas",
+        "value-quantification",
+        "fit-analysis",
+        "alternative-comparison"
+      ],
+      "status": "pending"
+    },
+    {
+      "agent": "business-model-canvas-agent",
+      "does": "Build the canvas with evidence per block and compare two real alternatives.",
+      "done_when": "All nine blocks evidence-tagged; coherence conflicts resolved.",
+      "id": "model",
+      "produces": "business-model-canvas.md",
+      "skills": [
+        "business-model-canvas",
+        "alternative-model-generation",
+        "model-coherence-check",
+        "evidence-tagging"
+      ],
+      "status": "pending"
+    },
+    {
+      "agent": "pricing-strategist",
+      "does": "Choose the value metric and set a price defended from floor and ceiling.",
+      "done_when": "Floor from unit economics and ceiling from value both established.",
+      "id": "pricing",
+      "produces": "pricing-strategy.md",
+      "skills": [
+        "value-metric-selection",
+        "willingness-to-pay-research",
+        "pricing-decision",
+        "packaging-design"
+      ],
+      "status": "pending"
+    },
+    {
+      "agent": "unit-economics-architect",
+      "does": "Prove one unit can make money and state when.",
+      "done_when": "Contribution margin derived line by line with sources.",
+      "id": "economics",
+      "produces": "unit-economics.md",
+      "skills": [
+        "unit-economics-analysis",
+        "cac-ltv-modeling",
+        "contribution-margin-waterfall",
+        "break-even-analysis"
+      ],
+      "status": "pending"
+    },
+    {
+      "agent": "council-director",
+      "does": "Submit the model for structured attack before any spend is justified by it.",
+      "done_when": "Schema-valid verdict exists with severities, owners, and dissent.",
+      "id": "council",
+      "produces": "council-verdict.md",
+      "skills": [
+        "council-debate-facilitation",
+        "verdict-writing",
+        "dissent-recording"
+      ],
+      "status": "pending"
+    }
+  ],
+  "venture": "laundro",
+  "workflow": "01-business-model-design"
+}

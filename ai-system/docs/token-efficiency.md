@@ -20,9 +20,19 @@ python3 ai-system/tests/measure_context_cost.py
 | **Median single-agent run (tier 1 + tier 2)** | **~4,700** |
 | Worst case single-agent run | ~5,600 |
 
-About **80x cheaper per run** than loading the library, with the remaining budget left for the
-actual task. Counts are estimates at four characters per token — good for comparing strategies,
-which is what they are for, and not a substitute for a tokeniser or a bill.
+**The "80x cheaper" framing was a strawman and has been retired.** Loading all 629 skills is not
+something any sane runtime would do, so beating it proves nothing.
+
+The honest comparison is against a single well-written general-purpose system prompt of ~5,000
+tokens. Against that, a routed run costs **about the same — roughly 1.6x cheaper, not 80x**.
+
+What tiering actually buys is not raw savings. It is that **138 specialised agents, each with its
+own charter, skills and guardrails, stay affordable at roughly the cost of one generalist prompt**.
+That is capability per token, and it is a much smaller and much more defensible claim.
+
+Counts are estimates at four characters per token — good for comparing revisions of this repository
+against each other, which is what the regression gate needs, and not a substitute for a tokeniser
+or a bill.
 
 ## The seven mechanisms
 

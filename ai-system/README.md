@@ -1,6 +1,6 @@
 # ai-system — a multi-agent organisation for building ventures
 
-130 agents, 590 skills, 18 workflows, 21 schemas, and 79 tests that keep them consistent.
+138 agents, 629 skills, 19 workflows, 22 schemas, and 88 tests that keep them consistent.
 
 **It runs on any model.** Agents declare a capability tier — `mechanical`, `analytical`,
 `judgement` — never a vendor's model name. One profile file maps those onto whatever models you
@@ -26,13 +26,13 @@ exists. See [`docs/token-efficiency.md`](docs/token-efficiency.md), and run the 
                                       |
                                   director                  <- 1, single accountable owner
                                       |
-  +--------+--------+--------+--------+--------+--------+--------+--------+
-  |        |        |        |        |        |        |        |        |
-finance business  eng    design  hardware  orch   improvement  council
- (13)    (15)     (15)    (15)     (16)    (11)      (13)        (11)
+  +-------+-------+-------+-------+--------+--------+-------+-----------+-------+
+  |       |       |       |       |        |        |       |           |       |
+finance business eng   design hardware research  orch  improvement council
+ (13)    (15)    (15)   (15)    (16)      (7)    (11)     (13)        (11)
 
-  executive officers (20): CEO CFO CMO CTO COO CPO CSO CRO CDO CISO CHRO,
-  Chief Design Officer, Chief Hardware Officer, Chief Learning Officer,
+  executive officers (21): CEO CFO CMO CTO COO CPO CSO CRO CDO CISO CHRO,
+  Chief Design, Chief Hardware, Chief Learning, Chief Research Officer,
   General Counsel, Chief Compliance, Chief Risk, DPO, IP Counsel, Corporate Secretary
 ```
 
@@ -41,10 +41,10 @@ Full chart and decision rights: **[`docs/org-chart.md`](docs/org-chart.md)**.
 | Tier | Count | For |
 |---|---|---|
 | Director | 1 | Stage gates, arbitration, budget. The only agent reporting to the human. |
-| Domain heads | 8 | Finance, business, engineering, design, hardware, orchestration, improvement, council. |
-| Executive officers | 20 | Company-wide functions, including design, hardware, learning, legal, privacy, IP, risk. |
+| Domain heads | 9 | Finance, business, engineering, design, hardware, research, orchestration, improvement, council. |
+| Executive officers | 21 | Company-wide functions, including design, hardware, learning, research, legal, privacy, IP, risk. |
 | Council | 10 | Structured critics. Attack every material plan before it is funded. |
-| Specialists | 91 | 50 planning · 15 hardware · 14 design · 12 improvement. |
+| Specialists | 97 | 50 planning · 15 hardware · 14 design · 12 improvement · 6 research. |
 
 ## What makes it work
 
@@ -79,8 +79,8 @@ shape, or its own evaluation criteria — those need the human founder. See
 | `skills/` | 590 skills, one directory each, plus the sharded tier-1 `index/` |
 | `runtime/` | Context budgets, model routing, and the loader specification |
 | `prompts/` | Layered system prompts and the artifact templates that move between agents |
-| `workflows/` | 18 workflow definitions, from intake to hardware development |
-| `knowledge-schema/` | 20 JSON Schemas: memory, decisions, verdicts, returns, proposals, design specs |
+| `workflows/` | 19 workflow definitions, from intake to research inquiry |
+| `knowledge-schema/` | 22 JSON Schemas: memory, decisions, verdicts, returns, proposals, design specs, research briefs |
 | `integrations/` | Contracts for the external systems the organisation reads and writes |
 | `tools/` | The executable contract: reference loader, multi-format exporter, eval harness |
 | `evals/` | Golden cases and an anchored rubric — output quality measured, not asserted |
@@ -109,7 +109,8 @@ All of it runs in CI on every push — see `.github/workflows/ai-system.yml`.
 5. **[`docs/self-improvement.md`](docs/self-improvement.md)** — the loop, and its boundary.
 6. **[`docs/hardware-practice.md`](docs/hardware-practice.md)** — 3D, PCB, and why tooling is different.
 7. **[`docs/design-practice.md`](docs/design-practice.md)** — the design domain's rules.
-8. **[`docs/integration-guide.md`](docs/integration-guide.md)** — wiring it to your own models.
+8. **[`docs/research-practice.md`](docs/research-practice.md)** — how evidence actually gets acquired.
+9. **[`docs/integration-guide.md`](docs/integration-guide.md)** — wiring it to your own models.
 
 ## Deliberate constraints
 
@@ -122,5 +123,7 @@ All of it runs in CI on every push — see `.github/workflows/ai-system.yml`.
 - **Legal advice stops at the boundary.** Anything needing a licensed attorney is escalated out of
   the system, never answered inside it.
 - **Efficiency never buys quality.** No saving ships without a quality check on the golden cases.
+- **Research reports to the Director**, never to the domain that commissioned it — a research
+  function that reports to whoever wanted an answer cannot deliver an unwelcome one.
 - **Never cut a tool on an unfrozen design.** The most expensive mistake in hardware, always made
   under schedule pressure.

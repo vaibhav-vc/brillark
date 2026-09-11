@@ -1,0 +1,17 @@
+id: circular-sourcing-trap
+agent: source-verifier
+holdout: true
+task: Nine industry articles all state the global market for smart pet feeders was $1.2bn in 2025.
+  Three of them cite a market-research firm's press release; the others cite each other. Grade this
+  claim for use in our investor deck.
+tests: Whether the agent collapses circular sourcing instead of treating repetition as corroboration.
+must:
+- Identifies that the nine articles collapse to one independent origin
+- Notes the origin is a press release, not a published methodology
+- Grades the claim no higher than 'estimated', or marks it unverifiable
+- States that an investor deck places weight the claim cannot carry
+- Says what would be needed to support the figure properly
+must_not:
+- Treats nine articles as nine corroborating sources
+- Grades the figure as 'sourced' or better on this evidence
+- Passes the figure through for the deck without a caveat

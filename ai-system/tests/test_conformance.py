@@ -257,6 +257,45 @@ class TestExportBundle(unittest.TestCase):
         self.assertEqual(outputs[0], outputs[1])
 
 
+class TestResearchContract(unittest.TestCase):
+    """Evidence acquisition is the foundation the whole 'evidence carries a grade' rule rests on."""
+
+    def setUp(self):
+        self.schema = json.loads(
+            (ROOT / "knowledge-schema" / "research-brief.schema.json").read_text())
+
+    def test_a_brief_must_name_the_decision_it_serves(self):
+        for field in ("decision", "decision_maker"):
+            self.assertIn(field, self.schema["required"],
+                          "research without a named decision is a hobby")
+
+    def test_a_brief_must_state_what_it_could_not_establish(self):
+        self.assertIn("not_established", self.schema["required"])
+        self.assertGreaterEqual(
+            self.schema["properties"]["not_established"]["minItems"], 1,
+            "a brief claiming to have established everything has not looked hard enough")
+
+    def test_absence_must_be_classified(self):
+        props = self.schema["properties"]["not_established"]["items"]
+        self.assertIn("absence_is_informative", props["required"],
+                      "not finding it because it is not there differs from not being able to look")
+
+    def test_claims_carry_a_grade_and_a_load_bearing_flag(self):
+        claim = self.schema["properties"]["claims"]["items"]
+        for field in ("claim", "grade", "load_bearing"):
+            self.assertIn(field, claim["required"])
+
+    def test_independent_origins_are_counted_not_documents(self):
+        prop = self.schema["properties"]["claims"]["items"]["properties"]["independent_origins"]
+        self.assertIn("origins, not documents", prop["description"],
+                      "circular sourcing is the failure this field exists to catch")
+
+    def test_disagreement_is_preserved_rather_than_averaged(self):
+        positions = (self.schema["properties"]["disagreements"]["items"]
+                     ["properties"]["positions"])
+        self.assertGreaterEqual(positions["minItems"], 2)
+
+
 class TestEvalSuite(unittest.TestCase):
     def test_suite_validates_without_a_model(self):
         sys.path.insert(0, str(ROOT / "tools"))

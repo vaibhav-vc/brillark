@@ -222,6 +222,30 @@ agents:
   - org.decisions
   capability: 'Owns everything physical: the 3D product, the boards inside it, and whether it can be manufactured, certified,
     and sold'
+- id: research-head
+  title: Head of Research
+  tier: head
+  domain: research
+  reports_to: director
+  model: opus
+  task_class: judgement
+  escalates_to_model: opus
+  context_budget_tokens: 25000
+  return_budget_tokens: 1500
+  path: agents/orchestration/research-head.md
+  skills:
+  - evidence-standard-setting
+  - research-intake-triage
+  - research-independence-review
+  - unknowns-register
+  - repository-reuse-measurement
+  memory_scopes:
+  - org.research
+  - org.evidence
+  - org.unknowns
+  - venture.*.*
+  capability: 'Owns the quality of the evidence the whole organisation reasons from: what is asked, how it is gathered, how
+    it is graded, and whether anyone can still find it in a year'
 - id: ceo-agent
   title: CEO Agent
   tier: executive
@@ -689,6 +713,30 @@ agents:
   - org.decisions
   capability: 'Owns the physical product as a business bet: what it costs to make, what it takes to scale, and whether hardware
     is the right way to deliver the value at all'
+- id: chief-research-officer-agent
+  title: Chief Research Officer Agent
+  tier: executive
+  domain: governance
+  reports_to: director
+  model: opus
+  task_class: judgement
+  escalates_to_model: opus
+  context_budget_tokens: 20000
+  return_budget_tokens: 1200
+  path: agents/executive/chief-research-officer-agent.md
+  skills:
+  - standard-of-proof-policy
+  - research-agenda-setting
+  - knowledge-asset-review
+  - decision-readiness-review
+  - research-independence-review
+  memory_scopes:
+  - org.research
+  - org.evidence
+  - org.unknowns
+  - venture.*.*
+  capability: Owns what the organisation knows and how it knows it — the standard of proof, the research agenda, and the discipline
+    of admitting ignorance
 - id: council-red-team
   title: Council — Red Team Adversary
   tier: council
@@ -3038,3 +3086,147 @@ agents:
   - venture.*.suppliers
   - org.decisions
   capability: 'Gets physical parts made fast: which process, which supplier, what it will cost, and when it arrives'
+- id: research-analyst
+  title: Research Analyst
+  tier: specialist
+  domain: research
+  reports_to: research-head
+  model: sonnet
+  task_class: analytical
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/research/research-analyst.md
+  skills:
+  - research-question-scoping
+  - search-strategy-design
+  - multi-source-synthesis
+  - residual-uncertainty-statement
+  - research-repository-lookup
+  memory_scopes:
+  - org.research
+  - org.evidence
+  - org.unknowns
+  - venture.*.*
+  capability: 'Turns a question somebody needs answered into a decision-grade brief: scopes it, gathers from real sources,
+    synthesises, and says plainly what remains unknown'
+- id: source-verifier
+  title: Source Verifier
+  tier: specialist
+  domain: research
+  reports_to: research-head
+  model: opus
+  task_class: judgement
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/research/source-verifier.md
+  skills:
+  - source-credibility-assessment
+  - primary-source-tracing
+  - circular-sourcing-detection
+  - currency-and-retraction-check
+  - claim-weight-proportionality
+  memory_scopes:
+  - org.research
+  - org.evidence
+  - org.unknowns
+  - venture.*.*
+  capability: Decides whether a source can actually be trusted — who produced it, what they gain, whether it is primary, and
+    whether it is still true
+- id: prior-art-researcher
+  title: Prior Art Researcher
+  tier: specialist
+  domain: research
+  reports_to: research-head
+  model: sonnet
+  task_class: analytical
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/research/prior-art-researcher.md
+  skills:
+  - prior-art-search
+  - standards-landscape-review
+  - relevance-assessment
+  - failed-approach-cataloguing
+  - counsel-handoff
+  memory_scopes:
+  - org.research
+  - org.evidence
+  - org.unknowns
+  - venture.*.*
+  capability: Finds out whether this has been done, tried, published, patented, or standardised before — so the organisation
+    stops reinventing and stops infringing
+- id: technology-evaluator
+  title: Technology Evaluator
+  tier: specialist
+  domain: research
+  reports_to: research-head
+  model: sonnet
+  task_class: analytical
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/research/technology-evaluator.md
+  skills:
+  - evaluation-criteria-design
+  - candidate-trial
+  - total-cost-of-ownership
+  - project-health-assessment
+  - exit-cost-analysis
+  memory_scopes:
+  - org.research
+  - org.evidence
+  - org.unknowns
+  - venture.*.*
+  capability: Evaluates the candidates — tools, libraries, vendors, platforms, approaches — against what we actually need,
+    rather than against what their marketing says
+- id: data-sourcing-analyst
+  title: Data Sourcing Analyst
+  tier: specialist
+  domain: research
+  reports_to: research-head
+  model: sonnet
+  task_class: analytical
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/research/data-sourcing-analyst.md
+  skills:
+  - dataset-discovery
+  - methodology-assessment
+  - comparability-checking
+  - dataset-licence-review
+  - figure-with-limits-reporting
+  memory_scopes:
+  - org.research
+  - org.evidence
+  - org.unknowns
+  - venture.*.*
+  capability: Finds the numbers the organisation needs, establishes whether they mean what they appear to mean, and refuses
+    to supply a figure that cannot carry its weight
+- id: horizon-scanner
+  title: Horizon Scanner
+  tier: specialist
+  domain: research
+  reports_to: research-head
+  model: sonnet
+  task_class: analytical
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/research/horizon-scanner.md
+  skills:
+  - watchlist-design
+  - weak-signal-detection
+  - regulatory-change-monitoring
+  - signal-threshold-setting
+  - indicator-retirement
+  memory_scopes:
+  - org.research
+  - org.evidence
+  - org.unknowns
+  - venture.*.*
+  capability: Watches for the changes that would invalidate the plan — technology, regulation, competitive, and behavioural
+    — and separates the signals from the noise

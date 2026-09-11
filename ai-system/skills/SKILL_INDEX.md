@@ -1,6 +1,6 @@
 # Skill Index
 
-**590 skills** across 18 categories. Generated from `skills/registry.yaml`.
+**629 skills** across 19 categories. Generated from `skills/registry.yaml`.
 
 Each skill is a directory containing a single `SKILL.md` with frontmatter, a five-step procedure,
 an output contract, a quality bar, and the category's anti-patterns.
@@ -23,9 +23,10 @@ an output contract, a quality bar, and the category's anti-patterns.
 | [orchestration](#orchestration) | 48 |
 | [people](#people) | 5 |
 | [product](#product) | 13 |
+| [research](#research) | 39 |
 | [risk](#risk) | 4 |
 | [strategy](#strategy) | 11 |
-| **total** | **590** |
+| **total** | **629** |
 
 ## compliance
 
@@ -681,6 +682,50 @@ an output contract, a quality bar, and the category's anti-patterns.
 | [`scope-cut-justification`](scope-cut-justification/SKILL.md) | Record why something was cut so the decision survives argument. | 1 agent |
 | [`success-signal-definition`](success-signal-definition/SKILL.md) | Define in advance what would show a feature worked. | 1 agent |
 | [`time-to-user-estimation`](time-to-user-estimation/SKILL.md) | Estimate honestly when a real user will touch this. | 1 agent |
+
+## research
+
+| Skill | What it does | Used by |
+|---|---|---|
+| [`candidate-trial`](candidate-trial/SKILL.md) | Actually use the thing before recommending it. | 1 agent |
+| [`circular-sourcing-detection`](circular-sourcing-detection/SKILL.md) | Spot many sources that are secretly one source. | 1 agent |
+| [`claim-weight-proportionality`](claim-weight-proportionality/SKILL.md) | Match the evidence demanded to the weight the claim will carry. | 1 agent |
+| [`comparability-checking`](comparability-checking/SKILL.md) | Check two figures can honestly sit side by side. | 1 agent |
+| [`counsel-handoff`](counsel-handoff/SKILL.md) | Route a legal question to counsel instead of answering it. | 1 agent |
+| [`currency-and-retraction-check`](currency-and-retraction-check/SKILL.md) | Confirm the source is still true, not just still published. | 1 agent |
+| [`dataset-discovery`](dataset-discovery/SKILL.md) | Find the data that could answer the question. | 1 agent |
+| [`dataset-licence-review`](dataset-licence-review/SKILL.md) | Check we are allowed to use it the way we intend. | 1 agent |
+| [`decision-readiness-review`](decision-readiness-review/SKILL.md) | Check whether a decision has the evidence its consequence requires. | 1 agent |
+| [`evaluation-criteria-design`](evaluation-criteria-design/SKILL.md) | Decide what matters before looking at any candidate. | 1 agent |
+| [`evidence-standard-setting`](evidence-standard-setting/SKILL.md) | Decide what grade of evidence a claim needs before searching for it. | 1 agent |
+| [`exit-cost-analysis`](exit-cost-analysis/SKILL.md) | Know what it would take to leave before you commit. | 1 agent |
+| [`failed-approach-cataloguing`](failed-approach-cataloguing/SKILL.md) | Record what was tried and did not work. | 1 agent |
+| [`figure-with-limits-reporting`](figure-with-limits-reporting/SKILL.md) | Report a number with everything needed to use it responsibly. | 1 agent |
+| [`indicator-retirement`](indicator-retirement/SKILL.md) | Stop watching things that never taught you anything. | 1 agent |
+| [`knowledge-asset-review`](knowledge-asset-review/SKILL.md) | Ask what the organisation knows that others do not. | 1 agent |
+| [`methodology-assessment`](methodology-assessment/SKILL.md) | Read how the number was made before using it. | 1 agent |
+| [`multi-source-synthesis`](multi-source-synthesis/SKILL.md) | Combine many sources into one answer without inventing consensus. | 1 agent |
+| [`primary-source-tracing`](primary-source-tracing/SKILL.md) | Follow a claim back to where it actually originated. | 1 agent |
+| [`prior-art-search`](prior-art-search/SKILL.md) | Find out whether this has been done before. | 1 agent |
+| [`project-health-assessment`](project-health-assessment/SKILL.md) | Check whether the thing will still exist in three years. | 1 agent |
+| [`regulatory-change-monitoring`](regulatory-change-monitoring/SKILL.md) | Watch the rules as actively as the technology. | 1 agent |
+| [`relevance-assessment`](relevance-assessment/SKILL.md) | Judge honestly whether prior work is actually the same problem. | 1 agent |
+| [`repository-reuse-measurement`](repository-reuse-measurement/SKILL.md) | Check the research repository is actually an asset. | 1 agent |
+| [`research-agenda-setting`](research-agenda-setting/SKILL.md) | Choose which unknowns to resolve this period. | 1 agent |
+| [`research-independence-review`](research-independence-review/SKILL.md) | Check the finding was not shaped by what someone wanted. | 2 agents |
+| [`research-intake-triage`](research-intake-triage/SKILL.md) | Decide which questions are worth answering. | 1 agent |
+| [`research-question-scoping`](research-question-scoping/SKILL.md) | Narrow a request until a finite search could actually answer it. | 1 agent |
+| [`research-repository-lookup`](research-repository-lookup/SKILL.md) | Check what the organisation already knows before spending on finding out. | 1 agent |
+| [`residual-uncertainty-statement`](residual-uncertainty-statement/SKILL.md) | Say plainly what the research did not establish. | 1 agent |
+| [`search-strategy-design`](search-strategy-design/SKILL.md) | Plan the search so coverage is deliberate rather than accidental. | 1 agent |
+| [`signal-threshold-setting`](signal-threshold-setting/SKILL.md) | Define in advance what counts as a signal. | 1 agent |
+| [`source-credibility-assessment`](source-credibility-assessment/SKILL.md) | Decide how much a source can be trusted, and say why. | 1 agent |
+| [`standard-of-proof-policy`](standard-of-proof-policy/SKILL.md) | Set how much evidence different decisions require. | 1 agent |
+| [`standards-landscape-review`](standards-landscape-review/SKILL.md) | Find the standards that constrain or help the design. | 1 agent |
+| [`total-cost-of-ownership`](total-cost-of-ownership/SKILL.md) | Cost the whole life, not the sticker. | 1 agent |
+| [`unknowns-register`](unknowns-register/SKILL.md) | Keep an explicit record of what the organisation does not know. | 1 agent |
+| [`watchlist-design`](watchlist-design/SKILL.md) | Decide what to watch, from what would break the plan. | 1 agent |
+| [`weak-signal-detection`](weak-signal-detection/SKILL.md) | Notice a change before it is obvious, without inventing one. | 1 agent |
 
 ## risk
 

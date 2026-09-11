@@ -5,7 +5,8 @@ council	council-director	11	agents/index/council.tsv	Structured critique of ever
 design	design-head	15	agents/index/design.tsv	Research, structure, interaction, craft, accessibility, design system, service
 engineering	engineering-head	15	agents/index/engineering.tsv	Requirements, architecture, build, security, quality, release, observability
 finance	finance-head	13	agents/index/finance.tsv	Unit economics, pricing, runway, fundraising, billing, tax
-governance	director	21	agents/index/governance.tsv	Stage gates, strategy, capital, legal, compliance, privacy, IP, risk
+governance	director	22	agents/index/governance.tsv	Stage gates, strategy, capital, legal, compliance, privacy, IP, risk
 hardware	hardware-head	16	agents/index/hardware.tsv	3D and mechanical design, PCB and electronics, firmware, DFM, compliance, manufacture
 improvement	improvement-head	13	agents/index/improvement.tsv	Measurement, diagnosis, prompt and skill optimisation, token efficiency
 orchestration	orchestration-head	11	agents/index/orchestration.tsv	Routing, decomposition, scheduling, handoffs, memory, evaluation
+research	research-head	7	agents/index/research.tsv	External evidence: scoping, sourcing, verification, prior art, technology evaluation, horizon scanning

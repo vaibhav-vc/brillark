@@ -1,5 +1,5 @@
 version: 1
-count: 590
+count: 629
 description: Machine-readable skill library. Every skill referenced by an agent or workflow must appear here.
 skills:
 - name: agent-routing
@@ -4199,3 +4199,277 @@ skills:
   path: skills/product-lifecycle-planning/SKILL.md
   used_by:
   - chief-hardware-officer-agent
+- name: research-question-scoping
+  category: research
+  description: Narrow a request until a finite search could actually answer it.
+  output: research-question.md
+  path: skills/research-question-scoping/SKILL.md
+  used_by:
+  - research-analyst
+- name: search-strategy-design
+  category: research
+  description: Plan the search so coverage is deliberate rather than accidental.
+  output: search-plan.md
+  path: skills/search-strategy-design/SKILL.md
+  used_by:
+  - research-analyst
+- name: multi-source-synthesis
+  category: research
+  description: Combine many sources into one answer without inventing consensus.
+  output: synthesis.md
+  path: skills/multi-source-synthesis/SKILL.md
+  used_by:
+  - research-analyst
+- name: residual-uncertainty-statement
+  category: research
+  description: Say plainly what the research did not establish.
+  output: uncertainty-statement.md
+  path: skills/residual-uncertainty-statement/SKILL.md
+  used_by:
+  - research-analyst
+- name: research-repository-lookup
+  category: research
+  description: Check what the organisation already knows before spending on finding out.
+  output: repository-check.md
+  path: skills/research-repository-lookup/SKILL.md
+  used_by:
+  - research-analyst
+- name: source-credibility-assessment
+  category: research
+  description: Decide how much a source can be trusted, and say why.
+  output: credibility-assessment.md
+  path: skills/source-credibility-assessment/SKILL.md
+  used_by:
+  - source-verifier
+- name: primary-source-tracing
+  category: research
+  description: Follow a claim back to where it actually originated.
+  output: source-trace.md
+  path: skills/primary-source-tracing/SKILL.md
+  used_by:
+  - source-verifier
+- name: circular-sourcing-detection
+  category: research
+  description: Spot many sources that are secretly one source.
+  output: circularity-report.md
+  path: skills/circular-sourcing-detection/SKILL.md
+  used_by:
+  - source-verifier
+- name: currency-and-retraction-check
+  category: research
+  description: Confirm the source is still true, not just still published.
+  output: currency-check.md
+  path: skills/currency-and-retraction-check/SKILL.md
+  used_by:
+  - source-verifier
+- name: claim-weight-proportionality
+  category: research
+  description: Match the evidence demanded to the weight the claim will carry.
+  output: weight-assessment.md
+  path: skills/claim-weight-proportionality/SKILL.md
+  used_by:
+  - source-verifier
+- name: prior-art-search
+  category: research
+  description: Find out whether this has been done before.
+  output: prior-art-report.md
+  path: skills/prior-art-search/SKILL.md
+  used_by:
+  - prior-art-researcher
+- name: standards-landscape-review
+  category: research
+  description: Find the standards that constrain or help the design.
+  output: standards-review.md
+  path: skills/standards-landscape-review/SKILL.md
+  used_by:
+  - prior-art-researcher
+- name: relevance-assessment
+  category: research
+  description: Judge honestly whether prior work is actually the same problem.
+  output: relevance-notes.md
+  path: skills/relevance-assessment/SKILL.md
+  used_by:
+  - prior-art-researcher
+- name: failed-approach-cataloguing
+  category: research
+  description: Record what was tried and did not work.
+  output: failed-approaches.md
+  path: skills/failed-approach-cataloguing/SKILL.md
+  used_by:
+  - prior-art-researcher
+- name: counsel-handoff
+  category: research
+  description: Route a legal question to counsel instead of answering it.
+  output: counsel-handoff.md
+  path: skills/counsel-handoff/SKILL.md
+  used_by:
+  - prior-art-researcher
+- name: evaluation-criteria-design
+  category: research
+  description: Decide what matters before looking at any candidate.
+  output: evaluation-criteria.md
+  path: skills/evaluation-criteria-design/SKILL.md
+  used_by:
+  - technology-evaluator
+- name: candidate-trial
+  category: research
+  description: Actually use the thing before recommending it.
+  output: trial-report.md
+  path: skills/candidate-trial/SKILL.md
+  used_by:
+  - technology-evaluator
+- name: total-cost-of-ownership
+  category: research
+  description: Cost the whole life, not the sticker.
+  output: tco-analysis.md
+  path: skills/total-cost-of-ownership/SKILL.md
+  used_by:
+  - technology-evaluator
+- name: project-health-assessment
+  category: research
+  description: Check whether the thing will still exist in three years.
+  output: health-assessment.md
+  path: skills/project-health-assessment/SKILL.md
+  used_by:
+  - technology-evaluator
+- name: exit-cost-analysis
+  category: research
+  description: Know what it would take to leave before you commit.
+  output: exit-analysis.md
+  path: skills/exit-cost-analysis/SKILL.md
+  used_by:
+  - technology-evaluator
+- name: dataset-discovery
+  category: research
+  description: Find the data that could answer the question.
+  output: dataset-candidates.md
+  path: skills/dataset-discovery/SKILL.md
+  used_by:
+  - data-sourcing-analyst
+- name: methodology-assessment
+  category: research
+  description: Read how the number was made before using it.
+  output: methodology-notes.md
+  path: skills/methodology-assessment/SKILL.md
+  used_by:
+  - data-sourcing-analyst
+- name: comparability-checking
+  category: research
+  description: Check two figures can honestly sit side by side.
+  output: comparability-notes.md
+  path: skills/comparability-checking/SKILL.md
+  used_by:
+  - data-sourcing-analyst
+- name: dataset-licence-review
+  category: research
+  description: Check we are allowed to use it the way we intend.
+  output: licence-record.md
+  path: skills/dataset-licence-review/SKILL.md
+  used_by:
+  - data-sourcing-analyst
+- name: figure-with-limits-reporting
+  category: research
+  description: Report a number with everything needed to use it responsibly.
+  output: figure-report.md
+  path: skills/figure-with-limits-reporting/SKILL.md
+  used_by:
+  - data-sourcing-analyst
+- name: watchlist-design
+  category: research
+  description: Decide what to watch, from what would break the plan.
+  output: watchlist.md
+  path: skills/watchlist-design/SKILL.md
+  used_by:
+  - horizon-scanner
+- name: weak-signal-detection
+  category: research
+  description: Notice a change before it is obvious, without inventing one.
+  output: signal-report.md
+  path: skills/weak-signal-detection/SKILL.md
+  used_by:
+  - horizon-scanner
+- name: regulatory-change-monitoring
+  category: research
+  description: Watch the rules as actively as the technology.
+  output: regulatory-watch.md
+  path: skills/regulatory-change-monitoring/SKILL.md
+  used_by:
+  - horizon-scanner
+- name: signal-threshold-setting
+  category: research
+  description: Define in advance what counts as a signal.
+  output: thresholds.md
+  path: skills/signal-threshold-setting/SKILL.md
+  used_by:
+  - horizon-scanner
+- name: indicator-retirement
+  category: research
+  description: Stop watching things that never taught you anything.
+  output: retirement-log.md
+  path: skills/indicator-retirement/SKILL.md
+  used_by:
+  - horizon-scanner
+- name: evidence-standard-setting
+  category: research
+  description: Decide what grade of evidence a claim needs before searching for it.
+  output: evidence-standard.md
+  path: skills/evidence-standard-setting/SKILL.md
+  used_by:
+  - research-head
+- name: research-intake-triage
+  category: research
+  description: Decide which questions are worth answering.
+  output: intake-decision.md
+  path: skills/research-intake-triage/SKILL.md
+  used_by:
+  - research-head
+- name: research-independence-review
+  category: research
+  description: Check the finding was not shaped by what someone wanted.
+  output: independence-review.md
+  path: skills/research-independence-review/SKILL.md
+  used_by:
+  - chief-research-officer-agent
+  - research-head
+- name: unknowns-register
+  category: research
+  description: Keep an explicit record of what the organisation does not know.
+  output: unknowns-register.md
+  path: skills/unknowns-register/SKILL.md
+  used_by:
+  - research-head
+- name: repository-reuse-measurement
+  category: research
+  description: Check the research repository is actually an asset.
+  output: reuse-report.md
+  path: skills/repository-reuse-measurement/SKILL.md
+  used_by:
+  - research-head
+- name: standard-of-proof-policy
+  category: research
+  description: Set how much evidence different decisions require.
+  output: proof-policy.md
+  path: skills/standard-of-proof-policy/SKILL.md
+  used_by:
+  - chief-research-officer-agent
+- name: research-agenda-setting
+  category: research
+  description: Choose which unknowns to resolve this period.
+  output: research-agenda.md
+  path: skills/research-agenda-setting/SKILL.md
+  used_by:
+  - chief-research-officer-agent
+- name: knowledge-asset-review
+  category: research
+  description: Ask what the organisation knows that others do not.
+  output: knowledge-assets.md
+  path: skills/knowledge-asset-review/SKILL.md
+  used_by:
+  - chief-research-officer-agent
+- name: decision-readiness-review
+  category: research
+  description: Check whether a decision has the evidence its consequence requires.
+  output: readiness-review.md
+  path: skills/decision-readiness-review/SKILL.md
+  used_by:
+  - chief-research-officer-agent

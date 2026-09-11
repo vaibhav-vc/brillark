@@ -90,6 +90,10 @@ agents:
   model: opus
   task_class: judgement
   escalates_to: opus
+- id: chief-research-officer-agent
+  model: opus
+  task_class: judgement
+  escalates_to: opus
 - id: chief-revenue-officer-agent
   model: opus
   task_class: judgement
@@ -210,6 +214,10 @@ agents:
   model: opus
   task_class: judgement
   escalates_to: opus
+- id: data-sourcing-analyst
+  model: sonnet
+  task_class: analytical
+  escalates_to: opus
 - id: data-visualization-designer
   model: sonnet
   task_class: analytical
@@ -311,6 +319,10 @@ agents:
   task_class: judgement
   escalates_to: opus
 - id: hardware-test-engineer
+  model: sonnet
+  task_class: analytical
+  escalates_to: opus
+- id: horizon-scanner
   model: sonnet
   task_class: analytical
   escalates_to: opus
@@ -422,6 +434,10 @@ agents:
   model: opus
   task_class: judgement
   escalates_to: opus
+- id: prior-art-researcher
+  model: sonnet
+  task_class: analytical
+  escalates_to: opus
 - id: product-requirements-agent
   model: sonnet
   task_class: analytical
@@ -449,6 +465,14 @@ agents:
 - id: release-manager
   model: sonnet
   task_class: analytical
+  escalates_to: opus
+- id: research-analyst
+  model: sonnet
+  task_class: analytical
+  escalates_to: opus
+- id: research-head
+  model: opus
+  task_class: judgement
   escalates_to: opus
 - id: retrospective-agent
   model: sonnet
@@ -482,6 +506,10 @@ agents:
   model: sonnet
   task_class: analytical
   escalates_to: opus
+- id: source-verifier
+  model: opus
+  task_class: judgement
+  escalates_to: opus
 - id: system-architect
   model: opus
   task_class: judgement
@@ -491,6 +519,10 @@ agents:
   task_class: analytical
   escalates_to: opus
 - id: tech-debt-refactor-agent
+  model: sonnet
+  task_class: analytical
+  escalates_to: opus
+- id: technology-evaluator
   model: sonnet
   task_class: analytical
   escalates_to: opus

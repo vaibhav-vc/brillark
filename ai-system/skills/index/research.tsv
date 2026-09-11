@@ -1,0 +1,42 @@
+# Tier-1 discovery index for the 'research' category. name	output	purpose
+# Tier 2 is skills/<name>/SKILL.md — load only the skills you selected.
+# Category anti-patterns: skills/antipatterns/research.md (load once at tier 2).
+candidate-trial	Actually use the thing before recommending it.
+circular-sourcing-detection	Spot many sources that are secretly one source.
+claim-weight-proportionality	Match the evidence demanded to the weight the claim will carry.
+comparability-checking	Check two figures can honestly sit side by side.
+counsel-handoff	Route a legal question to counsel instead of answering it.
+currency-and-retraction-check	Confirm the source is still true, not just still published.
+dataset-discovery	Find the data that could answer the question.
+dataset-licence-review	Check we are allowed to use it the way we intend.
+decision-readiness-review	Check whether a decision has the evidence its consequence requires.
+evaluation-criteria-design	Decide what matters before looking at any candidate.
+evidence-standard-setting	Decide what grade of evidence a claim needs before searching for it.
+exit-cost-analysis	Know what it would take to leave before you commit.
+failed-approach-cataloguing	Record what was tried and did not work.
+figure-with-limits-reporting	Report a number with everything needed to use it responsibly.
+indicator-retirement	Stop watching things that never taught you anything.
+knowledge-asset-review	Ask what the organisation knows that others do not.
+methodology-assessment	Read how the number was made before using it.
+multi-source-synthesis	Combine many sources into one answer without inventing consensus.
+primary-source-tracing	Follow a claim back to where it actually originated.
+prior-art-search	Find out whether this has been done before.
+project-health-assessment	Check whether the thing will still exist in three years.
+regulatory-change-monitoring	Watch the rules as actively as the technology.
+relevance-assessment	Judge honestly whether prior work is actually the same problem.
+repository-reuse-measurement	Check the research repository is actually an asset.
+research-agenda-setting	Choose which unknowns to resolve this period.
+research-independence-review	Check the finding was not shaped by what someone wanted.
+research-intake-triage	Decide which questions are worth answering.
+research-question-scoping	Narrow a request until a finite search could actually answer it.
+research-repository-lookup	Check what the organisation already knows before spending on finding out.
+residual-uncertainty-statement	Say plainly what the research did not establish.
+search-strategy-design	Plan the search so coverage is deliberate rather than accidental.
+signal-threshold-setting	Define in advance what counts as a signal.
+source-credibility-assessment	Decide how much a source can be trusted, and say why.
+standard-of-proof-policy	Set how much evidence different decisions require.
+standards-landscape-review	Find the standards that constrain or help the design.
+total-cost-of-ownership	Cost the whole life, not the sticker.
+unknowns-register	Keep an explicit record of what the organisation does not know.
+watchlist-design	Decide what to watch, from what would break the plan.
+weak-signal-detection	Notice a change before it is obvious, without inventing one.

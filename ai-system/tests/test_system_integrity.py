@@ -25,8 +25,9 @@ REQUIRED = {
     "design_agents": 14,     # the design domain
     "improvement_agents": 12,  # the self-improvement domain
     "hardware_agents": 15,   # 3D/mechanical and PCB/electronics
+    "research_agents": 6,    # external evidence: sourcing, verification, prior art, horizon
     "council_agents": 10,    # the critics
-    "heads": 8,              # finance, business, engineering, design, hardware, orchestration, improvement, council
+    "heads": 9,              # + research
     "directors": 1,          # exactly one top-level owner
     "min_skills": 100,       # the floor; the library is far larger
 }
@@ -82,6 +83,7 @@ class TestAgents(unittest.TestCase):
         self.assertEqual(by_domain.get("design"), REQUIRED["design_agents"])
         self.assertEqual(by_domain.get("improvement"), REQUIRED["improvement_agents"])
         self.assertEqual(by_domain.get("hardware"), REQUIRED["hardware_agents"])
+        self.assertEqual(by_domain.get("research"), REQUIRED["research_agents"])
 
     def test_every_agent_has_a_valid_model_tier(self):
         for a in self.agents:
@@ -167,6 +169,27 @@ class TestAgents(unittest.TestCase):
             body = (ROOT / a["path"]).read_text()
             self.assertIn("## Return contract", body, f"{a['id']} has no return contract")
             self.assertIn("never its working context", body)
+
+    def test_source_verification_is_judgement_class(self):
+        """An ungraded claim entering memory corrupts every decision downstream of it."""
+        agent = next(a for a in self.agents if a["id"] == "source-verifier")
+        self.assertEqual(agent["task_class"], "judgement")
+        self.assertEqual(agent["model"], "opus")
+
+    def test_research_reports_to_the_director_not_to_a_consumer(self):
+        """Research that reports to the domain commissioning it cannot deliver unwelcome findings."""
+        head = next(a for a in self.agents if a["id"] == "research-head")
+        self.assertEqual(head["reports_to"], "director")
+        for a in self.agents:
+            if a["domain"] == "research" and a["tier"] == "specialist":
+                self.assertEqual(a["reports_to"], "research-head",
+                                 f"{a['id']} must report inside research to stay independent")
+
+    def test_research_never_gives_legal_advice(self):
+        """Prior art touches infringement; the boundary is that research routes, never opines."""
+        body = (ROOT / "agents" / "research" / "prior-art-researcher.md").read_text()
+        self.assertIn("ip-counsel-agent", body)
+        self.assertIn("Never opine on infringement", body)
 
     def test_hardware_judgement_work_is_tiered_correctly(self):
         """Tooling, board spins, and certification are one-way doors."""

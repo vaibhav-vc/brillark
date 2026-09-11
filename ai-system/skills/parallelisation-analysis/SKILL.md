@@ -5,6 +5,7 @@ description: "Find what can run at the same time and what genuinely cannot."
 output: "parallelisation-plan.md"
 used_by:
   - planning-decomposer
+  - workflow-optimizer
 ---
 
 # Parallelisation Analysis
@@ -16,7 +17,7 @@ Find what can run at the same time and what genuinely cannot.
 
 ## When to use it
 Invoke this skill when the task calls for the outcome described above.
-It is part of the standing toolkit of: `planning-decomposer`.
+It is part of the standing toolkit of: `planning-decomposer`, `workflow-optimizer`.
 
 ## Procedure
 1. Map each task's true inputs; a dependency exists only where an output is consumed.

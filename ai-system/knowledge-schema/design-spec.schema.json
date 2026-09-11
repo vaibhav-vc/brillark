@@ -1,0 +1,196 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://brillark.ai/schemas/design-spec.schema.json",
+  "title": "Design Specification",
+  "description": "A design handed to engineering. The states and the accessibility annotations are required because they are what is otherwise discovered in production.",
+  "type": "object",
+  "required": [
+    "surface",
+    "user_problem",
+    "flows",
+    "states",
+    "accessibility"
+  ],
+  "properties": {
+    "surface": {
+      "type": "string"
+    },
+    "user_problem": {
+      "type": "object",
+      "required": [
+        "problem",
+        "evidence"
+      ],
+      "properties": {
+        "problem": {
+          "type": "string"
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1
+        }
+      }
+    },
+    "flows": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "name",
+          "entry_points",
+          "happy_path",
+          "branches"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "entry_points": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1,
+            "description": "Users rarely arrive at step one."
+          },
+          "happy_path": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "branches": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "interruption_reentry": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "states": {
+      "type": "object",
+      "required": [
+        "empty",
+        "loading",
+        "partial",
+        "error",
+        "success"
+      ],
+      "properties": {
+        "empty": {
+          "type": "string"
+        },
+        "loading": {
+          "type": "string"
+        },
+        "partial": {
+          "type": "string"
+        },
+        "error": {
+          "type": "string"
+        },
+        "success": {
+          "type": "string"
+        }
+      },
+      "description": "All five. The empty and error states are where products feel broken."
+    },
+    "accessibility": {
+      "type": "object",
+      "required": [
+        "focus_order",
+        "conformance_target"
+      ],
+      "properties": {
+        "focus_order": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "accessible_names": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "landmarks": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "keyboard_interactions": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "conformance_target": {
+          "type": "string"
+        },
+        "verified": {
+          "type": "boolean"
+        }
+      }
+    },
+    "design_system": {
+      "type": "object",
+      "properties": {
+        "tokens_used": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "components_used": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "exceptions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "value",
+              "reason",
+              "removal_plan"
+            ],
+            "properties": {
+              "value": {
+                "type": "string"
+              },
+              "reason": {
+                "type": "string"
+              },
+              "removal_plan": {
+                "type": "string"
+              }
+            }
+          },
+          "description": "Every one-off value is future inconsistency and needs a plan to remove it."
+        }
+      }
+    },
+    "validated_with_users": {
+      "type": "boolean"
+    },
+    "copy": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    }
+  },
+  "additionalProperties": false
+}

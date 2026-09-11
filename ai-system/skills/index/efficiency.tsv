@@ -1,0 +1,11 @@
+# Tier-1 discovery index for the 'efficiency' category. name	output	purpose
+# Tier 2 is skills/<name>/SKILL.md — load only the skills you selected.
+cache-order-optimisation	cache-order.md	Order the prompt so the stable part stays cacheable.
+context-bloat-analysis	bloat-report.md	Find context that is loaded and never used.
+efficiency-quality-tradeoff	tradeoff-record.md	Decide whether a saving is worth it.
+escalation-rule-design	escalation-rules.md	Define when a cheaper tier must hand up.
+model-tier-assignment	tier-assignment.md	Put each agent on the cheapest tier that holds quality.
+routing-telemetry-review	routing-review.md	Check the routing is working in practice.
+task-class-classification	task-classes.md	Classify work so it can be routed to the right tier.
+tier-quality-verification	tier-verification.md	Prove a demotion did not cost quality.
+token-accounting	token-report.md	Know where the tokens actually go.

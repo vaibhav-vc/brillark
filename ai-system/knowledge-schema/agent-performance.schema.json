@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://brillark.ai/schemas/agent-performance.schema.json",
+  "title": "Agent Performance Record",
+  "description": "One agent's measured performance for one cycle. Rankings are of fixes, never of agents.",
+  "type": "object",
+  "required": [
+    "agent",
+    "cycle",
+    "evaluation_score",
+    "sample_size"
+  ],
+  "properties": {
+    "agent": {
+      "type": "string"
+    },
+    "cycle": {
+      "type": "string"
+    },
+    "model": {
+      "type": "string"
+    },
+    "evaluation_score": {
+      "type": "number"
+    },
+    "process_compliance_score": {
+      "type": "number",
+      "description": "Scored separately from outcome: an agent can follow every step and still be wrong."
+    },
+    "sample_size": {
+      "type": "integer"
+    },
+    "handoff_acceptance_rate": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "rework_attributed": {
+      "type": "object",
+      "properties": {
+        "capability": {
+          "type": "integer"
+        },
+        "context": {
+          "type": "integer"
+        },
+        "task_definition": {
+          "type": "integer"
+        }
+      }
+    },
+    "tokens_per_completed_task": {
+      "type": "integer",
+      "description": "Per completed task, not per call. A cheap call that fails twice is expensive."
+    },
+    "escalation_rate": {
+      "type": "number",
+      "description": "How often this agent handed up a model tier."
+    },
+    "trend": {
+      "type": "string",
+      "enum": [
+        "improving",
+        "flat",
+        "declining",
+        "insufficient_data"
+      ],
+      "description": "'insufficient_data' until at least three comparable cycles exist."
+    },
+    "top_improvement": {
+      "type": "string"
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": false
+}

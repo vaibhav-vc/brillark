@@ -1,0 +1,14 @@
+# Tier-1 discovery index for the 'compliance' category. name	output	purpose
+# Tier 2 is skills/<name>/SKILL.md — load only the skills you selected.
+audit-readiness-review	audit-readiness.md	Find the gaps before an auditor does.
+consent-design	consent-design.md	Design consent that is genuine rather than assumed.
+control-framework-design	control-framework.md	Build the controls that make compliance demonstrable.
+data-subject-rights-process	rights-process.md	Build a rights request process that actually works.
+evidence-collection	evidence-register.md	Gather proof that controls actually operated.
+metric-consistency-check	consistency-check.md	Verify a reported metric means the same thing it did last period.
+minute-taking	minutes.md	Record decisions so the corporate record is accurate.
+policy-authoring	policy.md	Write a policy people can actually follow.
+privacy-impact-assessment	dpia.md	Assess high-risk processing before it starts.
+processor-due-diligence	processor-assessment.md	Check a third party before sending them personal data.
+resolution-drafting	resolution.md	Draft a resolution that is unambiguous and effective.
+signature-authority-matrix	signature-authority.md	Make it unambiguous who may bind the company.

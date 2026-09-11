@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://brillark.ai/schemas/token-ledger.schema.json",
+  "title": "Token Ledger Entry",
+  "description": "What one run actually cost. Without this the efficiency work is guesswork.",
+  "type": "object",
+  "required": [
+    "run_id",
+    "agent",
+    "task_id",
+    "tokens",
+    "completed"
+  ],
+  "properties": {
+    "run_id": {
+      "type": "string"
+    },
+    "agent": {
+      "type": "string"
+    },
+    "task_id": {
+      "type": "string"
+    },
+    "model": {
+      "type": "string"
+    },
+    "tokens": {
+      "type": "object",
+      "required": [
+        "system",
+        "context",
+        "retrieved",
+        "output",
+        "total"
+      ],
+      "properties": {
+        "system": {
+          "type": "integer"
+        },
+        "context": {
+          "type": "integer"
+        },
+        "retrieved": {
+          "type": "integer"
+        },
+        "output": {
+          "type": "integer"
+        },
+        "total": {
+          "type": "integer"
+        },
+        "cached_prefix": {
+          "type": "integer",
+          "description": "Tokens served from cache. Rises when ordering is correct."
+        }
+      }
+    },
+    "context_referenced": {
+      "type": "integer",
+      "description": "Of the context loaded, how much the output actually used."
+    },
+    "completed": {
+      "type": "boolean",
+      "description": "False runs still cost. Cost per completed task includes them."
+    },
+    "attempts": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "escalated": {
+      "type": "boolean"
+    },
+    "budget_exceeded": {
+      "type": "boolean"
+    }
+  },
+  "additionalProperties": false
+}

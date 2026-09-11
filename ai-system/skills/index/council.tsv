@@ -1,0 +1,46 @@
+# Tier-1 discovery index for the 'council' category. name	output	purpose
+# Tier 2 is skills/<name>/SKILL.md — load only the skills you selected.
+abuse-case-analysis	abuse-cases.md	Find how the product will be misused.
+adjacency-mapping	adjacency-map.md	Find the markets and use cases nearest to where we already stand.
+alternative-revival	alternative-review.md	Check whether a discarded option deserves reconsideration.
+analogy-audit	analogy-audit.md	Find reasoning that rests on imitation rather than evidence.
+ask-framing	ask.md	Make a request specific enough to be acted on.
+assumption-extraction	assumption-list.md	Surface every assumption, including the invisible ones.
+benchmark-comparison	benchmark-comparison.md	Compare our numbers to observed reality and demand a reason for every gap.
+cascade-analysis	cascade-analysis.md	Find failures that trigger other failures.
+cheapest-test-design	test-design.md	Find the least expensive way to check a critical assumption.
+circular-logic-detection	circularity-report.md	Find reasoning that assumes what it is trying to prove.
+competitive-kill-scenario	kill-scenario.md	Describe how a competitor could destroy this business.
+conflict-resolution	conflict-resolution.md	Resolve a direct disagreement between critics.
+constraint-classification	constraint-analysis.md	Sort real constraints from assumed ones.
+council-debate-facilitation	debate-record.md	Run a structured debate that produces a decision.
+counter-case-argument	counter-case.md	Argue against the leading option in full.
+dark-pattern-audit	dark-pattern-audit.md	Find design that works against the user's interest.
+dissent-recording	dissent-log.md	Preserve minority positions on the record.
+early-warning-indicator-design	early-warning-indicators.md	Define signals that warn before the failure arrives.
+evidence-grading	evidence-grades.md	Rate how well each claim is actually supported.
+expansion-option-sizing	expansion-options.md	Size an expansion option honestly, including what it would require.
+failure-mode-cataloguing	failure-catalogue.md	Enumerate the distinct ways this can fail.
+failure-scenario-writing	failure-scenario.md	Turn an objection into a specific, checkable failure.
+falsification-test-design	falsification-test.md	Define what would prove the plan wrong.
+finding-deduplication	deduplicated-findings.md	Merge findings that are the same objection in different words.
+first-principles-decomposition	first-principles.md	Strip a plan to what is actually necessary.
+from-scratch-reconstruction	reconstruction.md	Rebuild the plan from the irreducible requirements alone.
+groupthink-detection	groupthink-check.md	Spot agreement that was assumed rather than earned.
+leverage-identification	leverage-list.md	Find where a small effort produces an outsized return.
+load-bearing-analysis	load-bearing-report.md	Determine which assumptions the plan cannot survive without.
+model-recomputation	recomputation-report.md	Independently recompute a model's headline numbers before critiquing them.
+network-effect-analysis	network-effect-analysis.md	Test whether a claimed network effect is real.
+pre-mortem	pre-mortem.md	Assume the venture failed and reconstruct how.
+recoverability-classification	recoverability-report.md	Separate the failures you can come back from.
+recurring-flaw-analysis	recurring-flaws.md	Find the mistakes this organisation keeps making.
+red-team-attack	red-team-report.md	Attack a plan the way a competitor or bad actor would.
+remedy-design	remedy-proposal.md	Propose a fix alongside every criticism.
+reputational-stress-test	reputation-test.md	Test whether the plan survives public scrutiny.
+sequencing-recommendation	sequence-plan.md	Recommend an order rather than a wish list.
+severity-normalisation	normalised-severities.md	Make severity consistent across different critics.
+severity-triage	severity-ratings.md	Assign a severity that means the same thing to everyone.
+simplification-challenge	simplification-report.md	Ask what could be removed entirely.
+stakeholder-harm-analysis	harm-analysis.md	Identify who could be harmed, including those who never chose to be involved.
+steelman-construction	steelman.md	Rebuild a rejected option at its strongest before judging it.
+verdict-writing	council-verdict.md	Produce the decision-grade output of a review.

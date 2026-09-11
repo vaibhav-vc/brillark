@@ -1,0 +1,38 @@
+# Tier-1 discovery index for the 'market' category. name	output	purpose
+# Tier 2 is skills/<name>/SKILL.md — load only the skills you selected.
+alternative-comparison	alternative-comparison.md	Compare against what the customer would actually do instead.
+alternative-model-generation	model-alternatives.md	Generate genuinely different business models before committing to one.
+business-model-canvas	business-model-canvas.md	Describe the whole business model on one page with evidence per block.
+claim-substantiation-planning	claim-proof-plan.md	Decide what proof each marketing claim needs before it is made.
+comparison-matrix	comparison-matrix.md	Compare alternatives on the dimensions that decide purchases.
+competitive-landscape-mapping	competitive-map.md	Map everyone competing for the same budget, including the ones nobody counts.
+competitor-strategy-inference	competitor-strategy.md	Work out what a competitor is trying to do from observable signals.
+customer-discovery-interview	interview-notes.md	Learn what customers actually do, without leading them or selling.
+demand-signal-research	demand-signals.md	Find evidence that demand exists in behaviour rather than in opinion.
+differentiation-analysis	differentiation.md	State the reason a customer would switch, or admit there is none.
+disconfirmation-reporting	disconfirmation-report.md	Report the evidence against your hypothesis first.
+disqualification-criteria	disqualification.md	Define who we will not sell to, and stick to it.
+evidence-extraction	evidence-extract.md	Turn raw conversation into structured, countable evidence.
+evidence-tagging	evidence-tags.md	Mark how much each claim in an artifact is actually supported.
+fit-analysis	fit-analysis.md	Assess honestly whether the offer matches the customer profile.
+hypothesis-backlog	hypothesis-backlog.md	Keep a ranked list of what we believe and how we will test it.
+icp-definition	icp.md	Define the customer precisely enough to build a target list.
+interview-guide-design	interview-guide.md	Write questions that produce evidence instead of politeness.
+job-mapping	job-map.md	Map every step of the job, including the parts our product never touches.
+jtbd-analysis	jtbd.md	Frame the problem as the job a customer hires a solution to do.
+market-sizing	market-sizing.md	Size a market bottom-up from countable inputs and sanity-check it top-down.
+model-change-logging	model-change-log.md	Record how the business model evolved and what caused each change.
+model-coherence-check	coherence-check.md	Check that the parts of the business model actually fit together.
+opportunity-scoring	opportunity-scores.md	Rank problems by how much unclaimed value they contain.
+outcome-metric-extraction	outcome-metrics.md	Capture how the customer measures success, in their own terms.
+pattern-synthesis	synthesis.md	Find the signal across many conversations without inventing it.
+persona-development	personas.md	Describe the people involved in the purchase and what each one needs.
+reachability-mapping	reachability.md	Establish where the ICP actually is and what it costs to get there.
+review-mining	review-analysis.md	Learn from what customers already say publicly about the alternatives.
+segmentation-analysis	segmentation.md	Divide the market into groups that behave differently and can be served differently.
+source-grading	source-grades.md	Rate how much a source can be trusted before using it in an argument.
+switching-analysis	switching-analysis.md	Understand what it costs a customer to change, and who bears that cost.
+trigger-event-analysis	trigger-events.md	Find the moment that makes a buyer start looking.
+value-proposition-canvas	value-proposition.md	Connect specific customer pains and gains to specific product capabilities.
+value-quantification	value-quantification.md	Put a number on the value delivered and show the arithmetic.
+why-now-analysis	why-now.md	Explain what changed that makes this opportunity possible or urgent today.

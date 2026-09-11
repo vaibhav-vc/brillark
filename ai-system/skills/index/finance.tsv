@@ -1,0 +1,58 @@
+# Tier-1 discovery index for the 'finance' category. name	output	purpose
+# Tier 2 is skills/<name>/SKILL.md — load only the skills you selected.
+assumption-ledger	assumption-ledger.md	Collect every assumption that touches money into one auditable list.
+billing-architecture-design	billing-architecture.md	Design the plumbing that turns pricing into collected cash.
+bookkeeping-standard	bookkeeping-standard.md	Define how transactions are recorded so the books stay auditable.
+break-even-analysis	break-even.md	Find the volume or price at which the business stops losing money.
+budget-approval	budget-decision.md	Approve or refuse spend with a stated reason either way.
+burn-categorisation	burn-report.md	Show where the money is actually going.
+cac-ltv-modeling	cac-ltv.md	Compute what a customer costs to acquire and what they are worth, honestly.
+cap-table-reconciliation	cap-table-reconciliation.md	Make the cap table match the signed documents exactly.
+capital-plan	capital-plan.md	Decide how much money to raise, when, and against what milestone.
+cash-threshold-alerting	cash-alert-policy.md	Make the cash position trigger action automatically.
+cohort-retention-analysis	cohort-analysis.md	Understand how customers actually behave over time rather than in aggregate.
+commitment-tracking	commitments.md	Track money already promised but not yet paid.
+contractor-classification-review	classification-review.md	Check that contractors are genuinely contractors.
+contribution-margin-waterfall	margin-waterfall.md	Show exactly where revenue per unit is consumed before it becomes margin.
+convertible-conversion-modeling	conversion-model.md	Model what convertible instruments turn into under real terms.
+cost-baseline	cost-baseline.md	Establish what things currently cost before trying to optimise.
+data-room-preparation	data-room-index.md	Assemble everything diligence will ask for, before it is asked for.
+dilution-modeling	dilution-model.md	Show what a financing actually costs in ownership.
+dunning-flow-design	dunning-flow.md	Recover failed payments without losing the customer.
+figure-reconciliation	reconciliation-trail.md	Trace every externally reported number to its source before it leaves the building.
+filing-calendar	filing-calendar.md	Make sure no statutory deadline is missed.
+financial-controls-review	controls-review.md	Check that money cannot leave the company without the right approvals.
+financial-model-build	financial-model.md	Build the integrated model where every money assumption meets its consequences.
+forecast-accuracy-review	forecast-accuracy.md	Score past forecasts so the method improves rather than the story.
+fundraising-plan	fundraising-plan.md	Run a raise as a process rather than a scramble.
+funnel-modeling	funnel-model.md	Model the path from first contact to paying customer with real conversion rates.
+indirect-tax-determination	indirect-tax-logic.md	Decide the VAT, GST, or sales tax treatment per product and market.
+investor-reporting	investor-update.md	Write an investor update that is accurate, consistent, and worth reading.
+investor-targeting	investor-list.md	Build a target list of investors who could actually say yes.
+metering-specification	metering-spec.md	Define the billable event precisely enough that nobody disputes the invoice.
+model-reconciliation	reconciliation.md	Check the model against reality and fix the model, not the reality.
+narrative-pressure-test	narrative-test.md	Test whether the fundraising story survives hostile questioning.
+option-pool-planning	option-pool-plan.md	Size the option pool against the actual hiring plan.
+packaging-design	packaging.md	Group capabilities into tiers customers can choose between.
+price-testing	price-test.md	Change price in a way that produces evidence rather than damage.
+pricing-decision	pricing-decision.md	Decide what to charge and be able to defend it from both directions.
+revenue-forecasting	revenue-forecast.md	Predict revenue with a stated range and a driver behind every number.
+revenue-plan-decomposition	revenue-plan.md	Break a revenue target into drivers someone can own.
+revenue-recognition-mapping	rev-rec-policy.md	Determine when revenue may actually be recognised, not when cash arrives.
+runway-forecast	runway.md	Determine the date the venture runs out of money.
+savings-verification	savings-verification.md	Prove a claimed saving actually appeared in the accounts.
+scenario-analysis	scenarios.md	Model distinct futures defined by driver values rather than adjectives.
+sensitivity-analysis	sensitivity-table.md	Find which inputs actually move the outcome.
+spend-efficiency-analysis	spend-efficiency.md	Rank spend by what it produces, and cut the worst.
+stress-testing	stress-test.md	Break the plan deliberately to find where it fails.
+survival-analysis	survival-requirements.md	State the minimum performance required to avoid failure.
+tax-handling-review	tax-review.md	Check that the system applies the tax logic correctly in practice.
+tax-obligation-mapping	tax-obligations.md	Determine what the venture owes, where, and when.
+three-statement-linking	three-statement-model.md	Connect profit and loss, balance sheet, and cash flow so the model cannot lie.
+trigger-response-planning	trigger-response-plan.md	Decide the response before the trigger fires, while thinking is still calm.
+unit-economics-analysis	unit-economics.md	Determine whether one unit of the business makes money, line by line.
+value-metric-selection	value-metric.md	Choose the thing the price scales with.
+variance-analysis	variance-analysis.md	Explain the gap between budget and actual in a way that changes behaviour.
+vendor-negotiation-prep	negotiation-brief.md	Arrive at a vendor negotiation with data instead of hope.
+waterfall-analysis	waterfall.md	Show who gets what in an exit, in what order.
+willingness-to-pay-research	wtp-research.md	Find out what customers will actually pay, not what they say they like.

@@ -1,0 +1,10 @@
+# Tier-1 routing index. Pick the domain first, then load only that domain's card file.
+# domain	head	agents	cards_file	owns
+business	business-head	15	agents/index/business.tsv	Market, customers, business model, GTM, sales, retention, brand
+council	council-director	11	agents/index/council.tsv	Structured critique of every material plan before it is funded
+design	design-head	15	agents/index/design.tsv	Research, structure, interaction, craft, accessibility, design system, service
+engineering	engineering-head	15	agents/index/engineering.tsv	Requirements, architecture, build, security, quality, release, observability
+finance	finance-head	13	agents/index/finance.tsv	Unit economics, pricing, runway, fundraising, billing, tax
+governance	director	20	agents/index/governance.tsv	Stage gates, strategy, capital, legal, compliance, privacy, IP, risk
+improvement	improvement-head	13	agents/index/improvement.tsv	Measurement, diagnosis, prompt and skill optimisation, token efficiency
+orchestration	orchestration-head	11	agents/index/orchestration.tsv	Routing, decomposition, scheduling, handoffs, memory, evaluation

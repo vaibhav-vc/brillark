@@ -1,6 +1,6 @@
 # Workflows
 
-Fourteen workflows. Each is a YAML file describing an ordered set of steps; each step names one agent,
+Seventeen workflows. Each is a YAML file describing an ordered set of steps; each step names one agent,
 the skills it uses, what it produces, and the condition under which the step is done.
 
 These are definitions, not a runtime. The orchestration agents read them: `intake-router` picks the
@@ -23,6 +23,9 @@ workflow, `planning-decomposer` expands the steps into tasks, `dependency-schedu
 | `11-incident-response` | any | `ciso-agent` |
 | `12-quarterly-planning` | any | `director` |
 | `13-legal-and-compliance-baseline` | any | `general-counsel-agent` |
+| `14-design-delivery` | mvp | `design-head` |
+| `15-self-improvement` | any | `improvement-head` |
+| `16-efficiency-review` | any | `improvement-head` |
 
 ## Structure
 
@@ -43,4 +46,5 @@ exit_criteria:
 ```
 
 Every agent and skill reference is verified by `tests/test_system_integrity.py`, as is the rule that
-stage-advancing workflows must route through the Council.
+stage-advancing workflows must route through the Council — and, for `15-self-improvement`, that
+adoption comes after the trial, the regression sweep, and the authorisation check.

@@ -4,15 +4,17 @@ Five layers. Each depends only on the ones below it, which is why a change to a 
 require touching an agent, and a change to an agent does not require touching a schema.
 
 ```
-  workflows/         what happens in what order        (14 definitions)
+  workflows/         what happens in what order            (17 definitions)
        |
-  agents/            who is accountable                (83 agents, 5 tiers)
+  agents/            who is accountable                    (113 agents, 5 tiers, 8 domains)
        |
-  skills/            how a thing is done               (363 procedures)
+  skills/            how a thing is done                   (505 procedures)
        |
-  knowledge-schema/  what may be stored, and in what shape  (14 schemas)
+  runtime/           what may be loaded, and in what order (budgets, routing, loader spec)
        |
-  prompts/           the rules every agent runs under  (5 system prompts, 6 templates)
+  knowledge-schema/  what may be stored, and in what shape (19 schemas)
+       |
+  prompts/           the rules every agent runs under      (7 system prompts, 6 templates)
 ```
 
 ## Separation of concerns
@@ -43,7 +45,17 @@ of the agents that produced them. Its job is that the organisation's mistakes ge
 stage gate, expire what is stale, measure retrieval. Its job is that the tenth venture costs less to
 plan than the first.
 
-## Why 83 agents rather than a handful
+## The loading layer
+
+`runtime/` is the layer that makes the rest affordable. It is separate from `agents/` and `skills/`
+on purpose: what an agent *is* and what gets *loaded* are different concerns, and conflating them is
+how organisations like this become too expensive to run.
+
+The indexes in `agents/index/` and `skills/index/` are generated from the registries and checked
+against them by tests, so discovery can never silently drift from reality. That matters because a
+stale index does not fail loudly — it just routes work to an agent that no longer exists.
+
+## Why 113 agents rather than a handful
 
 Because accountability does not compress. A single "finance agent" that owns pricing, runway,
 fundraising, billing, and tax has no definition of done, no meaningful escalation condition, and no
@@ -53,11 +65,28 @@ succeed?" has an answer.
 The cost is coordination, which is why the orchestration domain exists and why the reporting lines
 are strict: every agent escalates to exactly one parent, and every path terminates at the Director.
 
-## Why 363 skills rather than 100
+The other cost would be context, except that it is not: because of tiering, a run loads one charter,
+not 113. Adding agents makes the organisation more capable without making any single run more
+expensive. That is the property that makes this shape viable at all — and it is measured, not assumed.
+
+## Why 505 skills rather than 100
 
 The skill count is a consequence, not a target. Each skill was derived from a capability some agent's
 charter actually requires. Merging near-duplicates would produce fewer, vaguer procedures — and a
 vague procedure is one an agent improvises around, which defeats the purpose.
+
+The same tiering argument applies: an agent loads the five or six skills it declared, never the
+library. The index shard it reads to choose them costs about 400 tokens.
+
+## Why the improvement domain cannot rewrite everything
+
+A system that can modify itself will optimise whatever it is measured on. The boundary is therefore
+structural rather than a matter of good behaviour: prompts and skill steps may change automatically
+with a passing trial; workflows and charters need the Director; guardrails, schemas, the org shape,
+and the **evaluation criteria** need the human founder.
+
+The evaluation criteria are the fixed point. Everything else in the loop turns around them, and a
+loop permitted to move its own reference point is not an improvement loop.
 
 ## What this is not
 

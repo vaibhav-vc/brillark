@@ -1,0 +1,6 @@
+# Tier-1 discovery index for the 'risk' category. name	output	purpose
+# Tier 2 is skills/<name>/SKILL.md — load only the skills you selected.
+business-continuity-plan	continuity-plan.md	Plan for continuing to operate through a serious disruption.
+near-miss-analysis	near-miss-log.md	Learn from the failures that almost happened.
+risk-register-consolidation	risk-register.md	Merge domain risk registers into one ranked list.
+risk-scoring	risk-scores.md	Score risks consistently so they can be ranked.

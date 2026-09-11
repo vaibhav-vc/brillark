@@ -1,0 +1,17 @@
+# Tier-1 discovery index for the 'legal' category. name	output	purpose
+# Tier 2 is skills/<name>/SKILL.md — load only the skills you selected.
+claims-substantiation-review	substantiation-file.md	Check that public claims can be backed up.
+contract-review	contract-review.md	Read an agreement for what it actually commits us to.
+counsel-escalation	counsel-request.md	Mark clearly what needs a licensed professional.
+entity-structure-review	entity-review.md	Check the corporate structure fits what the business actually does.
+freedom-to-operate-search	fto-memo.md	Check whether building this could infringe someone else's rights.
+invention-disclosure	invention-disclosure.md	Capture inventions while the detail still exists.
+ip-assignment-check	ip-assignment-audit.md	Verify the company actually owns what it built.
+jurisdiction-risk-review	jurisdiction-review.md	Treat each new market as a new risk surface.
+legal-risk-register	legal-risk-register.md	Track legal exposure in one place.
+oss-license-compliance	license-report.md	Make sure dependency licences are compatible with the business model.
+platform-policy-review	platform-policy-review.md	Check the plan against the rules of the platforms it depends on.
+regulatory-applicability-mapping	applicability-map.md	Determine which rules actually apply to this business.
+regulatory-exposure-review	regulatory-exposure.md	Challenge a plan on what regulators would permit.
+trade-secret-hygiene	trade-secret-policy.md	Protect what is not worth patenting.
+trademark-clearance	clearance-memo.md	Check a name can actually be used before committing to it.

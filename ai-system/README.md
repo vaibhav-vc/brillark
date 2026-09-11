@@ -1,76 +1,106 @@
 # ai-system — a multi-agent organisation for building ventures
 
-83 agents, 363 skills, 14 workflows, 14 schemas, and a test suite that keeps them consistent.
+113 agents, 505 skills, 17 workflows, 19 schemas, and a test suite that keeps them consistent.
 
-The system takes a founder's intent and runs it through the same path a competent company would:
-design a business model, validate it against real customers, scope an MVP to the smallest thing that
-tests the riskiest belief, build it, launch it, learn from it, and upgrade it — with every material
-plan attacked by a standing Council of critics before money is spent on it.
+The system takes a founder's intent and runs it through the path a competent company would: design a
+business model, validate it against real customers, design the experience, scope an MVP to the
+smallest thing that tests the riskiest belief, build it, launch it, learn from it, upgrade it — with
+every material plan attacked by a standing Council before money is spent on it, and a self-improvement
+loop that makes the next cycle better than the last.
+
+**It is built to be cheap to run.** A single agent run loads about **4,700 tokens**, not the 373,000
+the full library would cost, because nothing loads what it does not need. See
+[`docs/token-efficiency.md`](docs/token-efficiency.md) — and run the measurement yourself.
 
 ## The organisation
 
 ```
-                          human founder
-                                |
-                            director                 <- 1, single accountable owner
-                                |
-        +---------------+-------+-------+---------------+
-        |               |               |               |
-   finance-head   business-head   engineering-head  orchestration-head   council-director
-      (12)            (14)             (14)              (10)                (10 critics)
-                                                                          <- 50 specialists total
+                              human founder
+                                    |
+                                director                    <- 1, single accountable owner
+                                    |
+    +---------+---------+-----------+-----------+---------+---------+
+    |         |         |           |           |         |         |
+ finance  business  engineering  design   orchestration improvement council
+   (13)     (15)       (15)       (15)        (11)         (13)      (11)
 
-        executive officers (17): CEO, CFO, CMO, CTO, COO, CPO, CSO, CRO, CDO,
-        CISO, CHRO, General Counsel, Chief Compliance, Chief Risk,
-        Data Protection Officer, IP Counsel, Corporate Secretary
+    executive officers (19): CEO CFO CMO CTO COO CPO CSO CRO CDO CISO CHRO
+    Chief Design Officer, Chief Learning Officer, General Counsel,
+    Chief Compliance, Chief Risk, DPO, IP Counsel, Corporate Secretary
 ```
 
-Full chart, decision rights, and the constraints that hold it together: **[`docs/org-chart.md`](docs/org-chart.md)**.
+Full chart and decision rights: **[`docs/org-chart.md`](docs/org-chart.md)**.
 
-| Tier | Count | What it is for |
+| Tier | Count | For |
 |---|---|---|
-| Director | 1 | Owns stage gates, arbitration, and the budget. The only agent reporting to the human. |
-| Domain heads | 5 | Finance, business, engineering, orchestration, council. Own their domain's output. |
-| Executive officers | 17 | Company-wide functions, including legal, compliance, privacy, IP, and risk. |
+| Director | 1 | Stage gates, arbitration, budget. The only agent reporting to the human. |
+| Domain heads | 7 | Finance, business, engineering, design, orchestration, improvement, council. |
+| Executive officers | 19 | Company-wide functions, including design, learning, legal, privacy, IP, risk. |
 | Council | 10 | Structured critics. Attack every material plan before it is funded. |
-| Specialists | 50 | The planning agents that do the work. |
+| Specialists | 76 | 50 planning · 14 design · 12 improvement. |
+
+## What makes it work
+
+**Progressive disclosure.** Three tiers: discovery (a domain index, then one domain's agent cards,
+then one skill category index — about 1,100 tokens), activation (the one charter and the skills
+actually chosen), execution (context fetched just-in-time). The org grew 36% from v1 and the cost of
+a run *fell* 39%.
+
+**Context isolation.** Every agent runs in its own context and returns at most its
+`return_budget_tokens` — the decision, the artifact paths, a confidence grade. Never its working
+context.
+
+**Model tiering.** 3 agents on `haiku` for mechanical work, 65 on
+`sonnet` for analysis, 45 on `opus` for judgement. Every assignment needs quality
+evidence; judgement work is never demoted to save money.
+
+**Structural rules.** A memory record cannot exist without provenance. A decision cannot omit its
+accepted costs. A Council finding cannot be an adjective. A design spec cannot omit its error state.
+These are enforced by schema, not by convention.
+
+**It improves itself, within limits.** The improvement domain measures, diagnoses, trials against
+held-out cases, sweeps for regressions, adopts one change at a time, and verifies the next cycle. It
+may edit prompts and skill steps automatically. It may **never** change guardrails, schemas, the org
+shape, or its own evaluation criteria — those need the human founder. See
+[`docs/self-improvement.md`](docs/self-improvement.md).
 
 ## Layout
 
-| Directory | What is in it |
+| Directory | Contents |
 |---|---|
-| `agents/` | 83 agent definitions plus `registry.yaml` and `AGENT_INDEX.md` |
-| `skills/` | 363 skills, one directory each, plus `registry.yaml` and `SKILL_INDEX.md` |
+| `agents/` | 113 charters, `registry.yaml`, and the tier-1 `index/` used for routing |
+| `skills/` | 505 skills, one directory each, plus the sharded tier-1 `index/` |
+| `runtime/` | Context budgets, model routing, and the loader specification |
 | `prompts/` | Layered system prompts and the artifact templates that move between agents |
-| `workflows/` | 14 executable workflow definitions, from intake to fundraise |
-| `knowledge-schema/` | 14 JSON Schemas: memory, entities, decisions, verdicts, tasks, handoffs |
+| `workflows/` | 17 workflow definitions, from intake to self-improvement |
+| `knowledge-schema/` | 20 JSON Schemas: memory, decisions, verdicts, returns, proposals, design specs |
 | `integrations/` | Contracts for the external systems the organisation reads and writes |
-| `tests/` | Integrity tests that fail when the parts drift apart |
-| `bootstrap/` | Start a new venture and check the system is wired correctly |
-| `docs/` | Org chart, memory model, stage gates, council protocol, conventions, glossary |
+| `tests/` | Integrity tests, plus the context-cost measurement |
+| `bootstrap/` | Scaffold a venture and verify the wiring |
+| `docs/` | Org chart, memory model, token efficiency, self-improvement, design practice |
 
 ## Start here
 
-1. **[`docs/getting-started.md`](docs/getting-started.md)** — run your first venture through the system.
-2. **[`docs/org-chart.md`](docs/org-chart.md)** — who reports to whom and who decides what.
-3. **[`docs/memory-model.md`](docs/memory-model.md)** — how context and memory actually work.
-4. **[`docs/stage-gates.md`](docs/stage-gates.md)** — the seven stages and what each requires to exit.
-
 ```bash
-bash ai-system/bootstrap/init.sh acme-corp     # scaffold a venture workspace
-python3 ai-system/tests/test_system_integrity.py   # verify the system is consistent
+python3 ai-system/tests/test_system_integrity.py    # 41 tests: does everything still line up?
+python3 ai-system/tests/measure_context_cost.py     # what does a run actually cost?
+bash ai-system/bootstrap/init.sh acme-corp          # scaffold a venture workspace
 ```
 
-## The design decisions worth knowing
+1. **[`docs/getting-started.md`](docs/getting-started.md)** — run your first venture through it.
+2. **[`docs/org-chart.md`](docs/org-chart.md)** — who reports to whom, who decides what.
+3. **[`docs/token-efficiency.md`](docs/token-efficiency.md)** — why it is cheap, and how to keep it cheap.
+4. **[`docs/memory-model.md`](docs/memory-model.md)** — how context and memory actually work.
+5. **[`docs/self-improvement.md`](docs/self-improvement.md)** — the loop, and its boundary.
 
-- **One owner per thing.** Tasks, artifacts, risks, and metrics each have exactly one accountable agent.
-- **Evidence carries a grade.** Every claim is `measured`, `sourced`, `benchmarked`, `estimated`, or
-  `guessed`. A guess may never be load-bearing at a stage gate.
-- **The Council attacks but never decides.** It issues verdicts; the Director decides. Overruling a
-  blocker is allowed and must be written down.
-- **Memory is a system, not a folder.** Four memory types, provenance on every write, contradictions
-  resolved by supersession, and stale context quarantined rather than silently trusted.
-- **Legal advice stops at the boundary.** The legal agents spot issues and draft; anything needing a
-  licensed attorney is escalated out of the system rather than answered inside it.
-- **The whole thing is testable.** `tests/test_system_integrity.py` fails if an agent references a
-  skill that does not exist, a reporting line dangles, or a workflow names a missing agent.
+## Deliberate constraints
+
+- **One owner** per task, artifact, risk, and metric. Two owners means none.
+- **Evidence carries a grade** — `measured`, `sourced`, `benchmarked`, `estimated`, `guessed`. A
+  guess may never be load-bearing at a stage gate.
+- **The Council attacks but never decides.** The Director decides, and overruling a blocker must be
+  written down.
+- **Accessibility is a build requirement.** A surface that fails its conformance target is a defect.
+- **Legal advice stops at the boundary.** Anything needing a licensed attorney is escalated out of
+  the system, never answered inside it.
+- **Efficiency never buys quality.** No saving ships without a quality check on the golden cases.

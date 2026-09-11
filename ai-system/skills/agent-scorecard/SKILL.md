@@ -4,6 +4,7 @@ category: orchestration
 description: "Report how well each agent actually performs, from evidence."
 output: "agent-scorecard.md"
 used_by:
+  - agent-performance-analyst
   - evaluation-harness-agent
 ---
 
@@ -16,7 +17,7 @@ Report how well each agent actually performs, from evidence.
 
 ## When to use it
 Invoke this skill when the task calls for the outcome described above.
-It is part of the standing toolkit of: `evaluation-harness-agent`.
+It is part of the standing toolkit of: `agent-performance-analyst`, `evaluation-harness-agent`.
 
 ## Procedure
 1. Score evaluation results, handoff acceptance rate, and rework attribution.

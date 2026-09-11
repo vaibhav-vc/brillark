@@ -1,0 +1,13 @@
+# Tier-1 discovery index for the 'strategy' category. name	output	purpose
+# Tier 2 is skills/<name>/SKILL.md — load only the skills you selected.
+bet-portfolio-sizing	bet-portfolio.md	Allocate effort across bets according to their expected value and risk.
+board-update	board-update.md	Report to a board so they can help rather than merely be informed.
+build-buy-partner-analysis	build-buy-partner.md	Decide whether to build a capability, buy it, or partner for it.
+market-structure-analysis	market-structure.md	Understand who captures value in this market and why.
+moat-thesis	moat-thesis.md	State the defensibility as a mechanism, not as a feature list.
+narrative-one-pager	one-pager.md	Compress the whole company onto one page a new person could absorb.
+scenario-planning	scenarios.md	Prepare for several plausible futures rather than forecasting one.
+strategy-memo	strategy-memo.md	State the strategy as a set of explicit choices.
+technical-due-diligence	tech-diligence-pack.md	Keep the technical story ready for anyone who will examine it.
+trend-signal-monitoring	signal-watchlist.md	Watch the small number of indicators that would change the strategy.
+vendor-risk-review	vendor-risk.md	Assess what a vendor dependency actually exposes us to.

@@ -1,6 +1,6 @@
 # Skill Index
 
-**363 skills** across 14 categories. Generated from `skills/registry.yaml`.
+**505 skills** across 17 categories. Generated from `skills/registry.yaml`.
 
 Each skill is a directory containing a single `SKILL.md` with frontmatter, a five-step procedure,
 an output contract, a quality bar, and the category's anti-patterns.
@@ -10,9 +10,12 @@ an output contract, a quality bar, and the category's anti-patterns.
 | [compliance](#compliance) | 12 |
 | [council](#council) | 44 |
 | [data](#data) | 7 |
+| [design](#design) | 78 |
+| [efficiency](#efficiency) | 9 |
 | [engineering](#engineering) | 61 |
 | [finance](#finance) | 56 |
 | [gtm](#gtm) | 38 |
+| [improvement](#improvement) | 55 |
 | [legal](#legal) | 15 |
 | [market](#market) | 36 |
 | [memory](#memory) | 13 |
@@ -21,7 +24,7 @@ an output contract, a quality bar, and the category's anti-patterns.
 | [product](#product) | 13 |
 | [risk](#risk) | 4 |
 | [strategy](#strategy) | 11 |
-| **total** | **363** |
+| **total** | **505** |
 
 ## compliance
 
@@ -100,6 +103,103 @@ an output contract, a quality bar, and the category's anti-patterns.
 | [`data-quality-scoring`](data-quality-scoring/SKILL.md) | Measure whether the data can be trusted. | 1 agent |
 | [`experiment-design`](experiment-design/SKILL.md) | Design a test that can actually answer the question. | 1 agent |
 | [`metric-dictionary`](metric-dictionary/SKILL.md) | Define every metric once, with one owner. | 1 agent |
+
+## design
+
+| Skill | What it does | Used by |
+|---|---|---|
+| [`accessibility-annotation`](accessibility-annotation/SKILL.md) | Give engineering everything it needs to build the interface accessibly. | 1 agent |
+| [`accessibility-conformance-review`](accessibility-conformance-review/SKILL.md) | Decide whether a surface meets the bar to ship. | 1 agent |
+| [`asset-library-management`](asset-library-management/SKILL.md) | Keep brand and product assets available in the formats people need. | 1 agent |
+| [`assistive-technology-testing`](assistive-technology-testing/SKILL.md) | Test with the tools people actually use, not only with automated checkers. | 1 agent |
+| [`back-stage-validation`](back-stage-validation/SKILL.md) | Check the operation can actually deliver the designed experience. | 1 agent |
+| [`brand-distinctiveness-check`](brand-distinctiveness-check/SKILL.md) | Verify the identity is actually distinguishable from the competition. | 1 agent |
+| [`brand-guideline-authoring`](brand-guideline-authoring/SKILL.md) | Write guidelines people can actually follow. | 1 agent |
+| [`card-sorting`](card-sorting/SKILL.md) | Learn how users group and name things, rather than imposing the internal structure. | 1 agent |
+| [`channel-handoff-design`](channel-handoff-design/SKILL.md) | Design the moments where the service moves between channels or between machine and human. | 1 agent |
+| [`chart-form-selection`](chart-form-selection/SKILL.md) | Pick the chart form from the comparison being made. | 1 agent |
+| [`colourblind-safe-palette`](colourblind-safe-palette/SKILL.md) | Build a palette that works for everyone. | 1 agent |
+| [`component-api-design`](component-api-design/SKILL.md) | Design a component's interface so it is hard to misuse. | 1 agent |
+| [`component-deprecation`](component-deprecation/SKILL.md) | Remove a component without stranding the people using it. | 1 agent |
+| [`conformance-auditing`](conformance-auditing/SKILL.md) | Audit a shipped surface against the conformance target. | 1 agent |
+| [`content-modeling`](content-modeling/SKILL.md) | Define the content types and their relationships before designing pages. | 1 agent |
+| [`contextual-inquiry`](contextual-inquiry/SKILL.md) | Watch people do the real task in the real place, rather than asking them to describe it. | 1 agent |
+| [`contrast-and-colour-audit`](contrast-and-colour-audit/SKILL.md) | Check colour works for everyone who has to read it. | 1 agent |
+| [`copy-comprehension-testing`](copy-comprehension-testing/SKILL.md) | Check that people understand the words before shipping them. | 1 agent |
+| [`critique-ground-rules`](critique-ground-rules/SKILL.md) | Set the rules that make critique safe and useful. | 1 agent |
+| [`dashboard-composition`](dashboard-composition/SKILL.md) | Compose a dashboard that answers questions rather than displaying numbers. | 1 agent |
+| [`design-capability-planning`](design-capability-planning/SKILL.md) | Plan the design capability the roadmap actually needs. | 1 agent |
+| [`design-code-parity-audit`](design-code-parity-audit/SKILL.md) | Check that the design source and the shipped code still agree. | 1 agent |
+| [`design-critique-facilitation`](design-critique-facilitation/SKILL.md) | Run critique that improves the work rather than asserting rank. | 2 agents |
+| [`design-decision-record`](design-decision-record/SKILL.md) | Record a design decision so it is not re-argued every week. | 1 agent |
+| [`design-engineering-walkthrough`](design-engineering-walkthrough/SKILL.md) | Walk the spec with engineering before handoff, not after. | 1 agent |
+| [`design-investment-review`](design-investment-review/SKILL.md) | Judge whether design effort is going where it pays. | 1 agent |
+| [`design-quality-bar`](design-quality-bar/SKILL.md) | Define what finished means for a design. | 1 agent |
+| [`design-research-planning`](design-research-planning/SKILL.md) | Plan research that answers a specific decision rather than producing general interest. | 1 agent |
+| [`design-standard-definition`](design-standard-definition/SKILL.md) | Define the experience standard the business strategy requires. | 1 agent |
+| [`design-strategy-alignment`](design-strategy-alignment/SKILL.md) | Check the design direction actually serves the strategy. | 1 agent |
+| [`design-system-governance`](design-system-governance/SKILL.md) | Keep the system coherent as more people contribute to it. | 1 agent |
+| [`design-token-application`](design-token-application/SKILL.md) | Use the system's tokens rather than introducing one-off values. | 1 agent |
+| [`design-token-architecture`](design-token-architecture/SKILL.md) | Structure tokens so themes, modes, and brands work without rework. | 1 agent |
+| [`encoding-honesty-review`](encoding-honesty-review/SKILL.md) | Check the chart does not mislead. | 1 agent |
+| [`error-message-design`](error-message-design/SKILL.md) | Write errors that let the user recover. | 1 agent |
+| [`error-prevention-design`](error-prevention-design/SKILL.md) | Stop the error happening rather than reporting it afterwards. | 1 agent |
+| [`experience-quality-measurement`](experience-quality-measurement/SKILL.md) | Measure experience quality so it can be argued for with evidence. | 1 agent |
+| [`finding-severity-rating`](finding-severity-rating/SKILL.md) | Rate usability findings so the team fixes the right ones first. | 1 agent |
+| [`fix-verification`](fix-verification/SKILL.md) | Confirm the fix actually fixed it. | 1 agent |
+| [`flow-design`](flow-design/SKILL.md) | Design the complete path through a task, including the ways it goes wrong. | 1 agent |
+| [`goal-anchored-feedback`](goal-anchored-feedback/SKILL.md) | Give feedback that can be acted on. | 1 agent |
+| [`identity-stress-testing`](identity-stress-testing/SKILL.md) | Test the identity where it is most likely to fail. | 1 agent |
+| [`identity-system-design`](identity-system-design/SKILL.md) | Design the identity as a system, not as a logo. | 1 agent |
+| [`inclusive-design-review`](inclusive-design-review/SKILL.md) | Review the design for who it excludes before it is built. | 1 agent |
+| [`insight-synthesis`](insight-synthesis/SKILL.md) | Turn raw observation into insights that survive challenge. | 1 agent |
+| [`interaction-pattern-selection`](interaction-pattern-selection/SKILL.md) | Reuse an established pattern before inventing one. | 1 agent |
+| [`interface-copywriting`](interface-copywriting/SKILL.md) | Write the words in the product so they do the explaining. | 1 agent |
+| [`journey-mapping`](journey-mapping/SKILL.md) | Map the customer's whole path, including the parts the product never sees. | 1 agent |
+| [`layout-composition`](layout-composition/SKILL.md) | Arrange the screen so the structure is obvious without explanation. | 1 agent |
+| [`loading-feedback-design`](loading-feedback-design/SKILL.md) | Tell the user what is happening while they wait. | 1 agent |
+| [`moderation-discipline`](moderation-discipline/SKILL.md) | Run the session without contaminating the data. | 1 agent |
+| [`motion-performance-check`](motion-performance-check/SKILL.md) | Confirm the animation does not cost more than it gives. | 1 agent |
+| [`motion-principles`](motion-principles/SKILL.md) | Define what motion is for in this product, and what it is not for. | 1 agent |
+| [`navigation-design`](navigation-design/SKILL.md) | Design how people move through the product and know where they are. | 1 agent |
+| [`plain-language-editing`](plain-language-editing/SKILL.md) | Cut the text down to what people will actually read. | 1 agent |
+| [`prototype-disposal`](prototype-disposal/SKILL.md) | Retire the prototype instead of letting it become the product. | 1 agent |
+| [`prototype-fidelity-selection`](prototype-fidelity-selection/SKILL.md) | Choose the cheapest fidelity that answers the question. | 1 agent |
+| [`prototype-scoping`](prototype-scoping/SKILL.md) | Be explicit about what the prototype proves and what it fakes. | 1 agent |
+| [`rapid-prototyping`](rapid-prototyping/SKILL.md) | Build the testable artifact fast, without building the product. | 1 agent |
+| [`realistic-content-testing`](realistic-content-testing/SKILL.md) | Test the design with the content it will actually hold. | 2 agents |
+| [`reduced-motion-design`](reduced-motion-design/SKILL.md) | Give an equivalent experience to people who have turned motion off. | 1 agent |
+| [`research-evidence-review`](research-evidence-review/SKILL.md) | Check that a design decision rests on evidence rather than assertion. | 1 agent |
+| [`research-repository-management`](research-repository-management/SKILL.md) | Keep past research findable so the next project does not re-run it. | 1 agent |
+| [`service-blueprinting`](service-blueprinting/SKILL.md) | Map the whole service, including everything the customer never sees. | 1 agent |
+| [`service-recovery-design`](service-recovery-design/SKILL.md) | Design what happens when the service fails the customer. | 1 agent |
+| [`state-specification`](state-specification/SKILL.md) | Specify every state a view can be in, so none is discovered in production. | 1 agent |
+| [`system-contribution-process`](system-contribution-process/SKILL.md) | Define how a component enters the system. | 1 agent |
+| [`task-success-measurement`](task-success-measurement/SKILL.md) | Measure whether people can actually complete the task. | 1 agent |
+| [`taste-versus-principle-separation`](taste-versus-principle-separation/SKILL.md) | Tell apart a real problem and a personal preference. | 1 agent |
+| [`taxonomy-design`](taxonomy-design/SKILL.md) | Build the controlled vocabulary the whole organisation uses. | 1 agent |
+| [`terminology-governance`](terminology-governance/SKILL.md) | Keep one name per concept across every surface. | 1 agent |
+| [`touchpoint-instrumentation`](touchpoint-instrumentation/SKILL.md) | Measure the service where the customer actually experiences it. | 1 agent |
+| [`transition-design`](transition-design/SKILL.md) | Move between states so the user can follow what happened. | 1 agent |
+| [`tree-testing`](tree-testing/SKILL.md) | Test whether people can find things in a structure before anything is designed on top of it. | 1 agent |
+| [`typography-system`](typography-system/SKILL.md) | Set type so the product can be read comfortably. | 1 agent |
+| [`uncertainty-visualisation`](uncertainty-visualisation/SKILL.md) | Show how confident the numbers are. | 1 agent |
+| [`usability-test-design`](usability-test-design/SKILL.md) | Design a test that produces findings rather than reassurance. | 1 agent |
+| [`visual-hierarchy-design`](visual-hierarchy-design/SKILL.md) | Make the order things are read match the order they matter. | 1 agent |
+
+## efficiency
+
+| Skill | What it does | Used by |
+|---|---|---|
+| [`cache-order-optimisation`](cache-order-optimisation/SKILL.md) | Order the prompt so the stable part stays cacheable. | 1 agent |
+| [`context-bloat-analysis`](context-bloat-analysis/SKILL.md) | Find context that is loaded and never used. | 1 agent |
+| [`efficiency-quality-tradeoff`](efficiency-quality-tradeoff/SKILL.md) | Decide whether a saving is worth it. | 1 agent |
+| [`escalation-rule-design`](escalation-rule-design/SKILL.md) | Define when a cheaper tier must hand up. | 1 agent |
+| [`model-tier-assignment`](model-tier-assignment/SKILL.md) | Put each agent on the cheapest tier that holds quality. | 2 agents |
+| [`routing-telemetry-review`](routing-telemetry-review/SKILL.md) | Check the routing is working in practice. | 1 agent |
+| [`task-class-classification`](task-class-classification/SKILL.md) | Classify work so it can be routed to the right tier. | 1 agent |
+| [`tier-quality-verification`](tier-quality-verification/SKILL.md) | Prove a demotion did not cost quality. | 1 agent |
+| [`token-accounting`](token-accounting/SKILL.md) | Know where the tokens actually go. | 1 agent |
 
 ## engineering
 
@@ -271,6 +371,66 @@ an output contract, a quality bar, and the category's anti-patterns.
 | [`voice-of-customer-synthesis`](voice-of-customer-synthesis/SKILL.md) | Turn scattered customer feedback into something product can act on. | 1 agent |
 | [`win-loss-analysis`](win-loss-analysis/SKILL.md) | Find out why deals were actually won and lost. | 2 agents |
 
+## improvement
+
+| Skill | What it does | Used by |
+|---|---|---|
+| [`adoption-threshold-setting`](adoption-threshold-setting/SKILL.md) | Decide in advance what would justify adopting the change. | 2 agents |
+| [`behaviour-change-verification`](behaviour-change-verification/SKILL.md) | Check the instruction actually changed what agents do. | 1 agent |
+| [`capability-mapping`](capability-mapping/SKILL.md) | Know what the organisation can and cannot currently do. | 1 agent |
+| [`capability-target-setting`](capability-target-setting/SKILL.md) | Set improvement targets that can be judged. | 1 agent |
+| [`case-provenance-recording`](case-provenance-recording/SKILL.md) | Record where each case came from and why its answer is right. | 1 agent |
+| [`case-retirement`](case-retirement/SKILL.md) | Remove cases that no longer teach anything. | 1 agent |
+| [`change-reversion`](change-reversion/SKILL.md) | Undo a change that did not hold. | 1 agent |
+| [`constraint-over-explanation`](constraint-over-explanation/SKILL.md) | Write rules agents follow rather than rationale they interpret. | 1 agent |
+| [`contamination-auditing`](contamination-auditing/SKILL.md) | Check the measurement set has not leaked into development. | 1 agent |
+| [`coverage-mapping`](coverage-mapping/SKILL.md) | Know what the evaluation does and does not cover. | 1 agent |
+| [`discrimination-analysis`](discrimination-analysis/SKILL.md) | Check the evaluation actually separates good from bad. | 1 agent |
+| [`duplicate-review-elimination`](duplicate-review-elimination/SKILL.md) | Remove reviews that check the same thing twice. | 1 agent |
+| [`early-stopping-discipline`](early-stopping-discipline/SKILL.md) | Do not stop the trial when it starts looking good. | 1 agent |
+| [`effect-size-reporting`](effect-size-reporting/SKILL.md) | Report how much better, not just whether better. | 1 agent |
+| [`evaluation-revalidation`](evaluation-revalidation/SKILL.md) | Re-check the evaluation when the job changes. | 1 agent |
+| [`fail-fast-resequencing`](fail-fast-resequencing/SKILL.md) | Move the cheap disconfirming step earlier. | 1 agent |
+| [`failure-attribution`](failure-attribution/SKILL.md) | Determine whether a failure was capability, context, or task definition — because the fixes are different. | 1 agent |
+| [`failure-corpus-mining`](failure-corpus-mining/SKILL.md) | Gather everything that went wrong into one place worth analysing. | 1 agent |
+| [`failure-cost-estimation`](failure-cost-estimation/SKILL.md) | Put a number on what each failure pattern costs. | 1 agent |
+| [`fix-effect-measurement`](fix-effect-measurement/SKILL.md) | Measure whether the fix actually helped. | 1 agent |
+| [`gap-evidence-collection`](gap-evidence-collection/SKILL.md) | Prove the gap is real before proposing to fill it. | 1 agent |
+| [`golden-case-extraction`](golden-case-extraction/SKILL.md) | Turn a real failure into a test that stops it recurring. | 1 agent |
+| [`held-out-set-construction`](held-out-set-construction/SKILL.md) | Build a measurement set that stays honest. | 1 agent |
+| [`held-out-trial-design`](held-out-trial-design/SKILL.md) | Design the trial so its result means something. | 1 agent |
+| [`improvement-backlog-ranking`](improvement-backlog-ranking/SKILL.md) | Decide what to improve next. | 1 agent |
+| [`improvement-cycle-facilitation`](improvement-cycle-facilitation/SKILL.md) | Run the loop that makes the organisation better. | 1 agent |
+| [`improvement-queue-ranking`](improvement-queue-ranking/SKILL.md) | Rank candidate fixes by what they are actually worth. | 1 agent |
+| [`improvement-return-analysis`](improvement-return-analysis/SKILL.md) | Judge whether the improvement effort was worth it. | 1 agent |
+| [`instruction-placement`](instruction-placement/SKILL.md) | Put the instruction where it will actually be read. | 1 agent |
+| [`instruction-pruning`](instruction-pruning/SKILL.md) | Remove instructions that no longer earn their tokens. | 1 agent |
+| [`inter-rater-calibration`](inter-rater-calibration/SKILL.md) | Get different scorers to agree. | 1 agent |
+| [`learning-strategy`](learning-strategy/SKILL.md) | Decide what the organisation must get better at, and ignore the rest. | 1 agent |
+| [`lesson-distillation`](lesson-distillation/SKILL.md) | Compress a lesson into the shortest instruction that prevents the failure. | 1 agent |
+| [`library-overlap-analysis`](library-overlap-analysis/SKILL.md) | Find skills that have blurred into each other, and gaps between them. | 1 agent |
+| [`minimal-intervention-selection`](minimal-intervention-selection/SKILL.md) | Choose the smallest change that closes the gap. | 1 agent |
+| [`negative-result-reporting`](negative-result-reporting/SKILL.md) | Report what did not work, as prominently as what did. | 1 agent |
+| [`new-agent-justification`](new-agent-justification/SKILL.md) | Justify a new agent by the accountability nobody currently holds. | 1 agent |
+| [`optimisation-drift-detection`](optimisation-drift-detection/SKILL.md) | Catch the system getting better at its metrics while getting worse at its job. | 1 agent |
+| [`performance-trend-analysis`](performance-trend-analysis/SKILL.md) | Distinguish a real trend from noise before acting on it. | 1 agent |
+| [`prompt-change-logging`](prompt-change-logging/SKILL.md) | Keep the history of what changed and what it bought. | 1 agent |
+| [`prompt-variant-generation`](prompt-variant-generation/SKILL.md) | Produce candidate instruction changes worth testing. | 1 agent |
+| [`regression-sweep`](regression-sweep/SKILL.md) | Check the change did not break something else. | 2 agents |
+| [`root-cause-clustering`](root-cause-clustering/SKILL.md) | Group failures by what actually caused them. | 1 agent |
+| [`rubric-design`](rubric-design/SKILL.md) | Build a scoring scheme different reviewers apply the same way. | 1 agent |
+| [`sample-sizing`](sample-sizing/SKILL.md) | Work out how many cases the trial needs. | 1 agent |
+| [`self-modification-policy`](self-modification-policy/SKILL.md) | Define what the system may change about itself without human approval. | 1 agent |
+| [`skill-deprecation`](skill-deprecation/SKILL.md) | Retire a skill without breaking the agents that name it. | 1 agent |
+| [`skill-step-revision`](skill-step-revision/SKILL.md) | Fix the specific step that let the failure through. | 1 agent |
+| [`skill-usage-telemetry`](skill-usage-telemetry/SKILL.md) | Find out which skills are actually used. | 1 agent |
+| [`sprawl-resistance`](sprawl-resistance/SKILL.md) | Recommend against filling a gap when that is the right answer. | 1 agent |
+| [`step-concreteness-review`](step-concreteness-review/SKILL.md) | Check every step can actually be followed. | 1 agent |
+| [`step-value-analysis`](step-value-analysis/SKILL.md) | Find workflow steps that change no outcome. | 1 agent |
+| [`systemic-cause-identification`](systemic-cause-identification/SKILL.md) | Find the cause that produces many different failures. | 1 agent |
+| [`trial-execution`](trial-execution/SKILL.md) | Run the comparison cleanly. | 1 agent |
+| [`workflow-change-measurement`](workflow-change-measurement/SKILL.md) | Prove the workflow change helped. | 1 agent |
+
 ## legal
 
 | Skill | What it does | Used by |
@@ -356,7 +516,7 @@ an output contract, a quality bar, and the category's anti-patterns.
 |---|---|---|
 | [`action-verification`](action-verification/SKILL.md) | Confirm that agreed changes were actually made. | 1 agent |
 | [`agent-routing`](agent-routing/SKILL.md) | Send a request to exactly one accountable agent, chosen from capability rather than convenience. | 2 agents |
-| [`agent-scorecard`](agent-scorecard/SKILL.md) | Report how well each agent actually performs, from evidence. | 1 agent |
+| [`agent-scorecard`](agent-scorecard/SKILL.md) | Report how well each agent actually performs, from evidence. | 2 agents |
 | [`blocker-detection`](blocker-detection/SKILL.md) | Find work that has stopped moving before someone reports it. | 1 agent |
 | [`bottleneck-analysis`](bottleneck-analysis/SKILL.md) | Find the one constraint limiting the whole system's output. | 1 agent |
 | [`budget-allocation`](budget-allocation/SKILL.md) | Give every task an explicit ceiling on time, tokens, and spend. | 1 agent |
@@ -372,7 +532,7 @@ an output contract, a quality bar, and the category's anti-patterns.
 | [`escalation-criteria`](escalation-criteria/SKILL.md) | Define what must go up, to whom, and how fast. | 1 agent |
 | [`escalation-pattern-analysis`](escalation-pattern-analysis/SKILL.md) | Find the process defects behind repeated escalations. | 1 agent |
 | [`evaluation-suite-design`](evaluation-suite-design/SKILL.md) | Build a repeatable test set that shows whether agents and skills work. | 1 agent |
-| [`golden-case-curation`](golden-case-curation/SKILL.md) | Maintain the reference examples that define good output. | 1 agent |
+| [`golden-case-curation`](golden-case-curation/SKILL.md) | Maintain the reference examples that define good output. | 2 agents |
 | [`handoff-contract-definition`](handoff-contract-definition/SKILL.md) | Define what must accompany work passed between two specific roles. | 1 agent |
 | [`handoff-validation`](handoff-validation/SKILL.md) | Check that arriving work is complete before accepting it. | 1 agent |
 | [`intent-clarification`](intent-clarification/SKILL.md) | Convert a vague request into a restatement the requester confirms before work starts. | 2 agents |
@@ -382,7 +542,7 @@ an output contract, a quality bar, and the category's anti-patterns.
 | [`open-question-tracking`](open-question-tracking/SKILL.md) | Keep unresolved questions alive across handoffs instead of dropping them. | 1 agent |
 | [`operating-cadence-design`](operating-cadence-design/SKILL.md) | Design the rhythm of planning, review, and decision for the organisation. | 1 agent |
 | [`org-backlog-triage`](org-backlog-triage/SKILL.md) | Keep one prioritised list for the whole organisation so domains cannot each claim top priority. | 1 agent |
-| [`parallelisation-analysis`](parallelisation-analysis/SKILL.md) | Find what can run at the same time and what genuinely cannot. | 1 agent |
+| [`parallelisation-analysis`](parallelisation-analysis/SKILL.md) | Find what can run at the same time and what genuinely cannot. | 2 agents |
 | [`pattern-detection`](pattern-detection/SKILL.md) | Find repeating structures in outcomes, failures, or requests. | 1 agent |
 | [`prioritisation-forcing`](prioritisation-forcing/SKILL.md) | Break a tie or a 'everything is critical' deadlock into a decision. | 1 agent |
 | [`regression-detection`](regression-detection/SKILL.md) | Catch quality drops when a prompt, skill, or agent definition changes. | 1 agent |

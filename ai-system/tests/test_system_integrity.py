@@ -21,12 +21,16 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 # Counts the organisation is contractually required to have. If you deliberately change the
 # shape of the org, change these numbers in the same commit and say why in the message.
 REQUIRED = {
-    "planning_agents": 50,   # the specialist tier that plans and builds the business
+    "planning_agents": 50,   # finance + business + engineering + orchestration specialists
+    "design_agents": 14,     # the design domain
+    "improvement_agents": 12,  # the self-improvement domain
     "council_agents": 10,    # the critics
-    "heads": 5,              # finance, business, engineering, orchestration, council
+    "heads": 7,              # finance, business, engineering, design, orchestration, improvement, council
     "directors": 1,          # exactly one top-level owner
     "min_skills": 100,       # the floor; the library is far larger
 }
+PLANNING_DOMAINS = {"finance", "business", "engineering", "orchestration"}
+MODEL_TIERS = {"haiku", "sonnet", "opus"}
 
 FRONTMATTER = re.compile(r"\A---\n(.*?)\n---\n", re.S)
 
@@ -64,10 +68,40 @@ class TestAgents(unittest.TestCase):
         tiers = {}
         for a in self.agents:
             tiers[a["tier"]] = tiers.get(a["tier"], 0) + 1
-        self.assertEqual(tiers.get("specialist"), REQUIRED["planning_agents"])
         self.assertEqual(tiers.get("council"), REQUIRED["council_agents"])
         self.assertEqual(tiers.get("head"), REQUIRED["heads"])
         self.assertEqual(tiers.get("director"), REQUIRED["directors"])
+
+        specialists = [a for a in self.agents if a["tier"] == "specialist"]
+        by_domain = {}
+        for a in specialists:
+            by_domain[a["domain"]] = by_domain.get(a["domain"], 0) + 1
+        planning = sum(n for d, n in by_domain.items() if d in PLANNING_DOMAINS)
+        self.assertEqual(planning, REQUIRED["planning_agents"])
+        self.assertEqual(by_domain.get("design"), REQUIRED["design_agents"])
+        self.assertEqual(by_domain.get("improvement"), REQUIRED["improvement_agents"])
+
+    def test_every_agent_has_a_valid_model_tier(self):
+        for a in self.agents:
+            self.assertIn(a["model"], MODEL_TIERS, f"{a['id']} has model {a['model']}")
+            self.assertIn(a["escalates_to_model"], MODEL_TIERS)
+            self.assertIn(a["task_class"], {"mechanical", "analytical", "judgement"})
+
+    def test_judgement_work_is_not_on_a_cheap_tier(self):
+        """Arbitration and irreversible decisions stay on the strongest tier, whatever it costs."""
+        for a in self.agents:
+            if a["tier"] in ("director", "head", "council"):
+                self.assertEqual(a["model"], "opus",
+                                 f"{a['id']} arbitrates but runs on {a['model']}")
+            if a["task_class"] == "judgement":
+                self.assertEqual(a["model"], "opus")
+
+    def test_every_agent_has_context_and_return_budgets(self):
+        for a in self.agents:
+            self.assertGreater(a["context_budget_tokens"], 0, f"{a['id']} has no context budget")
+            self.assertGreater(a["return_budget_tokens"], 0, f"{a['id']} has no return budget")
+            self.assertLess(a["return_budget_tokens"], a["context_budget_tokens"],
+                            f"{a['id']} returns more than it may receive")
 
     def test_reporting_lines_resolve(self):
         for a in self.agents:
@@ -116,6 +150,12 @@ class TestAgents(unittest.TestCase):
     def test_agents_declare_memory_scopes(self):
         for a in self.agents:
             self.assertTrue(a["memory_scopes"], f"{a['id']} declares no memory scopes")
+
+    def test_agents_declare_a_return_contract(self):
+        for a in self.agents:
+            body = (ROOT / a["path"]).read_text()
+            self.assertIn("## Return contract", body, f"{a['id']} has no return contract")
+            self.assertIn("never its working context", body)
 
     def test_council_reports_to_council_director(self):
         for a in self.agents:
@@ -241,6 +281,132 @@ class TestSchemas(unittest.TestCase):
         finding = schema["properties"]["findings"]["items"]
         self.assertIn("failure_scenario", finding["required"],
                       "a finding without a concrete failure scenario is an adjective, not a finding")
+
+
+class TestProgressiveDisclosure(unittest.TestCase):
+    """The tiered indexes are what make the library affordable. If they drift, the design is gone."""
+
+    def setUp(self):
+        self.agents = load_registry()
+        self.skills = load_skill_registry()
+        self.budget = yaml.safe_load((ROOT / "runtime" / "context-budget.yaml").read_text())
+
+    def _tsv_rows(self, path):
+        return [line.split("\t") for line in path.read_text().splitlines()
+                if line and not line.startswith("#")]
+
+    def test_domain_index_covers_every_domain(self):
+        rows = self._tsv_rows(ROOT / "agents" / "index" / "_domains.tsv")
+        indexed = {r[0] for r in rows}
+        actual = {a["domain"] for a in self.agents}
+        self.assertEqual(indexed, actual, "agents/index/_domains.tsv has drifted from the registry")
+
+    def test_domain_index_counts_are_correct(self):
+        counts = {}
+        for a in self.agents:
+            counts[a["domain"]] = counts.get(a["domain"], 0) + 1
+        for row in self._tsv_rows(ROOT / "agents" / "index" / "_domains.tsv"):
+            self.assertEqual(int(row[2]), counts[row[0]],
+                             f"domain index claims the wrong agent count for {row[0]}")
+
+    def test_every_agent_appears_in_exactly_one_domain_card_file(self):
+        seen = {}
+        for path in (ROOT / "agents" / "index").glob("*.tsv"):
+            if path.stem.startswith("_"):
+                continue
+            for row in self._tsv_rows(path):
+                self.assertNotIn(row[0], seen, f"{row[0]} appears in two domain card files")
+                seen[row[0]] = path.stem
+        self.assertEqual(set(seen), {a["id"] for a in self.agents})
+        for a in self.agents:
+            self.assertEqual(seen[a["id"]], a["domain"])
+
+    def test_skill_index_covers_every_skill_exactly_once(self):
+        seen = set()
+        for path in (ROOT / "skills" / "index").glob("*.tsv"):
+            if path.stem.startswith("_"):
+                continue
+            for row in self._tsv_rows(path):
+                self.assertNotIn(row[0], seen, f"{row[0]} indexed twice")
+                seen.add(row[0])
+        self.assertEqual(seen, {s["name"] for s in self.skills},
+                         "skills/index has drifted from skills/registry.yaml")
+
+    def test_tier_one_discovery_fits_its_budget(self):
+        """Routing must be affordable, or agents will skip it and load everything instead."""
+        limit = self.budget["tiers"]["tier_1_discovery"]["budget"]
+        domains = len((ROOT / "agents" / "index" / "_domains.tsv").read_text()) // 4
+        worst_agent_shard = max(
+            len(p.read_text()) // 4 for p in (ROOT / "agents" / "index").glob("*.tsv")
+            if not p.stem.startswith("_"))
+        worst_skill_shard = max(
+            len(p.read_text()) // 4 for p in (ROOT / "skills" / "index").glob("*.tsv")
+            if not p.stem.startswith("_"))
+        worst = domains + worst_agent_shard + worst_skill_shard
+        self.assertLess(worst, limit,
+                        f"worst-case tier-1 discovery is {worst} tokens, over the {limit} budget")
+
+    def test_model_routing_table_matches_the_registry(self):
+        routing = yaml.safe_load((ROOT / "runtime" / "model-routing.yaml").read_text())
+        table = {r["id"]: r for r in routing["agents"]}
+        self.assertEqual(set(table), {a["id"] for a in self.agents})
+        for a in self.agents:
+            self.assertEqual(table[a["id"]]["model"], a["model"])
+            self.assertEqual(table[a["id"]]["escalates_to"], a["escalates_to_model"])
+
+    def test_cache_order_puts_variable_content_last(self):
+        order = self.budget["cache_order"]
+        self.assertEqual(order[-2:], ["context package", "task"],
+                         "variable content must come last or the stable prefix stops being cacheable")
+
+
+class TestSelfImprovementSafety(unittest.TestCase):
+    """The improvement loop may change the system. These are the limits on that."""
+
+    def test_evaluation_criteria_are_not_self_modifiable(self):
+        policy = (ROOT / "prompts" / "system" / "06-self-modification.md").read_text()
+        self.assertIn("Evaluation criteria", policy)
+        self.assertIn("Human founder", policy)
+        schema = json.loads(
+            (ROOT / "knowledge-schema" / "improvement-proposal.schema.json").read_text())
+        levels = schema["properties"]["authorisation_level"]["enum"]
+        self.assertIn("human_founder", levels)
+        classes = schema["properties"]["target"]["properties"]["artifact_class"]["enum"]
+        for protected in ("guardrail", "schema", "org_shape", "evaluation_criteria"):
+            self.assertIn(protected, classes,
+                          f"{protected} must be a nameable artifact class so it can be gated")
+
+    def test_proposals_require_a_diagnosis_before_a_change(self):
+        schema = json.loads(
+            (ROOT / "knowledge-schema" / "improvement-proposal.schema.json").read_text())
+        self.assertIn("diagnosis", schema["required"])
+        diagnosis = schema["properties"]["diagnosis"]
+        self.assertIn("attribution", diagnosis["required"],
+                      "a proposal must say whether the cause was capability, context, or task definition")
+        self.assertGreaterEqual(diagnosis["properties"]["instances"]["minimum"], 3,
+                                "three independent instances before calling something a pattern")
+
+    def test_variants_change_one_dimension(self):
+        schema = json.loads(
+            (ROOT / "knowledge-schema" / "improvement-proposal.schema.json").read_text())
+        dims = schema["properties"]["proposed_change"]["properties"]["dimensions_changed"]
+        self.assertEqual(dims["maximum"], 1, "one dimension per variant or the effect is unattributable")
+
+    def test_agent_returns_are_budget_capped(self):
+        schema = json.loads((ROOT / "knowledge-schema" / "agent-return.schema.json").read_text())
+        self.assertIn("tokens_used", schema["required"],
+                      "an agent that cannot report its cost cannot be optimised")
+        self.assertIn("maxLength", schema["properties"]["summary"])
+
+    def test_improvement_workflow_gates_adoption_on_a_trial(self):
+        wf = yaml.safe_load((ROOT / "workflows" / "15-self-improvement.yaml").read_text())
+        ids = [s["id"] for s in wf["steps"]]
+        for gate in ("measure", "diagnose", "trial", "sweep", "authorise", "adopt", "verify"):
+            self.assertIn(gate, ids, f"self-improvement workflow is missing the {gate} gate")
+        self.assertLess(ids.index("trial"), ids.index("adopt"), "adoption must follow the trial")
+        self.assertLess(ids.index("sweep"), ids.index("adopt"), "adoption must follow the sweep")
+        self.assertLess(ids.index("authorise"), ids.index("adopt"),
+                        "adoption must follow the authorisation check")
 
 
 if __name__ == "__main__":

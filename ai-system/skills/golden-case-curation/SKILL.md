@@ -4,6 +4,7 @@ category: orchestration
 description: "Maintain the reference examples that define good output."
 output: "golden-cases.md"
 used_by:
+  - benchmark-curator
   - evaluation-harness-agent
 ---
 
@@ -16,7 +17,7 @@ Maintain the reference examples that define good output.
 
 ## When to use it
 Invoke this skill when the task calls for the outcome described above.
-It is part of the standing toolkit of: `evaluation-harness-agent`.
+It is part of the standing toolkit of: `benchmark-curator`, `evaluation-harness-agent`.
 
 ## Procedure
 1. Choose cases that discriminate — a case everything passes teaches nothing.

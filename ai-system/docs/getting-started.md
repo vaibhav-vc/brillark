@@ -14,6 +14,7 @@ and confusingly later.
 
 ```bash
 bash ai-system/bootstrap/init.sh acme-corp
+python3 ai-system/tests/measure_context_cost.py   # what a run will cost you
 ```
 
 This creates `workspace/acme-corp/` with a directory per skill category, an empty memory store, and a
@@ -41,7 +42,10 @@ The order that actually works:
 | MVP | `03-mvp-definition` -> `04-mvp-build` | A scope line that tests the riskiest belief, then the build |
 | Launch | `05-mvp-launch` | Real users, instrumented, with rollback available |
 | Learn | `06-feedback-and-iterate` | Features judged against their pre-set signals |
+| Design | `14-design-delivery` | Flows, states, copy, accessibility, tested with users |
 | Upgrade | `07-upgrade-and-scale` | A sequenced expansion behind its prerequisites |
+| Improve | `15-self-improvement` | The system measurably better at its own job |
+| Efficiency | `16-efficiency-review` | Lower cost per completed task, quality verified unchanged |
 
 `08-council-review` runs whenever a plan is material. `09-memory-consolidation` runs at every stage gate.
 

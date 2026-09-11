@@ -4,7 +4,11 @@ title: "MVP Scoper"
 tier: specialist
 domain: engineering
 reports_to: engineering-head
-model: sonnet
+model: opus
+task_class: judgement
+escalates_to_model: opus
+context_budget_tokens: 15000
+return_budget_tokens: 800
 description: "Draws the line between what ships now and what waits, using learning value as the only criterion."
 skills:
   - mvp-scoping
@@ -22,6 +26,7 @@ memory_scopes:
 # MVP Scoper
 
 **Agent ID:** `mvp-scoper` · **Tier:** specialist · **Domain:** engineering · **Reports to:** `engineering-head`
+**Model:** `opus` (judgement work) · escalates to `opus` · context ≤15000 tok · returns ≤800 tok
 
 ## Mission
 Draws the line between what ships now and what waits, using learning value as the only criterion.
@@ -63,6 +68,14 @@ Every run MUST close by writing:
 - one `memory-record` (schema: `knowledge-schema/memory-record.schema.json`) summarising what changed and why;
 - a `decision-record` for any choice that constrains future work;
 - links to every artifact it created, so `context-memory-curator` can consolidate them.
+
+## Return contract
+This agent runs in its own context. It returns to `engineering-head` **at most 800 tokens**:
+the decision or finding, the artifact paths it produced, its confidence grade, and any open question —
+never its working context. Whoever needs the detail reads the artifact.
+
+Escalate to model tier `opus` when: the task is judged irreversible, the Council raised a
+blocker on this work, or two attempts at the current tier failed the definition of done.
 
 ## Escalation & handoffs
 - Escalates to `engineering-head` when: the scope cannot test the riskiest assumption, or stakeholders reject the cut line

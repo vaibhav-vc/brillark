@@ -1,0 +1,122 @@
+name: Self-improvement cycle
+stage: any
+owner: improvement-head
+purpose: Make the organisation measurably better at its job, without letting it drift or rewrite its own
+  rules.
+steps:
+- id: measure
+  agent: agent-performance-analyst
+  skills:
+  - agent-scorecard
+  - performance-trend-analysis
+  - failure-attribution
+  does: Establish what performance actually is before proposing anything.
+  produces: agent-scorecard.md
+  done_when: Three cycles of data; failures attributed to capability, context, or task definition.
+- id: mine
+  agent: failure-miner
+  skills:
+  - failure-corpus-mining
+  - root-cause-clustering
+  - failure-cost-estimation
+  - systemic-cause-identification
+  does: Find the patterns worth fixing and what they cost.
+  produces: failure-corpus.md
+  done_when: Each pattern has three independent instances and an estimated cost.
+- id: cases
+  agent: benchmark-curator
+  skills:
+  - golden-case-extraction
+  - case-provenance-recording
+  - coverage-mapping
+  - contamination-auditing
+  does: Turn the expensive failures into cases that catch a recurrence.
+  produces: golden-case.md
+  done_when: Cases verified to fail before the fix; splits audited for leakage.
+- id: rank
+  agent: improvement-head
+  skills:
+  - improvement-backlog-ranking
+  - improvement-queue-ranking
+  does: Decide what to improve, and fund fewer things properly.
+  produces: improvement-backlog.md
+  done_when: Ranked by expected value; below-the-line items published.
+- id: diagnose
+  agent: improvement-head
+  skills:
+  - improvement-cycle-facilitation
+  does: Confirm the diagnosis before anyone edits a prompt.
+  produces: cycle-report.md
+  done_when: Context and task-definition causes ruled out, or routed elsewhere.
+- id: propose
+  agent: prompt-optimizer
+  skills:
+  - prompt-variant-generation
+  - held-out-trial-design
+  - adoption-threshold-setting
+  does: Generate variants with a stated hypothesis and a threshold fixed in advance.
+  produces: variants.md
+  done_when: One dimension per variant; a removal variant included; threshold recorded first.
+- id: trial
+  agent: ab-test-runner
+  skills:
+  - trial-execution
+  - sample-sizing
+  - early-stopping-discipline
+  - effect-size-reporting
+  - negative-result-reporting
+  does: Run baseline against variant under fixed conditions.
+  produces: trial-results.md
+  done_when: Full planned sample run; negative results reported.
+- id: sweep
+  agent: prompt-optimizer
+  skills:
+  - regression-sweep
+  does: Check the change did not break anything else.
+  produces: regression-sweep.md
+  done_when: Per-case comparison; unexplained regressions block adoption.
+- id: authorise
+  agent: improvement-head
+  skills:
+  - self-modification-policy
+  does: Check the change is within what may be altered automatically.
+  produces: self-modification-policy.md
+  done_when: Authorisation level matches the artifact class; anything above it is escalated.
+- id: adopt
+  agent: improvement-head
+  skills:
+  - prompt-change-logging
+  - fix-effect-measurement
+  does: Adopt one change at a time and log the measured delta.
+  produces: prompt-change-log.md
+  done_when: One change per agent; delta and sample recorded.
+- id: distil
+  agent: knowledge-distiller
+  skills:
+  - lesson-distillation
+  - instruction-placement
+  - instruction-pruning
+  - behaviour-change-verification
+  does: Write the lesson where it will be read, and remove something to pay for it.
+  produces: distilled-lesson.md
+  done_when: Instruction length flat or falling; placement verified against a real run.
+- id: verify
+  agent: improvement-head
+  skills:
+  - change-reversion
+  - optimisation-drift-detection
+  does: Check last cycle's adoptions held, and that metrics still track real outcomes.
+  produces: reversion-record.md
+  done_when: Non-persisting changes reverted; drift between metrics and outcomes reported.
+- id: return
+  agent: chief-learning-officer-agent
+  skills:
+  - improvement-return-analysis
+  - capability-target-setting
+  does: Judge whether the improvement effort paid for itself.
+  produces: return-analysis.md
+  done_when: Reverted changes counted as cost; negative periods reported honestly.
+exit_criteria:
+- Every adoption backed by a held-out trial and a clean regression sweep.
+- No change above its authorisation level was made.
+- Prior cycle's adoptions verified to have held, or reverted.

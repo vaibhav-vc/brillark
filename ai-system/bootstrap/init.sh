@@ -24,12 +24,13 @@ if [[ -d "$DEST" ]]; then
 fi
 
 # One directory per skill category, so every skill's output contract has somewhere to land.
-CATEGORIES="orchestration memory finance market gtm product engineering strategy people data council legal compliance risk"
+CATEGORIES="orchestration memory finance market gtm product engineering design improvement efficiency strategy people data council legal compliance risk"
 for c in $CATEGORIES; do
   mkdir -p "$DEST/$c"
 done
 mkdir -p "$DEST/memory/episodic" "$DEST/memory/semantic" "$DEST/memory/procedural" \
-         "$DEST/memory/decisions" "$DEST/memory/entities" "$DEST/council-verdicts" "$DEST/artifacts"
+         "$DEST/memory/decisions" "$DEST/memory/entities" "$DEST/council-verdicts" "$DEST/artifacts" \
+         "$DEST/telemetry/token-ledger" "$DEST/telemetry/agent-performance" "$DEST/improvement-proposals"
 
 sed "s/<venture-id>/$VENTURE/g" "$SYSTEM/bootstrap/venture.template.yaml" > "$DEST/venture.yaml"
 
@@ -42,6 +43,8 @@ Workspace for the venture \`$VENTURE\`, scaffolded from ai-system/bootstrap.
 - \`memory/\` — the four memory types plus entities and decisions.
 - \`council-verdicts/\` — every verdict, kept permanently including dissent.
 - \`artifacts/\` — registered skill outputs.
+- \`telemetry/\` — token ledger and agent performance records; the improvement loop reads these.
+- \`improvement-proposals/\` — proposed changes to the system, with their trials and authorisation.
 - one directory per skill category for working output.
 
 ## Next steps

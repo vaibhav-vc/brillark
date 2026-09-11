@@ -10,6 +10,10 @@
     "tier",
     "domain",
     "reports_to",
+    "model",
+    "task_class",
+    "context_budget_tokens",
+    "return_budget_tokens",
     "skills",
     "memory_scopes"
   ],
@@ -37,7 +41,9 @@
         "finance",
         "business",
         "engineering",
+        "design",
         "orchestration",
+        "improvement",
         "council"
       ]
     },
@@ -45,7 +51,44 @@
       "type": "string"
     },
     "model": {
-      "type": "string"
+      "type": "string",
+      "enum": [
+        "haiku",
+        "sonnet",
+        "opus"
+      ],
+      "description": "Assigned from measured quality on golden cases, never from assumed difficulty."
+    },
+    "task_class": {
+      "type": "string",
+      "enum": [
+        "mechanical",
+        "analytical",
+        "judgement"
+      ],
+      "description": "Judgement work is never demoted to a cheaper tier to save money."
+    },
+    "escalates_to_model": {
+      "type": "string",
+      "enum": [
+        "haiku",
+        "sonnet",
+        "opus"
+      ]
+    },
+    "context_budget_tokens": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Ceiling on what may be loaded. Enforced by the runtime, not by good intentions."
+    },
+    "return_budget_tokens": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Ceiling on what this agent hands back to its parent. Always below the context budget."
+    },
+    "capability": {
+      "type": "string",
+      "description": "One line, used in the tier-1 discovery index."
     },
     "path": {
       "type": "string"

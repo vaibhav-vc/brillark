@@ -12,6 +12,8 @@ graph TD
   director --> engineering_head[Head of Engineering]
   director --> orchestration_head[Head of Orchestration & Memory]
   director --> council_director[Council Director]
+  director --> design_head[Head of Design]
+  director --> improvement_head[Head of Continuous Improvement]
   subgraph officers[Executive officers - advise the Director]
     ceo_agent[CEO Agent]
     cfo_agent[CFO Agent]
@@ -30,6 +32,8 @@ graph TD
     data_protection_officer_agent[Data Protection Officer Agent]
     ip_counsel_agent[IP Counsel Agent]
     corporate_secretary_agent[Corporate Secretary Agent]
+    chief_design_officer_agent[Chief Design Officer Agent]
+    chief_learning_officer_agent[Chief Learning Officer Agent]
   end
   director --> officers
   subgraph finance_team[finance - 12 agents]
@@ -81,6 +85,23 @@ graph TD
     observability_agent[Observability Agent]
   end
   engineering_head --> engineering_team
+  subgraph design_team[design - 14 agents]
+    design_researcher[Design Researcher]
+    usability_tester[Usability Tester]
+    information_architect[Information Architect]
+    interaction_designer[Interaction Designer]
+    visual_designer[Visual Designer]
+    design_system_architect[Design System Architect]
+    content_designer[Content Designer]
+    accessibility_designer[Accessibility Designer]
+    motion_designer[Motion Designer]
+    prototyper[Prototyper]
+    brand_identity_designer[Brand Identity Designer]
+    data_visualization_designer[Data Visualisation Designer]
+    service_designer[Service Designer]
+    design_critic[Design Critic]
+  end
+  design_head --> design_team
   subgraph orchestration_team[orchestration - 10 agents]
     intake_router[Intake Router]
     planning_decomposer[Planning Decomposer]
@@ -94,6 +115,21 @@ graph TD
     retrospective_agent[Retrospective Agent]
   end
   orchestration_head --> orchestration_team
+  subgraph improvement_team[improvement - 12 agents]
+    agent_performance_analyst[Agent Performance Analyst]
+    failure_miner[Failure Miner]
+    prompt_optimizer[Prompt Optimizer]
+    skill_refiner[Skill Refiner]
+    eval_designer[Evaluation Designer]
+    ab_test_runner[Variant Trial Runner]
+    token_efficiency_analyst[Token Efficiency Analyst]
+    workflow_optimizer[Workflow Optimizer]
+    capability_gap_scout[Capability Gap Scout]
+    knowledge_distiller[Knowledge Distiller]
+    benchmark_curator[Benchmark Curator]
+    model_router_tuner[Model Router Tuner]
+  end
+  improvement_head --> improvement_team
   subgraph council_team[council - 10 agents]
     council_red_team[Council — Red Team Adversary]
     council_devils_advocate[Council — Devil's Advocate]
@@ -117,13 +153,17 @@ graph TD
 | `director` | `human-founder` |
 | `business-head` | `director` |
 | `council-director` | `director` |
+| `design-head` | `director` |
 | `engineering-head` | `director` |
 | `finance-head` | `director` |
+| `improvement-head` | `director` |
 | `orchestration-head` | `director` |
 | `ceo-agent` | `director` |
 | `cfo-agent` | `director` |
 | `chief-compliance-officer-agent` | `director` |
 | `chief-data-officer-agent` | `director` |
+| `chief-design-officer-agent` | `director` |
+| `chief-learning-officer-agent` | `director` |
 | `chief-revenue-officer-agent` | `director` |
 | `chief-risk-officer-agent` | `director` |
 | `chief-strategy-officer-agent` | `director` |
@@ -147,22 +187,35 @@ graph TD
 | `council-red-team` | `council-director` |
 | `council-risk-and-failure-modes` | `council-director` |
 | `council-synthesis-arbiter` | `council-director` |
+| `ab-test-runner` | `improvement-head` |
+| `accessibility-designer` | `design-head` |
+| `agent-performance-analyst` | `improvement-head` |
 | `api-designer` | `engineering-head` |
 | `backend-implementation-agent` | `engineering-head` |
+| `benchmark-curator` | `improvement-head` |
 | `billing-systems-designer` | `finance-head` |
+| `brand-identity-designer` | `design-head` |
 | `brand-narrative-agent` | `business-head` |
 | `burn-runway-analyst` | `finance-head` |
 | `business-model-canvas-agent` | `business-head` |
 | `cap-table-steward` | `finance-head` |
+| `capability-gap-scout` | `improvement-head` |
 | `competitor-intel-analyst` | `business-head` |
+| `content-designer` | `design-head` |
 | `context-memory-curator` | `orchestration-head` |
 | `cost-optimization-analyst` | `finance-head` |
 | `customer-discovery-interviewer` | `business-head` |
 | `customer-success-agent` | `business-head` |
 | `data-model-designer` | `engineering-head` |
+| `data-visualization-designer` | `design-head` |
 | `dependency-scheduler` | `orchestration-head` |
+| `design-critic` | `design-head` |
+| `design-researcher` | `design-head` |
+| `design-system-architect` | `design-head` |
 | `escalation-manager` | `orchestration-head` |
+| `eval-designer` | `improvement-head` |
 | `evaluation-harness-agent` | `orchestration-head` |
+| `failure-miner` | `improvement-head` |
 | `financial-model-builder` | `finance-head` |
 | `frontend-implementation-agent` | `engineering-head` |
 | `fundraising-strategist` | `finance-head` |
@@ -170,12 +223,17 @@ graph TD
 | `gtm-strategist` | `business-head` |
 | `handoff-coordinator` | `orchestration-head` |
 | `icp-persona-builder` | `business-head` |
+| `information-architect` | `design-head` |
 | `infra-devops-agent` | `engineering-head` |
 | `intake-router` | `orchestration-head` |
+| `interaction-designer` | `design-head` |
 | `investor-reporting-agent` | `finance-head` |
 | `jtbd-analyst` | `business-head` |
+| `knowledge-distiller` | `improvement-head` |
 | `knowledge-graph-librarian` | `orchestration-head` |
 | `market-researcher` | `business-head` |
+| `model-router-tuner` | `improvement-head` |
+| `motion-designer` | `design-head` |
 | `mvp-scoper` | `engineering-head` |
 | `observability-agent` | `engineering-head` |
 | `partnership-bd-agent` | `business-head` |
@@ -185,6 +243,8 @@ graph TD
 | `pricing-strategist` | `finance-head` |
 | `product-requirements-agent` | `engineering-head` |
 | `progress-tracker` | `orchestration-head` |
+| `prompt-optimizer` | `improvement-head` |
+| `prototyper` | `design-head` |
 | `qa-test-strategist` | `engineering-head` |
 | `release-manager` | `engineering-head` |
 | `retrospective-agent` | `orchestration-head` |
@@ -192,11 +252,17 @@ graph TD
 | `sales-playbook-agent` | `business-head` |
 | `scenario-stress-tester` | `finance-head` |
 | `security-engineer` | `engineering-head` |
+| `service-designer` | `design-head` |
+| `skill-refiner` | `improvement-head` |
 | `system-architect` | `engineering-head` |
 | `tax-and-compliance-finance` | `finance-head` |
 | `tech-debt-refactor-agent` | `engineering-head` |
+| `token-efficiency-analyst` | `improvement-head` |
 | `unit-economics-architect` | `finance-head` |
+| `usability-tester` | `design-head` |
 | `value-proposition-designer` | `business-head` |
+| `visual-designer` | `design-head` |
+| `workflow-optimizer` | `improvement-head` |
 
 ## Who decides what
 

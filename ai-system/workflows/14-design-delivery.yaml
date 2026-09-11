@@ -1,0 +1,107 @@
+name: Design delivery
+stage: mvp
+owner: design-head
+purpose: Take a validated problem to a design engineering can build and users can actually operate.
+steps:
+- id: research
+  agent: design-researcher
+  skills:
+  - design-research-planning
+  - contextual-inquiry
+  - journey-mapping
+  - insight-synthesis
+  does: Establish how people behave today and what the design must change.
+  produces: research-findings.md
+  done_when: Research tied to a named decision; disconfirming evidence reported first.
+- id: structure
+  agent: information-architect
+  skills:
+  - card-sorting
+  - tree-testing
+  - taxonomy-design
+  - navigation-design
+  - content-modeling
+  does: Organise and name things the way users expect to find them.
+  produces: navigation-spec.md
+  done_when: Structure validated by tree test; one term per concept.
+- id: flows
+  agent: interaction-designer
+  skills:
+  - flow-design
+  - state-specification
+  - error-prevention-design
+  - interaction-pattern-selection
+  does: Design every branch and every view state, not just the happy path.
+  produces: flow-spec.md
+  done_when: All five states specified per view; entry, interruption, and re-entry designed.
+- id: copy
+  agent: content-designer
+  skills:
+  - interface-copywriting
+  - error-message-design
+  - plain-language-editing
+  - terminology-governance
+  does: Write the words, starting with the errors.
+  produces: interface-copy.md
+  done_when: Every error offers a doable recovery action; comprehension tested.
+- id: craft
+  agent: visual-designer
+  skills:
+  - visual-hierarchy-design
+  - typography-system
+  - layout-composition
+  - design-token-application
+  - realistic-content-testing
+  does: Make the hierarchy match what matters, using system tokens.
+  produces: hierarchy-spec.md
+  done_when: Holds with real content at the smallest supported size; no undocumented one-off values.
+- id: access
+  agent: accessibility-designer
+  skills:
+  - accessibility-annotation
+  - contrast-and-colour-audit
+  - inclusive-design-review
+  does: Annotate for assistive technology before engineering starts.
+  produces: a11y-annotations.md
+  done_when: Focus order, names, roles, and keyboard behaviour all specified.
+- id: prototype
+  agent: prototyper
+  skills:
+  - prototype-fidelity-selection
+  - rapid-prototyping
+  - prototype-scoping
+  does: Build the cheapest artifact that answers the open question.
+  produces: prototype
+  done_when: Only the tested path built; faked elements listed.
+- id: test
+  agent: usability-tester
+  skills:
+  - usability-test-design
+  - moderation-discipline
+  - task-success-measurement
+  - finding-severity-rating
+  - fix-verification
+  does: Watch real people try it and rate what broke.
+  produces: test-plan.md
+  done_when: Tasks had success criteria; findings severity-rated; fixes retested.
+- id: critique
+  agent: design-critic
+  skills:
+  - design-critique-facilitation
+  - goal-anchored-feedback
+  - taste-versus-principle-separation
+  - design-decision-record
+  does: Argue the design against its stated goal, not against taste.
+  produces: design-decision.md
+  done_when: Every objection names who fails to do what; decisions recorded.
+- id: handoff
+  agent: interaction-designer
+  skills:
+  - design-engineering-walkthrough
+  does: Walk the spec with engineering and resolve ambiguity before handoff.
+  produces: walkthrough-notes.md
+  done_when: Ambiguities resolved in session; agreed simplifications recorded.
+exit_criteria:
+- Problem evidenced, full flow and all states specified.
+- Accessibility annotated and contrast verified before build.
+- Validated with real users; decisions recorded so they are not re-argued.

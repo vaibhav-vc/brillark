@@ -9,14 +9,9 @@ used_by:
 
 # Interaction Pattern Selection
 
-**Category:** `design` · **Output artifact:** `pattern-decision.md`
+`design` · produces `pattern-decision.md` · used by `interaction-designer`
 
-## What this skill does
 Reuse an established pattern before inventing one.
-
-## When to use it
-Invoke this skill when the task calls for the outcome described above.
-It is part of the standing toolkit of: `interaction-designer`.
 
 ## Procedure
 1. Identify the interaction problem in general terms before reaching for a solution.
@@ -26,39 +21,11 @@ It is part of the standing toolkit of: `interaction-designer`.
 5. Record the decision so the next designer does not re-litigate it.
 
 ## Output contract
-Write `pattern-decision.md` into `workspace/<venture-id>/design/`, then register it as an artifact record
-(`knowledge-schema/artifact.schema.json`) so it becomes retrievable memory. Every output carries:
-
-```markdown
-# <title>
-- **Skill:** interaction-pattern-selection
-- **Author agent:** <agent-id>
-- **Date:** <ISO-8601>
-- **Confidence:** measured | sourced | benchmarked | estimated | guessed
-
-## Summary
-<the answer in three sentences or fewer>
-
-## Body
-<the substance produced by the procedure above>
-
-## Evidence
-| Claim | Source | Grade |
-|---|---|---|
-
-## Open questions
-<what remains unknown, and who could answer it>
-
-## Next action
-<the single next step and its owner>
-```
+`pattern-decision.md` → `workspace/<venture-id>/design/`, registered as an artifact record.
+Shared format and required fields: `skills/OUTPUT_CONTRACT.md`.
+Anti-patterns for this category head `skills/index/design.tsv`.
 
 ## Quality bar
 - Existing pattern checked before invention
 - Novel patterns justified against learning cost
 - The output states its confidence grade and names the evidence behind every load-bearing claim.
-
-## Anti-patterns for the `design` category
-- Designing the showcase case with three tidy items instead of the dense case with real data.
-- Treating accessibility as remediation after launch rather than a build requirement.
-- Critique that asserts preference where the goal was never stated.

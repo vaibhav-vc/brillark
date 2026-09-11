@@ -1,0 +1,121 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://brillark.ai/schemas/bom.schema.json",
+  "title": "Bill of Materials",
+  "description": "Every part in the product. A BOM without lifecycle status and second sources is a list of things that will one day stop being available.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "revision",
+    "lines",
+    "volume_assumption"
+  ],
+  "properties": {
+    "revision": {
+      "type": "string"
+    },
+    "volume_assumption": {
+      "type": "integer",
+      "description": "Costs are meaningless without the volume they assume."
+    },
+    "lines": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "reference_designators",
+          "manufacturer_part_number",
+          "quantity",
+          "lifecycle_status"
+        ],
+        "properties": {
+          "reference_designators": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "manufacturer": {
+            "type": "string"
+          },
+          "manufacturer_part_number": {
+            "type": "string",
+            "description": "Not a description. Descriptions do not order."
+          },
+          "description": {
+            "type": "string"
+          },
+          "quantity": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "unit_cost": {
+            "type": "number",
+            "description": "At the stated volume, with real packaging and minimums."
+          },
+          "lead_time_weeks": {
+            "type": "number"
+          },
+          "lifecycle_status": {
+            "type": "string",
+            "enum": [
+              "new",
+              "active",
+              "mature",
+              "nrnd",
+              "eol",
+              "obsolete",
+              "unknown"
+            ],
+            "description": "'unknown' is itself a risk and must be resolved before production release."
+          },
+          "line_stopping": {
+            "type": "boolean",
+            "description": "Would its absence halt production?"
+          },
+          "second_source": {
+            "type": "object",
+            "properties": {
+              "manufacturer_part_number": {
+                "type": "string"
+              },
+              "tested_in_hardware": {
+                "type": "boolean",
+                "description": "An alternate approved on paper is not a second source."
+              }
+            }
+          },
+          "authorised_source": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "rollup": {
+      "type": "object",
+      "properties": {
+        "material_cost": {
+          "type": "number"
+        },
+        "assembly_cost": {
+          "type": "number"
+        },
+        "test_cost": {
+          "type": "number"
+        },
+        "yield_loss": {
+          "type": "number"
+        },
+        "tooling_amortisation": {
+          "type": "number"
+        },
+        "total_unit_cost": {
+          "type": "number"
+        },
+        "target_unit_cost": {
+          "type": "number"
+        }
+      }
+    }
+  }
+}

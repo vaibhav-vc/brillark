@@ -9,14 +9,9 @@ used_by:
 
 # Break Even Analysis
 
-**Category:** `finance` · **Output artifact:** `break-even.md`
+`finance` · produces `break-even.md` · used by `council-economics-skeptic`
 
-## What this skill does
 Find the volume or price at which the business stops losing money.
-
-## When to use it
-Invoke this skill when the task calls for the outcome described above.
-It is part of the standing toolkit of: `council-economics-skeptic`.
 
 ## Procedure
 1. Separate fixed from variable costs rigorously.
@@ -26,39 +21,11 @@ It is part of the standing toolkit of: `council-economics-skeptic`.
 5. State the time to reach break-even at the current growth rate.
 
 ## Output contract
-Write `break-even.md` into `workspace/<venture-id>/finance/`, then register it as an artifact record
-(`knowledge-schema/artifact.schema.json`) so it becomes retrievable memory. Every output carries:
-
-```markdown
-# <title>
-- **Skill:** break-even-analysis
-- **Author agent:** <agent-id>
-- **Date:** <ISO-8601>
-- **Confidence:** measured | sourced | benchmarked | estimated | guessed
-
-## Summary
-<the answer in three sentences or fewer>
-
-## Body
-<the substance produced by the procedure above>
-
-## Evidence
-| Claim | Source | Grade |
-|---|---|---|
-
-## Open questions
-<what remains unknown, and who could answer it>
-
-## Next action
-<the single next step and its owner>
-```
+`break-even.md` → `workspace/<venture-id>/finance/`, registered as an artifact record.
+Shared format and required fields: `skills/OUTPUT_CONTRACT.md`.
+Anti-patterns for this category head `skills/index/finance.tsv`.
 
 ## Quality bar
 - Fixed and variable separated rigorously
 - Time to break-even stated at current growth
 - The output states its confidence grade and names the evidence behind every load-bearing claim.
-
-## Anti-patterns for the `finance` category
-- Presenting a single number where the honest answer is a range.
-- Building a forecast from a growth percentage instead of from drivers.
-- Reporting a metric whose definition changed since last period without saying so.

@@ -9,14 +9,9 @@ used_by:
 
 # Deal Structuring
 
-**Category:** `gtm` · **Output artifact:** `deal-structure.md`
+`gtm` · produces `deal-structure.md` · used by `partnership-bd-agent`
 
-## What this skill does
 Structure an agreement that is testable before it is binding.
-
-## When to use it
-Invoke this skill when the task calls for the outcome described above.
-It is part of the standing toolkit of: `partnership-bd-agent`.
 
 ## Procedure
 1. Start with the smallest structure that tests the thesis.
@@ -26,39 +21,11 @@ It is part of the standing toolkit of: `partnership-bd-agent`.
 5. Define the exit and what happens to customers if it ends.
 
 ## Output contract
-Write `deal-structure.md` into `workspace/<venture-id>/gtm/`, then register it as an artifact record
-(`knowledge-schema/artifact.schema.json`) so it becomes retrievable memory. Every output carries:
-
-```markdown
-# <title>
-- **Skill:** deal-structuring
-- **Author agent:** <agent-id>
-- **Date:** <ISO-8601>
-- **Confidence:** measured | sourced | benchmarked | estimated | guessed
-
-## Summary
-<the answer in three sentences or fewer>
-
-## Body
-<the substance produced by the procedure above>
-
-## Evidence
-| Claim | Source | Grade |
-|---|---|---|
-
-## Open questions
-<what remains unknown, and who could answer it>
-
-## Next action
-<the single next step and its owner>
-```
+`deal-structure.md` → `workspace/<venture-id>/gtm/`, registered as an artifact record.
+Shared format and required fields: `skills/OUTPUT_CONTRACT.md`.
+Anti-patterns for this category head `skills/index/gtm.tsv`.
 
 ## Quality bar
 - No exclusivity before evidence
 - Exit terms defined up front
 - The output states its confidence grade and names the evidence behind every load-bearing claim.
-
-## Anti-patterns for the `gtm` category
-- Scaling a channel before its CAC is measured.
-- Running a test with no kill criterion, so it never ends.
-- Claiming differentiation that is not a reason anyone would switch.

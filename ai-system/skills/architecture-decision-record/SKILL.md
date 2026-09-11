@@ -11,14 +11,9 @@ used_by:
 
 # Architecture Decision Record
 
-**Category:** `engineering` · **Output artifact:** `adr.md`
+`engineering` · produces `adr.md` · used by `cto-agent`, `engineering-head`, `system-architect`
 
-## What this skill does
 Record a technical decision with the alternatives and the trade-offs.
-
-## When to use it
-Invoke this skill when the task calls for the outcome described above.
-It is part of the standing toolkit of: `cto-agent`, `engineering-head`, `system-architect`.
 
 ## Procedure
 1. State the decision and its status in one line.
@@ -28,39 +23,11 @@ It is part of the standing toolkit of: `cto-agent`, `engineering-head`, `system-
 5. Name what would make this decision wrong and worth revisiting.
 
 ## Output contract
-Write `adr.md` into `workspace/<venture-id>/engineering/`, then register it as an artifact record
-(`knowledge-schema/artifact.schema.json`) so it becomes retrievable memory. Every output carries:
-
-```markdown
-# <title>
-- **Skill:** architecture-decision-record
-- **Author agent:** <agent-id>
-- **Date:** <ISO-8601>
-- **Confidence:** measured | sourced | benchmarked | estimated | guessed
-
-## Summary
-<the answer in three sentences or fewer>
-
-## Body
-<the substance produced by the procedure above>
-
-## Evidence
-| Claim | Source | Grade |
-|---|---|---|
-
-## Open questions
-<what remains unknown, and who could answer it>
-
-## Next action
-<the single next step and its owner>
-```
+`adr.md` → `workspace/<venture-id>/engineering/`, registered as an artifact record.
+Shared format and required fields: `skills/OUTPUT_CONTRACT.md`.
+Anti-patterns for this category head `skills/index/engineering.tsv`.
 
 ## Quality bar
 - At least two genuine alternatives recorded
 - Negative consequences stated
 - The output states its confidence grade and names the evidence behind every load-bearing claim.
-
-## Anti-patterns for the `engineering` category
-- Designing for imagined scale instead of current load plus one order of magnitude.
-- Skipping or quarantining a failing test to get a green build.
-- Shipping without a verified way back.

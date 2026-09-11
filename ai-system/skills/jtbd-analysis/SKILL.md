@@ -10,14 +10,9 @@ used_by:
 
 # Jtbd Analysis
 
-**Category:** `market` · **Output artifact:** `jtbd.md`
+`market` · produces `jtbd.md` · used by `business-head`, `jtbd-analyst`
 
-## What this skill does
 Frame the problem as the job a customer hires a solution to do.
-
-## When to use it
-Invoke this skill when the task calls for the outcome described above.
-It is part of the standing toolkit of: `business-head`, `jtbd-analyst`.
 
 ## Procedure
 1. Write jobs as: when [situation], I want to [motivation], so I can [outcome].
@@ -27,39 +22,11 @@ It is part of the standing toolkit of: `business-head`, `jtbd-analyst`.
 5. Rank jobs by importance and current dissatisfaction.
 
 ## Output contract
-Write `jtbd.md` into `workspace/<venture-id>/market/`, then register it as an artifact record
-(`knowledge-schema/artifact.schema.json`) so it becomes retrievable memory. Every output carries:
-
-```markdown
-# <title>
-- **Skill:** jtbd-analysis
-- **Author agent:** <agent-id>
-- **Date:** <ISO-8601>
-- **Confidence:** measured | sourced | benchmarked | estimated | guessed
-
-## Summary
-<the answer in three sentences or fewer>
-
-## Body
-<the substance produced by the procedure above>
-
-## Evidence
-| Claim | Source | Grade |
-|---|---|---|
-
-## Open questions
-<what remains unknown, and who could answer it>
-
-## Next action
-<the single next step and its owner>
-```
+`jtbd.md` → `workspace/<venture-id>/market/`, registered as an artifact record.
+Shared format and required fields: `skills/OUTPUT_CONTRACT.md`.
+Anti-patterns for this category head `skills/index/market.tsv`.
 
 ## Quality bar
 - Every job traced to a quote
 - Current solution being fired identified
 - The output states its confidence grade and names the evidence behind every load-bearing claim.
-
-## Anti-patterns for the `market` category
-- Treating stated intent as evidence of demand.
-- Sizing a market top-down and calling it bottom-up.
-- Interviewing people who could never buy, then counting their enthusiasm.

@@ -9,14 +9,9 @@ used_by:
 
 # Design Token Application
 
-**Category:** `design` · **Output artifact:** `token-usage-report.md`
+`design` · produces `token-usage-report.md` · used by `visual-designer`
 
-## What this skill does
 Use the system's tokens rather than introducing one-off values.
-
-## When to use it
-Invoke this skill when the task calls for the outcome described above.
-It is part of the standing toolkit of: `visual-designer`.
 
 ## Procedure
 1. Look up the semantic token for the intent, not the literal value you want.
@@ -26,39 +21,11 @@ It is part of the standing toolkit of: `visual-designer`.
 5. Verify the applied tokens survive a theme switch.
 
 ## Output contract
-Write `token-usage-report.md` into `workspace/<venture-id>/design/`, then register it as an artifact record
-(`knowledge-schema/artifact.schema.json`) so it becomes retrievable memory. Every output carries:
-
-```markdown
-# <title>
-- **Skill:** design-token-application
-- **Author agent:** <agent-id>
-- **Date:** <ISO-8601>
-- **Confidence:** measured | sourced | benchmarked | estimated | guessed
-
-## Summary
-<the answer in three sentences or fewer>
-
-## Body
-<the substance produced by the procedure above>
-
-## Evidence
-| Claim | Source | Grade |
-|---|---|---|
-
-## Open questions
-<what remains unknown, and who could answer it>
-
-## Next action
-<the single next step and its owner>
-```
+`token-usage-report.md` → `workspace/<venture-id>/design/`, registered as an artifact record.
+Shared format and required fields: `skills/OUTPUT_CONTRACT.md`.
+Anti-patterns for this category head `skills/index/design.tsv`.
 
 ## Quality bar
 - No hard-coded values without a recorded reason
 - Verified across themes and modes
 - The output states its confidence grade and names the evidence behind every load-bearing claim.
-
-## Anti-patterns for the `design` category
-- Designing the showcase case with three tidy items instead of the dense case with real data.
-- Treating accessibility as remediation after launch rather than a build requirement.
-- Critique that asserts preference where the goal was never stated.

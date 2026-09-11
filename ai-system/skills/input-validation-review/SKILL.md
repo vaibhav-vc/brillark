@@ -9,14 +9,9 @@ used_by:
 
 # Input Validation Review
 
-**Category:** `engineering` · **Output artifact:** `validation-review.md`
+`engineering` · produces `validation-review.md` · used by `backend-implementation-agent`
 
-## What this skill does
 Check that untrusted input cannot get through unchecked.
-
-## When to use it
-Invoke this skill when the task calls for the outcome described above.
-It is part of the standing toolkit of: `backend-implementation-agent`.
 
 ## Procedure
 1. Identify every entry point where external data arrives.
@@ -26,39 +21,11 @@ It is part of the standing toolkit of: `backend-implementation-agent`.
 5. Test with malformed, oversized, and hostile input.
 
 ## Output contract
-Write `validation-review.md` into `workspace/<venture-id>/engineering/`, then register it as an artifact record
-(`knowledge-schema/artifact.schema.json`) so it becomes retrievable memory. Every output carries:
-
-```markdown
-# <title>
-- **Skill:** input-validation-review
-- **Author agent:** <agent-id>
-- **Date:** <ISO-8601>
-- **Confidence:** measured | sourced | benchmarked | estimated | guessed
-
-## Summary
-<the answer in three sentences or fewer>
-
-## Body
-<the substance produced by the procedure above>
-
-## Evidence
-| Claim | Source | Grade |
-|---|---|---|
-
-## Open questions
-<what remains unknown, and who could answer it>
-
-## Next action
-<the single next step and its owner>
-```
+`validation-review.md` → `workspace/<venture-id>/engineering/`, registered as an artifact record.
+Shared format and required fields: `skills/OUTPUT_CONTRACT.md`.
+Anti-patterns for this category head `skills/index/engineering.tsv`.
 
 ## Quality bar
 - Validation at the boundary, not deep inside
 - Hostile input tested
 - The output states its confidence grade and names the evidence behind every load-bearing claim.
-
-## Anti-patterns for the `engineering` category
-- Designing for imagined scale instead of current load plus one order of magnitude.
-- Skipping or quarantining a failing test to get a green build.
-- Shipping without a verified way back.

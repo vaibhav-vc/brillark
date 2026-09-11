@@ -9,14 +9,9 @@ used_by:
 
 # Reputational Stress Test
 
-**Category:** `council` · **Output artifact:** `reputation-test.md`
+`council` · produces `reputation-test.md` · used by `council-ethics-and-responsibility`
 
-## What this skill does
 Test whether the plan survives public scrutiny.
-
-## When to use it
-Invoke this skill when the task calls for the outcome described above.
-It is part of the standing toolkit of: `council-ethics-and-responsibility`.
 
 ## Procedure
 1. Write the most damaging accurate headline this plan could produce.
@@ -26,39 +21,11 @@ It is part of the standing toolkit of: `council-ethics-and-responsibility`.
 5. Recommend the change or record the accepted exposure.
 
 ## Output contract
-Write `reputation-test.md` into `workspace/<venture-id>/council/`, then register it as an artifact record
-(`knowledge-schema/artifact.schema.json`) so it becomes retrievable memory. Every output carries:
-
-```markdown
-# <title>
-- **Skill:** reputational-stress-test
-- **Author agent:** <agent-id>
-- **Date:** <ISO-8601>
-- **Confidence:** measured | sourced | benchmarked | estimated | guessed
-
-## Summary
-<the answer in three sentences or fewer>
-
-## Body
-<the substance produced by the procedure above>
-
-## Evidence
-| Claim | Source | Grade |
-|---|---|---|
-
-## Open questions
-<what remains unknown, and who could answer it>
-
-## Next action
-<the single next step and its owner>
-```
+`reputation-test.md` → `workspace/<venture-id>/council/`, registered as an artifact record.
+Shared format and required fields: `skills/OUTPUT_CONTRACT.md`.
+Anti-patterns for this category head `skills/index/council.tsv`.
 
 ## Quality bar
 - Headline is accurate, not exaggerated
 - Indefensible distinguished from embarrassing
 - The output states its confidence grade and names the evidence behind every load-bearing claim.
-
-## Anti-patterns for the `council` category
-- An objection stated as an adjective rather than a concrete failure sequence.
-- Criticism offered with no remedy at any cost level.
-- Averaging two positions instead of testing which survives the evidence.

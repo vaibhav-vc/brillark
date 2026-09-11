@@ -9,14 +9,9 @@ used_by:
 
 # Frontend Performance Budget
 
-**Category:** `engineering` · **Output artifact:** `performance-budget.md`
+`engineering` · produces `performance-budget.md` · used by `frontend-implementation-agent`
 
-## What this skill does
 Set and defend limits on what the client has to load and do.
-
-## When to use it
-Invoke this skill when the task calls for the outcome described above.
-It is part of the standing toolkit of: `frontend-implementation-agent`.
 
 ## Procedure
 1. Set budgets for bundle size, time to interactive, and main-thread work.
@@ -26,39 +21,11 @@ It is part of the standing toolkit of: `frontend-implementation-agent`.
 5. Review the budget when the target device or network profile changes.
 
 ## Output contract
-Write `performance-budget.md` into `workspace/<venture-id>/engineering/`, then register it as an artifact record
-(`knowledge-schema/artifact.schema.json`) so it becomes retrievable memory. Every output carries:
-
-```markdown
-# <title>
-- **Skill:** frontend-performance-budget
-- **Author agent:** <agent-id>
-- **Date:** <ISO-8601>
-- **Confidence:** measured | sourced | benchmarked | estimated | guessed
-
-## Summary
-<the answer in three sentences or fewer>
-
-## Body
-<the substance produced by the procedure above>
-
-## Evidence
-| Claim | Source | Grade |
-|---|---|---|
-
-## Open questions
-<what remains unknown, and who could answer it>
-
-## Next action
-<the single next step and its owner>
-```
+`performance-budget.md` → `workspace/<venture-id>/engineering/`, registered as an artifact record.
+Shared format and required fields: `skills/OUTPUT_CONTRACT.md`.
+Anti-patterns for this category head `skills/index/engineering.tsv`.
 
 ## Quality bar
 - Budget enforced in CI
 - Largest contributors attributed
 - The output states its confidence grade and names the evidence behind every load-bearing claim.
-
-## Anti-patterns for the `engineering` category
-- Designing for imagined scale instead of current load plus one order of magnitude.
-- Skipping or quarantining a failing test to get a green build.
-- Shipping without a verified way back.

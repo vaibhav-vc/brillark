@@ -1,0 +1,18 @@
+{
+  "agents": 130,
+  "budget_violations": 0,
+  "composed_run_median": 3734,
+  "median_charter": 860,
+  "median_skill": 280,
+  "naive_total": 278581,
+  "orphan_skills": 0,
+  "routed_run_max": 3836,
+  "routed_run_median": 3155,
+  "routed_run_p90": 3329,
+  "skills": 590,
+  "tier1_routing_max": 2632,
+  "workflow_cost_max": 40156,
+  "workflow_cost_median": 13335,
+  "workflow_step_cost_max": 3685,
+  "workflow_steps_max": 19
+}

@@ -9,14 +9,9 @@ used_by:
 
 # Motion Selection
 
-**Category:** `gtm` · **Output artifact:** `motion-decision.md`
+`gtm` · produces `motion-decision.md` · used by `gtm-strategist`
 
-## What this skill does
 Choose between self-serve, product-led, sales-led, and partner-led.
-
-## When to use it
-Invoke this skill when the task calls for the outcome described above.
-It is part of the standing toolkit of: `gtm-strategist`.
 
 ## Procedure
 1. Establish the price point and the annual contract value.
@@ -26,39 +21,11 @@ It is part of the standing toolkit of: `gtm-strategist`.
 5. State the motion and the conditions under which it would change.
 
 ## Output contract
-Write `motion-decision.md` into `workspace/<venture-id>/gtm/`, then register it as an artifact record
-(`knowledge-schema/artifact.schema.json`) so it becomes retrievable memory. Every output carries:
-
-```markdown
-# <title>
-- **Skill:** motion-selection
-- **Author agent:** <agent-id>
-- **Date:** <ISO-8601>
-- **Confidence:** measured | sourced | benchmarked | estimated | guessed
-
-## Summary
-<the answer in three sentences or fewer>
-
-## Body
-<the substance produced by the procedure above>
-
-## Evidence
-| Claim | Source | Grade |
-|---|---|---|
-
-## Open questions
-<what remains unknown, and who could answer it>
-
-## Next action
-<the single next step and its owner>
-```
+`motion-decision.md` → `workspace/<venture-id>/gtm/`, registered as an artifact record.
+Shared format and required fields: `skills/OUTPUT_CONTRACT.md`.
+Anti-patterns for this category head `skills/index/gtm.tsv`.
 
 ## Quality bar
 - Economics can fund the chosen motion
 - Product readiness for the motion checked
 - The output states its confidence grade and names the evidence behind every load-bearing claim.
-
-## Anti-patterns for the `gtm` category
-- Scaling a channel before its CAC is measured.
-- Running a test with no kill criterion, so it never ends.
-- Claiming differentiation that is not a reason anyone would switch.

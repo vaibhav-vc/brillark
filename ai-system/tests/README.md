@@ -1,9 +1,13 @@
 # Tests
 
 ```bash
-python3 ai-system/tests/test_system_integrity.py       # 41 integrity tests
+python3 ai-system/tests/test_system_integrity.py       # 46 integrity tests
+python3 ai-system/tests/benchmark.py                   # regression gate vs. committed baseline
+python3 ai-system/tests/benchmark.py --repeat 25       # confirm determinism
 python3 ai-system/tests/measure_context_cost.py        # what a run actually costs
 python3 -m pytest ai-system/tests -q                   # via pytest
+
+All three run in CI on every push to `ai-system/` — `.github/workflows/ai-system.yml`.
 ```
 
 Only the standard library and PyYAML are needed.
@@ -11,7 +15,7 @@ Only the standard library and PyYAML are needed.
 ## What is checked
 
 **Agents** — the registry matches the files on disk; ids are unique; the org shape is exactly
-50 planning + 14 design + 12 improvement specialists, 10 council, 7 heads, 1 director; every `reports_to` resolves; there are no reporting
+50 planning + 15 hardware + 14 design + 12 improvement specialists, 10 council, 8 heads, 1 director; every `reports_to` resolves; there are no reporting
 cycles; every agent reaches the Director; frontmatter matches the registry; every agent has all the
 required sections and declares memory scopes; profiles satisfy `agent-profile.schema.json`.
 
@@ -51,6 +55,18 @@ time — it produces an agent that cannot do its job, discovered much later.
 
 If you change the shape of the organisation, `REQUIRED` at the top of the test file is where you say
 so — and an org-shape change is not something the improvement domain may make on its own.
+
+## The benchmark
+
+`benchmark.py` is the regression gate. It computes fourteen metrics, compares them against
+`benchmark-baseline.json`, and exits non-zero when any has worsened past its tolerance (5% for most
+context metrics, 10% for worst-case workflow cost, exact-zero for budget violations and orphan
+skills). `--repeat N` re-runs and fails if any metric varies, since the measurement must be
+deterministic. `--update-baseline` accepts the current numbers — do that deliberately, and say why
+in the commit message.
+
+It earns its place: it caught an orphan skill (`assumption-extraction`, in the library but referenced
+by no agent) on its first run.
 
 ## The measurement
 

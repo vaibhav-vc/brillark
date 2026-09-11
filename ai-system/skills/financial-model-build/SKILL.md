@@ -10,14 +10,9 @@ used_by:
 
 # Financial Model Build
 
-**Category:** `finance` · **Output artifact:** `financial-model.md`
+`finance` · produces `financial-model.md` · used by `finance-head`, `financial-model-builder`
 
-## What this skill does
 Build the integrated model where every money assumption meets its consequences.
-
-## When to use it
-Invoke this skill when the task calls for the outcome described above.
-It is part of the standing toolkit of: `finance-head`, `financial-model-builder`.
 
 ## Procedure
 1. Separate inputs, calculations, and outputs into distinct sheets or modules.
@@ -27,39 +22,11 @@ It is part of the standing toolkit of: `finance-head`, `financial-model-builder`
 5. Expose every assumption on the input sheet with an owner and a source.
 
 ## Output contract
-Write `financial-model.md` into `workspace/<venture-id>/finance/`, then register it as an artifact record
-(`knowledge-schema/artifact.schema.json`) so it becomes retrievable memory. Every output carries:
-
-```markdown
-# <title>
-- **Skill:** financial-model-build
-- **Author agent:** <agent-id>
-- **Date:** <ISO-8601>
-- **Confidence:** measured | sourced | benchmarked | estimated | guessed
-
-## Summary
-<the answer in three sentences or fewer>
-
-## Body
-<the substance produced by the procedure above>
-
-## Evidence
-| Claim | Source | Grade |
-|---|---|---|
-
-## Open questions
-<what remains unknown, and who could answer it>
-
-## Next action
-<the single next step and its owner>
-```
+`financial-model.md` → `workspace/<venture-id>/finance/`, registered as an artifact record.
+Shared format and required fields: `skills/OUTPUT_CONTRACT.md`.
+Anti-patterns for this category head `skills/index/finance.tsv`.
 
 ## Quality bar
 - No hard-coded numbers inside formulas
 - Every input has an owner and a source
 - The output states its confidence grade and names the evidence behind every load-bearing claim.
-
-## Anti-patterns for the `finance` category
-- Presenting a single number where the honest answer is a range.
-- Building a forecast from a growth percentage instead of from drivers.
-- Reporting a metric whose definition changed since last period without saying so.

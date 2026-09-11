@@ -9,14 +9,9 @@ used_by:
 
 # Behaviour Change Verification
 
-**Category:** `improvement` · **Output artifact:** `verification-record.md`
+`improvement` · produces `verification-record.md` · used by `knowledge-distiller`
 
-## What this skill does
 Check the instruction actually changed what agents do.
-
-## When to use it
-Invoke this skill when the task calls for the outcome described above.
-It is part of the standing toolkit of: `knowledge-distiller`.
 
 ## Procedure
 1. Record the behaviour before the instruction was added.
@@ -26,39 +21,11 @@ It is part of the standing toolkit of: `knowledge-distiller`.
 5. Record the verification and act on a null result.
 
 ## Output contract
-Write `verification-record.md` into `workspace/<venture-id>/improvement/`, then register it as an artifact record
-(`knowledge-schema/artifact.schema.json`) so it becomes retrievable memory. Every output carries:
-
-```markdown
-# <title>
-- **Skill:** behaviour-change-verification
-- **Author agent:** <agent-id>
-- **Date:** <ISO-8601>
-- **Confidence:** measured | sourced | benchmarked | estimated | guessed
-
-## Summary
-<the answer in three sentences or fewer>
-
-## Body
-<the substance produced by the procedure above>
-
-## Evidence
-| Claim | Source | Grade |
-|---|---|---|
-
-## Open questions
-<what remains unknown, and who could answer it>
-
-## Next action
-<the single next step and its owner>
-```
+`verification-record.md` → `workspace/<venture-id>/improvement/`, registered as an artifact record.
+Shared format and required fields: `skills/OUTPUT_CONTRACT.md`.
+Anti-patterns for this category head `skills/index/improvement.tsv`.
 
 ## Quality bar
 - Following distinguished from outcome improvement
 - Null results acted on, not filed
 - The output states its confidence grade and names the evidence behind every load-bearing claim.
-
-## Anti-patterns for the `improvement` category
-- Starting an improvement cycle with an idea instead of a measurement.
-- Adopting a change that beat the cases it was tuned on.
-- Adding an instruction without removing one, until none of them are read.

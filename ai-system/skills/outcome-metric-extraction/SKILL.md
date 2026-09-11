@@ -9,14 +9,9 @@ used_by:
 
 # Outcome Metric Extraction
 
-**Category:** `market` · **Output artifact:** `outcome-metrics.md`
+`market` · produces `outcome-metrics.md` · used by `jtbd-analyst`
 
-## What this skill does
 Capture how the customer measures success, in their own terms.
-
-## When to use it
-Invoke this skill when the task calls for the outcome described above.
-It is part of the standing toolkit of: `jtbd-analyst`.
 
 ## Procedure
 1. Ask what number changes if the problem is solved.
@@ -26,39 +21,11 @@ It is part of the standing toolkit of: `jtbd-analyst`.
 5. Use it as the success criterion in the value proposition.
 
 ## Output contract
-Write `outcome-metrics.md` into `workspace/<venture-id>/market/`, then register it as an artifact record
-(`knowledge-schema/artifact.schema.json`) so it becomes retrievable memory. Every output carries:
-
-```markdown
-# <title>
-- **Skill:** outcome-metric-extraction
-- **Author agent:** <agent-id>
-- **Date:** <ISO-8601>
-- **Confidence:** measured | sourced | benchmarked | estimated | guessed
-
-## Summary
-<the answer in three sentences or fewer>
-
-## Body
-<the substance produced by the procedure above>
-
-## Evidence
-| Claim | Source | Grade |
-|---|---|---|
-
-## Open questions
-<what remains unknown, and who could answer it>
-
-## Next action
-<the single next step and its owner>
-```
+`outcome-metrics.md` → `workspace/<venture-id>/market/`, registered as an artifact record.
+Shared format and required fields: `skills/OUTPUT_CONTRACT.md`.
+Anti-patterns for this category head `skills/index/market.tsv`.
 
 ## Quality bar
 - Metric expressed in the customer's own terms
 - Product's ability to move it verified
 - The output states its confidence grade and names the evidence behind every load-bearing claim.
-
-## Anti-patterns for the `market` category
-- Treating stated intent as evidence of demand.
-- Sizing a market top-down and calling it bottom-up.
-- Interviewing people who could never buy, then counting their enthusiasm.

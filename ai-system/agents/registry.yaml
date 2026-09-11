@@ -198,6 +198,30 @@ agents:
   - council.recurring-flaws
   capability: 'Owns the loop that makes the organisation better at its job over time: measure, diagnose, propose, trial, adopt,
     verify'
+- id: hardware-head
+  title: Head of Hardware
+  tier: head
+  domain: hardware
+  reports_to: director
+  model: opus
+  task_class: judgement
+  escalates_to_model: opus
+  context_budget_tokens: 25000
+  return_budget_tokens: 1500
+  path: agents/orchestration/hardware-head.md
+  skills:
+  - hardware-architecture
+  - build-phase-gating
+  - manufacturing-readiness-review
+  - hardware-cost-rollup
+  - interface-contract-definition
+  memory_scopes:
+  - org.hardware
+  - venture.*.hardware
+  - venture.*.suppliers
+  - org.decisions
+  capability: 'Owns everything physical: the 3D product, the boards inside it, and whether it can be manufactured, certified,
+    and sold'
 - id: ceo-agent
   title: CEO Agent
   tier: executive
@@ -641,6 +665,30 @@ agents:
   - council.recurring-flaws
   capability: 'Owns whether the organisation actually gets better: what it learns, what it retains, and what it is permitted
     to change about itself'
+- id: chief-hardware-officer-agent
+  title: Chief Hardware Officer Agent
+  tier: executive
+  domain: governance
+  reports_to: director
+  model: opus
+  task_class: judgement
+  escalates_to_model: opus
+  context_budget_tokens: 20000
+  return_budget_tokens: 1200
+  path: agents/executive/chief-hardware-officer-agent.md
+  skills:
+  - hardware-strategy
+  - tooling-capital-planning
+  - manufacturing-partner-selection
+  - supply-chain-resilience-review
+  - product-lifecycle-planning
+  memory_scopes:
+  - org.hardware
+  - venture.*.hardware
+  - venture.*.suppliers
+  - org.decisions
+  capability: 'Owns the physical product as a business bet: what it costs to make, what it takes to scale, and whether hardware
+    is the right way to deliver the value at all'
 - id: council-red-team
   title: Council — Red Team Adversary
   tier: council
@@ -723,6 +771,7 @@ agents:
   return_budget_tokens: 1200
   path: agents/council/council-assumption-auditor.md
   skills:
+  - assumption-extraction
   - assumption-ledger
   - evidence-grading
   - load-bearing-analysis
@@ -2635,3 +2684,357 @@ agents:
   - org.memory
   - council.recurring-flaws
   capability: Decides which model tier each agent runs on, and moves work down a tier whenever quality allows
+- id: industrial-designer
+  title: Industrial Designer
+  tier: specialist
+  domain: hardware
+  reports_to: hardware-head
+  model: sonnet
+  task_class: analytical
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/hardware/industrial-designer.md
+  skills:
+  - industrial-design-concepting
+  - ergonomics-and-human-factors
+  - cmf-specification
+  - physical-model-review
+  - form-volume-negotiation
+  memory_scopes:
+  - org.hardware
+  - venture.*.hardware
+  - venture.*.suppliers
+  - org.decisions
+  capability: 'Decides what the physical product is: its form, how it is held and used, what it is made of, and why someone
+    would want it on their desk'
+- id: cad-modeler
+  title: CAD Modeller
+  tier: specialist
+  domain: hardware
+  reports_to: hardware-head
+  model: sonnet
+  task_class: analytical
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/hardware/cad-modeler.md
+  skills:
+  - parametric-modeling
+  - assembly-modeling
+  - interference-checking
+  - gd-and-t-drafting
+  - model-revision-control
+  memory_scopes:
+  - org.hardware
+  - venture.*.hardware
+  - venture.*.suppliers
+  - org.decisions
+  capability: Builds the 3D model that everything else depends on — parametric, tolerant of change, and the single geometric
+    source of truth
+- id: mechanical-engineer
+  title: Mechanical Engineer
+  tier: specialist
+  domain: hardware
+  reports_to: hardware-head
+  model: sonnet
+  task_class: analytical
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/hardware/mechanical-engineer.md
+  skills:
+  - tolerance-stackup-analysis
+  - structural-analysis
+  - fastener-and-joint-design
+  - drop-and-vibration-analysis
+  - analysis-test-correlation
+  memory_scopes:
+  - org.hardware
+  - venture.*.hardware
+  - venture.*.suppliers
+  - org.decisions
+  capability: 'Makes sure the physical thing holds together: loads, stresses, fits, fasteners, and the tolerance stack that
+    decides whether parts actually assemble'
+- id: dfm-engineer
+  title: Design for Manufacture Engineer
+  tier: specialist
+  domain: hardware
+  reports_to: hardware-head
+  model: opus
+  task_class: judgement
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/hardware/dfm-engineer.md
+  skills:
+  - dfm-review
+  - process-selection
+  - tooling-design-review
+  - design-for-assembly
+  - process-capability-analysis
+  memory_scopes:
+  - org.hardware
+  - venture.*.hardware
+  - venture.*.suppliers
+  - org.decisions
+  capability: Makes sure the design can actually be made, repeatably, at the intended volume and cost — before tooling is
+    cut
+- id: enclosure-designer
+  title: Enclosure Designer
+  tier: specialist
+  domain: hardware
+  reports_to: hardware-head
+  model: sonnet
+  task_class: analytical
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/hardware/enclosure-designer.md
+  skills:
+  - enclosure-architecture
+  - ingress-protection-design
+  - board-mounting-design
+  - aperture-tolerancing
+  - closure-and-retention-design
+  memory_scopes:
+  - org.hardware
+  - venture.*.hardware
+  - venture.*.suppliers
+  - org.decisions
+  capability: 'Designs the housing: how it splits, how it closes, how it keeps water and dust out, and how a human opens it
+    when it needs service'
+- id: thermal-engineer
+  title: Thermal Engineer
+  tier: specialist
+  domain: hardware
+  reports_to: hardware-head
+  model: sonnet
+  task_class: analytical
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/hardware/thermal-engineer.md
+  skills:
+  - thermal-budgeting
+  - thermal-path-analysis
+  - thermal-interface-selection
+  - touch-temperature-compliance
+  - thermal-validation-testing
+  memory_scopes:
+  - org.hardware
+  - venture.*.hardware
+  - venture.*.suppliers
+  - org.decisions
+  capability: Keeps the electronics inside their temperature limits, in the real enclosure, in the real environment
+- id: pcb-schematic-designer
+  title: PCB Schematic Designer
+  tier: specialist
+  domain: hardware
+  reports_to: hardware-head
+  model: opus
+  task_class: judgement
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/hardware/pcb-schematic-designer.md
+  skills:
+  - schematic-capture
+  - power-sequencing-design
+  - interface-protection-design
+  - pin-accounting-review
+  - design-for-test-provision
+  memory_scopes:
+  - org.hardware
+  - venture.*.hardware
+  - venture.*.suppliers
+  - org.decisions
+  capability: 'Draws the circuit: what connects to what, why, and with what protection — the document every later hardware
+    problem gets traced back to'
+- id: pcb-layout-designer
+  title: PCB Layout Designer
+  tier: specialist
+  domain: hardware
+  reports_to: hardware-head
+  model: sonnet
+  task_class: analytical
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/hardware/pcb-layout-designer.md
+  skills:
+  - stackup-design
+  - component-placement
+  - high-speed-routing
+  - ground-and-return-path-design
+  - fabrication-output-review
+  memory_scopes:
+  - org.hardware
+  - venture.*.hardware
+  - venture.*.suppliers
+  - org.decisions
+  capability: 'Turns the schematic into copper: stack-up, placement, routing, and the physical decisions that determine whether
+    the circuit actually works'
+- id: signal-integrity-engineer
+  title: Signal Integrity Engineer
+  tier: specialist
+  domain: hardware
+  reports_to: hardware-head
+  model: sonnet
+  task_class: analytical
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/hardware/signal-integrity-engineer.md
+  skills:
+  - impedance-planning
+  - termination-and-topology-design
+  - crosstalk-analysis
+  - timing-budget-analysis
+  - si-simulation-and-measurement
+  memory_scopes:
+  - org.hardware
+  - venture.*.hardware
+  - venture.*.suppliers
+  - org.decisions
+  capability: 'Makes sure the signals survive the board: impedance, reflections, crosstalk, timing, and the return paths nobody
+    drew'
+- id: power-electronics-engineer
+  title: Power Electronics Engineer
+  tier: specialist
+  domain: hardware
+  reports_to: hardware-head
+  model: sonnet
+  task_class: analytical
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/hardware/power-electronics-engineer.md
+  skills:
+  - power-tree-design
+  - converter-topology-selection
+  - transient-response-design
+  - power-protection-design
+  - power-measurement-validation
+  memory_scopes:
+  - org.hardware
+  - venture.*.hardware
+  - venture.*.suppliers
+  - org.decisions
+  capability: Designs how the product gets, converts, and survives power — including the failure cases nobody plans for
+- id: electronics-component-engineer
+  title: Electronics Component Engineer
+  tier: specialist
+  domain: hardware
+  reports_to: hardware-head
+  model: sonnet
+  task_class: analytical
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/hardware/electronics-component-engineer.md
+  skills:
+  - bom-management
+  - second-source-qualification
+  - lifecycle-and-obsolescence-review
+  - component-cost-analysis
+  - authorised-sourcing-control
+  memory_scopes:
+  - org.hardware
+  - venture.*.hardware
+  - venture.*.suppliers
+  - org.decisions
+  capability: 'Owns the bill of materials: what parts go in, whether they can be bought, and what happens when one goes obsolete'
+- id: embedded-firmware-engineer
+  title: Embedded Firmware Engineer
+  tier: specialist
+  domain: hardware
+  reports_to: hardware-head
+  model: sonnet
+  task_class: analytical
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/hardware/embedded-firmware-engineer.md
+  skills:
+  - firmware-architecture
+  - board-bringup
+  - hardware-abstraction-design
+  - safe-field-update-design
+  - realtime-timing-verification
+  memory_scopes:
+  - org.hardware
+  - venture.*.hardware
+  - venture.*.suppliers
+  - org.decisions
+  capability: Writes the code that runs on the hardware, and owns the boundary where software assumptions meet physical reality
+- id: compliance-emc-engineer
+  title: EMC & Product Compliance Engineer
+  tier: specialist
+  domain: hardware
+  reports_to: hardware-head
+  model: opus
+  task_class: judgement
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/hardware/compliance-emc-engineer.md
+  skills:
+  - standards-applicability-matrix
+  - emc-design-review
+  - pre-compliance-testing
+  - product-safety-review
+  - technical-file-assembly
+  memory_scopes:
+  - org.hardware
+  - venture.*.hardware
+  - venture.*.suppliers
+  - org.decisions
+  capability: 'Gets the product legally sellable: emissions, immunity, safety, and the certification paperwork for every market
+    it ships to'
+- id: hardware-test-engineer
+  title: Hardware Test Engineer
+  tier: specialist
+  domain: hardware
+  reports_to: hardware-head
+  model: sonnet
+  task_class: analytical
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/hardware/hardware-test-engineer.md
+  skills:
+  - test-strategy-hardware
+  - verification-matrix
+  - environmental-testing
+  - production-test-design
+  - failure-analysis-hardware
+  memory_scopes:
+  - org.hardware
+  - venture.*.hardware
+  - venture.*.suppliers
+  - org.decisions
+  capability: Proves the hardware works — on the bench, through the build phases, and on the production line
+- id: prototyping-fabrication-agent
+  title: Prototyping & Fabrication Agent
+  tier: specialist
+  domain: hardware
+  reports_to: hardware-head
+  model: sonnet
+  task_class: analytical
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/hardware/prototyping-fabrication-agent.md
+  skills:
+  - prototype-process-selection
+  - fabrication-package-preparation
+  - supplier-quoting
+  - build-traceability
+  - prototype-learning-capture
+  memory_scopes:
+  - org.hardware
+  - venture.*.hardware
+  - venture.*.suppliers
+  - org.decisions
+  capability: 'Gets physical parts made fast: which process, which supplier, what it will cost, and when it arrives'

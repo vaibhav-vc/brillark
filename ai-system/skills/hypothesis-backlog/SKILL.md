@@ -9,14 +9,9 @@ used_by:
 
 # Hypothesis Backlog
 
-**Category:** `market` · **Output artifact:** `hypothesis-backlog.md`
+`market` · produces `hypothesis-backlog.md` · used by `business-head`
 
-## What this skill does
 Keep a ranked list of what we believe and how we will test it.
-
-## When to use it
-Invoke this skill when the task calls for the outcome described above.
-It is part of the standing toolkit of: `business-head`.
 
 ## Procedure
 1. Write each belief as a falsifiable statement with a threshold.
@@ -26,39 +21,11 @@ It is part of the standing toolkit of: `business-head`.
 5. Move results into the validated-learning log, including failures.
 
 ## Output contract
-Write `hypothesis-backlog.md` into `workspace/<venture-id>/market/`, then register it as an artifact record
-(`knowledge-schema/artifact.schema.json`) so it becomes retrievable memory. Every output carries:
-
-```markdown
-# <title>
-- **Skill:** hypothesis-backlog
-- **Author agent:** <agent-id>
-- **Date:** <ISO-8601>
-- **Confidence:** measured | sourced | benchmarked | estimated | guessed
-
-## Summary
-<the answer in three sentences or fewer>
-
-## Body
-<the substance produced by the procedure above>
-
-## Evidence
-| Claim | Source | Grade |
-|---|---|---|
-
-## Open questions
-<what remains unknown, and who could answer it>
-
-## Next action
-<the single next step and its owner>
-```
+`hypothesis-backlog.md` → `workspace/<venture-id>/market/`, registered as an artifact record.
+Shared format and required fields: `skills/OUTPUT_CONTRACT.md`.
+Anti-patterns for this category head `skills/index/market.tsv`.
 
 ## Quality bar
 - Beliefs stated falsifiably with thresholds
 - Ranked by dependency and uncertainty
 - The output states its confidence grade and names the evidence behind every load-bearing claim.
-
-## Anti-patterns for the `market` category
-- Treating stated intent as evidence of demand.
-- Sizing a market top-down and calling it bottom-up.
-- Interviewing people who could never buy, then counting their enthusiasm.

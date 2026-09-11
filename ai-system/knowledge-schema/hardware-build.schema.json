@@ -1,0 +1,185 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://brillark.ai/schemas/hardware-build.schema.json",
+  "title": "Hardware Build Record",
+  "description": "One build of physical units. Without the exact configuration, a test result cannot be attributed and a field failure cannot be traced.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "build_id",
+    "phase",
+    "quantity",
+    "configuration",
+    "purpose"
+  ],
+  "properties": {
+    "build_id": {
+      "type": "string"
+    },
+    "phase": {
+      "type": "string",
+      "enum": [
+        "breadboard",
+        "EVT",
+        "DVT",
+        "PVT",
+        "MP"
+      ],
+      "description": "EVT proves it can work, DVT proves the design is right, PVT proves the process is."
+    },
+    "purpose": {
+      "type": "string",
+      "description": "What this build exists to prove. A build with no question is parts."
+    },
+    "quantity": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "design_frozen": {
+      "type": "boolean",
+      "description": "Tooling may not be cut on an unfrozen design, whatever the schedule says."
+    },
+    "configuration": {
+      "type": "object",
+      "required": [
+        "mechanical_rev",
+        "pcb_rev",
+        "bom_rev",
+        "firmware_rev"
+      ],
+      "properties": {
+        "mechanical_rev": {
+          "type": "string"
+        },
+        "pcb_rev": {
+          "type": "string"
+        },
+        "bom_rev": {
+          "type": "string"
+        },
+        "firmware_rev": {
+          "type": "string"
+        }
+      }
+    },
+    "deviations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "unit",
+          "change",
+          "reason"
+        ],
+        "properties": {
+          "unit": {
+            "type": "string"
+          },
+          "change": {
+            "type": "string"
+          },
+          "reason": {
+            "type": "string"
+          }
+        },
+        "description": "Every bodge, rework, and substitution. Recorded, not remembered."
+      }
+    },
+    "suppliers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "part",
+          "supplier",
+          "process"
+        ],
+        "properties": {
+          "part": {
+            "type": "string"
+          },
+          "supplier": {
+            "type": "string"
+          },
+          "process": {
+            "type": "string"
+          },
+          "lot": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "yield": {
+      "type": "object",
+      "properties": {
+        "built": {
+          "type": "integer"
+        },
+        "passed": {
+          "type": "integer"
+        },
+        "failures_by_mode": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "findings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "finding",
+          "discipline",
+          "process_artefact"
+        ],
+        "properties": {
+          "finding": {
+            "type": "string"
+          },
+          "discipline": {
+            "type": "string"
+          },
+          "process_artefact": {
+            "type": "boolean",
+            "description": "True when caused by the prototype process rather than the design \u2014 these must not drive design changes."
+          },
+          "severity": {
+            "type": "string",
+            "enum": [
+              "blocker",
+              "major",
+              "minor",
+              "note"
+            ]
+          }
+        }
+      }
+    },
+    "phase_exit": {
+      "type": "object",
+      "properties": {
+        "criteria_met": {
+          "type": "boolean"
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "decision": {
+          "type": "string",
+          "enum": [
+            "proceed",
+            "repeat_phase",
+            "redesign"
+          ]
+        }
+      }
+    }
+  }
+}

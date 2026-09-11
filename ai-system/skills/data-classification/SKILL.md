@@ -9,14 +9,9 @@ used_by:
 
 # Data Classification
 
-**Category:** `data` · **Output artifact:** `data-classification.md`
+`data` · produces `data-classification.md` · used by `data-model-designer`
 
-## What this skill does
 Label data by sensitivity so controls can follow.
-
-## When to use it
-Invoke this skill when the task calls for the outcome described above.
-It is part of the standing toolkit of: `data-model-designer`.
 
 ## Procedure
 1. Define the classification levels and what each requires.
@@ -26,39 +21,11 @@ It is part of the standing toolkit of: `data-model-designer`.
 5. Refuse to store data that has no classification.
 
 ## Output contract
-Write `data-classification.md` into `workspace/<venture-id>/data/`, then register it as an artifact record
-(`knowledge-schema/artifact.schema.json`) so it becomes retrievable memory. Every output carries:
-
-```markdown
-# <title>
-- **Skill:** data-classification
-- **Author agent:** <agent-id>
-- **Date:** <ISO-8601>
-- **Confidence:** measured | sourced | benchmarked | estimated | guessed
-
-## Summary
-<the answer in three sentences or fewer>
-
-## Body
-<the substance produced by the procedure above>
-
-## Evidence
-| Claim | Source | Grade |
-|---|---|---|
-
-## Open questions
-<what remains unknown, and who could answer it>
-
-## Next action
-<the single next step and its owner>
-```
+`data-classification.md` → `workspace/<venture-id>/data/`, registered as an artifact record.
+Shared format and required fields: `skills/OUTPUT_CONTRACT.md`.
+Anti-patterns for this category head `skills/index/data.tsv`.
 
 ## Quality bar
 - Classification applied at creation
 - Controls tied to each level
 - The output states its confidence grade and names the evidence behind every load-bearing claim.
-
-## Anti-patterns for the `data` category
-- Two dashboards reporting the same metric with different definitions.
-- Reporting an experiment result that never had the power to detect the effect.
-- Collecting a field first and finding a purpose for it later.

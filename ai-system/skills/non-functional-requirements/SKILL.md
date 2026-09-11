@@ -9,14 +9,9 @@ used_by:
 
 # Non Functional Requirements
 
-**Category:** `product` · **Output artifact:** `nfr.md`
+`product` · produces `nfr.md` · used by `product-requirements-agent`
 
-## What this skill does
 State the qualities the system must have, not just its behaviour.
-
-## When to use it
-Invoke this skill when the task calls for the outcome described above.
-It is part of the standing toolkit of: `product-requirements-agent`.
 
 ## Procedure
 1. Specify latency and throughput targets for the critical journeys.
@@ -26,39 +21,11 @@ It is part of the standing toolkit of: `product-requirements-agent`.
 5. Make each testable; an untestable requirement is a wish.
 
 ## Output contract
-Write `nfr.md` into `workspace/<venture-id>/product/`, then register it as an artifact record
-(`knowledge-schema/artifact.schema.json`) so it becomes retrievable memory. Every output carries:
-
-```markdown
-# <title>
-- **Skill:** non-functional-requirements
-- **Author agent:** <agent-id>
-- **Date:** <ISO-8601>
-- **Confidence:** measured | sourced | benchmarked | estimated | guessed
-
-## Summary
-<the answer in three sentences or fewer>
-
-## Body
-<the substance produced by the procedure above>
-
-## Evidence
-| Claim | Source | Grade |
-|---|---|---|
-
-## Open questions
-<what remains unknown, and who could answer it>
-
-## Next action
-<the single next step and its owner>
-```
+`nfr.md` → `workspace/<venture-id>/product/`, registered as an artifact record.
+Shared format and required fields: `skills/OUTPUT_CONTRACT.md`.
+Anti-patterns for this category head `skills/index/product.tsv`.
 
 ## Quality bar
 - Every requirement testable
 - Failure behaviour specified, not just uptime
 - The output states its confidence grade and names the evidence behind every load-bearing claim.
-
-## Anti-patterns for the `product` category
-- Writing a requirement that starts with a solution instead of an evidenced problem.
-- Shipping without defining, in advance, what would show it worked.
-- Treating the roadmap as a promise rather than a current best sequence.

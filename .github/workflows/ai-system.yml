@@ -1,0 +1,62 @@
+name: ai-system
+
+on:
+  push:
+    branches: ["**"]
+    paths: ["ai-system/**", ".github/workflows/ai-system.yml"]
+  pull_request:
+    paths: ["ai-system/**", ".github/workflows/ai-system.yml"]
+  workflow_dispatch:
+
+jobs:
+  integrity:
+    name: Integrity tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install dependencies
+        run: pip install --quiet pyyaml
+      - name: Run integrity tests
+        run: python3 ai-system/tests/test_system_integrity.py
+
+  benchmark:
+    name: Context benchmark
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install dependencies
+        run: pip install --quiet pyyaml
+      - name: Check the measurement is deterministic
+        run: python3 ai-system/tests/benchmark.py --repeat 10
+      - name: Benchmark against the committed baseline
+        run: python3 ai-system/tests/benchmark.py
+      - name: Report context cost
+        run: python3 ai-system/tests/measure_context_cost.py
+
+  bootstrap:
+    name: Bootstrap a venture
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Scaffold and check the workspace
+        run: |
+          bash ai-system/bootstrap/init.sh ci-smoke-test
+          test -f workspace/ci-smoke-test/venture.yaml
+          test -d workspace/ci-smoke-test/memory/decisions
+          test -d workspace/ci-smoke-test/telemetry/token-ledger
+      - name: Refuse to overwrite an existing venture
+        run: |
+          if bash ai-system/bootstrap/init.sh ci-smoke-test 2>/dev/null; then
+            echo "init.sh overwrote an existing venture; it must refuse" && exit 1
+          fi
+      - name: Reject a malformed venture id
+        run: |
+          if bash ai-system/bootstrap/init.sh "Bad ID" 2>/dev/null; then
+            echo "init.sh accepted an invalid venture id" && exit 1
+          fi

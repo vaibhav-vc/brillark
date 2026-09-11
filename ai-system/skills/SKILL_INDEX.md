@@ -1,6 +1,6 @@
 # Skill Index
 
-**505 skills** across 17 categories. Generated from `skills/registry.yaml`.
+**590 skills** across 18 categories. Generated from `skills/registry.yaml`.
 
 Each skill is a directory containing a single `SKILL.md` with frontmatter, a five-step procedure,
 an output contract, a quality bar, and the category's anti-patterns.
@@ -15,6 +15,7 @@ an output contract, a quality bar, and the category's anti-patterns.
 | [engineering](#engineering) | 61 |
 | [finance](#finance) | 56 |
 | [gtm](#gtm) | 38 |
+| [hardware](#hardware) | 85 |
 | [improvement](#improvement) | 55 |
 | [legal](#legal) | 15 |
 | [market](#market) | 36 |
@@ -24,7 +25,7 @@ an output contract, a quality bar, and the category's anti-patterns.
 | [product](#product) | 13 |
 | [risk](#risk) | 4 |
 | [strategy](#strategy) | 11 |
-| **total** | **505** |
+| **total** | **590** |
 
 ## compliance
 
@@ -52,7 +53,7 @@ an output contract, a quality bar, and the category's anti-patterns.
 | [`alternative-revival`](alternative-revival/SKILL.md) | Check whether a discarded option deserves reconsideration. | 1 agent |
 | [`analogy-audit`](analogy-audit/SKILL.md) | Find reasoning that rests on imitation rather than evidence. | 1 agent |
 | [`ask-framing`](ask-framing/SKILL.md) | Make a request specific enough to be acted on. | 1 agent |
-| [`assumption-extraction`](assumption-extraction/SKILL.md) | Surface every assumption, including the invisible ones. | 0 agents |
+| [`assumption-extraction`](assumption-extraction/SKILL.md) | Surface every assumption, including the invisible ones. | 1 agent |
 | [`benchmark-comparison`](benchmark-comparison/SKILL.md) | Compare our numbers to observed reality and demand a reason for every gap. | 1 agent |
 | [`cascade-analysis`](cascade-analysis/SKILL.md) | Find failures that trigger other failures. | 1 agent |
 | [`cheapest-test-design`](cheapest-test-design/SKILL.md) | Find the least expensive way to check a critical assumption. | 1 agent |
@@ -370,6 +371,96 @@ an output contract, a quality bar, and the category's anti-patterns.
 | [`terminology-consistency-audit`](terminology-consistency-audit/SKILL.md) | Make sure one concept has one name everywhere. | 1 agent |
 | [`voice-of-customer-synthesis`](voice-of-customer-synthesis/SKILL.md) | Turn scattered customer feedback into something product can act on. | 1 agent |
 | [`win-loss-analysis`](win-loss-analysis/SKILL.md) | Find out why deals were actually won and lost. | 2 agents |
+
+## hardware
+
+| Skill | What it does | Used by |
+|---|---|---|
+| [`analysis-test-correlation`](analysis-test-correlation/SKILL.md) | Check the simulation actually predicted reality. | 1 agent |
+| [`aperture-tolerancing`](aperture-tolerancing/SKILL.md) | Size openings so the mating part actually fits every time. | 1 agent |
+| [`assembly-modeling`](assembly-modeling/SKILL.md) | Model the assembly so it reflects how the product is actually put together. | 1 agent |
+| [`authorised-sourcing-control`](authorised-sourcing-control/SKILL.md) | Buy only what you can trace. | 1 agent |
+| [`board-bringup`](board-bringup/SKILL.md) | Get the first board alive, in a defined order. | 1 agent |
+| [`board-mounting-design`](board-mounting-design/SKILL.md) | Hold the board so its connectors land where they should. | 1 agent |
+| [`bom-management`](bom-management/SKILL.md) | Own the list of everything that goes into the product. | 1 agent |
+| [`build-phase-gating`](build-phase-gating/SKILL.md) | Exit each build phase on evidence, not on schedule. | 1 agent |
+| [`build-traceability`](build-traceability/SKILL.md) | Know which parts are in which unit. | 1 agent |
+| [`closure-and-retention-design`](closure-and-retention-design/SKILL.md) | Make it close properly and stay closed. | 1 agent |
+| [`cmf-specification`](cmf-specification/SKILL.md) | Specify colour, material, and finish so the factory produces what was designed. | 1 agent |
+| [`component-cost-analysis`](component-cost-analysis/SKILL.md) | Know what the parts really cost at the volume you will actually build. | 1 agent |
+| [`component-placement`](component-placement/SKILL.md) | Place parts for the signal path, the mechanics, and the build. | 1 agent |
+| [`converter-topology-selection`](converter-topology-selection/SKILL.md) | Choose the right converter for each rail. | 1 agent |
+| [`crosstalk-analysis`](crosstalk-analysis/SKILL.md) | Keep signals from corrupting their neighbours. | 1 agent |
+| [`design-for-assembly`](design-for-assembly/SKILL.md) | Reduce the cost and error rate of putting it together. | 1 agent |
+| [`design-for-test-provision`](design-for-test-provision/SKILL.md) | Build in the access debugging and production will need. | 1 agent |
+| [`dfm-review`](dfm-review/SKILL.md) | Check every part can be made by the intended process. | 1 agent |
+| [`drop-and-vibration-analysis`](drop-and-vibration-analysis/SKILL.md) | Check the product survives being dropped and shaken. | 1 agent |
+| [`emc-design-review`](emc-design-review/SKILL.md) | Design for compliance while it is still cheap. | 1 agent |
+| [`enclosure-architecture`](enclosure-architecture/SKILL.md) | Decide how the housing splits, closes, and holds itself together. | 1 agent |
+| [`environmental-testing`](environmental-testing/SKILL.md) | Test the conditions the product will actually meet. | 1 agent |
+| [`ergonomics-and-human-factors`](ergonomics-and-human-factors/SKILL.md) | Fit the product to the range of people who will actually use it. | 1 agent |
+| [`fabrication-output-review`](fabrication-output-review/SKILL.md) | Check the package before the fabricator does. | 1 agent |
+| [`fabrication-package-preparation`](fabrication-package-preparation/SKILL.md) | Send the supplier everything they need and nothing ambiguous. | 1 agent |
+| [`failure-analysis-hardware`](failure-analysis-hardware/SKILL.md) | Find out why the unit actually failed. | 1 agent |
+| [`fastener-and-joint-design`](fastener-and-joint-design/SKILL.md) | Choose how parts are held together and whether they can come apart. | 1 agent |
+| [`firmware-architecture`](firmware-architecture/SKILL.md) | Structure the embedded software so hardware changes do not rewrite the product. | 1 agent |
+| [`form-volume-negotiation`](form-volume-negotiation/SKILL.md) | Settle the internal volume envelope before anyone refines a surface. | 1 agent |
+| [`gd-and-t-drafting`](gd-and-t-drafting/SKILL.md) | Dimension drawings so the part can be inspected and accepted unambiguously. | 1 agent |
+| [`ground-and-return-path-design`](ground-and-return-path-design/SKILL.md) | Design where the current comes back, not just where it goes. | 1 agent |
+| [`hardware-abstraction-design`](hardware-abstraction-design/SKILL.md) | Keep the product code independent of the parts underneath it. | 1 agent |
+| [`hardware-architecture`](hardware-architecture/SKILL.md) | Settle how mechanical, electrical, and firmware fit together before detail work starts. | 1 agent |
+| [`hardware-cost-rollup`](hardware-cost-rollup/SKILL.md) | Know what a unit actually costs to make. | 1 agent |
+| [`hardware-strategy`](hardware-strategy/SKILL.md) | Decide whether and how to be a hardware company. | 1 agent |
+| [`high-speed-routing`](high-speed-routing/SKILL.md) | Route the fast signals so they still work when they arrive. | 1 agent |
+| [`impedance-planning`](impedance-planning/SKILL.md) | Set impedance targets and make them achievable. | 1 agent |
+| [`industrial-design-concepting`](industrial-design-concepting/SKILL.md) | Generate and narrow physical product concepts against real use, not against a mood board. | 1 agent |
+| [`ingress-protection-design`](ingress-protection-design/SKILL.md) | Keep water and dust out, to the rating the product claims. | 1 agent |
+| [`interface-contract-definition`](interface-contract-definition/SKILL.md) | Write down the boundaries between disciplines so they stop moving. | 1 agent |
+| [`interface-protection-design`](interface-protection-design/SKILL.md) | Protect every connection to the outside world. | 1 agent |
+| [`interference-checking`](interference-checking/SKILL.md) | Find the collisions before the parts are made. | 1 agent |
+| [`lifecycle-and-obsolescence-review`](lifecycle-and-obsolescence-review/SKILL.md) | Avoid designing in a part that is about to disappear. | 1 agent |
+| [`manufacturing-partner-selection`](manufacturing-partner-selection/SKILL.md) | Choose who builds it on more than price. | 1 agent |
+| [`manufacturing-readiness-review`](manufacturing-readiness-review/SKILL.md) | Check the factory can actually build it. | 1 agent |
+| [`model-revision-control`](model-revision-control/SKILL.md) | Keep geometry versions unambiguous. | 1 agent |
+| [`parametric-modeling`](parametric-modeling/SKILL.md) | Build a 3D model that survives change. | 1 agent |
+| [`physical-model-review`](physical-model-review/SKILL.md) | Judge form with a physical object, because screens flatter shapes that fail in the hand. | 1 agent |
+| [`pin-accounting-review`](pin-accounting-review/SKILL.md) | Account for every pin on every part. | 1 agent |
+| [`power-measurement-validation`](power-measurement-validation/SKILL.md) | Measure the power system rather than quoting the datasheet. | 1 agent |
+| [`power-protection-design`](power-protection-design/SKILL.md) | Define what happens when power goes wrong. | 1 agent |
+| [`power-sequencing-design`](power-sequencing-design/SKILL.md) | Specify what powers up when, and what every output does at reset. | 1 agent |
+| [`power-tree-design`](power-tree-design/SKILL.md) | Lay out every rail, its source, and its headroom. | 1 agent |
+| [`pre-compliance-testing`](pre-compliance-testing/SKILL.md) | Find the failures before the accredited lab does. | 1 agent |
+| [`process-capability-analysis`](process-capability-analysis/SKILL.md) | Design inside what the supplier can actually hold. | 1 agent |
+| [`process-selection`](process-selection/SKILL.md) | Choose the manufacturing process for the real volume. | 1 agent |
+| [`product-lifecycle-planning`](product-lifecycle-planning/SKILL.md) | Plan the product's whole life before shipping the first unit. | 1 agent |
+| [`product-safety-review`](product-safety-review/SKILL.md) | Check the product cannot hurt anyone. | 1 agent |
+| [`production-test-design`](production-test-design/SKILL.md) | Design the test that every unit passes through. | 1 agent |
+| [`prototype-learning-capture`](prototype-learning-capture/SKILL.md) | Turn the build into evidence rather than anecdote. | 1 agent |
+| [`prototype-process-selection`](prototype-process-selection/SKILL.md) | Choose how to make the prototype from what it must prove. | 1 agent |
+| [`realtime-timing-verification`](realtime-timing-verification/SKILL.md) | Measure the timing rather than reasoning about it. | 1 agent |
+| [`safe-field-update-design`](safe-field-update-design/SKILL.md) | Make sure an update cannot brick a unit in the field. | 1 agent |
+| [`schematic-capture`](schematic-capture/SKILL.md) | Draw the circuit so it can be reviewed, built, and debugged. | 1 agent |
+| [`second-source-qualification`](second-source-qualification/SKILL.md) | Make sure one supplier cannot stop the line. | 1 agent |
+| [`si-simulation-and-measurement`](si-simulation-and-measurement/SKILL.md) | Check the signals, first in simulation and then on the bench. | 1 agent |
+| [`stackup-design`](stackup-design/SKILL.md) | Decide the layer structure before anything is routed. | 1 agent |
+| [`standards-applicability-matrix`](standards-applicability-matrix/SKILL.md) | Know which rules apply before designing, not before submitting. | 1 agent |
+| [`structural-analysis`](structural-analysis/SKILL.md) | Check the part survives the loads it will actually see. | 1 agent |
+| [`supplier-quoting`](supplier-quoting/SKILL.md) | Compare quotes on more than price. | 1 agent |
+| [`supply-chain-resilience-review`](supply-chain-resilience-review/SKILL.md) | Find where the supply chain would break. | 1 agent |
+| [`technical-file-assembly`](technical-file-assembly/SKILL.md) | Keep the certification evidence current with what actually ships. | 1 agent |
+| [`termination-and-topology-design`](termination-and-topology-design/SKILL.md) | Control reflections before they become errors. | 1 agent |
+| [`test-strategy-hardware`](test-strategy-hardware/SKILL.md) | Decide what gets tested at each build phase and why. | 1 agent |
+| [`thermal-budgeting`](thermal-budgeting/SKILL.md) | Account for every watt before designing the cooling. | 1 agent |
+| [`thermal-interface-selection`](thermal-interface-selection/SKILL.md) | Choose the material at the contact, where most thermal designs fail. | 1 agent |
+| [`thermal-path-analysis`](thermal-path-analysis/SKILL.md) | Follow the heat from junction to ambient. | 1 agent |
+| [`thermal-validation-testing`](thermal-validation-testing/SKILL.md) | Measure what the product actually runs at. | 1 agent |
+| [`timing-budget-analysis`](timing-budget-analysis/SKILL.md) | Prove the data arrives when the receiver expects it. | 1 agent |
+| [`tolerance-stackup-analysis`](tolerance-stackup-analysis/SKILL.md) | Work out whether the parts will actually assemble. | 1 agent |
+| [`tooling-capital-planning`](tooling-capital-planning/SKILL.md) | Plan the money that gets locked into steel and inventory. | 1 agent |
+| [`tooling-design-review`](tooling-design-review/SKILL.md) | Review the tool before it is cut. | 1 agent |
+| [`touch-temperature-compliance`](touch-temperature-compliance/SKILL.md) | Keep the outside safe to touch. | 1 agent |
+| [`transient-response-design`](transient-response-design/SKILL.md) | Make the rail hold up when the load steps. | 1 agent |
+| [`verification-matrix`](verification-matrix/SKILL.md) | Prove every requirement was actually tested. | 1 agent |
 
 ## improvement
 

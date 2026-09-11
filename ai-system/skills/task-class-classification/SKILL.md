@@ -9,14 +9,9 @@ used_by:
 
 # Task Class Classification
 
-**Category:** `efficiency` · **Output artifact:** `task-classes.md`
+`efficiency` · produces `task-classes.md` · used by `model-router-tuner`
 
-## What this skill does
 Classify work so it can be routed to the right tier.
-
-## When to use it
-Invoke this skill when the task calls for the outcome described above.
-It is part of the standing toolkit of: `model-router-tuner`.
 
 ## Procedure
 1. Classify as mechanical, analytical, or judgement.
@@ -26,39 +21,11 @@ It is part of the standing toolkit of: `model-router-tuner`.
 5. Record the classification with the agent's charter.
 
 ## Output contract
-Write `task-classes.md` into `workspace/<venture-id>/efficiency/`, then register it as an artifact record
-(`knowledge-schema/artifact.schema.json`) so it becomes retrievable memory. Every output carries:
-
-```markdown
-# <title>
-- **Skill:** task-class-classification
-- **Author agent:** <agent-id>
-- **Date:** <ISO-8601>
-- **Confidence:** measured | sourced | benchmarked | estimated | guessed
-
-## Summary
-<the answer in three sentences or fewer>
-
-## Body
-<the substance produced by the procedure above>
-
-## Evidence
-| Claim | Source | Grade |
-|---|---|---|
-
-## Open questions
-<what remains unknown, and who could answer it>
-
-## Next action
-<the single next step and its owner>
-```
+`task-classes.md` → `workspace/<venture-id>/efficiency/`, registered as an artifact record.
+Shared format and required fields: `skills/OUTPUT_CONTRACT.md`.
+Anti-patterns for this category head `skills/index/efficiency.tsv`.
 
 ## Quality bar
 - Classification recorded with the charter
 - Irreversible decisions always classed as judgement
 - The output states its confidence grade and names the evidence behind every load-bearing claim.
-
-## Anti-patterns for the `efficiency` category
-- Measuring cost per call instead of cost per completed task.
-- Demoting a model tier without checking the hardest cases.
-- Trimming context by hand instead of fixing the rule that loaded it.

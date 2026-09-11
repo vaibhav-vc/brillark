@@ -9,14 +9,9 @@ used_by:
 
 # Red Team Attack
 
-**Category:** `council` · **Output artifact:** `red-team-report.md`
+`council` · produces `red-team-report.md` · used by `council-red-team`
 
-## What this skill does
 Attack a plan the way a competitor or bad actor would.
-
-## When to use it
-Invoke this skill when the task calls for the outcome described above.
-It is part of the standing toolkit of: `council-red-team`.
 
 ## Procedure
 1. Attack the plan's strongest claim first; weak points are already known.
@@ -26,39 +21,11 @@ It is part of the standing toolkit of: `council-red-team`.
 5. Propose the cheapest defence for each surviving attack.
 
 ## Output contract
-Write `red-team-report.md` into `workspace/<venture-id>/council/`, then register it as an artifact record
-(`knowledge-schema/artifact.schema.json`) so it becomes retrievable memory. Every output carries:
-
-```markdown
-# <title>
-- **Skill:** red-team-attack
-- **Author agent:** <agent-id>
-- **Date:** <ISO-8601>
-- **Confidence:** measured | sourced | benchmarked | estimated | guessed
-
-## Summary
-<the answer in three sentences or fewer>
-
-## Body
-<the substance produced by the procedure above>
-
-## Evidence
-| Claim | Source | Grade |
-|---|---|---|
-
-## Open questions
-<what remains unknown, and who could answer it>
-
-## Next action
-<the single next step and its owner>
-```
+`red-team-report.md` → `workspace/<venture-id>/council/`, registered as an artifact record.
+Shared format and required fields: `skills/OUTPUT_CONTRACT.md`.
+Anti-patterns for this category head `skills/index/council.tsv`.
 
 ## Quality bar
 - Attacks written as concrete sequences
 - A defence proposed for each surviving attack
 - The output states its confidence grade and names the evidence behind every load-bearing claim.
-
-## Anti-patterns for the `council` category
-- An objection stated as an adjective rather than a concrete failure sequence.
-- Criticism offered with no remedy at any cost level.
-- Averaging two positions instead of testing which survives the evidence.

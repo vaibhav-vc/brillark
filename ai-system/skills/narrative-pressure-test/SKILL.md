@@ -9,14 +9,9 @@ used_by:
 
 # Narrative Pressure Test
 
-**Category:** `finance` · **Output artifact:** `narrative-test.md`
+`finance` · produces `narrative-test.md` · used by `fundraising-strategist`
 
-## What this skill does
 Test whether the fundraising story survives hostile questioning.
-
-## When to use it
-Invoke this skill when the task calls for the outcome described above.
-It is part of the standing toolkit of: `fundraising-strategist`.
 
 ## Procedure
 1. List the three questions a skeptical investor would ask first.
@@ -26,39 +21,11 @@ It is part of the standing toolkit of: `fundraising-strategist`.
 5. Rehearse the answers until they are short and non-defensive.
 
 ## Output contract
-Write `narrative-test.md` into `workspace/<venture-id>/finance/`, then register it as an artifact record
-(`knowledge-schema/artifact.schema.json`) so it becomes retrievable memory. Every output carries:
-
-```markdown
-# <title>
-- **Skill:** narrative-pressure-test
-- **Author agent:** <agent-id>
-- **Date:** <ISO-8601>
-- **Confidence:** measured | sourced | benchmarked | estimated | guessed
-
-## Summary
-<the answer in three sentences or fewer>
-
-## Body
-<the substance produced by the procedure above>
-
-## Evidence
-| Claim | Source | Grade |
-|---|---|---|
-
-## Open questions
-<what remains unknown, and who could answer it>
-
-## Next action
-<the single next step and its owner>
-```
+`narrative-test.md` → `workspace/<venture-id>/finance/`, registered as an artifact record.
+Shared format and required fields: `skills/OUTPUT_CONTRACT.md`.
+Anti-patterns for this category head `skills/index/finance.tsv`.
 
 ## Quality bar
 - Weak answers identified rather than hidden
 - Narrative checked against the model
 - The output states its confidence grade and names the evidence behind every load-bearing claim.
-
-## Anti-patterns for the `finance` category
-- Presenting a single number where the honest answer is a range.
-- Building a forecast from a growth percentage instead of from drivers.
-- Reporting a metric whose definition changed since last period without saying so.

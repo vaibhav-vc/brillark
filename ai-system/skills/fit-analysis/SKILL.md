@@ -9,14 +9,9 @@ used_by:
 
 # Fit Analysis
 
-**Category:** `market` · **Output artifact:** `fit-analysis.md`
+`market` · produces `fit-analysis.md` · used by `value-proposition-designer`
 
-## What this skill does
 Assess honestly whether the offer matches the customer profile.
-
-## When to use it
-Invoke this skill when the task calls for the outcome described above.
-It is part of the standing toolkit of: `value-proposition-designer`.
 
 ## Procedure
 1. Compare the ranked pains against the ranked relievers.
@@ -26,39 +21,11 @@ It is part of the standing toolkit of: `value-proposition-designer`.
 5. Recommend either a product change or a segment change.
 
 ## Output contract
-Write `fit-analysis.md` into `workspace/<venture-id>/market/`, then register it as an artifact record
-(`knowledge-schema/artifact.schema.json`) so it becomes retrievable memory. Every output carries:
-
-```markdown
-# <title>
-- **Skill:** fit-analysis
-- **Author agent:** <agent-id>
-- **Date:** <ISO-8601>
-- **Confidence:** measured | sourced | benchmarked | estimated | guessed
-
-## Summary
-<the answer in three sentences or fewer>
-
-## Body
-<the substance produced by the procedure above>
-
-## Evidence
-| Claim | Source | Grade |
-|---|---|---|
-
-## Open questions
-<what remains unknown, and who could answer it>
-
-## Next action
-<the single next step and its owner>
-```
+`fit-analysis.md` → `workspace/<venture-id>/market/`, registered as an artifact record.
+Shared format and required fields: `skills/OUTPUT_CONTRACT.md`.
+Anti-patterns for this category head `skills/index/market.tsv`.
 
 ## Quality bar
 - Top-ranked pain addressed, not just any pain
 - Weakest link named
 - The output states its confidence grade and names the evidence behind every load-bearing claim.
-
-## Anti-patterns for the `market` category
-- Treating stated intent as evidence of demand.
-- Sizing a market top-down and calling it bottom-up.
-- Interviewing people who could never buy, then counting their enthusiasm.

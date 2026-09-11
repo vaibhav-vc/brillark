@@ -50,6 +50,10 @@ agents:
   model: opus
   task_class: judgement
   escalates_to: opus
+- id: cad-modeler
+  model: sonnet
+  task_class: analytical
+  escalates_to: opus
 - id: cap-table-steward
   model: sonnet
   task_class: analytical
@@ -75,6 +79,10 @@ agents:
   task_class: judgement
   escalates_to: opus
 - id: chief-design-officer-agent
+  model: opus
+  task_class: judgement
+  escalates_to: opus
+- id: chief-hardware-officer-agent
   model: opus
   task_class: judgement
   escalates_to: opus
@@ -109,6 +117,10 @@ agents:
 - id: competitor-intel-analyst
   model: sonnet
   task_class: analytical
+  escalates_to: opus
+- id: compliance-emc-engineer
+  model: opus
+  task_class: judgement
   escalates_to: opus
 - id: content-designer
   model: sonnet
@@ -222,9 +234,25 @@ agents:
   model: sonnet
   task_class: analytical
   escalates_to: opus
+- id: dfm-engineer
+  model: opus
+  task_class: judgement
+  escalates_to: opus
 - id: director
   model: opus
   task_class: judgement
+  escalates_to: opus
+- id: electronics-component-engineer
+  model: sonnet
+  task_class: analytical
+  escalates_to: opus
+- id: embedded-firmware-engineer
+  model: sonnet
+  task_class: analytical
+  escalates_to: opus
+- id: enclosure-designer
+  model: sonnet
+  task_class: analytical
   escalates_to: opus
 - id: engineering-head
   model: opus
@@ -278,6 +306,14 @@ agents:
   model: haiku
   task_class: mechanical
   escalates_to: sonnet
+- id: hardware-head
+  model: opus
+  task_class: judgement
+  escalates_to: opus
+- id: hardware-test-engineer
+  model: sonnet
+  task_class: analytical
+  escalates_to: opus
 - id: icp-persona-builder
   model: sonnet
   task_class: analytical
@@ -285,6 +321,10 @@ agents:
 - id: improvement-head
   model: opus
   task_class: judgement
+  escalates_to: opus
+- id: industrial-designer
+  model: sonnet
+  task_class: analytical
   escalates_to: opus
 - id: information-architect
   model: sonnet
@@ -326,6 +366,10 @@ agents:
   model: sonnet
   task_class: analytical
   escalates_to: opus
+- id: mechanical-engineer
+  model: sonnet
+  task_class: analytical
+  escalates_to: opus
 - id: model-router-tuner
   model: sonnet
   task_class: analytical
@@ -350,6 +394,14 @@ agents:
   model: sonnet
   task_class: analytical
   escalates_to: opus
+- id: pcb-layout-designer
+  model: sonnet
+  task_class: analytical
+  escalates_to: opus
+- id: pcb-schematic-designer
+  model: opus
+  task_class: judgement
+  escalates_to: opus
 - id: performance-engineer
   model: sonnet
   task_class: analytical
@@ -359,6 +411,10 @@ agents:
   task_class: analytical
   escalates_to: opus
 - id: positioning-messaging-agent
+  model: sonnet
+  task_class: analytical
+  escalates_to: opus
+- id: power-electronics-engineer
   model: sonnet
   task_class: analytical
   escalates_to: opus
@@ -379,6 +435,10 @@ agents:
   task_class: judgement
   escalates_to: opus
 - id: prototyper
+  model: sonnet
+  task_class: analytical
+  escalates_to: opus
+- id: prototyping-fabrication-agent
   model: sonnet
   task_class: analytical
   escalates_to: opus
@@ -414,6 +474,10 @@ agents:
   model: sonnet
   task_class: analytical
   escalates_to: opus
+- id: signal-integrity-engineer
+  model: sonnet
+  task_class: analytical
+  escalates_to: opus
 - id: skill-refiner
   model: sonnet
   task_class: analytical
@@ -427,6 +491,10 @@ agents:
   task_class: analytical
   escalates_to: opus
 - id: tech-debt-refactor-agent
+  model: sonnet
+  task_class: analytical
+  escalates_to: opus
+- id: thermal-engineer
   model: sonnet
   task_class: analytical
   escalates_to: opus

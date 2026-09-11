@@ -9,14 +9,9 @@ used_by:
 
 # Competitive Landscape Mapping
 
-**Category:** `market` · **Output artifact:** `competitive-map.md`
+`market` · produces `competitive-map.md` · used by `competitor-intel-analyst`
 
-## What this skill does
 Map everyone competing for the same budget, including the ones nobody counts.
-
-## When to use it
-Invoke this skill when the task calls for the outcome described above.
-It is part of the standing toolkit of: `competitor-intel-analyst`.
 
 ## Procedure
 1. List direct competitors, indirect alternatives, and the status quo.
@@ -26,39 +21,11 @@ It is part of the standing toolkit of: `competitor-intel-analyst`.
 5. Identify the whitespace and check whether it is empty for a good reason.
 
 ## Output contract
-Write `competitive-map.md` into `workspace/<venture-id>/market/`, then register it as an artifact record
-(`knowledge-schema/artifact.schema.json`) so it becomes retrievable memory. Every output carries:
-
-```markdown
-# <title>
-- **Skill:** competitive-landscape-mapping
-- **Author agent:** <agent-id>
-- **Date:** <ISO-8601>
-- **Confidence:** measured | sourced | benchmarked | estimated | guessed
-
-## Summary
-<the answer in three sentences or fewer>
-
-## Body
-<the substance produced by the procedure above>
-
-## Evidence
-| Claim | Source | Grade |
-|---|---|---|
-
-## Open questions
-<what remains unknown, and who could answer it>
-
-## Next action
-<the single next step and its owner>
-```
+`competitive-map.md` → `workspace/<venture-id>/market/`, registered as an artifact record.
+Shared format and required fields: `skills/OUTPUT_CONTRACT.md`.
+Anti-patterns for this category head `skills/index/market.tsv`.
 
 ## Quality bar
 - Status quo included as a competitor
 - Whitespace tested for why it is empty
 - The output states its confidence grade and names the evidence behind every load-bearing claim.
-
-## Anti-patterns for the `market` category
-- Treating stated intent as evidence of demand.
-- Sizing a market top-down and calling it bottom-up.
-- Interviewing people who could never buy, then counting their enthusiasm.

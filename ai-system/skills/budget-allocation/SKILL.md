@@ -9,14 +9,9 @@ used_by:
 
 # Budget Allocation
 
-**Category:** `orchestration` · **Output artifact:** `budget-allocation.md`
+`orchestration` · produces `budget-allocation.md` · used by `dependency-scheduler`
 
-## What this skill does
 Give every task an explicit ceiling on time, tokens, and spend.
-
-## When to use it
-Invoke this skill when the task calls for the outcome described above.
-It is part of the standing toolkit of: `dependency-scheduler`.
 
 ## Procedure
 1. Derive the total budget from the stage gate's allowance.
@@ -26,39 +21,11 @@ It is part of the standing toolkit of: `dependency-scheduler`.
 5. Track consumption and report overruns before they compound.
 
 ## Output contract
-Write `budget-allocation.md` into `workspace/<venture-id>/orchestration/`, then register it as an artifact record
-(`knowledge-schema/artifact.schema.json`) so it becomes retrievable memory. Every output carries:
-
-```markdown
-# <title>
-- **Skill:** budget-allocation
-- **Author agent:** <agent-id>
-- **Date:** <ISO-8601>
-- **Confidence:** measured | sourced | benchmarked | estimated | guessed
-
-## Summary
-<the answer in three sentences or fewer>
-
-## Body
-<the substance produced by the procedure above>
-
-## Evidence
-| Claim | Source | Grade |
-|---|---|---|
-
-## Open questions
-<what remains unknown, and who could answer it>
-
-## Next action
-<the single next step and its owner>
-```
+`budget-allocation.md` → `workspace/<venture-id>/orchestration/`, registered as an artifact record.
+Shared format and required fields: `skills/OUTPUT_CONTRACT.md`.
+Anti-patterns for this category head `skills/index/orchestration.tsv`.
 
 ## Quality bar
 - Every task has a hard ceiling
 - Contingency held centrally, not pre-spent
 - The output states its confidence grade and names the evidence behind every load-bearing claim.
-
-## Anti-patterns for the `orchestration` category
-- Assigning a task to a group instead of one accountable agent.
-- Reporting progress as a percentage instead of as artifacts that exist.
-- Adding a review layer to fix a problem that a clearer definition of done would solve.

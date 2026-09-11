@@ -9,14 +9,9 @@ used_by:
 
 # Growth Loop Design
 
-**Category:** `gtm` · **Output artifact:** `growth-loop.md`
+`gtm` · produces `growth-loop.md` · used by `growth-loop-designer`
 
-## What this skill does
 Design a mechanism where output feeds back into input so growth compounds.
-
-## When to use it
-Invoke this skill when the task calls for the outcome described above.
-It is part of the standing toolkit of: `growth-loop-designer`.
 
 ## Procedure
 1. Draw the loop end to end, labelling every step's conversion rate and duration.
@@ -26,39 +21,11 @@ It is part of the standing toolkit of: `growth-loop-designer`.
 5. State the input required to start the loop and what sustains it.
 
 ## Output contract
-Write `growth-loop.md` into `workspace/<venture-id>/gtm/`, then register it as an artifact record
-(`knowledge-schema/artifact.schema.json`) so it becomes retrievable memory. Every output carries:
-
-```markdown
-# <title>
-- **Skill:** growth-loop-design
-- **Author agent:** <agent-id>
-- **Date:** <ISO-8601>
-- **Confidence:** measured | sourced | benchmarked | estimated | guessed
-
-## Summary
-<the answer in three sentences or fewer>
-
-## Body
-<the substance produced by the procedure above>
-
-## Evidence
-| Claim | Source | Grade |
-|---|---|---|
-
-## Open questions
-<what remains unknown, and who could answer it>
-
-## Next action
-<the single next step and its owner>
-```
+`growth-loop.md` → `workspace/<venture-id>/gtm/`, registered as an artifact record.
+Shared format and required fields: `skills/OUTPUT_CONTRACT.md`.
+Anti-patterns for this category head `skills/index/gtm.tsv`.
 
 ## Quality bar
 - Amplification factor computed, not assumed
 - Existing-user impact assessed
 - The output states its confidence grade and names the evidence behind every load-bearing claim.
-
-## Anti-patterns for the `gtm` category
-- Scaling a channel before its CAC is measured.
-- Running a test with no kill criterion, so it never ends.
-- Claiming differentiation that is not a reason anyone would switch.

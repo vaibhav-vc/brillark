@@ -9,14 +9,9 @@ used_by:
 
 # Cycle Detection
 
-**Category:** `orchestration` · **Output artifact:** `cycle-report.md`
+`orchestration` · produces `cycle-report.md` · used by `dependency-scheduler`
 
-## What this skill does
 Find circular dependencies before they deadlock execution.
-
-## When to use it
-Invoke this skill when the task calls for the outcome described above.
-It is part of the standing toolkit of: `dependency-scheduler`.
 
 ## Procedure
 1. Traverse the graph depth-first, tracking the active path.
@@ -26,39 +21,11 @@ It is part of the standing toolkit of: `dependency-scheduler`.
 5. Re-run detection after the fix to confirm the graph is acyclic.
 
 ## Output contract
-Write `cycle-report.md` into `workspace/<venture-id>/orchestration/`, then register it as an artifact record
-(`knowledge-schema/artifact.schema.json`) so it becomes retrievable memory. Every output carries:
-
-```markdown
-# <title>
-- **Skill:** cycle-detection
-- **Author agent:** <agent-id>
-- **Date:** <ISO-8601>
-- **Confidence:** measured | sourced | benchmarked | estimated | guessed
-
-## Summary
-<the answer in three sentences or fewer>
-
-## Body
-<the substance produced by the procedure above>
-
-## Evidence
-| Claim | Source | Grade |
-|---|---|---|
-
-## Open questions
-<what remains unknown, and who could answer it>
-
-## Next action
-<the single next step and its owner>
-```
+`cycle-report.md` → `workspace/<venture-id>/orchestration/`, registered as an artifact record.
+Shared format and required fields: `skills/OUTPUT_CONTRACT.md`.
+Anti-patterns for this category head `skills/index/orchestration.tsv`.
 
 ## Quality bar
 - Full loops reported, not single edges
 - Re-verified acyclic after the break
 - The output states its confidence grade and names the evidence behind every load-bearing claim.
-
-## Anti-patterns for the `orchestration` category
-- Assigning a task to a group instead of one accountable agent.
-- Reporting progress as a percentage instead of as artifacts that exist.
-- Adding a review layer to fix a problem that a clearer definition of done would solve.

@@ -24,8 +24,9 @@ REQUIRED = {
     "planning_agents": 50,   # finance + business + engineering + orchestration specialists
     "design_agents": 14,     # the design domain
     "improvement_agents": 12,  # the self-improvement domain
+    "hardware_agents": 15,   # 3D/mechanical and PCB/electronics
     "council_agents": 10,    # the critics
-    "heads": 7,              # finance, business, engineering, design, orchestration, improvement, council
+    "heads": 8,              # finance, business, engineering, design, hardware, orchestration, improvement, council
     "directors": 1,          # exactly one top-level owner
     "min_skills": 100,       # the floor; the library is far larger
 }
@@ -80,6 +81,7 @@ class TestAgents(unittest.TestCase):
         self.assertEqual(planning, REQUIRED["planning_agents"])
         self.assertEqual(by_domain.get("design"), REQUIRED["design_agents"])
         self.assertEqual(by_domain.get("improvement"), REQUIRED["improvement_agents"])
+        self.assertEqual(by_domain.get("hardware"), REQUIRED["hardware_agents"])
 
     def test_every_agent_has_a_valid_model_tier(self):
         for a in self.agents:
@@ -140,12 +142,21 @@ class TestAgents(unittest.TestCase):
 
     def test_agents_have_required_sections(self):
         required = ["## Mission", "## Charter", "## Operating procedure",
-                    "## Memory & context contract", "## Escalation & handoffs",
-                    "## Guardrails", "## Definition of done"]
+                    "## Memory & context contract", "## Return contract",
+                    "## Escalation & handoffs", "## Guardrails", "## Definition of done"]
         for a in self.agents:
             body = (ROOT / a["path"]).read_text()
             for section in required:
                 self.assertIn(section, body, f"{a['id']} is missing {section}")
+
+    def test_shared_boilerplate_is_referenced_not_duplicated(self):
+        """Guardrails live once in the base prompt. A charter that restates them has drifted."""
+        base = (ROOT / "prompts" / "system" / "00-base-agent.md").read_text()
+        self.assertIn("Evidence has a grade", base, "the shared guardrails must live in the base prompt")
+        for a in self.agents:
+            body = (ROOT / a["path"]).read_text()
+            self.assertIn("prompts/system/00-base-agent.md", body,
+                          f"{a['id']} does not point at the shared guardrails")
 
     def test_agents_declare_memory_scopes(self):
         for a in self.agents:
@@ -156,6 +167,14 @@ class TestAgents(unittest.TestCase):
             body = (ROOT / a["path"]).read_text()
             self.assertIn("## Return contract", body, f"{a['id']} has no return contract")
             self.assertIn("never its working context", body)
+
+    def test_hardware_judgement_work_is_tiered_correctly(self):
+        """Tooling, board spins, and certification are one-way doors."""
+        for name in ("pcb-schematic-designer", "dfm-engineer", "compliance-emc-engineer"):
+            agent = next(a for a in self.agents if a["id"] == name)
+            self.assertEqual(agent["task_class"], "judgement",
+                             f"{name} makes expensive-to-reverse decisions")
+            self.assertEqual(agent["model"], "opus")
 
     def test_council_reports_to_council_director(self):
         for a in self.agents:
@@ -199,6 +218,27 @@ class TestSkills(unittest.TestCase):
             self.assertIn("## Output contract", body, f"{s['name']} has no output contract")
             steps = re.findall(r"^\d+\. ", body, re.M)
             self.assertGreaterEqual(len(steps), 5, f"{s['name']} has fewer than five steps")
+
+    def test_skills_point_at_the_shared_output_contract(self):
+        """The output format lives once. 590 copies of it is ~100k tokens of duplication."""
+        shared = ROOT / "skills" / "OUTPUT_CONTRACT.md"
+        self.assertTrue(shared.exists(), "skills/OUTPUT_CONTRACT.md is missing")
+        for s in self.skills:
+            body = (ROOT / s["path"]).read_text()
+            self.assertIn("skills/OUTPUT_CONTRACT.md", body,
+                          f"{s['name']} does not point at the shared output contract")
+
+    def test_every_skill_is_referenced_by_an_agent(self):
+        """An orphan skill is dead weight: nobody can invoke it and nobody maintains it."""
+        referenced = {sk for a in self.agents for sk in a["skills"]}
+        orphans = sorted(self.names - referenced)
+        self.assertEqual(orphans, [], f"skills referenced by no agent: {orphans}")
+
+    def test_every_category_has_an_antipatterns_file(self):
+        categories = {s["category"] for s in self.skills}
+        for c in categories:
+            path = ROOT / "skills" / "antipatterns" / f"{c}.md"
+            self.assertTrue(path.exists(), f"no anti-patterns file for category {c}")
 
     def test_frontmatter_matches_registry(self):
         for s in self.skills:

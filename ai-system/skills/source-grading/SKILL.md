@@ -9,14 +9,9 @@ used_by:
 
 # Source Grading
 
-**Category:** `market` · **Output artifact:** `source-grades.md`
+`market` · produces `source-grades.md` · used by `market-researcher`
 
-## What this skill does
 Rate how much a source can be trusted before using it in an argument.
-
-## When to use it
-Invoke this skill when the task calls for the outcome described above.
-It is part of the standing toolkit of: `market-researcher`.
 
 ## Procedure
 1. Identify who produced the source and what they gain from its conclusion.
@@ -26,39 +21,11 @@ It is part of the standing toolkit of: `market-researcher`.
 5. Assign a grade — measured, sourced, benchmarked, estimated, or guessed — and carry it forward.
 
 ## Output contract
-Write `source-grades.md` into `workspace/<venture-id>/market/`, then register it as an artifact record
-(`knowledge-schema/artifact.schema.json`) so it becomes retrievable memory. Every output carries:
-
-```markdown
-# <title>
-- **Skill:** source-grading
-- **Author agent:** <agent-id>
-- **Date:** <ISO-8601>
-- **Confidence:** measured | sourced | benchmarked | estimated | guessed
-
-## Summary
-<the answer in three sentences or fewer>
-
-## Body
-<the substance produced by the procedure above>
-
-## Evidence
-| Claim | Source | Grade |
-|---|---|---|
-
-## Open questions
-<what remains unknown, and who could answer it>
-
-## Next action
-<the single next step and its owner>
-```
+`source-grades.md` → `workspace/<venture-id>/market/`, registered as an artifact record.
+Shared format and required fields: `skills/OUTPUT_CONTRACT.md`.
+Anti-patterns for this category head `skills/index/market.tsv`.
 
 ## Quality bar
 - Producer incentive assessed
 - Grade carried into every downstream use
 - The output states its confidence grade and names the evidence behind every load-bearing claim.
-
-## Anti-patterns for the `market` category
-- Treating stated intent as evidence of demand.
-- Sizing a market top-down and calling it bottom-up.
-- Interviewing people who could never buy, then counting their enthusiasm.

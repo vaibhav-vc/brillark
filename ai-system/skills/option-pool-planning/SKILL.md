@@ -9,14 +9,9 @@ used_by:
 
 # Option Pool Planning
 
-**Category:** `finance` · **Output artifact:** `option-pool-plan.md`
+`finance` · produces `option-pool-plan.md` · used by `cap-table-steward`
 
-## What this skill does
 Size the option pool against the actual hiring plan.
-
-## When to use it
-Invoke this skill when the task calls for the outcome described above.
-It is part of the standing toolkit of: `cap-table-steward`.
 
 ## Procedure
 1. Build the hiring plan by role and level for the funding period.
@@ -26,39 +21,11 @@ It is part of the standing toolkit of: `cap-table-steward`.
 5. Avoid oversizing — unallocated pool is dilution taken early for no reason.
 
 ## Output contract
-Write `option-pool-plan.md` into `workspace/<venture-id>/finance/`, then register it as an artifact record
-(`knowledge-schema/artifact.schema.json`) so it becomes retrievable memory. Every output carries:
-
-```markdown
-# <title>
-- **Skill:** option-pool-planning
-- **Author agent:** <agent-id>
-- **Date:** <ISO-8601>
-- **Confidence:** measured | sourced | benchmarked | estimated | guessed
-
-## Summary
-<the answer in three sentences or fewer>
-
-## Body
-<the substance produced by the procedure above>
-
-## Evidence
-| Claim | Source | Grade |
-|---|---|---|
-
-## Open questions
-<what remains unknown, and who could answer it>
-
-## Next action
-<the single next step and its owner>
-```
+`option-pool-plan.md` → `workspace/<venture-id>/finance/`, registered as an artifact record.
+Shared format and required fields: `skills/OUTPUT_CONTRACT.md`.
+Anti-patterns for this category head `skills/index/finance.tsv`.
 
 ## Quality bar
 - Pool derived from the actual hiring plan
 - Dilution cost of the pool stated
 - The output states its confidence grade and names the evidence behind every load-bearing claim.
-
-## Anti-patterns for the `finance` category
-- Presenting a single number where the honest answer is a range.
-- Building a forecast from a growth percentage instead of from drivers.
-- Reporting a metric whose definition changed since last period without saying so.

@@ -9,14 +9,9 @@ used_by:
 
 # Severity Normalisation
 
-**Category:** `council` · **Output artifact:** `normalised-severities.md`
+`council` · produces `normalised-severities.md` · used by `council-synthesis-arbiter`
 
-## What this skill does
 Make severity consistent across different critics.
-
-## When to use it
-Invoke this skill when the task calls for the outcome described above.
-It is part of the standing toolkit of: `council-synthesis-arbiter`.
 
 ## Procedure
 1. Collect the ratings from every critic.
@@ -26,39 +21,11 @@ It is part of the standing toolkit of: `council-synthesis-arbiter`.
 5. Report persistent disagreement rather than averaging it away.
 
 ## Output contract
-Write `normalised-severities.md` into `workspace/<venture-id>/council/`, then register it as an artifact record
-(`knowledge-schema/artifact.schema.json`) so it becomes retrievable memory. Every output carries:
-
-```markdown
-# <title>
-- **Skill:** severity-normalisation
-- **Author agent:** <agent-id>
-- **Date:** <ISO-8601>
-- **Confidence:** measured | sourced | benchmarked | estimated | guessed
-
-## Summary
-<the answer in three sentences or fewer>
-
-## Body
-<the substance produced by the procedure above>
-
-## Evidence
-| Claim | Source | Grade |
-|---|---|---|
-
-## Open questions
-<what remains unknown, and who could answer it>
-
-## Next action
-<the single next step and its owner>
-```
+`normalised-severities.md` → `workspace/<venture-id>/council/`, registered as an artifact record.
+Shared format and required fields: `skills/OUTPUT_CONTRACT.md`.
+Anti-patterns for this category head `skills/index/council.tsv`.
 
 ## Quality bar
 - Outliers re-anchored to the scale
 - Persistent disagreement reported, not averaged
 - The output states its confidence grade and names the evidence behind every load-bearing claim.
-
-## Anti-patterns for the `council` category
-- An objection stated as an adjective rather than a concrete failure sequence.
-- Criticism offered with no remedy at any cost level.
-- Averaging two positions instead of testing which survives the evidence.

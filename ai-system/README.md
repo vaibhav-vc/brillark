@@ -1,6 +1,6 @@
 # ai-system — a multi-agent organisation for building ventures
 
-113 agents, 505 skills, 17 workflows, 19 schemas, and a test suite that keeps them consistent.
+130 agents, 590 skills, 18 workflows, 21 schemas, and a test suite that keeps them consistent.
 
 The system takes a founder's intent and runs it through the path a competent company would: design a
 business model, validate it against real customers, design the experience, scope an MVP to the
@@ -8,25 +8,26 @@ smallest thing that tests the riskiest belief, build it, launch it, learn from i
 every material plan attacked by a standing Council before money is spent on it, and a self-improvement
 loop that makes the next cycle better than the last.
 
-**It is built to be cheap to run.** A single agent run loads about **4,700 tokens**, not the 373,000
-the full library would cost, because nothing loads what it does not need. See
-[`docs/token-efficiency.md`](docs/token-efficiency.md) — and run the measurement yourself.
+**It is built to be cheap to run.** A routed agent run loads about **3,155 tokens**, not the 278,000
+the full library would cost — about 88x cheaper. The organisation has grown from 83 agents to 130 and
+the cost of a run has fallen by a third, because cost is driven by what gets loaded, not by what
+exists. See [`docs/token-efficiency.md`](docs/token-efficiency.md), and run the benchmark yourself.
 
 ## The organisation
 
 ```
-                              human founder
-                                    |
-                                director                    <- 1, single accountable owner
-                                    |
-    +---------+---------+-----------+-----------+---------+---------+
-    |         |         |           |           |         |         |
- finance  business  engineering  design   orchestration improvement council
-   (13)     (15)       (15)       (15)        (11)         (13)      (11)
+                                human founder
+                                      |
+                                  director                  <- 1, single accountable owner
+                                      |
+  +--------+--------+--------+--------+--------+--------+--------+--------+
+  |        |        |        |        |        |        |        |        |
+finance business  eng    design  hardware  orch   improvement  council
+ (13)    (15)     (15)    (15)     (16)    (11)      (13)        (11)
 
-    executive officers (19): CEO CFO CMO CTO COO CPO CSO CRO CDO CISO CHRO
-    Chief Design Officer, Chief Learning Officer, General Counsel,
-    Chief Compliance, Chief Risk, DPO, IP Counsel, Corporate Secretary
+  executive officers (20): CEO CFO CMO CTO COO CPO CSO CRO CDO CISO CHRO,
+  Chief Design Officer, Chief Hardware Officer, Chief Learning Officer,
+  General Counsel, Chief Compliance, Chief Risk, DPO, IP Counsel, Corporate Secretary
 ```
 
 Full chart and decision rights: **[`docs/org-chart.md`](docs/org-chart.md)**.
@@ -34,24 +35,24 @@ Full chart and decision rights: **[`docs/org-chart.md`](docs/org-chart.md)**.
 | Tier | Count | For |
 |---|---|---|
 | Director | 1 | Stage gates, arbitration, budget. The only agent reporting to the human. |
-| Domain heads | 7 | Finance, business, engineering, design, orchestration, improvement, council. |
-| Executive officers | 19 | Company-wide functions, including design, learning, legal, privacy, IP, risk. |
+| Domain heads | 8 | Finance, business, engineering, design, hardware, orchestration, improvement, council. |
+| Executive officers | 20 | Company-wide functions, including design, hardware, learning, legal, privacy, IP, risk. |
 | Council | 10 | Structured critics. Attack every material plan before it is funded. |
-| Specialists | 76 | 50 planning · 14 design · 12 improvement. |
+| Specialists | 91 | 50 planning · 15 hardware · 14 design · 12 improvement. |
 
 ## What makes it work
 
-**Progressive disclosure.** Three tiers: discovery (a domain index, then one domain's agent cards,
-then one skill category index — about 1,100 tokens), activation (the one charter and the skills
-actually chosen), execution (context fetched just-in-time). The org grew 36% from v1 and the cost of
-a run *fell* 39%.
+**Progressive disclosure.** Three tiers: discovery (a domain index, then one domain's agent cards —
+about 770 tokens), activation (the one charter and the skills it declares), execution (context
+fetched just-in-time). Shared boilerplate — the output contract, the guardrails, the category
+anti-patterns — lives once in the cacheable prefix instead of being repeated 590 times.
 
 **Context isolation.** Every agent runs in its own context and returns at most its
 `return_budget_tokens` — the decision, the artifact paths, a confidence grade. Never its working
 context.
 
-**Model tiering.** 3 agents on `haiku` for mechanical work, 65 on
-`sonnet` for analysis, 45 on `opus` for judgement. Every assignment needs quality
+**Model tiering.** 3 agents on `haiku` for mechanical work, 77 on
+`sonnet` for analysis, 50 on `opus` for judgement. Every assignment needs quality
 evidence; judgement work is never demoted to save money.
 
 **Structural rules.** A memory record cannot exist without provenance. A decision cannot omit its
@@ -68,11 +69,11 @@ shape, or its own evaluation criteria — those need the human founder. See
 
 | Directory | Contents |
 |---|---|
-| `agents/` | 113 charters, `registry.yaml`, and the tier-1 `index/` used for routing |
-| `skills/` | 505 skills, one directory each, plus the sharded tier-1 `index/` |
+| `agents/` | 130 charters, `registry.yaml`, and the tier-1 `index/` used for routing |
+| `skills/` | 590 skills, one directory each, plus the sharded tier-1 `index/` |
 | `runtime/` | Context budgets, model routing, and the loader specification |
 | `prompts/` | Layered system prompts and the artifact templates that move between agents |
-| `workflows/` | 17 workflow definitions, from intake to self-improvement |
+| `workflows/` | 18 workflow definitions, from intake to hardware development |
 | `knowledge-schema/` | 20 JSON Schemas: memory, decisions, verdicts, returns, proposals, design specs |
 | `integrations/` | Contracts for the external systems the organisation reads and writes |
 | `tests/` | Integrity tests, plus the context-cost measurement |
@@ -82,16 +83,22 @@ shape, or its own evaluation criteria — those need the human founder. See
 ## Start here
 
 ```bash
-python3 ai-system/tests/test_system_integrity.py    # 41 tests: does everything still line up?
+python3 ai-system/tests/test_system_integrity.py    # 46 tests: does everything still line up?
+python3 ai-system/tests/benchmark.py                # regression gate against a committed baseline
+python3 ai-system/tests/benchmark.py --repeat 25    # confirm the measurement is deterministic
 python3 ai-system/tests/measure_context_cost.py     # what does a run actually cost?
 bash ai-system/bootstrap/init.sh acme-corp          # scaffold a venture workspace
 ```
+
+All three run in CI on every push — see `.github/workflows/ai-system.yml`.
 
 1. **[`docs/getting-started.md`](docs/getting-started.md)** — run your first venture through it.
 2. **[`docs/org-chart.md`](docs/org-chart.md)** — who reports to whom, who decides what.
 3. **[`docs/token-efficiency.md`](docs/token-efficiency.md)** — why it is cheap, and how to keep it cheap.
 4. **[`docs/memory-model.md`](docs/memory-model.md)** — how context and memory actually work.
 5. **[`docs/self-improvement.md`](docs/self-improvement.md)** — the loop, and its boundary.
+6. **[`docs/hardware-practice.md`](docs/hardware-practice.md)** — 3D, PCB, and why tooling is different.
+7. **[`docs/design-practice.md`](docs/design-practice.md)** — the design domain's rules.
 
 ## Deliberate constraints
 
@@ -104,3 +111,5 @@ bash ai-system/bootstrap/init.sh acme-corp          # scaffold a venture workspa
 - **Legal advice stops at the boundary.** Anything needing a licensed attorney is escalated out of
   the system, never answered inside it.
 - **Efficiency never buys quality.** No saving ships without a quality check on the golden cases.
+- **Never cut a tool on an unfrozen design.** The most expensive mistake in hardware, always made
+  under schedule pressure.

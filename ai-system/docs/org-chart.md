@@ -14,6 +14,7 @@ graph TD
   director --> council_director[Council Director]
   director --> design_head[Head of Design]
   director --> improvement_head[Head of Continuous Improvement]
+  director --> hardware_head[Head of Hardware]
   subgraph officers[Executive officers - advise the Director]
     ceo_agent[CEO Agent]
     cfo_agent[CFO Agent]
@@ -34,6 +35,7 @@ graph TD
     corporate_secretary_agent[Corporate Secretary Agent]
     chief_design_officer_agent[Chief Design Officer Agent]
     chief_learning_officer_agent[Chief Learning Officer Agent]
+    chief_hardware_officer_agent[Chief Hardware Officer Agent]
   end
   director --> officers
   subgraph finance_team[finance - 12 agents]
@@ -130,6 +132,24 @@ graph TD
     model_router_tuner[Model Router Tuner]
   end
   improvement_head --> improvement_team
+  subgraph hardware_team[hardware - 15 agents]
+    industrial_designer[Industrial Designer]
+    cad_modeler[CAD Modeller]
+    mechanical_engineer[Mechanical Engineer]
+    dfm_engineer[Design for Manufacture Engineer]
+    enclosure_designer[Enclosure Designer]
+    thermal_engineer[Thermal Engineer]
+    pcb_schematic_designer[PCB Schematic Designer]
+    pcb_layout_designer[PCB Layout Designer]
+    signal_integrity_engineer[Signal Integrity Engineer]
+    power_electronics_engineer[Power Electronics Engineer]
+    electronics_component_engineer[Electronics Component Engineer]
+    embedded_firmware_engineer[Embedded Firmware Engineer]
+    compliance_emc_engineer[EMC & Product Compliance Engineer]
+    hardware_test_engineer[Hardware Test Engineer]
+    prototyping_fabrication_agent[Prototyping & Fabrication Agent]
+  end
+  hardware_head --> hardware_team
   subgraph council_team[council - 10 agents]
     council_red_team[Council — Red Team Adversary]
     council_devils_advocate[Council — Devil's Advocate]
@@ -156,6 +176,7 @@ graph TD
 | `design-head` | `director` |
 | `engineering-head` | `director` |
 | `finance-head` | `director` |
+| `hardware-head` | `director` |
 | `improvement-head` | `director` |
 | `orchestration-head` | `director` |
 | `ceo-agent` | `director` |
@@ -163,6 +184,7 @@ graph TD
 | `chief-compliance-officer-agent` | `director` |
 | `chief-data-officer-agent` | `director` |
 | `chief-design-officer-agent` | `director` |
+| `chief-hardware-officer-agent` | `director` |
 | `chief-learning-officer-agent` | `director` |
 | `chief-revenue-officer-agent` | `director` |
 | `chief-risk-officer-agent` | `director` |
@@ -198,9 +220,11 @@ graph TD
 | `brand-narrative-agent` | `business-head` |
 | `burn-runway-analyst` | `finance-head` |
 | `business-model-canvas-agent` | `business-head` |
+| `cad-modeler` | `hardware-head` |
 | `cap-table-steward` | `finance-head` |
 | `capability-gap-scout` | `improvement-head` |
 | `competitor-intel-analyst` | `business-head` |
+| `compliance-emc-engineer` | `hardware-head` |
 | `content-designer` | `design-head` |
 | `context-memory-curator` | `orchestration-head` |
 | `cost-optimization-analyst` | `finance-head` |
@@ -212,6 +236,10 @@ graph TD
 | `design-critic` | `design-head` |
 | `design-researcher` | `design-head` |
 | `design-system-architect` | `design-head` |
+| `dfm-engineer` | `hardware-head` |
+| `electronics-component-engineer` | `hardware-head` |
+| `embedded-firmware-engineer` | `hardware-head` |
+| `enclosure-designer` | `hardware-head` |
 | `escalation-manager` | `orchestration-head` |
 | `eval-designer` | `improvement-head` |
 | `evaluation-harness-agent` | `orchestration-head` |
@@ -222,7 +250,9 @@ graph TD
 | `growth-loop-designer` | `business-head` |
 | `gtm-strategist` | `business-head` |
 | `handoff-coordinator` | `orchestration-head` |
+| `hardware-test-engineer` | `hardware-head` |
 | `icp-persona-builder` | `business-head` |
+| `industrial-designer` | `hardware-head` |
 | `information-architect` | `design-head` |
 | `infra-devops-agent` | `engineering-head` |
 | `intake-router` | `orchestration-head` |
@@ -232,19 +262,24 @@ graph TD
 | `knowledge-distiller` | `improvement-head` |
 | `knowledge-graph-librarian` | `orchestration-head` |
 | `market-researcher` | `business-head` |
+| `mechanical-engineer` | `hardware-head` |
 | `model-router-tuner` | `improvement-head` |
 | `motion-designer` | `design-head` |
 | `mvp-scoper` | `engineering-head` |
 | `observability-agent` | `engineering-head` |
 | `partnership-bd-agent` | `business-head` |
+| `pcb-layout-designer` | `hardware-head` |
+| `pcb-schematic-designer` | `hardware-head` |
 | `performance-engineer` | `engineering-head` |
 | `planning-decomposer` | `orchestration-head` |
 | `positioning-messaging-agent` | `business-head` |
+| `power-electronics-engineer` | `hardware-head` |
 | `pricing-strategist` | `finance-head` |
 | `product-requirements-agent` | `engineering-head` |
 | `progress-tracker` | `orchestration-head` |
 | `prompt-optimizer` | `improvement-head` |
 | `prototyper` | `design-head` |
+| `prototyping-fabrication-agent` | `hardware-head` |
 | `qa-test-strategist` | `engineering-head` |
 | `release-manager` | `engineering-head` |
 | `retrospective-agent` | `orchestration-head` |
@@ -253,10 +288,12 @@ graph TD
 | `scenario-stress-tester` | `finance-head` |
 | `security-engineer` | `engineering-head` |
 | `service-designer` | `design-head` |
+| `signal-integrity-engineer` | `hardware-head` |
 | `skill-refiner` | `improvement-head` |
 | `system-architect` | `engineering-head` |
 | `tax-and-compliance-finance` | `finance-head` |
 | `tech-debt-refactor-agent` | `engineering-head` |
+| `thermal-engineer` | `hardware-head` |
 | `token-efficiency-analyst` | `improvement-head` |
 | `unit-economics-architect` | `finance-head` |
 | `usability-tester` | `design-head` |

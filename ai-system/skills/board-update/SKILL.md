@@ -9,14 +9,9 @@ used_by:
 
 # Board Update
 
-**Category:** `strategy` · **Output artifact:** `board-update.md`
+`strategy` · produces `board-update.md` · used by `ceo-agent`
 
-## What this skill does
 Report to a board so they can help rather than merely be informed.
-
-## When to use it
-Invoke this skill when the task calls for the outcome described above.
-It is part of the standing toolkit of: `ceo-agent`.
 
 ## Procedure
 1. Lead with the decisions you want from the board.
@@ -26,39 +21,11 @@ It is part of the standing toolkit of: `ceo-agent`.
 5. Send in advance so the meeting can be discussion rather than presentation.
 
 ## Output contract
-Write `board-update.md` into `workspace/<venture-id>/strategy/`, then register it as an artifact record
-(`knowledge-schema/artifact.schema.json`) so it becomes retrievable memory. Every output carries:
-
-```markdown
-# <title>
-- **Skill:** board-update
-- **Author agent:** <agent-id>
-- **Date:** <ISO-8601>
-- **Confidence:** measured | sourced | benchmarked | estimated | guessed
-
-## Summary
-<the answer in three sentences or fewer>
-
-## Body
-<the substance produced by the procedure above>
-
-## Evidence
-| Claim | Source | Grade |
-|---|---|---|
-
-## Open questions
-<what remains unknown, and who could answer it>
-
-## Next action
-<the single next step and its owner>
-```
+`board-update.md` → `workspace/<venture-id>/strategy/`, registered as an artifact record.
+Shared format and required fields: `skills/OUTPUT_CONTRACT.md`.
+Anti-patterns for this category head `skills/index/strategy.tsv`.
 
 ## Quality bar
 - Decisions requested up front
 - Bad news surfaced by us first
 - The output states its confidence grade and names the evidence behind every load-bearing claim.
-
-## Anti-patterns for the `strategy` category
-- A strategy that states only what we will do, never what we will not.
-- A moat described as a feature list rather than a compounding mechanism.
-- Reviewing scenarios on a calendar instead of when an indicator trips.

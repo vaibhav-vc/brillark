@@ -9,14 +9,9 @@ used_by:
 
 # Early Warning Indicator Design
 
-**Category:** `council` · **Output artifact:** `early-warning-indicators.md`
+`council` · produces `early-warning-indicators.md` · used by `council-risk-and-failure-modes`
 
-## What this skill does
 Define signals that warn before the failure arrives.
-
-## When to use it
-Invoke this skill when the task calls for the outcome described above.
-It is part of the standing toolkit of: `council-risk-and-failure-modes`.
 
 ## Procedure
 1. For each failure mode, identify what changes first.
@@ -26,39 +21,11 @@ It is part of the standing toolkit of: `council-risk-and-failure-modes`.
 5. Verify the indicator would have fired on a past instance.
 
 ## Output contract
-Write `early-warning-indicators.md` into `workspace/<venture-id>/council/`, then register it as an artifact record
-(`knowledge-schema/artifact.schema.json`) so it becomes retrievable memory. Every output carries:
-
-```markdown
-# <title>
-- **Skill:** early-warning-indicator-design
-- **Author agent:** <agent-id>
-- **Date:** <ISO-8601>
-- **Confidence:** measured | sourced | benchmarked | estimated | guessed
-
-## Summary
-<the answer in three sentences or fewer>
-
-## Body
-<the substance produced by the procedure above>
-
-## Evidence
-| Claim | Source | Grade |
-|---|---|---|
-
-## Open questions
-<what remains unknown, and who could answer it>
-
-## Next action
-<the single next step and its owner>
-```
+`early-warning-indicators.md` → `workspace/<venture-id>/council/`, registered as an artifact record.
+Shared format and required fields: `skills/OUTPUT_CONTRACT.md`.
+Anti-patterns for this category head `skills/index/council.tsv`.
 
 ## Quality bar
 - Indicators measurable today
 - Back-tested against a past instance
 - The output states its confidence grade and names the evidence behind every load-bearing claim.
-
-## Anti-patterns for the `council` category
-- An objection stated as an adjective rather than a concrete failure sequence.
-- Criticism offered with no remedy at any cost level.
-- Averaging two positions instead of testing which survives the evidence.

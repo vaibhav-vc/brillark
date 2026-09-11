@@ -10,14 +10,9 @@ used_by:
 
 # Acceptance Criteria Writing
 
-**Category:** `product` · **Output artifact:** `acceptance-criteria.md`
+`product` · produces `acceptance-criteria.md` · used by `cpo-agent`, `product-requirements-agent`
 
-## What this skill does
 Write conditions that decide unambiguously whether the work is done.
-
-## When to use it
-Invoke this skill when the task calls for the outcome described above.
-It is part of the standing toolkit of: `cpo-agent`, `product-requirements-agent`.
 
 ## Procedure
 1. Express each criterion as given, when, then.
@@ -27,39 +22,11 @@ It is part of the standing toolkit of: `cpo-agent`, `product-requirements-agent`
 5. Agree them with engineering and QA before build starts.
 
 ## Output contract
-Write `acceptance-criteria.md` into `workspace/<venture-id>/product/`, then register it as an artifact record
-(`knowledge-schema/artifact.schema.json`) so it becomes retrievable memory. Every output carries:
-
-```markdown
-# <title>
-- **Skill:** acceptance-criteria-writing
-- **Author agent:** <agent-id>
-- **Date:** <ISO-8601>
-- **Confidence:** measured | sourced | benchmarked | estimated | guessed
-
-## Summary
-<the answer in three sentences or fewer>
-
-## Body
-<the substance produced by the procedure above>
-
-## Evidence
-| Claim | Source | Grade |
-|---|---|---|
-
-## Open questions
-<what remains unknown, and who could answer it>
-
-## Next action
-<the single next step and its owner>
-```
+`acceptance-criteria.md` → `workspace/<venture-id>/product/`, registered as an artifact record.
+Shared format and required fields: `skills/OUTPUT_CONTRACT.md`.
+Anti-patterns for this category head `skills/index/product.tsv`.
 
 ## Quality bar
 - Unhappy paths covered
 - Agreed before build begins
 - The output states its confidence grade and names the evidence behind every load-bearing claim.
-
-## Anti-patterns for the `product` category
-- Writing a requirement that starts with a solution instead of an evidenced problem.
-- Shipping without defining, in advance, what would show it worked.
-- Treating the roadmap as a promise rather than a current best sequence.

@@ -10,14 +10,9 @@ used_by:
 
 # Parallelisation Analysis
 
-**Category:** `orchestration` · **Output artifact:** `parallelisation-plan.md`
+`orchestration` · produces `parallelisation-plan.md` · used by `planning-decomposer`, `workflow-optimizer`
 
-## What this skill does
 Find what can run at the same time and what genuinely cannot.
-
-## When to use it
-Invoke this skill when the task calls for the outcome described above.
-It is part of the standing toolkit of: `planning-decomposer`, `workflow-optimizer`.
 
 ## Procedure
 1. Map each task's true inputs; a dependency exists only where an output is consumed.
@@ -27,39 +22,11 @@ It is part of the standing toolkit of: `planning-decomposer`, `workflow-optimize
 5. Estimate the schedule gain, and drop parallelisation that adds coordination cost for little gain.
 
 ## Output contract
-Write `parallelisation-plan.md` into `workspace/<venture-id>/orchestration/`, then register it as an artifact record
-(`knowledge-schema/artifact.schema.json`) so it becomes retrievable memory. Every output carries:
-
-```markdown
-# <title>
-- **Skill:** parallelisation-analysis
-- **Author agent:** <agent-id>
-- **Date:** <ISO-8601>
-- **Confidence:** measured | sourced | benchmarked | estimated | guessed
-
-## Summary
-<the answer in three sentences or fewer>
-
-## Body
-<the substance produced by the procedure above>
-
-## Evidence
-| Claim | Source | Grade |
-|---|---|---|
-
-## Open questions
-<what remains unknown, and who could answer it>
-
-## Next action
-<the single next step and its owner>
-```
+`parallelisation-plan.md` → `workspace/<venture-id>/orchestration/`, registered as an artifact record.
+Shared format and required fields: `skills/OUTPUT_CONTRACT.md`.
+Anti-patterns for this category head `skills/index/orchestration.tsv`.
 
 ## Quality bar
 - Only true input dependencies retained
 - Shared-state hazards identified
 - The output states its confidence grade and names the evidence behind every load-bearing claim.
-
-## Anti-patterns for the `orchestration` category
-- Assigning a task to a group instead of one accountable agent.
-- Reporting progress as a percentage instead of as artifacts that exist.
-- Adding a review layer to fix a problem that a clearer definition of done would solve.

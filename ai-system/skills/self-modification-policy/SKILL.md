@@ -9,14 +9,9 @@ used_by:
 
 # Self Modification Policy
 
-**Category:** `improvement` · **Output artifact:** `self-modification-policy.md`
+`improvement` · produces `self-modification-policy.md` · used by `chief-learning-officer-agent`
 
-## What this skill does
 Define what the system may change about itself without human approval.
-
-## When to use it
-Invoke this skill when the task calls for the outcome described above.
-It is part of the standing toolkit of: `chief-learning-officer-agent`.
 
 ## Procedure
 1. List the artifact classes: prompts, skills, workflows, guardrails, schemas, org shape, evaluation criteria.
@@ -26,39 +21,11 @@ It is part of the standing toolkit of: `chief-learning-officer-agent`.
 5. Log every change with its authorisation level and refuse unauthorised ones.
 
 ## Output contract
-Write `self-modification-policy.md` into `workspace/<venture-id>/improvement/`, then register it as an artifact record
-(`knowledge-schema/artifact.schema.json`) so it becomes retrievable memory. Every output carries:
-
-```markdown
-# <title>
-- **Skill:** self-modification-policy
-- **Author agent:** <agent-id>
-- **Date:** <ISO-8601>
-- **Confidence:** measured | sourced | benchmarked | estimated | guessed
-
-## Summary
-<the answer in three sentences or fewer>
-
-## Body
-<the substance produced by the procedure above>
-
-## Evidence
-| Claim | Source | Grade |
-|---|---|---|
-
-## Open questions
-<what remains unknown, and who could answer it>
-
-## Next action
-<the single next step and its owner>
-```
+`self-modification-policy.md` → `workspace/<venture-id>/improvement/`, registered as an artifact record.
+Shared format and required fields: `skills/OUTPUT_CONTRACT.md`.
+Anti-patterns for this category head `skills/index/improvement.tsv`.
 
 ## Quality bar
 - Evaluation criteria never self-modifiable
 - Every change logged with its authorisation level
 - The output states its confidence grade and names the evidence behind every load-bearing claim.
-
-## Anti-patterns for the `improvement` category
-- Starting an improvement cycle with an idea instead of a measurement.
-- Adopting a change that beat the cases it was tuned on.
-- Adding an instruction without removing one, until none of them are read.

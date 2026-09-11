@@ -1,63 +1,64 @@
 # Tier-1 discovery index for the 'engineering' category. name	output	purpose
 # Tier 2 is skills/<name>/SKILL.md — load only the skills you selected.
-access-pattern-analysis	access-patterns.md	Establish how data will actually be read and written.
-accessibility-review	accessibility-report.md	Check the interface works for people who do not use it the default way.
-alert-design	alert-catalogue.md	Alert only when a human must act.
-api-design-review	api-review.md	Review an interface for consistency, evolvability, and misuse resistance.
-api-versioning-policy	versioning-policy.md	Decide how the interface changes without breaking clients.
-architecture-decision-record	adr.md	Record a technical decision with the alternatives and the trade-offs.
-authz-design-review	authz-review.md	Check that permission logic is correct and cannot be bypassed.
-backfill-strategy	backfill-plan.md	Populate new structures over existing data safely.
-behaviour-preserving-refactor	refactor-record.md	Change structure without changing behaviour.
-boundary-design	boundary-design.md	Decide where to split the system.
-capacity-planning	capacity-plan.md	Ensure capacity exists before demand arrives.
-cicd-pipeline-design	pipeline.md	Build a pipeline that makes shipping safe and boring.
-code-health-metrics	code-health-report.md	Measure whether the codebase is getting easier or harder to change.
-component-library-management	component-library.md	Keep the shared component set coherent as it grows.
-dashboard-design	dashboard-spec.md	Build dashboards that answer a specific question.
-data-model-design	data-model.md	Design the data structure around how it will actually be used.
-dead-code-removal	removal-record.md	Delete what is no longer used.
-dependency-failure-analysis	dependency-failure-plan.md	Decide what happens when each external dependency fails.
-deployment-safety-review	deployment-review.md	Check a deployment cannot cause irreversible harm.
-disaster-recovery-testing	dr-test-report.md	Prove you can actually recover, not just that you have backups.
-distributed-tracing-setup	tracing-setup.md	Follow a request across every service it touches.
-error-taxonomy-design	error-catalogue.md	Design errors that tell the caller what to do.
-feature-flag-management	flag-registry.md	Use flags without creating a permanent maze.
-flaky-test-elimination	flake-report.md	Remove nondeterminism instead of tolerating it.
-frontend-performance-budget	performance-budget.md	Set and defend limits on what the client has to load and do.
-idempotency-design	idempotency-design.md	Make retries safe.
-incident-response-runbook	incident-runbook.md	Prepare so an incident is executed rather than improvised.
-infrastructure-as-code	infrastructure-code	Define infrastructure so it can be rebuilt exactly.
-infrastructure-rightsizing	rightsizing-report.md	Match provisioned capacity to actual demand.
-input-validation-review	validation-review.md	Check that untrusted input cannot get through unchecked.
-instrumentation-standard	instrumentation-standard.md	Define how the system reports on itself.
-load-testing	load-test-report.md	Find the system's real limits under realistic conditions.
-migration-planning	migration-plan.md	Change a live schema without losing data or availability.
-openapi-specification	openapi.yaml	Specify the interface formally so clients and tests can be generated.
-performance-budgeting	performance-budgets.md	Set limits on the performance of critical journeys.
-performance-regression-gating	perf-gate.md	Stop performance regressions from reaching production.
-post-release-review	post-release-review.md	Learn from every release, not just the bad ones.
-profiling-analysis	profile-report.md	Find where time and resources actually go.
-progressive-rollout-design	rollout-plan.md	Expose a change gradually so problems are found by few, not by all.
-refactoring-planning	refactor-plan.md	Plan a refactor that pays off soon.
-release-quality-reporting	quality-report.md	Report quality as a signal with known limits.
-release-readiness-review	release-readiness.md	Decide honestly whether this can ship.
-rollback-verification	rollback-verification.md	Prove the way back works before you need it.
-scalability-stress-review	scalability-review.md	Find where the architecture breaks before the market finds it.
-secrets-management	secrets-policy.md	Keep credentials out of reach and rotatable.
-security-review	security-review.md	Review a change for security consequences before it ships.
-security-test-design	security-tests.md	Test that the security controls actually work.
-service-implementation	service-code	Build the server-side behaviour to match the contract exactly.
-slo-definition	slo.md	Define reliability targets from what users actually notice.
-state-handling-review	state-review.md	Check the interface handles every state a user can encounter.
-structured-logging	logging-standard.md	Log so that questions can be answered later.
-system-diagramming	architecture-diagram.md	Draw the system so a newcomer can understand it.
-tech-debt-registry	tech-debt-register.md	Record debt with its actual cost.
-test-data-management	test-data-standard.md	Make test data predictable and safe.
-test-pyramid-balancing	pyramid-report.md	Keep the suite fast and meaningful.
-test-strategy	test-strategy.md	Decide what to test, at what level, and why.
-threat-modeling	threat-model.md	Work out how a system could be attacked, before building it.
-transaction-design	transaction-design.md	Decide the consistency guarantee each operation actually offers.
-ui-implementation	ui-code	Build the interface to the acceptance criteria, including the hard states.
-vendor-security-review	vendor-security-review.md	Assess a third party before trusting them with data or access.
-vulnerability-triage	vulnerability-triage.md	Decide which vulnerabilities matter here.
+# Category anti-patterns: skills/antipatterns/engineering.md (load once at tier 2).
+access-pattern-analysis	Establish how data will actually be read and written.
+accessibility-review	Check the interface works for people who do not use it the default way.
+alert-design	Alert only when a human must act.
+api-design-review	Review an interface for consistency, evolvability, and misuse resistance.
+api-versioning-policy	Decide how the interface changes without breaking clients.
+architecture-decision-record	Record a technical decision with the alternatives and the trade-offs.
+authz-design-review	Check that permission logic is correct and cannot be bypassed.
+backfill-strategy	Populate new structures over existing data safely.
+behaviour-preserving-refactor	Change structure without changing behaviour.
+boundary-design	Decide where to split the system.
+capacity-planning	Ensure capacity exists before demand arrives.
+cicd-pipeline-design	Build a pipeline that makes shipping safe and boring.
+code-health-metrics	Measure whether the codebase is getting easier or harder to change.
+component-library-management	Keep the shared component set coherent as it grows.
+dashboard-design	Build dashboards that answer a specific question.
+data-model-design	Design the data structure around how it will actually be used.
+dead-code-removal	Delete what is no longer used.
+dependency-failure-analysis	Decide what happens when each external dependency fails.
+deployment-safety-review	Check a deployment cannot cause irreversible harm.
+disaster-recovery-testing	Prove you can actually recover, not just that you have backups.
+distributed-tracing-setup	Follow a request across every service it touches.
+error-taxonomy-design	Design errors that tell the caller what to do.
+feature-flag-management	Use flags without creating a permanent maze.
+flaky-test-elimination	Remove nondeterminism instead of tolerating it.
+frontend-performance-budget	Set and defend limits on what the client has to load and do.
+idempotency-design	Make retries safe.
+incident-response-runbook	Prepare so an incident is executed rather than improvised.
+infrastructure-as-code	Define infrastructure so it can be rebuilt exactly.
+infrastructure-rightsizing	Match provisioned capacity to actual demand.
+input-validation-review	Check that untrusted input cannot get through unchecked.
+instrumentation-standard	Define how the system reports on itself.
+load-testing	Find the system's real limits under realistic conditions.
+migration-planning	Change a live schema without losing data or availability.
+openapi-specification	Specify the interface formally so clients and tests can be generated.
+performance-budgeting	Set limits on the performance of critical journeys.
+performance-regression-gating	Stop performance regressions from reaching production.
+post-release-review	Learn from every release, not just the bad ones.
+profiling-analysis	Find where time and resources actually go.
+progressive-rollout-design	Expose a change gradually so problems are found by few, not by all.
+refactoring-planning	Plan a refactor that pays off soon.
+release-quality-reporting	Report quality as a signal with known limits.
+release-readiness-review	Decide honestly whether this can ship.
+rollback-verification	Prove the way back works before you need it.
+scalability-stress-review	Find where the architecture breaks before the market finds it.
+secrets-management	Keep credentials out of reach and rotatable.
+security-review	Review a change for security consequences before it ships.
+security-test-design	Test that the security controls actually work.
+service-implementation	Build the server-side behaviour to match the contract exactly.
+slo-definition	Define reliability targets from what users actually notice.
+state-handling-review	Check the interface handles every state a user can encounter.
+structured-logging	Log so that questions can be answered later.
+system-diagramming	Draw the system so a newcomer can understand it.
+tech-debt-registry	Record debt with its actual cost.
+test-data-management	Make test data predictable and safe.
+test-pyramid-balancing	Keep the suite fast and meaningful.
+test-strategy	Decide what to test, at what level, and why.
+threat-modeling	Work out how a system could be attacked, before building it.
+transaction-design	Decide the consistency guarantee each operation actually offers.
+ui-implementation	Build the interface to the acceptance criteria, including the hard states.
+vendor-security-review	Assess a third party before trusting them with data or access.
+vulnerability-triage	Decide which vulnerabilities matter here.

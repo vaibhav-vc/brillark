@@ -9,14 +9,9 @@ used_by:
 
 # Case Retirement
 
-**Category:** `improvement` · **Output artifact:** `retirement-log.md`
+`improvement` · produces `retirement-log.md` · used by `benchmark-curator`
 
-## What this skill does
 Remove cases that no longer teach anything.
-
-## When to use it
-Invoke this skill when the task calls for the outcome described above.
-It is part of the standing toolkit of: `benchmark-curator`.
 
 ## Procedure
 1. Identify cases every candidate passes across several cycles.
@@ -26,39 +21,11 @@ It is part of the standing toolkit of: `benchmark-curator`.
 5. Record the retirement and its reason.
 
 ## Output contract
-Write `retirement-log.md` into `workspace/<venture-id>/improvement/`, then register it as an artifact record
-(`knowledge-schema/artifact.schema.json`) so it becomes retrievable memory. Every output carries:
-
-```markdown
-# <title>
-- **Skill:** case-retirement
-- **Author agent:** <agent-id>
-- **Date:** <ISO-8601>
-- **Confidence:** measured | sourced | benchmarked | estimated | guessed
-
-## Summary
-<the answer in three sentences or fewer>
-
-## Body
-<the substance produced by the procedure above>
-
-## Evidence
-| Claim | Source | Grade |
-|---|---|---|
-
-## Open questions
-<what remains unknown, and who could answer it>
-
-## Next action
-<the single next step and its owner>
-```
+`retirement-log.md` → `workspace/<venture-id>/improvement/`, registered as an artifact record.
+Shared format and required fields: `skills/OUTPUT_CONTRACT.md`.
+Anti-patterns for this category head `skills/index/improvement.tsv`.
 
 ## Quality bar
 - Over-tuning ruled out before retiring
 - Retired coverage replaced
 - The output states its confidence grade and names the evidence behind every load-bearing claim.
-
-## Anti-patterns for the `improvement` category
-- Starting an improvement cycle with an idea instead of a measurement.
-- Adopting a change that beat the cases it was tuned on.
-- Adding an instruction without removing one, until none of them are read.

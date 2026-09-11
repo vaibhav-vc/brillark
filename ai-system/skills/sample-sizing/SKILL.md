@@ -9,14 +9,9 @@ used_by:
 
 # Sample Sizing
 
-**Category:** `improvement` · **Output artifact:** `sample-plan.md`
+`improvement` · produces `sample-plan.md` · used by `ab-test-runner`
 
-## What this skill does
 Work out how many cases the trial needs.
-
-## When to use it
-Invoke this skill when the task calls for the outcome described above.
-It is part of the standing toolkit of: `ab-test-runner`.
 
 ## Procedure
 1. State the smallest improvement that would be worth adopting.
@@ -26,39 +21,11 @@ It is part of the standing toolkit of: `ab-test-runner`.
 5. Never reduce the sample and keep the original claim.
 
 ## Output contract
-Write `sample-plan.md` into `workspace/<venture-id>/improvement/`, then register it as an artifact record
-(`knowledge-schema/artifact.schema.json`) so it becomes retrievable memory. Every output carries:
-
-```markdown
-# <title>
-- **Skill:** sample-sizing
-- **Author agent:** <agent-id>
-- **Date:** <ISO-8601>
-- **Confidence:** measured | sourced | benchmarked | estimated | guessed
-
-## Summary
-<the answer in three sentences or fewer>
-
-## Body
-<the substance produced by the procedure above>
-
-## Evidence
-| Claim | Source | Grade |
-|---|---|---|
-
-## Open questions
-<what remains unknown, and who could answer it>
-
-## Next action
-<the single next step and its owner>
-```
+`sample-plan.md` → `workspace/<venture-id>/improvement/`, registered as an artifact record.
+Shared format and required fields: `skills/OUTPUT_CONTRACT.md`.
+Anti-patterns for this category head `skills/index/improvement.tsv`.
 
 ## Quality bar
 - Minimum worthwhile effect stated first
 - Underpowered trials declared, not run anyway
 - The output states its confidence grade and names the evidence behind every load-bearing claim.
-
-## Anti-patterns for the `improvement` category
-- Starting an improvement cycle with an idea instead of a measurement.
-- Adopting a change that beat the cases it was tuned on.
-- Adding an instruction without removing one, until none of them are read.

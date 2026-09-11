@@ -11,14 +11,9 @@ used_by:
 
 # Severity Triage
 
-**Category:** `council` · **Output artifact:** `severity-ratings.md`
+`council` · produces `severity-ratings.md` · used by `council-director`, `council-red-team`, `escalation-manager`
 
-## What this skill does
 Assign a severity that means the same thing to everyone.
-
-## When to use it
-Invoke this skill when the task calls for the outcome described above.
-It is part of the standing toolkit of: `council-director`, `council-red-team`, `escalation-manager`.
 
 ## Procedure
 1. Apply the fixed scale: blocker, major, minor, note.
@@ -28,39 +23,11 @@ It is part of the standing toolkit of: `council-director`, `council-red-team`, `
 5. Drop findings that cannot be made concrete.
 
 ## Output contract
-Write `severity-ratings.md` into `workspace/<venture-id>/council/`, then register it as an artifact record
-(`knowledge-schema/artifact.schema.json`) so it becomes retrievable memory. Every output carries:
-
-```markdown
-# <title>
-- **Skill:** severity-triage
-- **Author agent:** <agent-id>
-- **Date:** <ISO-8601>
-- **Confidence:** measured | sourced | benchmarked | estimated | guessed
-
-## Summary
-<the answer in three sentences or fewer>
-
-## Body
-<the substance produced by the procedure above>
-
-## Evidence
-| Claim | Source | Grade |
-|---|---|---|
-
-## Open questions
-<what remains unknown, and who could answer it>
-
-## Next action
-<the single next step and its owner>
-```
+`severity-ratings.md` → `workspace/<venture-id>/council/`, registered as an artifact record.
+Shared format and required fields: `skills/OUTPUT_CONTRACT.md`.
+Anti-patterns for this category head `skills/index/council.tsv`.
 
 ## Quality bar
 - Blockers carry a concrete failure scenario
 - Consistency with prior ratings checked
 - The output states its confidence grade and names the evidence behind every load-bearing claim.
-
-## Anti-patterns for the `council` category
-- An objection stated as an adjective rather than a concrete failure sequence.
-- Criticism offered with no remedy at any cost level.
-- Averaging two positions instead of testing which survives the evidence.

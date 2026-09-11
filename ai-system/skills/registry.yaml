@@ -1,5 +1,5 @@
 version: 1
-count: 505
+count: 590
 description: Machine-readable skill library. Every skill referenced by an agent or workflow must appear here.
 skills:
 - name: agent-routing
@@ -2233,7 +2233,8 @@ skills:
   description: Surface every assumption, including the invisible ones.
   output: assumption-list.md
   path: skills/assumption-extraction/SKILL.md
-  used_by: []
+  used_by:
+  - council-assumption-auditor
 - name: evidence-grading
   category: council
   description: Rate how well each claim is actually supported.
@@ -3603,3 +3604,598 @@ skills:
   path: skills/workflow-change-measurement/SKILL.md
   used_by:
   - workflow-optimizer
+- name: industrial-design-concepting
+  category: hardware
+  description: Generate and narrow physical product concepts against real use, not against a mood board.
+  output: concept-study.md
+  path: skills/industrial-design-concepting/SKILL.md
+  used_by:
+  - industrial-designer
+- name: ergonomics-and-human-factors
+  category: hardware
+  description: Fit the product to the range of people who will actually use it.
+  output: ergonomics-report.md
+  path: skills/ergonomics-and-human-factors/SKILL.md
+  used_by:
+  - industrial-designer
+- name: cmf-specification
+  category: hardware
+  description: Specify colour, material, and finish so the factory produces what was designed.
+  output: cmf-spec.md
+  path: skills/cmf-specification/SKILL.md
+  used_by:
+  - industrial-designer
+- name: physical-model-review
+  category: hardware
+  description: Judge form with a physical object, because screens flatter shapes that fail in the hand.
+  output: model-review.md
+  path: skills/physical-model-review/SKILL.md
+  used_by:
+  - industrial-designer
+- name: form-volume-negotiation
+  category: hardware
+  description: Settle the internal volume envelope before anyone refines a surface.
+  output: volume-envelope.md
+  path: skills/form-volume-negotiation/SKILL.md
+  used_by:
+  - industrial-designer
+- name: parametric-modeling
+  category: hardware
+  description: Build a 3D model that survives change.
+  output: cad-model
+  path: skills/parametric-modeling/SKILL.md
+  used_by:
+  - cad-modeler
+- name: assembly-modeling
+  category: hardware
+  description: Model the assembly so it reflects how the product is actually put together.
+  output: assembly-model
+  path: skills/assembly-modeling/SKILL.md
+  used_by:
+  - cad-modeler
+- name: interference-checking
+  category: hardware
+  description: Find the collisions before the parts are made.
+  output: interference-report.md
+  path: skills/interference-checking/SKILL.md
+  used_by:
+  - cad-modeler
+- name: gd-and-t-drafting
+  category: hardware
+  description: Dimension drawings so the part can be inspected and accepted unambiguously.
+  output: drawing
+  path: skills/gd-and-t-drafting/SKILL.md
+  used_by:
+  - cad-modeler
+- name: model-revision-control
+  category: hardware
+  description: Keep geometry versions unambiguous.
+  output: revision-log.md
+  path: skills/model-revision-control/SKILL.md
+  used_by:
+  - cad-modeler
+- name: tolerance-stackup-analysis
+  category: hardware
+  description: Work out whether the parts will actually assemble.
+  output: stackup.md
+  path: skills/tolerance-stackup-analysis/SKILL.md
+  used_by:
+  - mechanical-engineer
+- name: structural-analysis
+  category: hardware
+  description: Check the part survives the loads it will actually see.
+  output: analysis-report.md
+  path: skills/structural-analysis/SKILL.md
+  used_by:
+  - mechanical-engineer
+- name: fastener-and-joint-design
+  category: hardware
+  description: Choose how parts are held together and whether they can come apart.
+  output: joint-spec.md
+  path: skills/fastener-and-joint-design/SKILL.md
+  used_by:
+  - mechanical-engineer
+- name: drop-and-vibration-analysis
+  category: hardware
+  description: Check the product survives being dropped and shaken.
+  output: drop-vibration-report.md
+  path: skills/drop-and-vibration-analysis/SKILL.md
+  used_by:
+  - mechanical-engineer
+- name: analysis-test-correlation
+  category: hardware
+  description: Check the simulation actually predicted reality.
+  output: correlation-report.md
+  path: skills/analysis-test-correlation/SKILL.md
+  used_by:
+  - mechanical-engineer
+- name: dfm-review
+  category: hardware
+  description: Check every part can be made by the intended process.
+  output: dfm-report.md
+  path: skills/dfm-review/SKILL.md
+  used_by:
+  - dfm-engineer
+- name: process-selection
+  category: hardware
+  description: Choose the manufacturing process for the real volume.
+  output: process-decision.md
+  path: skills/process-selection/SKILL.md
+  used_by:
+  - dfm-engineer
+- name: tooling-design-review
+  category: hardware
+  description: Review the tool before it is cut.
+  output: tool-review.md
+  path: skills/tooling-design-review/SKILL.md
+  used_by:
+  - dfm-engineer
+- name: design-for-assembly
+  category: hardware
+  description: Reduce the cost and error rate of putting it together.
+  output: dfa-report.md
+  path: skills/design-for-assembly/SKILL.md
+  used_by:
+  - dfm-engineer
+- name: process-capability-analysis
+  category: hardware
+  description: Design inside what the supplier can actually hold.
+  output: capability-report.md
+  path: skills/process-capability-analysis/SKILL.md
+  used_by:
+  - dfm-engineer
+- name: enclosure-architecture
+  category: hardware
+  description: Decide how the housing splits, closes, and holds itself together.
+  output: enclosure-architecture.md
+  path: skills/enclosure-architecture/SKILL.md
+  used_by:
+  - enclosure-designer
+- name: ingress-protection-design
+  category: hardware
+  description: Keep water and dust out, to the rating the product claims.
+  output: ip-design.md
+  path: skills/ingress-protection-design/SKILL.md
+  used_by:
+  - enclosure-designer
+- name: board-mounting-design
+  category: hardware
+  description: Hold the board so its connectors land where they should.
+  output: mounting-spec.md
+  path: skills/board-mounting-design/SKILL.md
+  used_by:
+  - enclosure-designer
+- name: aperture-tolerancing
+  category: hardware
+  description: Size openings so the mating part actually fits every time.
+  output: aperture-spec.md
+  path: skills/aperture-tolerancing/SKILL.md
+  used_by:
+  - enclosure-designer
+- name: closure-and-retention-design
+  category: hardware
+  description: Make it close properly and stay closed.
+  output: closure-spec.md
+  path: skills/closure-and-retention-design/SKILL.md
+  used_by:
+  - enclosure-designer
+- name: thermal-budgeting
+  category: hardware
+  description: Account for every watt before designing the cooling.
+  output: thermal-budget.md
+  path: skills/thermal-budgeting/SKILL.md
+  used_by:
+  - thermal-engineer
+- name: thermal-path-analysis
+  category: hardware
+  description: Follow the heat from junction to ambient.
+  output: thermal-analysis.md
+  path: skills/thermal-path-analysis/SKILL.md
+  used_by:
+  - thermal-engineer
+- name: thermal-interface-selection
+  category: hardware
+  description: Choose the material at the contact, where most thermal designs fail.
+  output: interface-spec.md
+  path: skills/thermal-interface-selection/SKILL.md
+  used_by:
+  - thermal-engineer
+- name: touch-temperature-compliance
+  category: hardware
+  description: Keep the outside safe to touch.
+  output: touch-temp-report.md
+  path: skills/touch-temperature-compliance/SKILL.md
+  used_by:
+  - thermal-engineer
+- name: thermal-validation-testing
+  category: hardware
+  description: Measure what the product actually runs at.
+  output: thermal-test-report.md
+  path: skills/thermal-validation-testing/SKILL.md
+  used_by:
+  - thermal-engineer
+- name: schematic-capture
+  category: hardware
+  description: Draw the circuit so it can be reviewed, built, and debugged.
+  output: schematic
+  path: skills/schematic-capture/SKILL.md
+  used_by:
+  - pcb-schematic-designer
+- name: power-sequencing-design
+  category: hardware
+  description: Specify what powers up when, and what every output does at reset.
+  output: sequencing-spec.md
+  path: skills/power-sequencing-design/SKILL.md
+  used_by:
+  - pcb-schematic-designer
+- name: interface-protection-design
+  category: hardware
+  description: Protect every connection to the outside world.
+  output: protection-spec.md
+  path: skills/interface-protection-design/SKILL.md
+  used_by:
+  - pcb-schematic-designer
+- name: pin-accounting-review
+  category: hardware
+  description: Account for every pin on every part.
+  output: pin-review.md
+  path: skills/pin-accounting-review/SKILL.md
+  used_by:
+  - pcb-schematic-designer
+- name: design-for-test-provision
+  category: hardware
+  description: Build in the access debugging and production will need.
+  output: dft-spec.md
+  path: skills/design-for-test-provision/SKILL.md
+  used_by:
+  - pcb-schematic-designer
+- name: stackup-design
+  category: hardware
+  description: Decide the layer structure before anything is routed.
+  output: stackup.md
+  path: skills/stackup-design/SKILL.md
+  used_by:
+  - pcb-layout-designer
+- name: component-placement
+  category: hardware
+  description: Place parts for the signal path, the mechanics, and the build.
+  output: placement.md
+  path: skills/component-placement/SKILL.md
+  used_by:
+  - pcb-layout-designer
+- name: high-speed-routing
+  category: hardware
+  description: Route the fast signals so they still work when they arrive.
+  output: routing-report.md
+  path: skills/high-speed-routing/SKILL.md
+  used_by:
+  - pcb-layout-designer
+- name: ground-and-return-path-design
+  category: hardware
+  description: Design where the current comes back, not just where it goes.
+  output: return-path-review.md
+  path: skills/ground-and-return-path-design/SKILL.md
+  used_by:
+  - pcb-layout-designer
+- name: fabrication-output-review
+  category: hardware
+  description: Check the package before the fabricator does.
+  output: fab-package
+  path: skills/fabrication-output-review/SKILL.md
+  used_by:
+  - pcb-layout-designer
+- name: impedance-planning
+  category: hardware
+  description: Set impedance targets and make them achievable.
+  output: impedance-plan.md
+  path: skills/impedance-planning/SKILL.md
+  used_by:
+  - signal-integrity-engineer
+- name: termination-and-topology-design
+  category: hardware
+  description: Control reflections before they become errors.
+  output: termination-spec.md
+  path: skills/termination-and-topology-design/SKILL.md
+  used_by:
+  - signal-integrity-engineer
+- name: crosstalk-analysis
+  category: hardware
+  description: Keep signals from corrupting their neighbours.
+  output: crosstalk-report.md
+  path: skills/crosstalk-analysis/SKILL.md
+  used_by:
+  - signal-integrity-engineer
+- name: timing-budget-analysis
+  category: hardware
+  description: Prove the data arrives when the receiver expects it.
+  output: timing-budget.md
+  path: skills/timing-budget-analysis/SKILL.md
+  used_by:
+  - signal-integrity-engineer
+- name: si-simulation-and-measurement
+  category: hardware
+  description: Check the signals, first in simulation and then on the bench.
+  output: si-report.md
+  path: skills/si-simulation-and-measurement/SKILL.md
+  used_by:
+  - signal-integrity-engineer
+- name: power-tree-design
+  category: hardware
+  description: Lay out every rail, its source, and its headroom.
+  output: power-tree.md
+  path: skills/power-tree-design/SKILL.md
+  used_by:
+  - power-electronics-engineer
+- name: converter-topology-selection
+  category: hardware
+  description: Choose the right converter for each rail.
+  output: converter-decision.md
+  path: skills/converter-topology-selection/SKILL.md
+  used_by:
+  - power-electronics-engineer
+- name: transient-response-design
+  category: hardware
+  description: Make the rail hold up when the load steps.
+  output: transient-report.md
+  path: skills/transient-response-design/SKILL.md
+  used_by:
+  - power-electronics-engineer
+- name: power-protection-design
+  category: hardware
+  description: Define what happens when power goes wrong.
+  output: power-protection-spec.md
+  path: skills/power-protection-design/SKILL.md
+  used_by:
+  - power-electronics-engineer
+- name: power-measurement-validation
+  category: hardware
+  description: Measure the power system rather than quoting the datasheet.
+  output: power-measurement.md
+  path: skills/power-measurement-validation/SKILL.md
+  used_by:
+  - power-electronics-engineer
+- name: bom-management
+  category: hardware
+  description: Own the list of everything that goes into the product.
+  output: bom.csv
+  path: skills/bom-management/SKILL.md
+  used_by:
+  - electronics-component-engineer
+- name: second-source-qualification
+  category: hardware
+  description: Make sure one supplier cannot stop the line.
+  output: second-source-report.md
+  path: skills/second-source-qualification/SKILL.md
+  used_by:
+  - electronics-component-engineer
+- name: lifecycle-and-obsolescence-review
+  category: hardware
+  description: Avoid designing in a part that is about to disappear.
+  output: lifecycle-report.md
+  path: skills/lifecycle-and-obsolescence-review/SKILL.md
+  used_by:
+  - electronics-component-engineer
+- name: component-cost-analysis
+  category: hardware
+  description: Know what the parts really cost at the volume you will actually build.
+  output: component-cost.md
+  path: skills/component-cost-analysis/SKILL.md
+  used_by:
+  - electronics-component-engineer
+- name: authorised-sourcing-control
+  category: hardware
+  description: Buy only what you can trace.
+  output: sourcing-record.md
+  path: skills/authorised-sourcing-control/SKILL.md
+  used_by:
+  - electronics-component-engineer
+- name: firmware-architecture
+  category: hardware
+  description: Structure the embedded software so hardware changes do not rewrite the product.
+  output: firmware-architecture.md
+  path: skills/firmware-architecture/SKILL.md
+  used_by:
+  - embedded-firmware-engineer
+- name: board-bringup
+  category: hardware
+  description: Get the first board alive, in a defined order.
+  output: bringup-log.md
+  path: skills/board-bringup/SKILL.md
+  used_by:
+  - embedded-firmware-engineer
+- name: hardware-abstraction-design
+  category: hardware
+  description: Keep the product code independent of the parts underneath it.
+  output: hal-spec.md
+  path: skills/hardware-abstraction-design/SKILL.md
+  used_by:
+  - embedded-firmware-engineer
+- name: safe-field-update-design
+  category: hardware
+  description: Make sure an update cannot brick a unit in the field.
+  output: update-spec.md
+  path: skills/safe-field-update-design/SKILL.md
+  used_by:
+  - embedded-firmware-engineer
+- name: realtime-timing-verification
+  category: hardware
+  description: Measure the timing rather than reasoning about it.
+  output: timing-report.md
+  path: skills/realtime-timing-verification/SKILL.md
+  used_by:
+  - embedded-firmware-engineer
+- name: standards-applicability-matrix
+  category: hardware
+  description: Know which rules apply before designing, not before submitting.
+  output: standards-matrix.md
+  path: skills/standards-applicability-matrix/SKILL.md
+  used_by:
+  - compliance-emc-engineer
+- name: emc-design-review
+  category: hardware
+  description: Design for compliance while it is still cheap.
+  output: emc-review.md
+  path: skills/emc-design-review/SKILL.md
+  used_by:
+  - compliance-emc-engineer
+- name: pre-compliance-testing
+  category: hardware
+  description: Find the failures before the accredited lab does.
+  output: precompliance-report.md
+  path: skills/pre-compliance-testing/SKILL.md
+  used_by:
+  - compliance-emc-engineer
+- name: product-safety-review
+  category: hardware
+  description: Check the product cannot hurt anyone.
+  output: safety-review.md
+  path: skills/product-safety-review/SKILL.md
+  used_by:
+  - compliance-emc-engineer
+- name: technical-file-assembly
+  category: hardware
+  description: Keep the certification evidence current with what actually ships.
+  output: technical-file
+  path: skills/technical-file-assembly/SKILL.md
+  used_by:
+  - compliance-emc-engineer
+- name: test-strategy-hardware
+  category: hardware
+  description: Decide what gets tested at each build phase and why.
+  output: hw-test-strategy.md
+  path: skills/test-strategy-hardware/SKILL.md
+  used_by:
+  - hardware-test-engineer
+- name: verification-matrix
+  category: hardware
+  description: Prove every requirement was actually tested.
+  output: verification-matrix.csv
+  path: skills/verification-matrix/SKILL.md
+  used_by:
+  - hardware-test-engineer
+- name: environmental-testing
+  category: hardware
+  description: Test the conditions the product will actually meet.
+  output: environmental-report.md
+  path: skills/environmental-testing/SKILL.md
+  used_by:
+  - hardware-test-engineer
+- name: production-test-design
+  category: hardware
+  description: Design the test that every unit passes through.
+  output: production-test-spec.md
+  path: skills/production-test-design/SKILL.md
+  used_by:
+  - hardware-test-engineer
+- name: failure-analysis-hardware
+  category: hardware
+  description: Find out why the unit actually failed.
+  output: failure-analysis.md
+  path: skills/failure-analysis-hardware/SKILL.md
+  used_by:
+  - hardware-test-engineer
+- name: prototype-process-selection
+  category: hardware
+  description: Choose how to make the prototype from what it must prove.
+  output: prototype-process.md
+  path: skills/prototype-process-selection/SKILL.md
+  used_by:
+  - prototyping-fabrication-agent
+- name: fabrication-package-preparation
+  category: hardware
+  description: Send the supplier everything they need and nothing ambiguous.
+  output: fab-package
+  path: skills/fabrication-package-preparation/SKILL.md
+  used_by:
+  - prototyping-fabrication-agent
+- name: supplier-quoting
+  category: hardware
+  description: Compare quotes on more than price.
+  output: quote-comparison.md
+  path: skills/supplier-quoting/SKILL.md
+  used_by:
+  - prototyping-fabrication-agent
+- name: build-traceability
+  category: hardware
+  description: Know which parts are in which unit.
+  output: build-record.md
+  path: skills/build-traceability/SKILL.md
+  used_by:
+  - prototyping-fabrication-agent
+- name: prototype-learning-capture
+  category: hardware
+  description: Turn the build into evidence rather than anecdote.
+  output: build-learnings.md
+  path: skills/prototype-learning-capture/SKILL.md
+  used_by:
+  - prototyping-fabrication-agent
+- name: hardware-architecture
+  category: hardware
+  description: Settle how mechanical, electrical, and firmware fit together before detail work starts.
+  output: hw-architecture.md
+  path: skills/hardware-architecture/SKILL.md
+  used_by:
+  - hardware-head
+- name: build-phase-gating
+  category: hardware
+  description: Exit each build phase on evidence, not on schedule.
+  output: phase-gate.md
+  path: skills/build-phase-gating/SKILL.md
+  used_by:
+  - hardware-head
+- name: manufacturing-readiness-review
+  category: hardware
+  description: Check the factory can actually build it.
+  output: readiness-review.md
+  path: skills/manufacturing-readiness-review/SKILL.md
+  used_by:
+  - hardware-head
+- name: hardware-cost-rollup
+  category: hardware
+  description: Know what a unit actually costs to make.
+  output: cost-rollup.md
+  path: skills/hardware-cost-rollup/SKILL.md
+  used_by:
+  - hardware-head
+- name: interface-contract-definition
+  category: hardware
+  description: Write down the boundaries between disciplines so they stop moving.
+  output: interface-contract.md
+  path: skills/interface-contract-definition/SKILL.md
+  used_by:
+  - hardware-head
+- name: hardware-strategy
+  category: hardware
+  description: Decide whether and how to be a hardware company.
+  output: hardware-strategy.md
+  path: skills/hardware-strategy/SKILL.md
+  used_by:
+  - chief-hardware-officer-agent
+- name: tooling-capital-planning
+  category: hardware
+  description: Plan the money that gets locked into steel and inventory.
+  output: tooling-capital-plan.md
+  path: skills/tooling-capital-planning/SKILL.md
+  used_by:
+  - chief-hardware-officer-agent
+- name: manufacturing-partner-selection
+  category: hardware
+  description: Choose who builds it on more than price.
+  output: partner-selection.md
+  path: skills/manufacturing-partner-selection/SKILL.md
+  used_by:
+  - chief-hardware-officer-agent
+- name: supply-chain-resilience-review
+  category: hardware
+  description: Find where the supply chain would break.
+  output: resilience-review.md
+  path: skills/supply-chain-resilience-review/SKILL.md
+  used_by:
+  - chief-hardware-officer-agent
+- name: product-lifecycle-planning
+  category: hardware
+  description: Plan the product's whole life before shipping the first unit.
+  output: lifecycle-plan.md
+  path: skills/product-lifecycle-planning/SKILL.md
+  used_by:
+  - chief-hardware-officer-agent

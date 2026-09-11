@@ -9,14 +9,9 @@ used_by:
 
 # Business Continuity Plan
 
-**Category:** `risk` · **Output artifact:** `continuity-plan.md`
+`risk` · produces `continuity-plan.md` · used by `chief-risk-officer-agent`
 
-## What this skill does
 Plan for continuing to operate through a serious disruption.
-
-## When to use it
-Invoke this skill when the task calls for the outcome described above.
-It is part of the standing toolkit of: `chief-risk-officer-agent`.
 
 ## Procedure
 1. Identify the functions that must continue and their maximum tolerable downtime.
@@ -26,39 +21,11 @@ It is part of the standing toolkit of: `chief-risk-officer-agent`.
 5. Test the plan; an untested continuity plan is a document, not a capability.
 
 ## Output contract
-Write `continuity-plan.md` into `workspace/<venture-id>/risk/`, then register it as an artifact record
-(`knowledge-schema/artifact.schema.json`) so it becomes retrievable memory. Every output carries:
-
-```markdown
-# <title>
-- **Skill:** business-continuity-plan
-- **Author agent:** <agent-id>
-- **Date:** <ISO-8601>
-- **Confidence:** measured | sourced | benchmarked | estimated | guessed
-
-## Summary
-<the answer in three sentences or fewer>
-
-## Body
-<the substance produced by the procedure above>
-
-## Evidence
-| Claim | Source | Grade |
-|---|---|---|
-
-## Open questions
-<what remains unknown, and who could answer it>
-
-## Next action
-<the single next step and its owner>
-```
+`continuity-plan.md` → `workspace/<venture-id>/risk/`, registered as an artifact record.
+Shared format and required fields: `skills/OUTPUT_CONTRACT.md`.
+Anti-patterns for this category head `skills/index/risk.tsv`.
 
 ## Quality bar
 - Maximum tolerable downtime defined per function
 - Plan tested, not just written
 - The output states its confidence grade and names the evidence behind every load-bearing claim.
-
-## Anti-patterns for the `risk` category
-- A risk register that ranks by how loudly a risk was raised.
-- Accepting a terminal risk implicitly by never classifying it.
-- A continuity plan that has never been tested.

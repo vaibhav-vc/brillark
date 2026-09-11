@@ -27,7 +27,13 @@ profiles:
 
   # Verified against this session's own model roster.
   anthropic:
-    description: Claude models. The tier assignments this repository's baseline was measured on.
+    description: >
+      Claude models. NOT YET VALIDATED — these assignments were made by judgement about task
+      character, not by measurement on the golden cases. The token baseline in
+      tests/benchmark-baseline.json was measured; the quality of these tier assignments was not.
+      By this file's own rule below, that makes them guesses with a config file around them.
+      Run `python3 ai-system/tools/eval.py --runner <yours>` before relying on them.
+    validated: false
     mechanical: claude-haiku-4-5-20251001
     analytical: claude-sonnet-5
     judgement: claude-opus-5
@@ -37,6 +43,7 @@ profiles:
 
   # Single-model fallback. Correct, just not cost-optimised.
   single_model:
+    validated: false
     description: >
       Every tier on one model. Use when only one model is available, or as the control arm when
       measuring whether tiering actually buys anything. Always correct; never cheapest.
@@ -47,6 +54,7 @@ profiles:
   # Fill these in for your own provider. Deliberately left unset rather than guessed:
   # naming a model this repository has never been measured against would be a claim, not a config.
   custom:
+    validated: false
     description: >
       Your provider. Set each tier to a concrete model id, then run
       `python3 ai-system/tools/eval.py --profile custom` to establish quality evidence before

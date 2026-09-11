@@ -124,8 +124,12 @@ and export fidelity.
 - **It does not score itself.** `eval.py` assembles, runs, and records. Scoring is against
   `evals/rubric.yaml` by a human or a separate judge — a model scoring its own output measures
   agreement, not quality.
-- **It does not guarantee output quality on a model it has never been measured on.** The tier
-  assignments in the `anthropic` profile were measured. Yours have not been. Run the evals.
+- **It does not guarantee output quality on any model, including Claude.** No profile's tier
+  assignments have been validated against the golden cases yet — including `anthropic`, whose
+  assignments were made by judgement about task character, not by measurement. Every profile is
+  marked `validated: false`. Run the evals before relying on any of them.
+- **No agent in this organisation has ever been executed.** The definitions, budgets, and contracts
+  are tested for internal consistency; the *output* they produce is entirely unvalidated.
 
 ## Common mistakes
 

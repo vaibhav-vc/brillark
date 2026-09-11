@@ -1,0 +1,64 @@
+name: Token efficiency review
+stage: any
+owner: improvement-head
+purpose: Cut what the organisation spends without quality falling — and prove quality did not fall.
+steps:
+- id: account
+  agent: token-efficiency-analyst
+  skills:
+  - token-accounting
+  - task-class-classification
+  does: Establish where tokens actually go, per completed task.
+  produces: token-report.md
+  done_when: Cost per completed task, split by system, context, retrieval, and output.
+- id: bloat
+  agent: token-efficiency-analyst
+  skills:
+  - context-bloat-analysis
+  does: Find context loaded and never used, and fix the rule that loaded it.
+  produces: bloat-report.md
+  done_when: Unused content traced to a packaging rule; re-measured after the change.
+- id: cache
+  agent: token-efficiency-analyst
+  skills:
+  - cache-order-optimisation
+  does: Keep the stable prefix stable so it stays cacheable.
+  produces: cache-order.md
+  done_when: No variable content inside the stable prefix; cache reuse verified.
+- id: tiers
+  agent: model-router-tuner
+  skills:
+  - model-tier-assignment
+  - tier-quality-verification
+  - escalation-rule-design
+  does: Move work down a tier wherever quality holds, with an escalation rule.
+  produces: tier-assignment.md
+  done_when: Hardest cases checked; judgement work not demoted; escalation triggers observable.
+- id: routing
+  agent: model-router-tuner
+  skills:
+  - routing-telemetry-review
+  does: 'Check the routing is working: nobody starved, nobody over-provisioned.'
+  produces: routing-review.md
+  done_when: Over-escalating and over-provisioned agents both identified.
+- id: workflow
+  agent: workflow-optimizer
+  skills:
+  - step-value-analysis
+  - fail-fast-resequencing
+  - duplicate-review-elimination
+  - workflow-change-measurement
+  does: Remove steps that change no outcome and move disconfirming steps earlier.
+  produces: step-value.md
+  done_when: Gate-evidence steps protected; one workflow changed at a time.
+- id: tradeoff
+  agent: improvement-head
+  skills:
+  - efficiency-quality-tradeoff
+  does: Accept only the savings that did not cost quality.
+  produces: tradeoff-record.md
+  done_when: Rubric floor not crossed; retry cost accounted for.
+exit_criteria:
+- Cost per completed task measured and falling, or the reason stated.
+- No quality regression on the golden cases.
+- Every tier change carries quality evidence and an escalation rule.

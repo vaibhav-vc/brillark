@@ -1,0 +1,41 @@
+# Tier-1 discovery index for the 'gtm' category. name	output	purpose
+# Tier 2 is skills/<name>/SKILL.md — load only the skills you selected.
+# Category anti-patterns: skills/antipatterns/gtm.md (load once at tier 2).
+amplification-analysis	Determine whether a loop actually compounds.
+audience-narrative-adaptation	Tell the same story to customers, investors, and candidates without contradicting yourself.
+beachhead-selection	Choose the one segment to win first.
+brand-consistency-audit	Find where the brand has drifted from its guidelines.
+brand-voice-guidelines	Define how the company sounds, with examples.
+campaign-brief	Define a campaign tightly enough that it can be judged afterwards.
+category-frame-selection	Choose the mental category that sets customer expectations.
+channel-cac-modeling	Compute what each channel actually costs per acquired customer.
+channel-test-design	Test a channel cheaply enough that failure is affordable.
+churn-analysis	Understand why customers leave, in categories you can act on.
+co-marketing-planning	Plan joint activity that both parties will actually resource.
+content-calendar	Plan content that serves the funnel rather than filling a schedule.
+cycle-time-optimisation	Make the loop turn faster, not just convert better.
+deal-structuring	Structure an agreement that is testable before it is binding.
+discovery-call-script	Structure the first call to diagnose rather than pitch.
+growth-loop-design	Design a mechanism where output feeds back into input so growth compounds.
+gtm-planning	Decide how the product reaches customers and in what order.
+health-scoring	Predict which customers are at risk before they leave.
+loop-instrumentation	Measure a growth loop so optimisation is not guesswork.
+message-hierarchy	Structure the message from headline claim to supporting proof.
+message-testing	Find out whether a message works before paying to distribute it.
+motion-selection	Choose between self-serve, product-led, sales-led, and partner-led.
+narrative-writing	Write the story of why the company exists and why it matters.
+objection-handling-library	Build evidenced answers to the objections that actually lose deals.
+onboarding-design	Get a new customer to their first real value quickly.
+origin-story-development	Capture why the founders started this, credibly.
+partner-qualification	Decide whether a candidate partner is worth the effort.
+partnership-review	Judge whether a partnership is producing and act on the answer.
+partnership-thesis	State why a partnership would create value before pursuing one.
+pipeline-model	Model the pipeline so forecasts mean something.
+positioning-statement	Decide what the product is in the customer's mind.
+qualification-framework	Decide quickly whether a deal is real.
+reference-development	Turn successful customers into evidence others will believe.
+referral-mechanics-design	Design a referral that people actually want to make.
+sales-playbook	Write down how selling works so someone other than the founder can do it.
+terminology-consistency-audit	Make sure one concept has one name everywhere.
+voice-of-customer-synthesis	Turn scattered customer feedback into something product can act on.
+win-loss-analysis	Find out why deals were actually won and lost.

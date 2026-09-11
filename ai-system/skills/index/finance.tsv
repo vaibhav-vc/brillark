@@ -1,0 +1,59 @@
+# Tier-1 discovery index for the 'finance' category. name	output	purpose
+# Tier 2 is skills/<name>/SKILL.md — load only the skills you selected.
+# Category anti-patterns: skills/antipatterns/finance.md (load once at tier 2).
+assumption-ledger	Collect every assumption that touches money into one auditable list.
+billing-architecture-design	Design the plumbing that turns pricing into collected cash.
+bookkeeping-standard	Define how transactions are recorded so the books stay auditable.
+break-even-analysis	Find the volume or price at which the business stops losing money.
+budget-approval	Approve or refuse spend with a stated reason either way.
+burn-categorisation	Show where the money is actually going.
+cac-ltv-modeling	Compute what a customer costs to acquire and what they are worth, honestly.
+cap-table-reconciliation	Make the cap table match the signed documents exactly.
+capital-plan	Decide how much money to raise, when, and against what milestone.
+cash-threshold-alerting	Make the cash position trigger action automatically.
+cohort-retention-analysis	Understand how customers actually behave over time rather than in aggregate.
+commitment-tracking	Track money already promised but not yet paid.
+contractor-classification-review	Check that contractors are genuinely contractors.
+contribution-margin-waterfall	Show exactly where revenue per unit is consumed before it becomes margin.
+convertible-conversion-modeling	Model what convertible instruments turn into under real terms.
+cost-baseline	Establish what things currently cost before trying to optimise.
+data-room-preparation	Assemble everything diligence will ask for, before it is asked for.
+dilution-modeling	Show what a financing actually costs in ownership.
+dunning-flow-design	Recover failed payments without losing the customer.
+figure-reconciliation	Trace every externally reported number to its source before it leaves the building.
+filing-calendar	Make sure no statutory deadline is missed.
+financial-controls-review	Check that money cannot leave the company without the right approvals.
+financial-model-build	Build the integrated model where every money assumption meets its consequences.
+forecast-accuracy-review	Score past forecasts so the method improves rather than the story.
+fundraising-plan	Run a raise as a process rather than a scramble.
+funnel-modeling	Model the path from first contact to paying customer with real conversion rates.
+indirect-tax-determination	Decide the VAT, GST, or sales tax treatment per product and market.
+investor-reporting	Write an investor update that is accurate, consistent, and worth reading.
+investor-targeting	Build a target list of investors who could actually say yes.
+metering-specification	Define the billable event precisely enough that nobody disputes the invoice.
+model-reconciliation	Check the model against reality and fix the model, not the reality.
+narrative-pressure-test	Test whether the fundraising story survives hostile questioning.
+option-pool-planning	Size the option pool against the actual hiring plan.
+packaging-design	Group capabilities into tiers customers can choose between.
+price-testing	Change price in a way that produces evidence rather than damage.
+pricing-decision	Decide what to charge and be able to defend it from both directions.
+revenue-forecasting	Predict revenue with a stated range and a driver behind every number.
+revenue-plan-decomposition	Break a revenue target into drivers someone can own.
+revenue-recognition-mapping	Determine when revenue may actually be recognised, not when cash arrives.
+runway-forecast	Determine the date the venture runs out of money.
+savings-verification	Prove a claimed saving actually appeared in the accounts.
+scenario-analysis	Model distinct futures defined by driver values rather than adjectives.
+sensitivity-analysis	Find which inputs actually move the outcome.
+spend-efficiency-analysis	Rank spend by what it produces, and cut the worst.
+stress-testing	Break the plan deliberately to find where it fails.
+survival-analysis	State the minimum performance required to avoid failure.
+tax-handling-review	Check that the system applies the tax logic correctly in practice.
+tax-obligation-mapping	Determine what the venture owes, where, and when.
+three-statement-linking	Connect profit and loss, balance sheet, and cash flow so the model cannot lie.
+trigger-response-planning	Decide the response before the trigger fires, while thinking is still calm.
+unit-economics-analysis	Determine whether one unit of the business makes money, line by line.
+value-metric-selection	Choose the thing the price scales with.
+variance-analysis	Explain the gap between budget and actual in a way that changes behaviour.
+vendor-negotiation-prep	Arrive at a vendor negotiation with data instead of hope.
+waterfall-analysis	Show who gets what in an exit, in what order.
+willingness-to-pay-research	Find out what customers will actually pay, not what they say they like.

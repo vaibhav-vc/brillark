@@ -1,0 +1,51 @@
+# Tier-1 discovery index for the 'orchestration' category. name	output	purpose
+# Tier 2 is skills/<name>/SKILL.md — load only the skills you selected.
+# Category anti-patterns: skills/antipatterns/orchestration.md (load once at tier 2).
+action-verification	Confirm that agreed changes were actually made.
+agent-routing	Send a request to exactly one accountable agent, chosen from capability rather than convenience.
+agent-scorecard	Report how well each agent actually performs, from evidence.
+blocker-detection	Find work that has stopped moving before someone reports it.
+bottleneck-analysis	Find the one constraint limiting the whole system's output.
+budget-allocation	Give every task an explicit ceiling on time, tokens, and spend.
+context-packaging	Assemble everything an agent needs so it never has to rediscover known facts.
+critical-path-analysis	Identify the chain of work that actually determines the finish date.
+cycle-detection	Find circular dependencies before they deadlock execution.
+cycle-time-analysis	Find where time actually goes between request and delivery.
+decision-record-writing	Capture a decision so a future reader understands why, not just what.
+decision-request-framing	Escalate a problem as a decision someone can actually make.
+definition-of-done-writing	Write a completion condition that can be checked by someone other than the author.
+dependency-resolution	Turn a set of tasks into a valid execution order.
+duplicate-detection	Find out whether this request is already answered or already in flight before spending effort.
+escalation-criteria	Define what must go up, to whom, and how fast.
+escalation-pattern-analysis	Find the process defects behind repeated escalations.
+evaluation-suite-design	Build a repeatable test set that shows whether agents and skills work.
+golden-case-curation	Maintain the reference examples that define good output.
+handoff-contract-definition	Define what must accompany work passed between two specific roles.
+handoff-validation	Check that arriving work is complete before accepting it.
+intent-clarification	Convert a vague request into a restatement the requester confirms before work starts.
+kill-criteria-definition	Decide in advance what would make us stop, while judgement is still uncommitted.
+lesson-to-guardrail-conversion	Turn a lesson into a constraint that prevents the repeat automatically.
+metrics-tree-design	Connect the top-level goal to metrics each domain can actually move.
+open-question-tracking	Keep unresolved questions alive across handoffs instead of dropping them.
+operating-cadence-design	Design the rhythm of planning, review, and decision for the organisation.
+org-backlog-triage	Keep one prioritised list for the whole organisation so domains cannot each claim top priority.
+parallelisation-analysis	Find what can run at the same time and what genuinely cannot.
+pattern-detection	Find repeating structures in outcomes, failures, or requests.
+prioritisation-forcing	Break a tie or a 'everything is critical' deadlock into a decision.
+regression-detection	Catch quality drops when a prompt, skill, or agent definition changes.
+request-classification	Put an incoming request into the taxonomy that determines how it is handled.
+resolution-tracking	Follow escalations and blockers through to an actual outcome.
+resource-allocation	Decide which agents and budget go to which bets this cycle.
+retrospective-facilitation	Run a cycle review that changes behaviour instead of producing notes.
+rework-attribution	Find out what caused work to be redone, so the cause can be fixed.
+root-cause-analysis	Trace a failure back to the cause that can actually be changed.
+rubric-writing	Define scoring criteria that different reviewers apply the same way.
+runbook-authoring	Write a procedure another agent can execute without asking questions.
+schedule-optimisation	Improve the schedule without pretending work takes less time than it does.
+stage-gate-review	Decide whether a venture stage is complete and what happens next.
+status-tracking	Report the true state of work from artifacts rather than self-assessment.
+task-decomposition	Break an objective into tasks one agent can finish in one run with a checkable output.
+throughput-reporting	Measure how much work actually completes per cycle so capacity claims can be checked.
+variance-reporting	Report the gap between plan and reality early and without spin.
+weekly-scorecard	Publish a small set of numbers that show whether the organisation is on track.
+work-breakdown-structure	Produce the hierarchy from objective to epic to task, so nothing falls between levels.

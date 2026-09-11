@@ -1,0 +1,176 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://brillark.ai/schemas/improvement-proposal.schema.json",
+  "title": "Improvement Proposal",
+  "description": "A proposed change to the system itself. Nothing is adopted without a held-out trial result and an authorisation level that matches what is being changed.",
+  "type": "object",
+  "required": [
+    "id",
+    "target",
+    "diagnosis",
+    "proposed_change",
+    "authorisation_level",
+    "status"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^imp_[a-z0-9-]+$"
+    },
+    "target": {
+      "type": "object",
+      "required": [
+        "artifact_class",
+        "artifact_id"
+      ],
+      "properties": {
+        "artifact_class": {
+          "type": "string",
+          "enum": [
+            "prompt",
+            "skill_step",
+            "skill",
+            "workflow",
+            "agent_charter",
+            "guardrail",
+            "schema",
+            "org_shape",
+            "evaluation_criteria"
+          ]
+        },
+        "artifact_id": {
+          "type": "string"
+        }
+      }
+    },
+    "diagnosis": {
+      "type": "object",
+      "required": [
+        "failure_pattern",
+        "attribution",
+        "evidence"
+      ],
+      "properties": {
+        "failure_pattern": {
+          "type": "string"
+        },
+        "attribution": {
+          "type": "string",
+          "enum": [
+            "capability",
+            "context",
+            "task_definition"
+          ],
+          "description": "Context and task-definition causes are not fixed by editing prompts."
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1
+        },
+        "instances": {
+          "type": "integer",
+          "minimum": 3,
+          "description": "At least three independent instances. Fewer is a streak, not a pattern."
+        },
+        "cost_per_cycle": {
+          "type": "string"
+        }
+      }
+    },
+    "proposed_change": {
+      "type": "object",
+      "required": [
+        "before",
+        "after",
+        "hypothesis"
+      ],
+      "properties": {
+        "before": {
+          "type": "string"
+        },
+        "after": {
+          "type": "string"
+        },
+        "hypothesis": {
+          "type": "string",
+          "description": "What this change is expected to fix, stated testably."
+        },
+        "dimensions_changed": {
+          "type": "integer",
+          "maximum": 1,
+          "description": "One dimension per variant, or the effect is not attributable."
+        }
+      }
+    },
+    "trial": {
+      "type": "object",
+      "properties": {
+        "held_out_set": {
+          "type": "string"
+        },
+        "sample_size": {
+          "type": "integer"
+        },
+        "threshold_set_before": {
+          "type": "boolean",
+          "description": "Must be true. A threshold set afterwards is not a threshold."
+        },
+        "baseline_score": {
+          "type": "number"
+        },
+        "variant_score": {
+          "type": "number"
+        },
+        "effect_size": {
+          "type": "number"
+        },
+        "regression_sweep_passed": {
+          "type": "boolean"
+        },
+        "cases_worsened": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "authorisation_level": {
+      "type": "string",
+      "enum": [
+        "automatic",
+        "director",
+        "human_founder"
+      ],
+      "description": "prompt and skill_step may be automatic with a passing trial; workflow and agent_charter need the director; guardrail, schema, org_shape and evaluation_criteria always need the human founder."
+    },
+    "authorised_by": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "proposed",
+        "trialling",
+        "adopted",
+        "rejected",
+        "reverted"
+      ]
+    },
+    "adopted_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "verified_next_cycle": {
+      "type": "boolean",
+      "description": "Whether the measured gain still held one cycle later. False triggers reversion."
+    },
+    "reverted_reason": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": false
+}

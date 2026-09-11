@@ -1,0 +1,47 @@
+# Tier-1 discovery index for the 'council' category. name	output	purpose
+# Tier 2 is skills/<name>/SKILL.md — load only the skills you selected.
+# Category anti-patterns: skills/antipatterns/council.md (load once at tier 2).
+abuse-case-analysis	Find how the product will be misused.
+adjacency-mapping	Find the markets and use cases nearest to where we already stand.
+alternative-revival	Check whether a discarded option deserves reconsideration.
+analogy-audit	Find reasoning that rests on imitation rather than evidence.
+ask-framing	Make a request specific enough to be acted on.
+assumption-extraction	Surface every assumption, including the invisible ones.
+benchmark-comparison	Compare our numbers to observed reality and demand a reason for every gap.
+cascade-analysis	Find failures that trigger other failures.
+cheapest-test-design	Find the least expensive way to check a critical assumption.
+circular-logic-detection	Find reasoning that assumes what it is trying to prove.
+competitive-kill-scenario	Describe how a competitor could destroy this business.
+conflict-resolution	Resolve a direct disagreement between critics.
+constraint-classification	Sort real constraints from assumed ones.
+council-debate-facilitation	Run a structured debate that produces a decision.
+counter-case-argument	Argue against the leading option in full.
+dark-pattern-audit	Find design that works against the user's interest.
+dissent-recording	Preserve minority positions on the record.
+early-warning-indicator-design	Define signals that warn before the failure arrives.
+evidence-grading	Rate how well each claim is actually supported.
+expansion-option-sizing	Size an expansion option honestly, including what it would require.
+failure-mode-cataloguing	Enumerate the distinct ways this can fail.
+failure-scenario-writing	Turn an objection into a specific, checkable failure.
+falsification-test-design	Define what would prove the plan wrong.
+finding-deduplication	Merge findings that are the same objection in different words.
+first-principles-decomposition	Strip a plan to what is actually necessary.
+from-scratch-reconstruction	Rebuild the plan from the irreducible requirements alone.
+groupthink-detection	Spot agreement that was assumed rather than earned.
+leverage-identification	Find where a small effort produces an outsized return.
+load-bearing-analysis	Determine which assumptions the plan cannot survive without.
+model-recomputation	Independently recompute a model's headline numbers before critiquing them.
+network-effect-analysis	Test whether a claimed network effect is real.
+pre-mortem	Assume the venture failed and reconstruct how.
+recoverability-classification	Separate the failures you can come back from.
+recurring-flaw-analysis	Find the mistakes this organisation keeps making.
+red-team-attack	Attack a plan the way a competitor or bad actor would.
+remedy-design	Propose a fix alongside every criticism.
+reputational-stress-test	Test whether the plan survives public scrutiny.
+sequencing-recommendation	Recommend an order rather than a wish list.
+severity-normalisation	Make severity consistent across different critics.
+severity-triage	Assign a severity that means the same thing to everyone.
+simplification-challenge	Ask what could be removed entirely.
+stakeholder-harm-analysis	Identify who could be harmed, including those who never chose to be involved.
+steelman-construction	Rebuild a rejected option at its strongest before judging it.
+verdict-writing	Produce the decision-grade output of a review.

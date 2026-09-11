@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://brillark.ai/schemas/risk.schema.json",
+  "title": "Risk",
+  "description": "One entry in the enterprise risk register.",
+  "type": "object",
+  "required": [
+    "id",
+    "description",
+    "likelihood",
+    "impact",
+    "owner"
+  ],
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "domain": {
+      "type": "string"
+    },
+    "likelihood": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 5
+    },
+    "impact": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 5
+    },
+    "expected_loss": {
+      "type": "number"
+    },
+    "recoverability": {
+      "type": "string",
+      "enum": [
+        "recoverable",
+        "costly_but_survivable",
+        "terminal"
+      ]
+    },
+    "early_warning_indicator": {
+      "type": "string"
+    },
+    "mitigation": {
+      "type": "string"
+    },
+    "owner": {
+      "type": "string"
+    },
+    "review_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "open",
+        "mitigating",
+        "accepted",
+        "closed",
+        "materialised"
+      ]
+    },
+    "accepted_by": {
+      "type": "string",
+      "description": "Required when status is 'accepted'. Terminal risks may never be accepted implicitly."
+    }
+  },
+  "additionalProperties": false
+}

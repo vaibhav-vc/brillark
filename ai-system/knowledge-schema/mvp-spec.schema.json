@@ -1,0 +1,94 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://brillark.ai/schemas/mvp-spec.schema.json",
+  "title": "MVP Specification",
+  "description": "What ships first, what waits, and the assumption the build exists to test.",
+  "type": "object",
+  "required": [
+    "venture_id",
+    "riskiest_assumption",
+    "in_scope",
+    "out_of_scope",
+    "success_signal"
+  ],
+  "properties": {
+    "venture_id": {
+      "type": "string"
+    },
+    "riskiest_assumption": {
+      "type": "string",
+      "description": "The belief this MVP exists to test."
+    },
+    "in_scope": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "item",
+          "learning_justification"
+        ],
+        "properties": {
+          "item": {
+            "type": "string"
+          },
+          "learning_justification": {
+            "type": "string",
+            "description": "How this changes what we learn from first users."
+          }
+        }
+      }
+    },
+    "out_of_scope": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "item",
+          "reason",
+          "revisit_trigger"
+        ],
+        "properties": {
+          "item": {
+            "type": "string"
+          },
+          "reason": {
+            "type": "string"
+          },
+          "revisit_trigger": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "manual_steps": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Deliberately unautomated. Automation before proven demand is waste."
+    },
+    "success_signal": {
+      "type": "object",
+      "required": [
+        "metric",
+        "threshold",
+        "window"
+      ],
+      "properties": {
+        "metric": {
+          "type": "string"
+        },
+        "threshold": {
+          "type": "string"
+        },
+        "window": {
+          "type": "string"
+        }
+      }
+    },
+    "time_to_first_user_days": {
+      "type": "integer"
+    }
+  },
+  "additionalProperties": false
+}

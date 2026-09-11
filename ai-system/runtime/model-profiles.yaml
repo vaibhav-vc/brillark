@@ -1,0 +1,92 @@
+version: 1
+
+description: >
+  Maps the organisation's portable capability tiers onto whatever models a runtime actually has.
+  This file is the ONLY place a concrete model name appears. Every agent declares a `task_class`,
+  never a vendor's model name, so the same organisation runs on any provider by swapping the
+  active profile.
+
+# The portable contract. Agents declare one of these; runtimes resolve it.
+task_classes:
+  mechanical:
+    description: Extraction, formatting, validation, tracking, lookup.
+    needs: Instruction-following and structured output. Reasoning depth is not the constraint.
+    failure_cost: Low and immediately visible — a malformed record, a missed status update.
+  analytical:
+    description: Synthesis, comparison, modelling, diagnosis, building.
+    needs: Sustained multi-step reasoning over supplied context; consistent procedure-following.
+    failure_cost: Moderate and recoverable — wrong analysis caught at review or at the next gate.
+  judgement:
+    description: Arbitration, strategy, ethics, one-way doors, the whole Council.
+    needs: Strongest available reasoning, resistance to plausible-but-wrong, willingness to dissent.
+    failure_cost: High and often irreversible — a cut tool, a shipped price, a funded wrong bet.
+
+active_profile: anthropic
+
+profiles:
+
+  # Verified against this session's own model roster.
+  anthropic:
+    description: >
+      Claude models. NOT YET VALIDATED — these assignments were made by judgement about task
+      character, not by measurement on the golden cases. The token baseline in
+      tests/benchmark-baseline.json was measured; the quality of these tier assignments was not.
+      By this file's own rule below, that makes them guesses with a config file around them.
+      Run `python3 ai-system/tools/eval.py --runner <yours>` before relying on them.
+    validated: false
+    mechanical: claude-haiku-4-5-20251001
+    analytical: claude-sonnet-5
+    judgement: claude-opus-5
+    notes: >
+      claude-fable-5-1 is also available and may be substituted at any tier, subject to the same
+      rule as every other assignment: it needs quality evidence on the golden cases first.
+
+  # Single-model fallback. Correct, just not cost-optimised.
+  single_model:
+    validated: false
+    description: >
+      Every tier on one model. Use when only one model is available, or as the control arm when
+      measuring whether tiering actually buys anything. Always correct; never cheapest.
+    mechanical: ${MODEL}
+    analytical: ${MODEL}
+    judgement: ${MODEL}
+
+  # Fill these in for your own provider. Deliberately left unset rather than guessed:
+  # naming a model this repository has never been measured against would be a claim, not a config.
+  custom:
+    validated: false
+    description: >
+      Your provider. Set each tier to a concrete model id, then run
+      `python3 ai-system/tools/eval.py --profile custom` to establish quality evidence before
+      trusting the assignment. An unmeasured tier assignment is a guess with a config file around it.
+    mechanical: null
+    analytical: null
+    judgement: null
+
+resolution_rules:
+  - Resolve `task_class` through the active profile at load time. Never hardcode a model in an agent.
+  - A null tier in the active profile is a hard error, not a silent fallback to a stronger model.
+  - Escalation moves up a tier — analytical to judgement — not to a specific named model.
+  - Judgement-class work is never resolved downward to save money, whatever the profile says.
+
+escalation_triggers:
+  - The task is classified irreversible (a one-way door).
+  - The Council raised a blocker on this work.
+  - Two attempts at the current tier failed the definition of done.
+  - The agent's own confidence on a load-bearing claim would be `guessed`.
+
+capability_requirements:
+  description: >
+    What a runtime's model must support for this organisation to work at all. A model missing any
+    of these will produce output that looks right and fails the contract.
+  required:
+    - Structured output that validates against a supplied JSON Schema (returns, memory, proposals).
+    - A context window of at least 32k tokens — routed activation is ~3.2k, leaving room for task context.
+    - Reliable instruction-following across a system prompt of several thousand tokens.
+    - Ability to say "I don't know" and to return a `guessed` confidence grade rather than confabulating.
+  strongly_recommended:
+    - Prompt caching, or the cache-ordering discipline in loader-spec.md buys nothing.
+    - Tool or function calling, for just-in-time retrieval rather than pre-loading context.
+  not_required:
+    - Any specific vendor, tokeniser, or model family.
+    - Native "agent" or "skill" features — the organisation supplies its own.

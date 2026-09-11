@@ -1,0 +1,16 @@
+# Tier-1 discovery index for the 'product' category. name	output	purpose
+# Tier 2 is skills/<name>/SKILL.md — load only the skills you selected.
+# Category anti-patterns: skills/antipatterns/product.md (load once at tier 2).
+acceptance-criteria-writing	Write conditions that decide unambiguously whether the work is done.
+concierge-mvp-design	Deliver the outcome manually before building the machine.
+feature-kill-review	Decide whether a shipped feature earned its place.
+mvp-scoping	Find the smallest build that answers the riskiest question.
+non-functional-requirements	State the qualities the system must have, not just its behaviour.
+prioritisation-framework	Apply one consistent method to decide what gets built next.
+product-requirements-doc	Write requirements an engineer can build and a tester can verify.
+riskiest-assumption-testing	Test the belief that would hurt most if wrong, first.
+roadmap-sequencing	Order the roadmap for learning value rather than for tidiness.
+scope-boundary-definition	Draw the line around what this work includes.
+scope-cut-justification	Record why something was cut so the decision survives argument.
+success-signal-definition	Define in advance what would show a feature worked.
+time-to-user-estimation	Estimate honestly when a real user will touch this.

@@ -1,0 +1,57 @@
+name: Market validation
+stage: validation
+owner: business-head
+purpose: Test the riskiest beliefs with real customers before building anything.
+steps:
+- id: hypotheses
+  agent: business-head
+  skills:
+  - hypothesis-backlog
+  - assumption-ledger
+  does: Write the beliefs as falsifiable statements, ranked by dependency.
+  produces: hypothesis-backlog.md
+  done_when: Each belief has a threshold and a cheapest test.
+- id: icp
+  agent: icp-persona-builder
+  skills:
+  - icp-definition
+  - persona-development
+  - disqualification-criteria
+  - reachability-mapping
+  does: Define who to talk to, precisely enough to build a list.
+  produces: icp.md
+  done_when: ICP filterable against a real list; exclusions explicit.
+- id: guide
+  agent: customer-discovery-interviewer
+  skills:
+  - interview-guide-design
+  does: Write non-leading, behavioural questions for the riskiest hypotheses.
+  produces: interview-guide.md
+  done_when: No leading questions; disconfirming questions included.
+- id: interviews
+  agent: customer-discovery-interviewer
+  skills:
+  - customer-discovery-interview
+  - evidence-extraction
+  does: Run qualified interviews and extract structured evidence.
+  produces: evidence-extract.md
+  done_when: At least five qualified conversations; behaviour separated from stated intent.
+- id: synthesis
+  agent: customer-discovery-interviewer
+  skills:
+  - pattern-synthesis
+  - disconfirmation-reporting
+  does: Report what contradicted the hypothesis first.
+  produces: synthesis.md
+  done_when: Disconfirming evidence reported before confirming evidence.
+- id: update
+  agent: business-model-canvas-agent
+  skills:
+  - model-change-logging
+  - evidence-tagging
+  does: Update the canvas from evidence and log what changed and why.
+  produces: model-change-log.md
+  done_when: Every changed block carries its new evidence grade.
+exit_criteria:
+- The core value hypothesis survived or was explicitly revised.
+- Validated-learning log updated, including the failed tests.

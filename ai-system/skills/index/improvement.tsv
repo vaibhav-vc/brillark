@@ -1,0 +1,58 @@
+# Tier-1 discovery index for the 'improvement' category. name	output	purpose
+# Tier 2 is skills/<name>/SKILL.md — load only the skills you selected.
+# Category anti-patterns: skills/antipatterns/improvement.md (load once at tier 2).
+adoption-threshold-setting	Decide in advance what would justify adopting the change.
+behaviour-change-verification	Check the instruction actually changed what agents do.
+capability-mapping	Know what the organisation can and cannot currently do.
+capability-target-setting	Set improvement targets that can be judged.
+case-provenance-recording	Record where each case came from and why its answer is right.
+case-retirement	Remove cases that no longer teach anything.
+change-reversion	Undo a change that did not hold.
+constraint-over-explanation	Write rules agents follow rather than rationale they interpret.
+contamination-auditing	Check the measurement set has not leaked into development.
+coverage-mapping	Know what the evaluation does and does not cover.
+discrimination-analysis	Check the evaluation actually separates good from bad.
+duplicate-review-elimination	Remove reviews that check the same thing twice.
+early-stopping-discipline	Do not stop the trial when it starts looking good.
+effect-size-reporting	Report how much better, not just whether better.
+evaluation-revalidation	Re-check the evaluation when the job changes.
+fail-fast-resequencing	Move the cheap disconfirming step earlier.
+failure-attribution	Determine whether a failure was capability, context, or task definition — because the fixes are different.
+failure-corpus-mining	Gather everything that went wrong into one place worth analysing.
+failure-cost-estimation	Put a number on what each failure pattern costs.
+fix-effect-measurement	Measure whether the fix actually helped.
+gap-evidence-collection	Prove the gap is real before proposing to fill it.
+golden-case-extraction	Turn a real failure into a test that stops it recurring.
+held-out-set-construction	Build a measurement set that stays honest.
+held-out-trial-design	Design the trial so its result means something.
+improvement-backlog-ranking	Decide what to improve next.
+improvement-cycle-facilitation	Run the loop that makes the organisation better.
+improvement-queue-ranking	Rank candidate fixes by what they are actually worth.
+improvement-return-analysis	Judge whether the improvement effort was worth it.
+instruction-placement	Put the instruction where it will actually be read.
+instruction-pruning	Remove instructions that no longer earn their tokens.
+inter-rater-calibration	Get different scorers to agree.
+learning-strategy	Decide what the organisation must get better at, and ignore the rest.
+lesson-distillation	Compress a lesson into the shortest instruction that prevents the failure.
+library-overlap-analysis	Find skills that have blurred into each other, and gaps between them.
+minimal-intervention-selection	Choose the smallest change that closes the gap.
+negative-result-reporting	Report what did not work, as prominently as what did.
+new-agent-justification	Justify a new agent by the accountability nobody currently holds.
+optimisation-drift-detection	Catch the system getting better at its metrics while getting worse at its job.
+performance-trend-analysis	Distinguish a real trend from noise before acting on it.
+prompt-change-logging	Keep the history of what changed and what it bought.
+prompt-variant-generation	Produce candidate instruction changes worth testing.
+regression-sweep	Check the change did not break something else.
+root-cause-clustering	Group failures by what actually caused them.
+rubric-design	Build a scoring scheme different reviewers apply the same way.
+sample-sizing	Work out how many cases the trial needs.
+self-modification-policy	Define what the system may change about itself without human approval.
+skill-deprecation	Retire a skill without breaking the agents that name it.
+skill-step-revision	Fix the specific step that let the failure through.
+skill-usage-telemetry	Find out which skills are actually used.
+sprawl-resistance	Recommend against filling a gap when that is the right answer.
+step-concreteness-review	Check every step can actually be followed.
+step-value-analysis	Find workflow steps that change no outcome.
+systemic-cause-identification	Find the cause that produces many different failures.
+trial-execution	Run the comparison cleanly.
+workflow-change-measurement	Prove the workflow change helped.

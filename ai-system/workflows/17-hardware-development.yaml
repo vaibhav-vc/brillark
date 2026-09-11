@@ -1,0 +1,200 @@
+name: Hardware development
+stage: mvp
+owner: hardware-head
+purpose: Take a physical product from concept to a design that can be manufactured, certified, and sold
+  — gating each build phase on evidence rather than on schedule.
+steps:
+- id: architecture
+  agent: hardware-head
+  skills:
+  - hardware-architecture
+  - interface-contract-definition
+  - build-phase-gating
+  does: Settle mechanical, electrical, and firmware interfaces before any detail work.
+  produces: hw-architecture.md
+  done_when: Interface contracts have an owner on each side; phase exit criteria defined.
+- id: form
+  agent: industrial-designer
+  skills:
+  - industrial-design-concepting
+  - ergonomics-and-human-factors
+  - form-volume-negotiation
+  - physical-model-review
+  does: Decide the physical form against real use and the volume the electronics need.
+  produces: concept-study.md
+  done_when: Validated with full-scale physical models; volume envelope agreed and frozen.
+- id: schematic
+  agent: pcb-schematic-designer
+  skills:
+  - schematic-capture
+  - power-sequencing-design
+  - interface-protection-design
+  - pin-accounting-review
+  - design-for-test-provision
+  does: Draw the circuit, account for every pin, and protect every external interface.
+  produces: schematic
+  done_when: Every pin justified at review; test and debug access provided.
+- id: power
+  agent: power-electronics-engineer
+  skills:
+  - power-tree-design
+  - converter-topology-selection
+  - transient-response-design
+  - power-protection-design
+  does: Design every rail with headroom and a specified behaviour at each fault.
+  produces: power-tree.md
+  done_when: Headroom stated per rail; every fault mode has defined behaviour.
+- id: bom
+  agent: electronics-component-engineer
+  skills:
+  - bom-management
+  - second-source-qualification
+  - lifecycle-and-obsolescence-review
+  - component-cost-analysis
+  - authorised-sourcing-control
+  does: Select parts that can actually be bought, now and in two years.
+  produces: bom.csv
+  done_when: No end-of-life parts; every line-stopping part has a tested second source.
+- id: si
+  agent: signal-integrity-engineer
+  skills:
+  - impedance-planning
+  - termination-and-topology-design
+  - timing-budget-analysis
+  - crosstalk-analysis
+  does: Constrain the critical nets before layout, not after.
+  produces: impedance-plan.md
+  done_when: Critical nets constrained; timing budgets close at voltage and temperature extremes.
+- id: layout
+  agent: pcb-layout-designer
+  skills:
+  - stackup-design
+  - component-placement
+  - high-speed-routing
+  - ground-and-return-path-design
+  - fabrication-output-review
+  does: Turn the schematic into copper with continuous return paths.
+  produces: fab-package
+  done_when: Stack-up agreed with the real fabricator; rules clean against their own check.
+- id: cad
+  agent: cad-modeler
+  skills:
+  - parametric-modeling
+  - assembly-modeling
+  - interference-checking
+  - gd-and-t-drafting
+  does: Build the geometry everything else references.
+  produces: cad-model
+  done_when: Rebuilds cleanly under parameter change; zero interferences at tolerance extremes.
+- id: mechanical
+  agent: mechanical-engineer
+  skills:
+  - tolerance-stackup-analysis
+  - structural-analysis
+  - fastener-and-joint-design
+  - drop-and-vibration-analysis
+  does: Prove the parts fit and survive the loads.
+  produces: stackup.md
+  done_when: Stack closes within process capability; margins stated numerically.
+- id: enclosure
+  agent: enclosure-designer
+  skills:
+  - enclosure-architecture
+  - ingress-protection-design
+  - board-mounting-design
+  - aperture-tolerancing
+  does: Design the housing, its seal, and how the board is held.
+  produces: enclosure-architecture.md
+  done_when: Sealing path continuous; connector apertures align at tolerance extremes.
+- id: thermal
+  agent: thermal-engineer
+  skills:
+  - thermal-budgeting
+  - thermal-path-analysis
+  - thermal-interface-selection
+  - touch-temperature-compliance
+  does: Keep every component and every touchable surface inside its limit.
+  produces: thermal-budget.md
+  done_when: All components within limit at worst-case ambient; touch temperature passes.
+- id: firmware
+  agent: embedded-firmware-engineer
+  skills:
+  - firmware-architecture
+  - board-bringup
+  - hardware-abstraction-design
+  - safe-field-update-design
+  does: Write the code that runs on it, starting with bring-up.
+  produces: firmware-architecture.md
+  done_when: Bring-up firmware exists; update path recovers from interruption.
+- id: dfm
+  agent: dfm-engineer
+  skills:
+  - dfm-review
+  - process-selection
+  - design-for-assembly
+  - process-capability-analysis
+  does: Make sure it can be made at the intended volume and cost.
+  produces: dfm-report.md
+  done_when: Process chosen at the real volume; every finding closed before tooling.
+- id: build
+  agent: prototyping-fabrication-agent
+  skills:
+  - prototype-process-selection
+  - fabrication-package-preparation
+  - supplier-quoting
+  - build-traceability
+  does: Get physical parts made and keep track of exactly what was built.
+  produces: build-record.md
+  done_when: Every unit's configuration recorded; findings routed as evidence.
+- id: compliance
+  agent: compliance-emc-engineer
+  skills:
+  - standards-applicability-matrix
+  - emc-design-review
+  - pre-compliance-testing
+  - product-safety-review
+  - technical-file-assembly
+  does: Get it legally sellable in every target market.
+  produces: standards-matrix.md
+  done_when: Pre-compliance run before design freeze; technical file matches what ships.
+- id: verify
+  agent: hardware-test-engineer
+  skills:
+  - test-strategy-hardware
+  - verification-matrix
+  - environmental-testing
+  - production-test-design
+  does: Prove every requirement, through every build phase.
+  produces: verification-matrix.csv
+  done_when: Every requirement mapped to a test and a result; production test coverage specified.
+- id: cost
+  agent: hardware-head
+  skills:
+  - hardware-cost-rollup
+  - manufacturing-readiness-review
+  does: Confirm the unit cost and that the factory can build it.
+  produces: cost-rollup.md
+  done_when: Yield loss included in cost; instructions validated by a real operator.
+- id: council
+  agent: council-director
+  skills:
+  - council-debate-facilitation
+  - verdict-writing
+  - dissent-recording
+  does: Attack the design before tooling capital is committed.
+  produces: council-verdict.md
+  done_when: Verdict issued; blockers owned with acceptance criteria.
+- id: gate
+  agent: director
+  skills:
+  - stage-gate-review
+  - decision-record-writing
+  - kill-criteria-definition
+  does: Decide whether to cut tooling, and on what evidence.
+  produces: stage-gate-decision.md
+  done_when: Design frozen before tooling release; decision names its deciding evidence.
+exit_criteria:
+- Each build phase exited on evidence, not on schedule pressure.
+- Every requirement verified; compliance passed before submission.
+- Design frozen before any tool is cut.
+- Cost at volume within target, with yield loss included.

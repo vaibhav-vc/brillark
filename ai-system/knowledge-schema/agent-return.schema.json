@@ -1,0 +1,99 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://brillark.ai/schemas/agent-return.schema.json",
+  "title": "Agent Return",
+  "description": "What a sub-agent hands back to its parent. Sub-agents run in isolated context and return only this \u2014 never their working context. The parent reads the artifact if it needs the detail.",
+  "type": "object",
+  "required": [
+    "agent",
+    "task_id",
+    "status",
+    "summary",
+    "confidence",
+    "tokens_used"
+  ],
+  "properties": {
+    "agent": {
+      "type": "string"
+    },
+    "task_id": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "done",
+        "blocked",
+        "failed",
+        "escalated"
+      ]
+    },
+    "summary": {
+      "type": "string",
+      "maxLength": 4000,
+      "description": "The decision or finding. Budget-capped: see runtime/context-budget.yaml."
+    },
+    "artifacts": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Paths, not contents. The parent fetches what it actually needs."
+    },
+    "confidence": {
+      "type": "string",
+      "enum": [
+        "measured",
+        "sourced",
+        "benchmarked",
+        "estimated",
+        "guessed"
+      ]
+    },
+    "open_questions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "blocked_on": {
+      "type": "string"
+    },
+    "escalated_to_model": {
+      "type": "string",
+      "description": "Set when the agent handed up a model tier, with the trigger."
+    },
+    "escalation_trigger": {
+      "type": "string"
+    },
+    "tokens_used": {
+      "type": "object",
+      "required": [
+        "total"
+      ],
+      "properties": {
+        "system": {
+          "type": "integer"
+        },
+        "context": {
+          "type": "integer"
+        },
+        "retrieved": {
+          "type": "integer"
+        },
+        "output": {
+          "type": "integer"
+        },
+        "total": {
+          "type": "integer"
+        }
+      },
+      "description": "Feeds token-accounting. An agent that cannot report this cannot be optimised."
+    },
+    "context_loaded_unused": {
+      "type": "integer",
+      "description": "Tokens placed in context and never referenced. Feeds context-bloat-analysis."
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,16 @@
+# Tier-1 discovery index for the 'memory' category. name	output	purpose
+# Tier 2 is skills/<name>/SKILL.md — load only the skills you selected.
+# Category anti-patterns: skills/antipatterns/memory.md (load once at tier 2).
+contradiction-detection	Catch conflicting claims across the knowledge graph as they arrive.
+entity-resolution	Make sure one real-world thing is one node in the knowledge graph.
+graph-query-design	Build the specific queries agents need rather than a generic search box.
+knowledge-graph-modeling	Design the entities and typed relationships that make cross-domain questions answerable.
+link-provenance	Ensure every graph edge points at the artifact that justifies it.
+memory-conflict-resolution	Resolve two stored facts that cannot both be true.
+memory-consolidation	Promote scattered episodic events into durable semantic and procedural memory.
+memory-decay-policy	Expire stale context deliberately, because trusted-but-wrong is worse than missing.
+memory-retrieval-tuning	Make sure the right memory reaches the agent that needs it.
+memory-write-standard	Enforce the structure that makes a memory retrievable months later.
+pattern-reuse-lookup	Find the prior decomposition, plan, or solution that matches this shape.
+prior-error-lookup	Check whether this organisation has already been wrong about this.
+provenance-tracking	Keep every claim traceable to the evidence that produced it.

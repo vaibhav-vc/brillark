@@ -1,0 +1,21 @@
+# Skill categories. Load only the shard(s) your task needs.
+# category	skills	index_file
+compliance	12	skills/index/compliance.tsv
+council	44	skills/index/council.tsv
+data	7	skills/index/data.tsv
+design	78	skills/index/design.tsv
+efficiency	9	skills/index/efficiency.tsv
+engineering	61	skills/index/engineering.tsv
+finance	56	skills/index/finance.tsv
+gtm	38	skills/index/gtm.tsv
+hardware	85	skills/index/hardware.tsv
+improvement	55	skills/index/improvement.tsv
+legal	15	skills/index/legal.tsv
+market	36	skills/index/market.tsv
+memory	13	skills/index/memory.tsv
+orchestration	48	skills/index/orchestration.tsv
+people	5	skills/index/people.tsv
+product	13	skills/index/product.tsv
+research	39	skills/index/research.tsv
+risk	4	skills/index/risk.tsv
+strategy	11	skills/index/strategy.tsv

@@ -1,0 +1,147 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://brillark.ai/schemas/entity.schema.json",
+  "title": "Knowledge Graph Entity",
+  "description": "One canonical real-world thing. Duplicate entities silently split knowledge, so resolution is mandatory.",
+  "type": "object",
+  "required": [
+    "id",
+    "type",
+    "canonical_name"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^ent_[a-z0-9-]+$"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "customer",
+        "prospect",
+        "competitor",
+        "segment",
+        "persona",
+        "feature",
+        "risk",
+        "decision",
+        "experiment",
+        "vendor",
+        "partner",
+        "regulation",
+        "metric",
+        "channel",
+        "venture"
+      ]
+    },
+    "canonical_name": {
+      "type": "string"
+    },
+    "aliases": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "attributes": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "relationships": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "type",
+          "target",
+          "source_artifact"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "competes_with",
+              "depends_on",
+              "evidences",
+              "contradicts",
+              "serves",
+              "owned_by",
+              "derived_from",
+              "blocks",
+              "supersedes",
+              "member_of"
+            ],
+            "description": "Typed only. 'related_to' carries no information and is not permitted."
+          },
+          "target": {
+            "type": "string"
+          },
+          "source_artifact": {
+            "type": "string",
+            "description": "The artifact justifying this edge. Required."
+          },
+          "evidence_grade": {
+            "type": "string",
+            "enum": [
+              "measured",
+              "sourced",
+              "benchmarked",
+              "estimated",
+              "guessed"
+            ],
+            "description": "How well this is evidenced. 'guessed' may never be load-bearing at a stage gate."
+          },
+          "valid_from": {
+            "type": "string",
+            "format": "date"
+          },
+          "valid_to": {
+            "type": "string",
+            "format": "date"
+          }
+        }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "required": [
+        "author_agent",
+        "created_at",
+        "evidence_grade"
+      ],
+      "properties": {
+        "author_agent": {
+          "type": "string",
+          "description": "Agent id that wrote this record."
+        },
+        "skill": {
+          "type": "string",
+          "description": "Skill used to produce it."
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "evidence_grade": {
+          "type": "string",
+          "enum": [
+            "measured",
+            "sourced",
+            "benchmarked",
+            "estimated",
+            "guessed"
+          ],
+          "description": "How well this is evidenced. 'guessed' may never be load-bearing at a stage gate."
+        },
+        "source_artifacts": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Artifact ids that justify this record. Required for anything above 'estimated'."
+        }
+      }
+    }
+  },
+  "additionalProperties": false
+}

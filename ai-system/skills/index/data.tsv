@@ -1,0 +1,10 @@
+# Tier-1 discovery index for the 'data' category. name	output	purpose
+# Tier 2 is skills/<name>/SKILL.md — load only the skills you selected.
+# Category anti-patterns: skills/antipatterns/data.md (load once at tier 2).
+data-classification	Label data by sensitivity so controls can follow.
+data-governance-policy	Set the rules for how data is handled.
+data-inventory	Know what data exists and why.
+data-lineage-audit	Trace a reported number back to where it came from.
+data-quality-scoring	Measure whether the data can be trusted.
+experiment-design	Design a test that can actually answer the question.
+metric-dictionary	Define every metric once, with one owner.

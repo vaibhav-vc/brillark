@@ -1,0 +1,65 @@
+name: MVP definition
+stage: mvp
+owner: engineering-head
+purpose: Decide the smallest build that tests the riskiest assumption, and freeze the scope line.
+steps:
+- id: assumption
+  agent: council-assumption-auditor
+  skills:
+  - load-bearing-analysis
+  - evidence-grading
+  - cheapest-test-design
+  does: Identify which assumption the build must test.
+  produces: load-bearing-report.md
+  done_when: The critical set is ranked; the top assumption is named.
+- id: prd
+  agent: product-requirements-agent
+  skills:
+  - product-requirements-doc
+  - success-signal-definition
+  - acceptance-criteria-writing
+  - non-functional-requirements
+  does: Write requirements that start from the evidenced problem.
+  produces: prd.md
+  done_when: Success signal measurable; acceptance criteria testable including unhappy paths.
+- id: scope
+  agent: mvp-scoper
+  skills:
+  - mvp-scoping
+  - riskiest-assumption-testing
+  - concierge-mvp-design
+  - scope-cut-justification
+  - time-to-user-estimation
+  does: Cut everything that does not change what we learn.
+  produces: mvp-scope.md
+  done_when: Every deferral has a revisit trigger; time to first user is the binding constraint.
+- id: architecture
+  agent: system-architect
+  skills:
+  - architecture-decision-record
+  - system-diagramming
+  - boundary-design
+  - dependency-failure-analysis
+  does: Design two viable options and record the choice with its trade-offs.
+  produces: adr.md
+  done_when: Two genuine alternatives compared; failure behaviour defined per dependency.
+- id: threat
+  agent: security-engineer
+  skills:
+  - threat-modeling
+  - data-classification
+  does: Threat-model the new surface before it is built.
+  produces: threat-model.md
+  done_when: Trust boundaries marked; controls defined for threats above threshold.
+- id: council
+  agent: council-director
+  skills:
+  - council-debate-facilitation
+  - verdict-writing
+  does: 'Attack the scope: is this really the smallest test of the riskiest belief?'
+  produces: council-verdict.md
+  done_when: Verdict issued; blockers owned with acceptance criteria.
+exit_criteria:
+- Scope demonstrably tests the riskiest assumption.
+- Out-of-scope list published with triggers.
+- Architecture choice recorded in an ADR.

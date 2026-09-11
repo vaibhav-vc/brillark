@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://brillark.ai/schemas/assumption.schema.json",
+  "title": "Assumption",
+  "description": "A belief the plan depends on, graded and load-scored so the dangerous ones are visible.",
+  "type": "object",
+  "required": [
+    "id",
+    "statement",
+    "evidence_grade",
+    "load_bearing_score",
+    "owner"
+  ],
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "statement": {
+      "type": "string",
+      "description": "A standalone claim that could be true or false."
+    },
+    "evidence_grade": {
+      "type": "string",
+      "enum": [
+        "measured",
+        "sourced",
+        "benchmarked",
+        "estimated",
+        "guessed"
+      ],
+      "description": "How well this is evidenced. 'guessed' may never be load-bearing at a stage gate."
+    },
+    "load_bearing_score": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 5,
+      "description": "5 = the plan collapses if this is false."
+    },
+    "cheapest_test": {
+      "type": "string"
+    },
+    "test_threshold": {
+      "type": "string"
+    },
+    "owner": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "untested",
+        "testing",
+        "confirmed",
+        "disproven"
+      ]
+    },
+    "disproven_note": {
+      "type": "string",
+      "description": "Kept permanently: prior-error lookup reads these."
+    }
+  },
+  "additionalProperties": false
+}

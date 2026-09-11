@@ -1,0 +1,88 @@
+# Tier-1 discovery index for the 'hardware' category. name	output	purpose
+# Tier 2 is skills/<name>/SKILL.md — load only the skills you selected.
+# Category anti-patterns: skills/antipatterns/hardware.md (load once at tier 2).
+analysis-test-correlation	Check the simulation actually predicted reality.
+aperture-tolerancing	Size openings so the mating part actually fits every time.
+assembly-modeling	Model the assembly so it reflects how the product is actually put together.
+authorised-sourcing-control	Buy only what you can trace.
+board-bringup	Get the first board alive, in a defined order.
+board-mounting-design	Hold the board so its connectors land where they should.
+bom-management	Own the list of everything that goes into the product.
+build-phase-gating	Exit each build phase on evidence, not on schedule.
+build-traceability	Know which parts are in which unit.
+closure-and-retention-design	Make it close properly and stay closed.
+cmf-specification	Specify colour, material, and finish so the factory produces what was designed.
+component-cost-analysis	Know what the parts really cost at the volume you will actually build.
+component-placement	Place parts for the signal path, the mechanics, and the build.
+converter-topology-selection	Choose the right converter for each rail.
+crosstalk-analysis	Keep signals from corrupting their neighbours.
+design-for-assembly	Reduce the cost and error rate of putting it together.
+design-for-test-provision	Build in the access debugging and production will need.
+dfm-review	Check every part can be made by the intended process.
+drop-and-vibration-analysis	Check the product survives being dropped and shaken.
+emc-design-review	Design for compliance while it is still cheap.
+enclosure-architecture	Decide how the housing splits, closes, and holds itself together.
+environmental-testing	Test the conditions the product will actually meet.
+ergonomics-and-human-factors	Fit the product to the range of people who will actually use it.
+fabrication-output-review	Check the package before the fabricator does.
+fabrication-package-preparation	Send the supplier everything they need and nothing ambiguous.
+failure-analysis-hardware	Find out why the unit actually failed.
+fastener-and-joint-design	Choose how parts are held together and whether they can come apart.
+firmware-architecture	Structure the embedded software so hardware changes do not rewrite the product.
+form-volume-negotiation	Settle the internal volume envelope before anyone refines a surface.
+gd-and-t-drafting	Dimension drawings so the part can be inspected and accepted unambiguously.
+ground-and-return-path-design	Design where the current comes back, not just where it goes.
+hardware-abstraction-design	Keep the product code independent of the parts underneath it.
+hardware-architecture	Settle how mechanical, electrical, and firmware fit together before detail work starts.
+hardware-cost-rollup	Know what a unit actually costs to make.
+hardware-strategy	Decide whether and how to be a hardware company.
+high-speed-routing	Route the fast signals so they still work when they arrive.
+impedance-planning	Set impedance targets and make them achievable.
+industrial-design-concepting	Generate and narrow physical product concepts against real use, not against a mood board.
+ingress-protection-design	Keep water and dust out, to the rating the product claims.
+interface-contract-definition	Write down the boundaries between disciplines so they stop moving.
+interface-protection-design	Protect every connection to the outside world.
+interference-checking	Find the collisions before the parts are made.
+lifecycle-and-obsolescence-review	Avoid designing in a part that is about to disappear.
+manufacturing-partner-selection	Choose who builds it on more than price.
+manufacturing-readiness-review	Check the factory can actually build it.
+model-revision-control	Keep geometry versions unambiguous.
+parametric-modeling	Build a 3D model that survives change.
+physical-model-review	Judge form with a physical object, because screens flatter shapes that fail in the hand.
+pin-accounting-review	Account for every pin on every part.
+power-measurement-validation	Measure the power system rather than quoting the datasheet.
+power-protection-design	Define what happens when power goes wrong.
+power-sequencing-design	Specify what powers up when, and what every output does at reset.
+power-tree-design	Lay out every rail, its source, and its headroom.
+pre-compliance-testing	Find the failures before the accredited lab does.
+process-capability-analysis	Design inside what the supplier can actually hold.
+process-selection	Choose the manufacturing process for the real volume.
+product-lifecycle-planning	Plan the product's whole life before shipping the first unit.
+product-safety-review	Check the product cannot hurt anyone.
+production-test-design	Design the test that every unit passes through.
+prototype-learning-capture	Turn the build into evidence rather than anecdote.
+prototype-process-selection	Choose how to make the prototype from what it must prove.
+realtime-timing-verification	Measure the timing rather than reasoning about it.
+safe-field-update-design	Make sure an update cannot brick a unit in the field.
+schematic-capture	Draw the circuit so it can be reviewed, built, and debugged.
+second-source-qualification	Make sure one supplier cannot stop the line.
+si-simulation-and-measurement	Check the signals, first in simulation and then on the bench.
+stackup-design	Decide the layer structure before anything is routed.
+standards-applicability-matrix	Know which rules apply before designing, not before submitting.
+structural-analysis	Check the part survives the loads it will actually see.
+supplier-quoting	Compare quotes on more than price.
+supply-chain-resilience-review	Find where the supply chain would break.
+technical-file-assembly	Keep the certification evidence current with what actually ships.
+termination-and-topology-design	Control reflections before they become errors.
+test-strategy-hardware	Decide what gets tested at each build phase and why.
+thermal-budgeting	Account for every watt before designing the cooling.
+thermal-interface-selection	Choose the material at the contact, where most thermal designs fail.
+thermal-path-analysis	Follow the heat from junction to ambient.
+thermal-validation-testing	Measure what the product actually runs at.
+timing-budget-analysis	Prove the data arrives when the receiver expects it.
+tolerance-stackup-analysis	Work out whether the parts will actually assemble.
+tooling-capital-planning	Plan the money that gets locked into steel and inventory.
+tooling-design-review	Review the tool before it is cut.
+touch-temperature-compliance	Keep the outside safe to touch.
+transient-response-design	Make the rail hold up when the load steps.
+verification-matrix	Prove every requirement was actually tested.

@@ -1,0 +1,4475 @@
+version: 1
+count: 629
+description: Machine-readable skill library. Every skill referenced by an agent or workflow must appear here.
+skills:
+- name: agent-routing
+  category: orchestration
+  description: Send a request to exactly one accountable agent, chosen from capability rather than convenience.
+  output: routing-decision.md
+  path: skills/agent-routing/SKILL.md
+  used_by:
+  - intake-router
+  - orchestration-head
+- name: request-classification
+  category: orchestration
+  description: Put an incoming request into the taxonomy that determines how it is handled.
+  output: intake-record.md
+  path: skills/request-classification/SKILL.md
+  used_by:
+  - intake-router
+- name: intent-clarification
+  category: orchestration
+  description: Convert a vague request into a restatement the requester confirms before work starts.
+  output: clarified-brief.md
+  path: skills/intent-clarification/SKILL.md
+  used_by:
+  - director
+  - intake-router
+- name: duplicate-detection
+  category: orchestration
+  description: Find out whether this request is already answered or already in flight before spending effort.
+  output: duplicate-check.md
+  path: skills/duplicate-detection/SKILL.md
+  used_by:
+  - intake-router
+- name: task-decomposition
+  category: orchestration
+  description: Break an objective into tasks one agent can finish in one run with a checkable output.
+  output: task-graph.yaml
+  path: skills/task-decomposition/SKILL.md
+  used_by:
+  - orchestration-head
+  - planning-decomposer
+- name: work-breakdown-structure
+  category: orchestration
+  description: Produce the hierarchy from objective to epic to task, so nothing falls between levels.
+  output: wbs.md
+  path: skills/work-breakdown-structure/SKILL.md
+  used_by:
+  - planning-decomposer
+- name: definition-of-done-writing
+  category: orchestration
+  description: Write a completion condition that can be checked by someone other than the author.
+  output: definition-of-done.md
+  path: skills/definition-of-done-writing/SKILL.md
+  used_by:
+  - planning-decomposer
+- name: parallelisation-analysis
+  category: orchestration
+  description: Find what can run at the same time and what genuinely cannot.
+  output: parallelisation-plan.md
+  path: skills/parallelisation-analysis/SKILL.md
+  used_by:
+  - planning-decomposer
+  - workflow-optimizer
+- name: dependency-resolution
+  category: orchestration
+  description: Turn a set of tasks into a valid execution order.
+  output: dependency-graph.yaml
+  path: skills/dependency-resolution/SKILL.md
+  used_by:
+  - dependency-scheduler
+- name: cycle-detection
+  category: orchestration
+  description: Find circular dependencies before they deadlock execution.
+  output: cycle-report.md
+  path: skills/cycle-detection/SKILL.md
+  used_by:
+  - dependency-scheduler
+- name: critical-path-analysis
+  category: orchestration
+  description: Identify the chain of work that actually determines the finish date.
+  output: critical-path.md
+  path: skills/critical-path-analysis/SKILL.md
+  used_by:
+  - dependency-scheduler
+- name: schedule-optimisation
+  category: orchestration
+  description: Improve the schedule without pretending work takes less time than it does.
+  output: schedule.md
+  path: skills/schedule-optimisation/SKILL.md
+  used_by:
+  - dependency-scheduler
+- name: budget-allocation
+  category: orchestration
+  description: Give every task an explicit ceiling on time, tokens, and spend.
+  output: budget-allocation.md
+  path: skills/budget-allocation/SKILL.md
+  used_by:
+  - dependency-scheduler
+- name: resource-allocation
+  category: orchestration
+  description: Decide which agents and budget go to which bets this cycle.
+  output: allocation-decision.md
+  path: skills/resource-allocation/SKILL.md
+  used_by:
+  - director
+- name: org-backlog-triage
+  category: orchestration
+  description: Keep one prioritised list for the whole organisation so domains cannot each claim top priority.
+  output: org-backlog.md
+  path: skills/org-backlog-triage/SKILL.md
+  used_by:
+  - director
+- name: prioritisation-forcing
+  category: orchestration
+  description: Break a tie or a 'everything is critical' deadlock into a decision.
+  output: prioritisation-decision.md
+  path: skills/prioritisation-forcing/SKILL.md
+  used_by:
+  - ceo-agent
+- name: stage-gate-review
+  category: orchestration
+  description: Decide whether a venture stage is complete and what happens next.
+  output: stage-gate-decision.md
+  path: skills/stage-gate-review/SKILL.md
+  used_by:
+  - director
+- name: kill-criteria-definition
+  category: orchestration
+  description: Decide in advance what would make us stop, while judgement is still uncommitted.
+  output: kill-criteria.md
+  path: skills/kill-criteria-definition/SKILL.md
+  used_by:
+  - director
+- name: decision-record-writing
+  category: orchestration
+  description: Capture a decision so a future reader understands why, not just what.
+  output: decision-record.md
+  path: skills/decision-record-writing/SKILL.md
+  used_by:
+  - director
+- name: decision-request-framing
+  category: orchestration
+  description: Escalate a problem as a decision someone can actually make.
+  output: decision-request.md
+  path: skills/decision-request-framing/SKILL.md
+  used_by:
+  - escalation-manager
+- name: escalation-criteria
+  category: orchestration
+  description: Define what must go up, to whom, and how fast.
+  output: escalation-policy.md
+  path: skills/escalation-criteria/SKILL.md
+  used_by:
+  - escalation-manager
+- name: resolution-tracking
+  category: orchestration
+  description: Follow escalations and blockers through to an actual outcome.
+  output: resolution-log.md
+  path: skills/resolution-tracking/SKILL.md
+  used_by:
+  - escalation-manager
+- name: escalation-pattern-analysis
+  category: orchestration
+  description: Find the process defects behind repeated escalations.
+  output: escalation-pattern-report.md
+  path: skills/escalation-pattern-analysis/SKILL.md
+  used_by:
+  - escalation-manager
+- name: blocker-detection
+  category: orchestration
+  description: Find work that has stopped moving before someone reports it.
+  output: blocker-report.md
+  path: skills/blocker-detection/SKILL.md
+  used_by:
+  - progress-tracker
+- name: status-tracking
+  category: orchestration
+  description: Report the true state of work from artifacts rather than self-assessment.
+  output: status-board.md
+  path: skills/status-tracking/SKILL.md
+  used_by:
+  - progress-tracker
+- name: throughput-reporting
+  category: orchestration
+  description: Measure how much work actually completes per cycle so capacity claims can be checked.
+  output: throughput-report.md
+  path: skills/throughput-reporting/SKILL.md
+  used_by:
+  - progress-tracker
+- name: cycle-time-analysis
+  category: orchestration
+  description: Find where time actually goes between request and delivery.
+  output: cycle-time-report.md
+  path: skills/cycle-time-analysis/SKILL.md
+  used_by:
+  - progress-tracker
+- name: variance-reporting
+  category: orchestration
+  description: Report the gap between plan and reality early and without spin.
+  output: variance-report.md
+  path: skills/variance-reporting/SKILL.md
+  used_by:
+  - progress-tracker
+- name: bottleneck-analysis
+  category: orchestration
+  description: Find the one constraint limiting the whole system's output.
+  output: bottleneck-report.md
+  path: skills/bottleneck-analysis/SKILL.md
+  used_by:
+  - coo-agent
+- name: context-packaging
+  category: orchestration
+  description: Assemble everything an agent needs so it never has to rediscover known facts.
+  output: context-package.json
+  path: skills/context-packaging/SKILL.md
+  used_by:
+  - handoff-coordinator
+  - intake-router
+  - orchestration-head
+- name: handoff-contract-definition
+  category: orchestration
+  description: Define what must accompany work passed between two specific roles.
+  output: handoff-contract.md
+  path: skills/handoff-contract-definition/SKILL.md
+  used_by:
+  - handoff-coordinator
+- name: handoff-validation
+  category: orchestration
+  description: Check that arriving work is complete before accepting it.
+  output: handoff-record.md
+  path: skills/handoff-validation/SKILL.md
+  used_by:
+  - handoff-coordinator
+- name: open-question-tracking
+  category: orchestration
+  description: Keep unresolved questions alive across handoffs instead of dropping them.
+  output: open-questions.md
+  path: skills/open-question-tracking/SKILL.md
+  used_by:
+  - handoff-coordinator
+- name: rework-attribution
+  category: orchestration
+  description: Find out what caused work to be redone, so the cause can be fixed.
+  output: rework-log.md
+  path: skills/rework-attribution/SKILL.md
+  used_by:
+  - handoff-coordinator
+- name: memory-write-standard
+  category: memory
+  description: Enforce the structure that makes a memory retrievable months later.
+  output: memory-record.json
+  path: skills/memory-write-standard/SKILL.md
+  used_by:
+  - context-memory-curator
+- name: memory-consolidation
+  category: memory
+  description: Promote scattered episodic events into durable semantic and procedural memory.
+  output: consolidation-report.md
+  path: skills/memory-consolidation/SKILL.md
+  used_by:
+  - context-memory-curator
+  - orchestration-head
+- name: memory-retrieval-tuning
+  category: memory
+  description: Make sure the right memory reaches the agent that needs it.
+  output: retrieval-quality-report.md
+  path: skills/memory-retrieval-tuning/SKILL.md
+  used_by:
+  - context-memory-curator
+- name: memory-decay-policy
+  category: memory
+  description: Expire stale context deliberately, because trusted-but-wrong is worse than missing.
+  output: decay-policy.md
+  path: skills/memory-decay-policy/SKILL.md
+  used_by:
+  - context-memory-curator
+- name: memory-conflict-resolution
+  category: memory
+  description: Resolve two stored facts that cannot both be true.
+  output: conflict-resolution.md
+  path: skills/memory-conflict-resolution/SKILL.md
+  used_by:
+  - orchestration-head
+- name: provenance-tracking
+  category: memory
+  description: Keep every claim traceable to the evidence that produced it.
+  output: provenance-record.json
+  path: skills/provenance-tracking/SKILL.md
+  used_by:
+  - context-memory-curator
+- name: entity-resolution
+  category: memory
+  description: Make sure one real-world thing is one node in the knowledge graph.
+  output: entity-resolution-report.md
+  path: skills/entity-resolution/SKILL.md
+  used_by:
+  - knowledge-graph-librarian
+- name: knowledge-graph-modeling
+  category: memory
+  description: Design the entities and typed relationships that make cross-domain questions answerable.
+  output: graph-model.md
+  path: skills/knowledge-graph-modeling/SKILL.md
+  used_by:
+  - knowledge-graph-librarian
+- name: contradiction-detection
+  category: memory
+  description: Catch conflicting claims across the knowledge graph as they arrive.
+  output: contradiction-report.md
+  path: skills/contradiction-detection/SKILL.md
+  used_by:
+  - knowledge-graph-librarian
+- name: graph-query-design
+  category: memory
+  description: Build the specific queries agents need rather than a generic search box.
+  output: query-catalogue.md
+  path: skills/graph-query-design/SKILL.md
+  used_by:
+  - knowledge-graph-librarian
+- name: link-provenance
+  category: memory
+  description: Ensure every graph edge points at the artifact that justifies it.
+  output: edge-provenance-report.md
+  path: skills/link-provenance/SKILL.md
+  used_by:
+  - knowledge-graph-librarian
+- name: pattern-reuse-lookup
+  category: memory
+  description: Find the prior decomposition, plan, or solution that matches this shape.
+  output: pattern-match.md
+  path: skills/pattern-reuse-lookup/SKILL.md
+  used_by:
+  - planning-decomposer
+- name: prior-error-lookup
+  category: memory
+  description: Check whether this organisation has already been wrong about this.
+  output: prior-error-report.md
+  path: skills/prior-error-lookup/SKILL.md
+  used_by:
+  - council-assumption-auditor
+- name: pattern-detection
+  category: orchestration
+  description: Find repeating structures in outcomes, failures, or requests.
+  output: pattern-report.md
+  path: skills/pattern-detection/SKILL.md
+  used_by:
+  - retrospective-agent
+- name: root-cause-analysis
+  category: orchestration
+  description: Trace a failure back to the cause that can actually be changed.
+  output: root-cause-analysis.md
+  path: skills/root-cause-analysis/SKILL.md
+  used_by:
+  - retrospective-agent
+- name: retrospective-facilitation
+  category: orchestration
+  description: Run a cycle review that changes behaviour instead of producing notes.
+  output: retrospective.md
+  path: skills/retrospective-facilitation/SKILL.md
+  used_by:
+  - orchestration-head
+  - retrospective-agent
+- name: action-verification
+  category: orchestration
+  description: Confirm that agreed changes were actually made.
+  output: action-verification.md
+  path: skills/action-verification/SKILL.md
+  used_by:
+  - retrospective-agent
+- name: lesson-to-guardrail-conversion
+  category: orchestration
+  description: Turn a lesson into a constraint that prevents the repeat automatically.
+  output: guardrail-change.md
+  path: skills/lesson-to-guardrail-conversion/SKILL.md
+  used_by:
+  - retrospective-agent
+- name: runbook-authoring
+  category: orchestration
+  description: Write a procedure another agent can execute without asking questions.
+  output: runbook.md
+  path: skills/runbook-authoring/SKILL.md
+  used_by:
+  - coo-agent
+- name: operating-cadence-design
+  category: orchestration
+  description: Design the rhythm of planning, review, and decision for the organisation.
+  output: operating-cadence.md
+  path: skills/operating-cadence-design/SKILL.md
+  used_by:
+  - coo-agent
+- name: metrics-tree-design
+  category: orchestration
+  description: Connect the top-level goal to metrics each domain can actually move.
+  output: metrics-tree.md
+  path: skills/metrics-tree-design/SKILL.md
+  used_by:
+  - coo-agent
+- name: weekly-scorecard
+  category: orchestration
+  description: Publish a small set of numbers that show whether the organisation is on track.
+  output: scorecard.md
+  path: skills/weekly-scorecard/SKILL.md
+  used_by:
+  - coo-agent
+- name: evaluation-suite-design
+  category: orchestration
+  description: Build a repeatable test set that shows whether agents and skills work.
+  output: evaluation-suite.yaml
+  path: skills/evaluation-suite-design/SKILL.md
+  used_by:
+  - evaluation-harness-agent
+- name: golden-case-curation
+  category: orchestration
+  description: Maintain the reference examples that define good output.
+  output: golden-cases.md
+  path: skills/golden-case-curation/SKILL.md
+  used_by:
+  - benchmark-curator
+  - evaluation-harness-agent
+- name: regression-detection
+  category: orchestration
+  description: Catch quality drops when a prompt, skill, or agent definition changes.
+  output: regression-report.md
+  path: skills/regression-detection/SKILL.md
+  used_by:
+  - evaluation-harness-agent
+- name: agent-scorecard
+  category: orchestration
+  description: Report how well each agent actually performs, from evidence.
+  output: agent-scorecard.md
+  path: skills/agent-scorecard/SKILL.md
+  used_by:
+  - agent-performance-analyst
+  - evaluation-harness-agent
+- name: rubric-writing
+  category: orchestration
+  description: Define scoring criteria that different reviewers apply the same way.
+  output: rubric.md
+  path: skills/rubric-writing/SKILL.md
+  used_by:
+  - evaluation-harness-agent
+- name: unit-economics-analysis
+  category: finance
+  description: Determine whether one unit of the business makes money, line by line.
+  output: unit-economics.md
+  path: skills/unit-economics-analysis/SKILL.md
+  used_by:
+  - finance-head
+  - unit-economics-architect
+- name: contribution-margin-waterfall
+  category: finance
+  description: Show exactly where revenue per unit is consumed before it becomes margin.
+  output: margin-waterfall.md
+  path: skills/contribution-margin-waterfall/SKILL.md
+  used_by:
+  - unit-economics-architect
+- name: cac-ltv-modeling
+  category: finance
+  description: Compute what a customer costs to acquire and what they are worth, honestly.
+  output: cac-ltv.md
+  path: skills/cac-ltv-modeling/SKILL.md
+  used_by:
+  - unit-economics-architect
+- name: cohort-retention-analysis
+  category: finance
+  description: Understand how customers actually behave over time rather than in aggregate.
+  output: cohort-analysis.md
+  path: skills/cohort-retention-analysis/SKILL.md
+  used_by:
+  - revenue-forecaster
+  - unit-economics-architect
+- name: financial-model-build
+  category: finance
+  description: Build the integrated model where every money assumption meets its consequences.
+  output: financial-model.md
+  path: skills/financial-model-build/SKILL.md
+  used_by:
+  - finance-head
+  - financial-model-builder
+- name: three-statement-linking
+  category: finance
+  description: Connect profit and loss, balance sheet, and cash flow so the model cannot lie.
+  output: three-statement-model.md
+  path: skills/three-statement-linking/SKILL.md
+  used_by:
+  - financial-model-builder
+- name: assumption-ledger
+  category: finance
+  description: Collect every assumption that touches money into one auditable list.
+  output: assumption-ledger.md
+  path: skills/assumption-ledger/SKILL.md
+  used_by:
+  - council-assumption-auditor
+  - finance-head
+  - financial-model-builder
+- name: model-reconciliation
+  category: finance
+  description: Check the model against reality and fix the model, not the reality.
+  output: reconciliation.md
+  path: skills/model-reconciliation/SKILL.md
+  used_by:
+  - financial-model-builder
+- name: model-recomputation
+  category: council
+  description: Independently recompute a model's headline numbers before critiquing them.
+  output: recomputation-report.md
+  path: skills/model-recomputation/SKILL.md
+  used_by:
+  - council-economics-skeptic
+- name: scenario-analysis
+  category: finance
+  description: Model distinct futures defined by driver values rather than adjectives.
+  output: scenarios.md
+  path: skills/scenario-analysis/SKILL.md
+  used_by:
+  - finance-head
+  - financial-model-builder
+  - revenue-forecaster
+  - scenario-stress-tester
+- name: sensitivity-analysis
+  category: finance
+  description: Find which inputs actually move the outcome.
+  output: sensitivity-table.md
+  path: skills/sensitivity-analysis/SKILL.md
+  used_by:
+  - council-economics-skeptic
+  - scenario-stress-tester
+  - unit-economics-architect
+- name: stress-testing
+  category: finance
+  description: Break the plan deliberately to find where it fails.
+  output: stress-test.md
+  path: skills/stress-testing/SKILL.md
+  used_by:
+  - scenario-stress-tester
+- name: survival-analysis
+  category: finance
+  description: State the minimum performance required to avoid failure.
+  output: survival-requirements.md
+  path: skills/survival-analysis/SKILL.md
+  used_by:
+  - scenario-stress-tester
+- name: trigger-response-planning
+  category: finance
+  description: Decide the response before the trigger fires, while thinking is still calm.
+  output: trigger-response-plan.md
+  path: skills/trigger-response-planning/SKILL.md
+  used_by:
+  - scenario-stress-tester
+- name: break-even-analysis
+  category: finance
+  description: Find the volume or price at which the business stops losing money.
+  output: break-even.md
+  path: skills/break-even-analysis/SKILL.md
+  used_by:
+  - council-economics-skeptic
+- name: runway-forecast
+  category: finance
+  description: Determine the date the venture runs out of money.
+  output: runway.md
+  path: skills/runway-forecast/SKILL.md
+  used_by:
+  - burn-runway-analyst
+  - finance-head
+- name: burn-categorisation
+  category: finance
+  description: Show where the money is actually going.
+  output: burn-report.md
+  path: skills/burn-categorisation/SKILL.md
+  used_by:
+  - burn-runway-analyst
+- name: commitment-tracking
+  category: finance
+  description: Track money already promised but not yet paid.
+  output: commitments.md
+  path: skills/commitment-tracking/SKILL.md
+  used_by:
+  - burn-runway-analyst
+- name: cash-threshold-alerting
+  category: finance
+  description: Make the cash position trigger action automatically.
+  output: cash-alert-policy.md
+  path: skills/cash-threshold-alerting/SKILL.md
+  used_by:
+  - burn-runway-analyst
+- name: spend-efficiency-analysis
+  category: finance
+  description: Rank spend by what it produces, and cut the worst.
+  output: spend-efficiency.md
+  path: skills/spend-efficiency-analysis/SKILL.md
+  used_by:
+  - burn-runway-analyst
+  - cost-optimization-analyst
+- name: cost-baseline
+  category: finance
+  description: Establish what things currently cost before trying to optimise.
+  output: cost-baseline.md
+  path: skills/cost-baseline/SKILL.md
+  used_by:
+  - cost-optimization-analyst
+- name: savings-verification
+  category: finance
+  description: Prove a claimed saving actually appeared in the accounts.
+  output: savings-verification.md
+  path: skills/savings-verification/SKILL.md
+  used_by:
+  - cost-optimization-analyst
+- name: vendor-negotiation-prep
+  category: finance
+  description: Arrive at a vendor negotiation with data instead of hope.
+  output: negotiation-brief.md
+  path: skills/vendor-negotiation-prep/SKILL.md
+  used_by:
+  - cost-optimization-analyst
+- name: variance-analysis
+  category: finance
+  description: Explain the gap between budget and actual in a way that changes behaviour.
+  output: variance-analysis.md
+  path: skills/variance-analysis/SKILL.md
+  used_by:
+  - cfo-agent
+- name: budget-approval
+  category: finance
+  description: Approve or refuse spend with a stated reason either way.
+  output: budget-decision.md
+  path: skills/budget-approval/SKILL.md
+  used_by:
+  - cfo-agent
+- name: financial-controls-review
+  category: finance
+  description: Check that money cannot leave the company without the right approvals.
+  output: controls-review.md
+  path: skills/financial-controls-review/SKILL.md
+  used_by:
+  - cfo-agent
+- name: figure-reconciliation
+  category: finance
+  description: Trace every externally reported number to its source before it leaves the building.
+  output: reconciliation-trail.md
+  path: skills/figure-reconciliation/SKILL.md
+  used_by:
+  - investor-reporting-agent
+- name: bookkeeping-standard
+  category: finance
+  description: Define how transactions are recorded so the books stay auditable.
+  output: bookkeeping-standard.md
+  path: skills/bookkeeping-standard/SKILL.md
+  used_by:
+  - tax-and-compliance-finance
+- name: revenue-recognition-mapping
+  category: finance
+  description: Determine when revenue may actually be recognised, not when cash arrives.
+  output: rev-rec-policy.md
+  path: skills/revenue-recognition-mapping/SKILL.md
+  used_by:
+  - billing-systems-designer
+- name: revenue-forecasting
+  category: finance
+  description: Predict revenue with a stated range and a driver behind every number.
+  output: revenue-forecast.md
+  path: skills/revenue-forecasting/SKILL.md
+  used_by:
+  - revenue-forecaster
+- name: revenue-plan-decomposition
+  category: finance
+  description: Break a revenue target into drivers someone can own.
+  output: revenue-plan.md
+  path: skills/revenue-plan-decomposition/SKILL.md
+  used_by:
+  - chief-revenue-officer-agent
+- name: forecast-accuracy-review
+  category: finance
+  description: Score past forecasts so the method improves rather than the story.
+  output: forecast-accuracy.md
+  path: skills/forecast-accuracy-review/SKILL.md
+  used_by:
+  - revenue-forecaster
+- name: funnel-modeling
+  category: finance
+  description: Model the path from first contact to paying customer with real conversion rates.
+  output: funnel-model.md
+  path: skills/funnel-modeling/SKILL.md
+  used_by:
+  - revenue-forecaster
+- name: pricing-decision
+  category: finance
+  description: Decide what to charge and be able to defend it from both directions.
+  output: pricing-decision.md
+  path: skills/pricing-decision/SKILL.md
+  used_by:
+  - finance-head
+  - pricing-strategist
+- name: value-metric-selection
+  category: finance
+  description: Choose the thing the price scales with.
+  output: value-metric.md
+  path: skills/value-metric-selection/SKILL.md
+  used_by:
+  - pricing-strategist
+- name: willingness-to-pay-research
+  category: finance
+  description: Find out what customers will actually pay, not what they say they like.
+  output: wtp-research.md
+  path: skills/willingness-to-pay-research/SKILL.md
+  used_by:
+  - pricing-strategist
+- name: packaging-design
+  category: finance
+  description: Group capabilities into tiers customers can choose between.
+  output: packaging.md
+  path: skills/packaging-design/SKILL.md
+  used_by:
+  - pricing-strategist
+- name: price-testing
+  category: finance
+  description: Change price in a way that produces evidence rather than damage.
+  output: price-test.md
+  path: skills/price-testing/SKILL.md
+  used_by:
+  - pricing-strategist
+- name: billing-architecture-design
+  category: finance
+  description: Design the plumbing that turns pricing into collected cash.
+  output: billing-architecture.md
+  path: skills/billing-architecture-design/SKILL.md
+  used_by:
+  - billing-systems-designer
+- name: metering-specification
+  category: finance
+  description: Define the billable event precisely enough that nobody disputes the invoice.
+  output: metering-spec.md
+  path: skills/metering-specification/SKILL.md
+  used_by:
+  - billing-systems-designer
+- name: dunning-flow-design
+  category: finance
+  description: Recover failed payments without losing the customer.
+  output: dunning-flow.md
+  path: skills/dunning-flow-design/SKILL.md
+  used_by:
+  - billing-systems-designer
+- name: tax-obligation-mapping
+  category: finance
+  description: Determine what the venture owes, where, and when.
+  output: tax-obligations.md
+  path: skills/tax-obligation-mapping/SKILL.md
+  used_by:
+  - tax-and-compliance-finance
+- name: indirect-tax-determination
+  category: finance
+  description: Decide the VAT, GST, or sales tax treatment per product and market.
+  output: indirect-tax-logic.md
+  path: skills/indirect-tax-determination/SKILL.md
+  used_by:
+  - tax-and-compliance-finance
+- name: tax-handling-review
+  category: finance
+  description: Check that the system applies the tax logic correctly in practice.
+  output: tax-review.md
+  path: skills/tax-handling-review/SKILL.md
+  used_by:
+  - billing-systems-designer
+- name: contractor-classification-review
+  category: finance
+  description: Check that contractors are genuinely contractors.
+  output: classification-review.md
+  path: skills/contractor-classification-review/SKILL.md
+  used_by:
+  - tax-and-compliance-finance
+- name: filing-calendar
+  category: finance
+  description: Make sure no statutory deadline is missed.
+  output: filing-calendar.md
+  path: skills/filing-calendar/SKILL.md
+  used_by:
+  - corporate-secretary-agent
+  - tax-and-compliance-finance
+- name: capital-plan
+  category: finance
+  description: Decide how much money to raise, when, and against what milestone.
+  output: capital-plan.md
+  path: skills/capital-plan/SKILL.md
+  used_by:
+  - cfo-agent
+- name: fundraising-plan
+  category: finance
+  description: Run a raise as a process rather than a scramble.
+  output: fundraising-plan.md
+  path: skills/fundraising-plan/SKILL.md
+  used_by:
+  - fundraising-strategist
+- name: investor-targeting
+  category: finance
+  description: Build a target list of investors who could actually say yes.
+  output: investor-list.md
+  path: skills/investor-targeting/SKILL.md
+  used_by:
+  - fundraising-strategist
+- name: data-room-preparation
+  category: finance
+  description: Assemble everything diligence will ask for, before it is asked for.
+  output: data-room-index.md
+  path: skills/data-room-preparation/SKILL.md
+  used_by:
+  - fundraising-strategist
+- name: dilution-modeling
+  category: finance
+  description: Show what a financing actually costs in ownership.
+  output: dilution-model.md
+  path: skills/dilution-modeling/SKILL.md
+  used_by:
+  - cap-table-steward
+  - fundraising-strategist
+- name: cap-table-reconciliation
+  category: finance
+  description: Make the cap table match the signed documents exactly.
+  output: cap-table-reconciliation.md
+  path: skills/cap-table-reconciliation/SKILL.md
+  used_by:
+  - cap-table-steward
+  - corporate-secretary-agent
+- name: option-pool-planning
+  category: finance
+  description: Size the option pool against the actual hiring plan.
+  output: option-pool-plan.md
+  path: skills/option-pool-planning/SKILL.md
+  used_by:
+  - cap-table-steward
+- name: convertible-conversion-modeling
+  category: finance
+  description: Model what convertible instruments turn into under real terms.
+  output: conversion-model.md
+  path: skills/convertible-conversion-modeling/SKILL.md
+  used_by:
+  - cap-table-steward
+- name: waterfall-analysis
+  category: finance
+  description: Show who gets what in an exit, in what order.
+  output: waterfall.md
+  path: skills/waterfall-analysis/SKILL.md
+  used_by:
+  - cap-table-steward
+- name: investor-reporting
+  category: finance
+  description: Write an investor update that is accurate, consistent, and worth reading.
+  output: investor-update.md
+  path: skills/investor-reporting/SKILL.md
+  used_by:
+  - cfo-agent
+  - investor-reporting-agent
+- name: benchmark-comparison
+  category: council
+  description: Compare our numbers to observed reality and demand a reason for every gap.
+  output: benchmark-comparison.md
+  path: skills/benchmark-comparison/SKILL.md
+  used_by:
+  - council-economics-skeptic
+- name: circular-logic-detection
+  category: council
+  description: Find reasoning that assumes what it is trying to prove.
+  output: circularity-report.md
+  path: skills/circular-logic-detection/SKILL.md
+  used_by:
+  - council-economics-skeptic
+- name: narrative-pressure-test
+  category: finance
+  description: Test whether the fundraising story survives hostile questioning.
+  output: narrative-test.md
+  path: skills/narrative-pressure-test/SKILL.md
+  used_by:
+  - fundraising-strategist
+- name: market-sizing
+  category: market
+  description: Size a market bottom-up from countable inputs and sanity-check it top-down.
+  output: market-sizing.md
+  path: skills/market-sizing/SKILL.md
+  used_by:
+  - market-researcher
+- name: segmentation-analysis
+  category: market
+  description: Divide the market into groups that behave differently and can be served differently.
+  output: segmentation.md
+  path: skills/segmentation-analysis/SKILL.md
+  used_by:
+  - market-researcher
+- name: demand-signal-research
+  category: market
+  description: Find evidence that demand exists in behaviour rather than in opinion.
+  output: demand-signals.md
+  path: skills/demand-signal-research/SKILL.md
+  used_by:
+  - market-researcher
+- name: source-grading
+  category: market
+  description: Rate how much a source can be trusted before using it in an argument.
+  output: source-grades.md
+  path: skills/source-grading/SKILL.md
+  used_by:
+  - market-researcher
+- name: why-now-analysis
+  category: market
+  description: Explain what changed that makes this opportunity possible or urgent today.
+  output: why-now.md
+  path: skills/why-now-analysis/SKILL.md
+  used_by:
+  - market-researcher
+- name: competitive-landscape-mapping
+  category: market
+  description: Map everyone competing for the same budget, including the ones nobody counts.
+  output: competitive-map.md
+  path: skills/competitive-landscape-mapping/SKILL.md
+  used_by:
+  - competitor-intel-analyst
+- name: comparison-matrix
+  category: market
+  description: Compare alternatives on the dimensions that decide purchases.
+  output: comparison-matrix.md
+  path: skills/comparison-matrix/SKILL.md
+  used_by:
+  - competitor-intel-analyst
+- name: review-mining
+  category: market
+  description: Learn from what customers already say publicly about the alternatives.
+  output: review-analysis.md
+  path: skills/review-mining/SKILL.md
+  used_by:
+  - competitor-intel-analyst
+- name: competitor-strategy-inference
+  category: market
+  description: Work out what a competitor is trying to do from observable signals.
+  output: competitor-strategy.md
+  path: skills/competitor-strategy-inference/SKILL.md
+  used_by:
+  - competitor-intel-analyst
+- name: differentiation-analysis
+  category: market
+  description: State the reason a customer would switch, or admit there is none.
+  output: differentiation.md
+  path: skills/differentiation-analysis/SKILL.md
+  used_by:
+  - competitor-intel-analyst
+- name: customer-discovery-interview
+  category: market
+  description: Learn what customers actually do, without leading them or selling.
+  output: interview-notes.md
+  path: skills/customer-discovery-interview/SKILL.md
+  used_by:
+  - business-head
+  - customer-discovery-interviewer
+- name: interview-guide-design
+  category: market
+  description: Write questions that produce evidence instead of politeness.
+  output: interview-guide.md
+  path: skills/interview-guide-design/SKILL.md
+  used_by:
+  - customer-discovery-interviewer
+- name: evidence-extraction
+  category: market
+  description: Turn raw conversation into structured, countable evidence.
+  output: evidence-extract.md
+  path: skills/evidence-extraction/SKILL.md
+  used_by:
+  - customer-discovery-interviewer
+- name: pattern-synthesis
+  category: market
+  description: Find the signal across many conversations without inventing it.
+  output: synthesis.md
+  path: skills/pattern-synthesis/SKILL.md
+  used_by:
+  - customer-discovery-interviewer
+- name: disconfirmation-reporting
+  category: market
+  description: Report the evidence against your hypothesis first.
+  output: disconfirmation-report.md
+  path: skills/disconfirmation-reporting/SKILL.md
+  used_by:
+  - customer-discovery-interviewer
+- name: icp-definition
+  category: market
+  description: Define the customer precisely enough to build a target list.
+  output: icp.md
+  path: skills/icp-definition/SKILL.md
+  used_by:
+  - icp-persona-builder
+- name: persona-development
+  category: market
+  description: Describe the people involved in the purchase and what each one needs.
+  output: personas.md
+  path: skills/persona-development/SKILL.md
+  used_by:
+  - icp-persona-builder
+- name: disqualification-criteria
+  category: market
+  description: Define who we will not sell to, and stick to it.
+  output: disqualification.md
+  path: skills/disqualification-criteria/SKILL.md
+  used_by:
+  - icp-persona-builder
+- name: trigger-event-analysis
+  category: market
+  description: Find the moment that makes a buyer start looking.
+  output: trigger-events.md
+  path: skills/trigger-event-analysis/SKILL.md
+  used_by:
+  - icp-persona-builder
+- name: reachability-mapping
+  category: market
+  description: Establish where the ICP actually is and what it costs to get there.
+  output: reachability.md
+  path: skills/reachability-mapping/SKILL.md
+  used_by:
+  - icp-persona-builder
+- name: jtbd-analysis
+  category: market
+  description: Frame the problem as the job a customer hires a solution to do.
+  output: jtbd.md
+  path: skills/jtbd-analysis/SKILL.md
+  used_by:
+  - business-head
+  - jtbd-analyst
+- name: job-mapping
+  category: market
+  description: Map every step of the job, including the parts our product never touches.
+  output: job-map.md
+  path: skills/job-mapping/SKILL.md
+  used_by:
+  - jtbd-analyst
+- name: switching-analysis
+  category: market
+  description: Understand what it costs a customer to change, and who bears that cost.
+  output: switching-analysis.md
+  path: skills/switching-analysis/SKILL.md
+  used_by:
+  - jtbd-analyst
+- name: outcome-metric-extraction
+  category: market
+  description: Capture how the customer measures success, in their own terms.
+  output: outcome-metrics.md
+  path: skills/outcome-metric-extraction/SKILL.md
+  used_by:
+  - jtbd-analyst
+- name: opportunity-scoring
+  category: market
+  description: Rank problems by how much unclaimed value they contain.
+  output: opportunity-scores.md
+  path: skills/opportunity-scoring/SKILL.md
+  used_by:
+  - jtbd-analyst
+- name: value-proposition-canvas
+  category: market
+  description: Connect specific customer pains and gains to specific product capabilities.
+  output: value-proposition.md
+  path: skills/value-proposition-canvas/SKILL.md
+  used_by:
+  - value-proposition-designer
+- name: value-quantification
+  category: market
+  description: Put a number on the value delivered and show the arithmetic.
+  output: value-quantification.md
+  path: skills/value-quantification/SKILL.md
+  used_by:
+  - value-proposition-designer
+- name: fit-analysis
+  category: market
+  description: Assess honestly whether the offer matches the customer profile.
+  output: fit-analysis.md
+  path: skills/fit-analysis/SKILL.md
+  used_by:
+  - value-proposition-designer
+- name: claim-substantiation-planning
+  category: market
+  description: Decide what proof each marketing claim needs before it is made.
+  output: claim-proof-plan.md
+  path: skills/claim-substantiation-planning/SKILL.md
+  used_by:
+  - value-proposition-designer
+- name: alternative-comparison
+  category: market
+  description: Compare against what the customer would actually do instead.
+  output: alternative-comparison.md
+  path: skills/alternative-comparison/SKILL.md
+  used_by:
+  - value-proposition-designer
+- name: business-model-canvas
+  category: market
+  description: Describe the whole business model on one page with evidence per block.
+  output: business-model-canvas.md
+  path: skills/business-model-canvas/SKILL.md
+  used_by:
+  - business-head
+  - business-model-canvas-agent
+- name: model-coherence-check
+  category: market
+  description: Check that the parts of the business model actually fit together.
+  output: coherence-check.md
+  path: skills/model-coherence-check/SKILL.md
+  used_by:
+  - business-model-canvas-agent
+- name: alternative-model-generation
+  category: market
+  description: Generate genuinely different business models before committing to one.
+  output: model-alternatives.md
+  path: skills/alternative-model-generation/SKILL.md
+  used_by:
+  - business-model-canvas-agent
+- name: evidence-tagging
+  category: market
+  description: Mark how much each claim in an artifact is actually supported.
+  output: evidence-tags.md
+  path: skills/evidence-tagging/SKILL.md
+  used_by:
+  - business-model-canvas-agent
+- name: model-change-logging
+  category: market
+  description: Record how the business model evolved and what caused each change.
+  output: model-change-log.md
+  path: skills/model-change-logging/SKILL.md
+  used_by:
+  - business-model-canvas-agent
+- name: hypothesis-backlog
+  category: market
+  description: Keep a ranked list of what we believe and how we will test it.
+  output: hypothesis-backlog.md
+  path: skills/hypothesis-backlog/SKILL.md
+  used_by:
+  - business-head
+- name: gtm-planning
+  category: gtm
+  description: Decide how the product reaches customers and in what order.
+  output: gtm-plan.md
+  path: skills/gtm-planning/SKILL.md
+  used_by:
+  - business-head
+  - gtm-strategist
+- name: motion-selection
+  category: gtm
+  description: Choose between self-serve, product-led, sales-led, and partner-led.
+  output: motion-decision.md
+  path: skills/motion-selection/SKILL.md
+  used_by:
+  - gtm-strategist
+- name: beachhead-selection
+  category: gtm
+  description: Choose the one segment to win first.
+  output: beachhead.md
+  path: skills/beachhead-selection/SKILL.md
+  used_by:
+  - gtm-strategist
+- name: channel-test-design
+  category: gtm
+  description: Test a channel cheaply enough that failure is affordable.
+  output: channel-test.md
+  path: skills/channel-test-design/SKILL.md
+  used_by:
+  - gtm-strategist
+- name: channel-cac-modeling
+  category: gtm
+  description: Compute what each channel actually costs per acquired customer.
+  output: channel-cac.md
+  path: skills/channel-cac-modeling/SKILL.md
+  used_by:
+  - cmo-agent
+  - gtm-strategist
+- name: positioning-statement
+  category: gtm
+  description: Decide what the product is in the customer's mind.
+  output: positioning.md
+  path: skills/positioning-statement/SKILL.md
+  used_by:
+  - business-head
+  - cmo-agent
+  - positioning-messaging-agent
+- name: category-frame-selection
+  category: gtm
+  description: Choose the mental category that sets customer expectations.
+  output: category-frame.md
+  path: skills/category-frame-selection/SKILL.md
+  used_by:
+  - positioning-messaging-agent
+- name: message-hierarchy
+  category: gtm
+  description: Structure the message from headline claim to supporting proof.
+  output: message-hierarchy.md
+  path: skills/message-hierarchy/SKILL.md
+  used_by:
+  - positioning-messaging-agent
+- name: message-testing
+  category: gtm
+  description: Find out whether a message works before paying to distribute it.
+  output: message-test.md
+  path: skills/message-testing/SKILL.md
+  used_by:
+  - cmo-agent
+  - positioning-messaging-agent
+- name: terminology-consistency-audit
+  category: gtm
+  description: Make sure one concept has one name everywhere.
+  output: terminology-audit.md
+  path: skills/terminology-consistency-audit/SKILL.md
+  used_by:
+  - positioning-messaging-agent
+- name: campaign-brief
+  category: gtm
+  description: Define a campaign tightly enough that it can be judged afterwards.
+  output: campaign-brief.md
+  path: skills/campaign-brief/SKILL.md
+  used_by:
+  - cmo-agent
+- name: content-calendar
+  category: gtm
+  description: Plan content that serves the funnel rather than filling a schedule.
+  output: content-calendar.md
+  path: skills/content-calendar/SKILL.md
+  used_by:
+  - cmo-agent
+- name: growth-loop-design
+  category: gtm
+  description: Design a mechanism where output feeds back into input so growth compounds.
+  output: growth-loop.md
+  path: skills/growth-loop-design/SKILL.md
+  used_by:
+  - growth-loop-designer
+- name: loop-instrumentation
+  category: gtm
+  description: Measure a growth loop so optimisation is not guesswork.
+  output: loop-instrumentation.md
+  path: skills/loop-instrumentation/SKILL.md
+  used_by:
+  - growth-loop-designer
+- name: amplification-analysis
+  category: gtm
+  description: Determine whether a loop actually compounds.
+  output: amplification-analysis.md
+  path: skills/amplification-analysis/SKILL.md
+  used_by:
+  - growth-loop-designer
+- name: cycle-time-optimisation
+  category: gtm
+  description: Make the loop turn faster, not just convert better.
+  output: cycle-time-optimisation.md
+  path: skills/cycle-time-optimisation/SKILL.md
+  used_by:
+  - growth-loop-designer
+- name: referral-mechanics-design
+  category: gtm
+  description: Design a referral that people actually want to make.
+  output: referral-design.md
+  path: skills/referral-mechanics-design/SKILL.md
+  used_by:
+  - growth-loop-designer
+- name: partnership-thesis
+  category: gtm
+  description: State why a partnership would create value before pursuing one.
+  output: partnership-thesis.md
+  path: skills/partnership-thesis/SKILL.md
+  used_by:
+  - chief-strategy-officer-agent
+  - partnership-bd-agent
+- name: partner-qualification
+  category: gtm
+  description: Decide whether a candidate partner is worth the effort.
+  output: partner-qualification.md
+  path: skills/partner-qualification/SKILL.md
+  used_by:
+  - partnership-bd-agent
+- name: deal-structuring
+  category: gtm
+  description: Structure an agreement that is testable before it is binding.
+  output: deal-structure.md
+  path: skills/deal-structuring/SKILL.md
+  used_by:
+  - partnership-bd-agent
+- name: co-marketing-planning
+  category: gtm
+  description: Plan joint activity that both parties will actually resource.
+  output: co-marketing-plan.md
+  path: skills/co-marketing-planning/SKILL.md
+  used_by:
+  - partnership-bd-agent
+- name: partnership-review
+  category: gtm
+  description: Judge whether a partnership is producing and act on the answer.
+  output: partnership-review.md
+  path: skills/partnership-review/SKILL.md
+  used_by:
+  - partnership-bd-agent
+- name: pipeline-model
+  category: gtm
+  description: Model the pipeline so forecasts mean something.
+  output: pipeline-model.md
+  path: skills/pipeline-model/SKILL.md
+  used_by:
+  - chief-revenue-officer-agent
+- name: sales-playbook
+  category: gtm
+  description: Write down how selling works so someone other than the founder can do it.
+  output: sales-playbook.md
+  path: skills/sales-playbook/SKILL.md
+  used_by:
+  - chief-revenue-officer-agent
+  - sales-playbook-agent
+- name: qualification-framework
+  category: gtm
+  description: Decide quickly whether a deal is real.
+  output: qualification-framework.md
+  path: skills/qualification-framework/SKILL.md
+  used_by:
+  - sales-playbook-agent
+- name: discovery-call-script
+  category: gtm
+  description: Structure the first call to diagnose rather than pitch.
+  output: discovery-script.md
+  path: skills/discovery-call-script/SKILL.md
+  used_by:
+  - sales-playbook-agent
+- name: objection-handling-library
+  category: gtm
+  description: Build evidenced answers to the objections that actually lose deals.
+  output: objection-library.md
+  path: skills/objection-handling-library/SKILL.md
+  used_by:
+  - sales-playbook-agent
+- name: win-loss-analysis
+  category: gtm
+  description: Find out why deals were actually won and lost.
+  output: win-loss-report.md
+  path: skills/win-loss-analysis/SKILL.md
+  used_by:
+  - chief-revenue-officer-agent
+  - sales-playbook-agent
+- name: onboarding-design
+  category: gtm
+  description: Get a new customer to their first real value quickly.
+  output: onboarding-design.md
+  path: skills/onboarding-design/SKILL.md
+  used_by:
+  - customer-success-agent
+- name: onboarding-plan
+  category: people
+  description: Make a new team member productive in their first week.
+  output: onboarding-plan.md
+  path: skills/onboarding-plan/SKILL.md
+  used_by:
+  - chro-agent
+- name: health-scoring
+  category: gtm
+  description: Predict which customers are at risk before they leave.
+  output: health-score-model.md
+  path: skills/health-scoring/SKILL.md
+  used_by:
+  - customer-success-agent
+- name: churn-analysis
+  category: gtm
+  description: Understand why customers leave, in categories you can act on.
+  output: churn-analysis.md
+  path: skills/churn-analysis/SKILL.md
+  used_by:
+  - chief-revenue-officer-agent
+  - customer-success-agent
+- name: voice-of-customer-synthesis
+  category: gtm
+  description: Turn scattered customer feedback into something product can act on.
+  output: voc-digest.md
+  path: skills/voice-of-customer-synthesis/SKILL.md
+  used_by:
+  - customer-success-agent
+- name: reference-development
+  category: gtm
+  description: Turn successful customers into evidence others will believe.
+  output: reference-assets.md
+  path: skills/reference-development/SKILL.md
+  used_by:
+  - customer-success-agent
+- name: narrative-writing
+  category: gtm
+  description: Write the story of why the company exists and why it matters.
+  output: narrative.md
+  path: skills/narrative-writing/SKILL.md
+  used_by:
+  - brand-narrative-agent
+  - investor-reporting-agent
+- name: origin-story-development
+  category: gtm
+  description: Capture why the founders started this, credibly.
+  output: origin-story.md
+  path: skills/origin-story-development/SKILL.md
+  used_by:
+  - brand-narrative-agent
+- name: brand-voice-guidelines
+  category: gtm
+  description: Define how the company sounds, with examples.
+  output: voice-guidelines.md
+  path: skills/brand-voice-guidelines/SKILL.md
+  used_by:
+  - brand-narrative-agent
+- name: audience-narrative-adaptation
+  category: gtm
+  description: Tell the same story to customers, investors, and candidates without contradicting yourself.
+  output: narrative-variants.md
+  path: skills/audience-narrative-adaptation/SKILL.md
+  used_by:
+  - brand-narrative-agent
+- name: brand-consistency-audit
+  category: gtm
+  description: Find where the brand has drifted from its guidelines.
+  output: brand-audit.md
+  path: skills/brand-consistency-audit/SKILL.md
+  used_by:
+  - brand-narrative-agent
+- name: strategy-memo
+  category: strategy
+  description: State the strategy as a set of explicit choices.
+  output: strategy-memo.md
+  path: skills/strategy-memo/SKILL.md
+  used_by:
+  - ceo-agent
+- name: bet-portfolio-sizing
+  category: strategy
+  description: Allocate effort across bets according to their expected value and risk.
+  output: bet-portfolio.md
+  path: skills/bet-portfolio-sizing/SKILL.md
+  used_by:
+  - ceo-agent
+- name: narrative-one-pager
+  category: strategy
+  description: Compress the whole company onto one page a new person could absorb.
+  output: one-pager.md
+  path: skills/narrative-one-pager/SKILL.md
+  used_by:
+  - ceo-agent
+- name: board-update
+  category: strategy
+  description: Report to a board so they can help rather than merely be informed.
+  output: board-update.md
+  path: skills/board-update/SKILL.md
+  used_by:
+  - ceo-agent
+- name: market-structure-analysis
+  category: strategy
+  description: Understand who captures value in this market and why.
+  output: market-structure.md
+  path: skills/market-structure-analysis/SKILL.md
+  used_by:
+  - chief-strategy-officer-agent
+- name: moat-thesis
+  category: strategy
+  description: State the defensibility as a mechanism, not as a feature list.
+  output: moat-thesis.md
+  path: skills/moat-thesis/SKILL.md
+  used_by:
+  - chief-strategy-officer-agent
+- name: scenario-planning
+  category: strategy
+  description: Prepare for several plausible futures rather than forecasting one.
+  output: scenarios.md
+  path: skills/scenario-planning/SKILL.md
+  used_by:
+  - chief-strategy-officer-agent
+- name: trend-signal-monitoring
+  category: strategy
+  description: Watch the small number of indicators that would change the strategy.
+  output: signal-watchlist.md
+  path: skills/trend-signal-monitoring/SKILL.md
+  used_by:
+  - chief-strategy-officer-agent
+- name: adjacency-mapping
+  category: council
+  description: Find the markets and use cases nearest to where we already stand.
+  output: adjacency-map.md
+  path: skills/adjacency-mapping/SKILL.md
+  used_by:
+  - council-expansion-scout
+- name: expansion-option-sizing
+  category: council
+  description: Size an expansion option honestly, including what it would require.
+  output: expansion-options.md
+  path: skills/expansion-option-sizing/SKILL.md
+  used_by:
+  - council-expansion-scout
+- name: network-effect-analysis
+  category: council
+  description: Test whether a claimed network effect is real.
+  output: network-effect-analysis.md
+  path: skills/network-effect-analysis/SKILL.md
+  used_by:
+  - council-expansion-scout
+- name: leverage-identification
+  category: council
+  description: Find where a small effort produces an outsized return.
+  output: leverage-list.md
+  path: skills/leverage-identification/SKILL.md
+  used_by:
+  - council-expansion-scout
+- name: sequencing-recommendation
+  category: council
+  description: Recommend an order rather than a wish list.
+  output: sequence-plan.md
+  path: skills/sequencing-recommendation/SKILL.md
+  used_by:
+  - council-expansion-scout
+- name: role-scorecard
+  category: people
+  description: Define a role by the outcomes it must produce.
+  output: role-scorecard.md
+  path: skills/role-scorecard/SKILL.md
+  used_by:
+  - chro-agent
+- name: hiring-plan
+  category: people
+  description: Sequence hiring against the constraint that is actually binding.
+  output: hiring-plan.md
+  path: skills/hiring-plan/SKILL.md
+  used_by:
+  - chro-agent
+- name: interview-loop-design
+  category: people
+  description: Design an assessment that measures the scorecard rather than likeability.
+  output: interview-loop.md
+  path: skills/interview-loop-design/SKILL.md
+  used_by:
+  - chro-agent
+- name: compensation-banding
+  category: people
+  description: Set pay bands and apply them consistently.
+  output: compensation-bands.md
+  path: skills/compensation-banding/SKILL.md
+  used_by:
+  - chro-agent
+- name: build-buy-partner-analysis
+  category: strategy
+  description: Decide whether to build a capability, buy it, or partner for it.
+  output: build-buy-partner.md
+  path: skills/build-buy-partner-analysis/SKILL.md
+  used_by:
+  - cto-agent
+- name: technical-due-diligence
+  category: strategy
+  description: Keep the technical story ready for anyone who will examine it.
+  output: tech-diligence-pack.md
+  path: skills/technical-due-diligence/SKILL.md
+  used_by:
+  - cto-agent
+- name: vendor-risk-review
+  category: strategy
+  description: Assess what a vendor dependency actually exposes us to.
+  output: vendor-risk.md
+  path: skills/vendor-risk-review/SKILL.md
+  used_by:
+  - cto-agent
+- name: prioritisation-framework
+  category: product
+  description: Apply one consistent method to decide what gets built next.
+  output: prioritisation.md
+  path: skills/prioritisation-framework/SKILL.md
+  used_by:
+  - cpo-agent
+- name: roadmap-sequencing
+  category: product
+  description: Order the roadmap for learning value rather than for tidiness.
+  output: roadmap.md
+  path: skills/roadmap-sequencing/SKILL.md
+  used_by:
+  - cpo-agent
+- name: product-requirements-doc
+  category: product
+  description: Write requirements an engineer can build and a tester can verify.
+  output: prd.md
+  path: skills/product-requirements-doc/SKILL.md
+  used_by:
+  - cpo-agent
+  - product-requirements-agent
+- name: acceptance-criteria-writing
+  category: product
+  description: Write conditions that decide unambiguously whether the work is done.
+  output: acceptance-criteria.md
+  path: skills/acceptance-criteria-writing/SKILL.md
+  used_by:
+  - cpo-agent
+  - product-requirements-agent
+- name: success-signal-definition
+  category: product
+  description: Define in advance what would show a feature worked.
+  output: success-signal.md
+  path: skills/success-signal-definition/SKILL.md
+  used_by:
+  - product-requirements-agent
+- name: non-functional-requirements
+  category: product
+  description: State the qualities the system must have, not just its behaviour.
+  output: nfr.md
+  path: skills/non-functional-requirements/SKILL.md
+  used_by:
+  - product-requirements-agent
+- name: scope-boundary-definition
+  category: product
+  description: Draw the line around what this work includes.
+  output: scope.md
+  path: skills/scope-boundary-definition/SKILL.md
+  used_by:
+  - product-requirements-agent
+- name: mvp-scoping
+  category: product
+  description: Find the smallest build that answers the riskiest question.
+  output: mvp-scope.md
+  path: skills/mvp-scoping/SKILL.md
+  used_by:
+  - engineering-head
+  - mvp-scoper
+- name: riskiest-assumption-testing
+  category: product
+  description: Test the belief that would hurt most if wrong, first.
+  output: rat-test.md
+  path: skills/riskiest-assumption-testing/SKILL.md
+  used_by:
+  - mvp-scoper
+- name: concierge-mvp-design
+  category: product
+  description: Deliver the outcome manually before building the machine.
+  output: concierge-design.md
+  path: skills/concierge-mvp-design/SKILL.md
+  used_by:
+  - mvp-scoper
+- name: scope-cut-justification
+  category: product
+  description: Record why something was cut so the decision survives argument.
+  output: scope-cuts.md
+  path: skills/scope-cut-justification/SKILL.md
+  used_by:
+  - mvp-scoper
+- name: time-to-user-estimation
+  category: product
+  description: Estimate honestly when a real user will touch this.
+  output: time-to-user.md
+  path: skills/time-to-user-estimation/SKILL.md
+  used_by:
+  - mvp-scoper
+- name: feature-kill-review
+  category: product
+  description: Decide whether a shipped feature earned its place.
+  output: feature-review.md
+  path: skills/feature-kill-review/SKILL.md
+  used_by:
+  - cpo-agent
+- name: architecture-decision-record
+  category: engineering
+  description: Record a technical decision with the alternatives and the trade-offs.
+  output: adr.md
+  path: skills/architecture-decision-record/SKILL.md
+  used_by:
+  - cto-agent
+  - engineering-head
+  - system-architect
+- name: system-diagramming
+  category: engineering
+  description: Draw the system so a newcomer can understand it.
+  output: architecture-diagram.md
+  path: skills/system-diagramming/SKILL.md
+  used_by:
+  - system-architect
+- name: boundary-design
+  category: engineering
+  description: Decide where to split the system.
+  output: boundary-design.md
+  path: skills/boundary-design/SKILL.md
+  used_by:
+  - system-architect
+- name: dependency-failure-analysis
+  category: engineering
+  description: Decide what happens when each external dependency fails.
+  output: dependency-failure-plan.md
+  path: skills/dependency-failure-analysis/SKILL.md
+  used_by:
+  - system-architect
+- name: scalability-stress-review
+  category: engineering
+  description: Find where the architecture breaks before the market finds it.
+  output: scalability-review.md
+  path: skills/scalability-stress-review/SKILL.md
+  used_by:
+  - cto-agent
+  - system-architect
+- name: api-design-review
+  category: engineering
+  description: Review an interface for consistency, evolvability, and misuse resistance.
+  output: api-review.md
+  path: skills/api-design-review/SKILL.md
+  used_by:
+  - api-designer
+  - engineering-head
+- name: openapi-specification
+  category: engineering
+  description: Specify the interface formally so clients and tests can be generated.
+  output: openapi.yaml
+  path: skills/openapi-specification/SKILL.md
+  used_by:
+  - api-designer
+- name: error-taxonomy-design
+  category: engineering
+  description: Design errors that tell the caller what to do.
+  output: error-catalogue.md
+  path: skills/error-taxonomy-design/SKILL.md
+  used_by:
+  - api-designer
+- name: api-versioning-policy
+  category: engineering
+  description: Decide how the interface changes without breaking clients.
+  output: versioning-policy.md
+  path: skills/api-versioning-policy/SKILL.md
+  used_by:
+  - api-designer
+- name: data-model-design
+  category: engineering
+  description: Design the data structure around how it will actually be used.
+  output: data-model.md
+  path: skills/data-model-design/SKILL.md
+  used_by:
+  - data-model-designer
+- name: access-pattern-analysis
+  category: engineering
+  description: Establish how data will actually be read and written.
+  output: access-patterns.md
+  path: skills/access-pattern-analysis/SKILL.md
+  used_by:
+  - data-model-designer
+- name: migration-planning
+  category: engineering
+  description: Change a live schema without losing data or availability.
+  output: migration-plan.md
+  path: skills/migration-planning/SKILL.md
+  used_by:
+  - data-model-designer
+- name: backfill-strategy
+  category: engineering
+  description: Populate new structures over existing data safely.
+  output: backfill-plan.md
+  path: skills/backfill-strategy/SKILL.md
+  used_by:
+  - data-model-designer
+- name: transaction-design
+  category: engineering
+  description: Decide the consistency guarantee each operation actually offers.
+  output: transaction-design.md
+  path: skills/transaction-design/SKILL.md
+  used_by:
+  - backend-implementation-agent
+- name: idempotency-design
+  category: engineering
+  description: Make retries safe.
+  output: idempotency-design.md
+  path: skills/idempotency-design/SKILL.md
+  used_by:
+  - api-designer
+  - backend-implementation-agent
+- name: service-implementation
+  category: engineering
+  description: Build the server-side behaviour to match the contract exactly.
+  output: service-code
+  path: skills/service-implementation/SKILL.md
+  used_by:
+  - backend-implementation-agent
+- name: input-validation-review
+  category: engineering
+  description: Check that untrusted input cannot get through unchecked.
+  output: validation-review.md
+  path: skills/input-validation-review/SKILL.md
+  used_by:
+  - backend-implementation-agent
+- name: structured-logging
+  category: engineering
+  description: Log so that questions can be answered later.
+  output: logging-standard.md
+  path: skills/structured-logging/SKILL.md
+  used_by:
+  - backend-implementation-agent
+- name: state-handling-review
+  category: engineering
+  description: Check the interface handles every state a user can encounter.
+  output: state-review.md
+  path: skills/state-handling-review/SKILL.md
+  used_by:
+  - frontend-implementation-agent
+- name: ui-implementation
+  category: engineering
+  description: Build the interface to the acceptance criteria, including the hard states.
+  output: ui-code
+  path: skills/ui-implementation/SKILL.md
+  used_by:
+  - frontend-implementation-agent
+- name: component-library-management
+  category: engineering
+  description: Keep the shared component set coherent as it grows.
+  output: component-library.md
+  path: skills/component-library-management/SKILL.md
+  used_by:
+  - frontend-implementation-agent
+- name: accessibility-review
+  category: engineering
+  description: Check the interface works for people who do not use it the default way.
+  output: accessibility-report.md
+  path: skills/accessibility-review/SKILL.md
+  used_by:
+  - council-ethics-and-responsibility
+  - frontend-implementation-agent
+- name: frontend-performance-budget
+  category: engineering
+  description: Set and defend limits on what the client has to load and do.
+  output: performance-budget.md
+  path: skills/frontend-performance-budget/SKILL.md
+  used_by:
+  - frontend-implementation-agent
+- name: infrastructure-as-code
+  category: engineering
+  description: Define infrastructure so it can be rebuilt exactly.
+  output: infrastructure-code
+  path: skills/infrastructure-as-code/SKILL.md
+  used_by:
+  - infra-devops-agent
+- name: cicd-pipeline-design
+  category: engineering
+  description: Build a pipeline that makes shipping safe and boring.
+  output: pipeline.md
+  path: skills/cicd-pipeline-design/SKILL.md
+  used_by:
+  - infra-devops-agent
+- name: deployment-safety-review
+  category: engineering
+  description: Check a deployment cannot cause irreversible harm.
+  output: deployment-review.md
+  path: skills/deployment-safety-review/SKILL.md
+  used_by:
+  - infra-devops-agent
+- name: progressive-rollout-design
+  category: engineering
+  description: Expose a change gradually so problems are found by few, not by all.
+  output: rollout-plan.md
+  path: skills/progressive-rollout-design/SKILL.md
+  used_by:
+  - release-manager
+- name: feature-flag-management
+  category: engineering
+  description: Use flags without creating a permanent maze.
+  output: flag-registry.md
+  path: skills/feature-flag-management/SKILL.md
+  used_by:
+  - release-manager
+- name: rollback-verification
+  category: engineering
+  description: Prove the way back works before you need it.
+  output: rollback-verification.md
+  path: skills/rollback-verification/SKILL.md
+  used_by:
+  - release-manager
+- name: release-readiness-review
+  category: engineering
+  description: Decide honestly whether this can ship.
+  output: release-readiness.md
+  path: skills/release-readiness-review/SKILL.md
+  used_by:
+  - engineering-head
+  - release-manager
+- name: release-quality-reporting
+  category: engineering
+  description: Report quality as a signal with known limits.
+  output: quality-report.md
+  path: skills/release-quality-reporting/SKILL.md
+  used_by:
+  - qa-test-strategist
+- name: post-release-review
+  category: engineering
+  description: Learn from every release, not just the bad ones.
+  output: post-release-review.md
+  path: skills/post-release-review/SKILL.md
+  used_by:
+  - release-manager
+- name: test-strategy
+  category: engineering
+  description: Decide what to test, at what level, and why.
+  output: test-strategy.md
+  path: skills/test-strategy/SKILL.md
+  used_by:
+  - engineering-head
+  - qa-test-strategist
+- name: test-pyramid-balancing
+  category: engineering
+  description: Keep the suite fast and meaningful.
+  output: pyramid-report.md
+  path: skills/test-pyramid-balancing/SKILL.md
+  used_by:
+  - qa-test-strategist
+- name: flaky-test-elimination
+  category: engineering
+  description: Remove nondeterminism instead of tolerating it.
+  output: flake-report.md
+  path: skills/flaky-test-elimination/SKILL.md
+  used_by:
+  - qa-test-strategist
+- name: test-data-management
+  category: engineering
+  description: Make test data predictable and safe.
+  output: test-data-standard.md
+  path: skills/test-data-management/SKILL.md
+  used_by:
+  - qa-test-strategist
+- name: security-test-design
+  category: engineering
+  description: Test that the security controls actually work.
+  output: security-tests.md
+  path: skills/security-test-design/SKILL.md
+  used_by:
+  - security-engineer
+- name: threat-modeling
+  category: engineering
+  description: Work out how a system could be attacked, before building it.
+  output: threat-model.md
+  path: skills/threat-modeling/SKILL.md
+  used_by:
+  - ciso-agent
+  - engineering-head
+  - security-engineer
+- name: authz-design-review
+  category: engineering
+  description: Check that permission logic is correct and cannot be bypassed.
+  output: authz-review.md
+  path: skills/authz-design-review/SKILL.md
+  used_by:
+  - security-engineer
+- name: secrets-management
+  category: engineering
+  description: Keep credentials out of reach and rotatable.
+  output: secrets-policy.md
+  path: skills/secrets-management/SKILL.md
+  used_by:
+  - security-engineer
+- name: vulnerability-triage
+  category: engineering
+  description: Decide which vulnerabilities matter here.
+  output: vulnerability-triage.md
+  path: skills/vulnerability-triage/SKILL.md
+  used_by:
+  - ciso-agent
+  - security-engineer
+- name: security-review
+  category: engineering
+  description: Review a change for security consequences before it ships.
+  output: security-review.md
+  path: skills/security-review/SKILL.md
+  used_by:
+  - ciso-agent
+- name: vendor-security-review
+  category: engineering
+  description: Assess a third party before trusting them with data or access.
+  output: vendor-security-review.md
+  path: skills/vendor-security-review/SKILL.md
+  used_by:
+  - ciso-agent
+- name: incident-response-runbook
+  category: engineering
+  description: Prepare so an incident is executed rather than improvised.
+  output: incident-runbook.md
+  path: skills/incident-response-runbook/SKILL.md
+  used_by:
+  - ciso-agent
+- name: disaster-recovery-testing
+  category: engineering
+  description: Prove you can actually recover, not just that you have backups.
+  output: dr-test-report.md
+  path: skills/disaster-recovery-testing/SKILL.md
+  used_by:
+  - infra-devops-agent
+- name: infrastructure-rightsizing
+  category: engineering
+  description: Match provisioned capacity to actual demand.
+  output: rightsizing-report.md
+  path: skills/infrastructure-rightsizing/SKILL.md
+  used_by:
+  - cost-optimization-analyst
+  - infra-devops-agent
+- name: capacity-planning
+  category: engineering
+  description: Ensure capacity exists before demand arrives.
+  output: capacity-plan.md
+  path: skills/capacity-planning/SKILL.md
+  used_by:
+  - performance-engineer
+- name: load-testing
+  category: engineering
+  description: Find the system's real limits under realistic conditions.
+  output: load-test-report.md
+  path: skills/load-testing/SKILL.md
+  used_by:
+  - performance-engineer
+- name: profiling-analysis
+  category: engineering
+  description: Find where time and resources actually go.
+  output: profile-report.md
+  path: skills/profiling-analysis/SKILL.md
+  used_by:
+  - performance-engineer
+- name: performance-budgeting
+  category: engineering
+  description: Set limits on the performance of critical journeys.
+  output: performance-budgets.md
+  path: skills/performance-budgeting/SKILL.md
+  used_by:
+  - performance-engineer
+- name: performance-regression-gating
+  category: engineering
+  description: Stop performance regressions from reaching production.
+  output: perf-gate.md
+  path: skills/performance-regression-gating/SKILL.md
+  used_by:
+  - performance-engineer
+- name: instrumentation-standard
+  category: engineering
+  description: Define how the system reports on itself.
+  output: instrumentation-standard.md
+  path: skills/instrumentation-standard/SKILL.md
+  used_by:
+  - observability-agent
+- name: slo-definition
+  category: engineering
+  description: Define reliability targets from what users actually notice.
+  output: slo.md
+  path: skills/slo-definition/SKILL.md
+  used_by:
+  - observability-agent
+- name: alert-design
+  category: engineering
+  description: Alert only when a human must act.
+  output: alert-catalogue.md
+  path: skills/alert-design/SKILL.md
+  used_by:
+  - observability-agent
+- name: distributed-tracing-setup
+  category: engineering
+  description: Follow a request across every service it touches.
+  output: tracing-setup.md
+  path: skills/distributed-tracing-setup/SKILL.md
+  used_by:
+  - observability-agent
+- name: dashboard-design
+  category: engineering
+  description: Build dashboards that answer a specific question.
+  output: dashboard-spec.md
+  path: skills/dashboard-design/SKILL.md
+  used_by:
+  - observability-agent
+- name: code-health-metrics
+  category: engineering
+  description: Measure whether the codebase is getting easier or harder to change.
+  output: code-health-report.md
+  path: skills/code-health-metrics/SKILL.md
+  used_by:
+  - tech-debt-refactor-agent
+- name: tech-debt-registry
+  category: engineering
+  description: Record debt with its actual cost.
+  output: tech-debt-register.md
+  path: skills/tech-debt-registry/SKILL.md
+  used_by:
+  - tech-debt-refactor-agent
+- name: refactoring-planning
+  category: engineering
+  description: Plan a refactor that pays off soon.
+  output: refactor-plan.md
+  path: skills/refactoring-planning/SKILL.md
+  used_by:
+  - tech-debt-refactor-agent
+- name: behaviour-preserving-refactor
+  category: engineering
+  description: Change structure without changing behaviour.
+  output: refactor-record.md
+  path: skills/behaviour-preserving-refactor/SKILL.md
+  used_by:
+  - tech-debt-refactor-agent
+- name: dead-code-removal
+  category: engineering
+  description: Delete what is no longer used.
+  output: removal-record.md
+  path: skills/dead-code-removal/SKILL.md
+  used_by:
+  - tech-debt-refactor-agent
+- name: metric-dictionary
+  category: data
+  description: Define every metric once, with one owner.
+  output: metric-dictionary.md
+  path: skills/metric-dictionary/SKILL.md
+  used_by:
+  - chief-data-officer-agent
+- name: data-lineage-audit
+  category: data
+  description: Trace a reported number back to where it came from.
+  output: lineage-report.md
+  path: skills/data-lineage-audit/SKILL.md
+  used_by:
+  - chief-data-officer-agent
+- name: data-quality-scoring
+  category: data
+  description: Measure whether the data can be trusted.
+  output: data-quality-report.md
+  path: skills/data-quality-scoring/SKILL.md
+  used_by:
+  - chief-data-officer-agent
+- name: data-classification
+  category: data
+  description: Label data by sensitivity so controls can follow.
+  output: data-classification.md
+  path: skills/data-classification/SKILL.md
+  used_by:
+  - data-model-designer
+- name: data-inventory
+  category: data
+  description: Know what data exists and why.
+  output: data-inventory.md
+  path: skills/data-inventory/SKILL.md
+  used_by:
+  - data-protection-officer-agent
+- name: data-governance-policy
+  category: data
+  description: Set the rules for how data is handled.
+  output: data-governance-policy.md
+  path: skills/data-governance-policy/SKILL.md
+  used_by:
+  - chief-data-officer-agent
+- name: experiment-design
+  category: data
+  description: Design a test that can actually answer the question.
+  output: experiment-design.md
+  path: skills/experiment-design/SKILL.md
+  used_by:
+  - chief-data-officer-agent
+- name: red-team-attack
+  category: council
+  description: Attack a plan the way a competitor or bad actor would.
+  output: red-team-report.md
+  path: skills/red-team-attack/SKILL.md
+  used_by:
+  - council-red-team
+- name: abuse-case-analysis
+  category: council
+  description: Find how the product will be misused.
+  output: abuse-cases.md
+  path: skills/abuse-case-analysis/SKILL.md
+  used_by:
+  - council-red-team
+- name: competitive-kill-scenario
+  category: council
+  description: Describe how a competitor could destroy this business.
+  output: kill-scenario.md
+  path: skills/competitive-kill-scenario/SKILL.md
+  used_by:
+  - council-red-team
+- name: failure-scenario-writing
+  category: council
+  description: Turn an objection into a specific, checkable failure.
+  output: failure-scenario.md
+  path: skills/failure-scenario-writing/SKILL.md
+  used_by:
+  - council-red-team
+- name: counter-case-argument
+  category: council
+  description: Argue against the leading option in full.
+  output: counter-case.md
+  path: skills/counter-case-argument/SKILL.md
+  used_by:
+  - council-devils-advocate
+- name: steelman-construction
+  category: council
+  description: Rebuild a rejected option at its strongest before judging it.
+  output: steelman.md
+  path: skills/steelman-construction/SKILL.md
+  used_by:
+  - council-devils-advocate
+  - council-director
+- name: alternative-revival
+  category: council
+  description: Check whether a discarded option deserves reconsideration.
+  output: alternative-review.md
+  path: skills/alternative-revival/SKILL.md
+  used_by:
+  - council-devils-advocate
+- name: groupthink-detection
+  category: council
+  description: Spot agreement that was assumed rather than earned.
+  output: groupthink-check.md
+  path: skills/groupthink-detection/SKILL.md
+  used_by:
+  - council-devils-advocate
+- name: falsification-test-design
+  category: council
+  description: Define what would prove the plan wrong.
+  output: falsification-test.md
+  path: skills/falsification-test-design/SKILL.md
+  used_by:
+  - council-devils-advocate
+- name: first-principles-decomposition
+  category: council
+  description: Strip a plan to what is actually necessary.
+  output: first-principles.md
+  path: skills/first-principles-decomposition/SKILL.md
+  used_by:
+  - council-first-principles
+- name: constraint-classification
+  category: council
+  description: Sort real constraints from assumed ones.
+  output: constraint-analysis.md
+  path: skills/constraint-classification/SKILL.md
+  used_by:
+  - council-first-principles
+- name: from-scratch-reconstruction
+  category: council
+  description: Rebuild the plan from the irreducible requirements alone.
+  output: reconstruction.md
+  path: skills/from-scratch-reconstruction/SKILL.md
+  used_by:
+  - council-first-principles
+- name: analogy-audit
+  category: council
+  description: Find reasoning that rests on imitation rather than evidence.
+  output: analogy-audit.md
+  path: skills/analogy-audit/SKILL.md
+  used_by:
+  - council-first-principles
+- name: simplification-challenge
+  category: council
+  description: Ask what could be removed entirely.
+  output: simplification-report.md
+  path: skills/simplification-challenge/SKILL.md
+  used_by:
+  - council-first-principles
+- name: assumption-extraction
+  category: council
+  description: Surface every assumption, including the invisible ones.
+  output: assumption-list.md
+  path: skills/assumption-extraction/SKILL.md
+  used_by:
+  - council-assumption-auditor
+- name: evidence-grading
+  category: council
+  description: Rate how well each claim is actually supported.
+  output: evidence-grades.md
+  path: skills/evidence-grading/SKILL.md
+  used_by:
+  - council-assumption-auditor
+- name: load-bearing-analysis
+  category: council
+  description: Determine which assumptions the plan cannot survive without.
+  output: load-bearing-report.md
+  path: skills/load-bearing-analysis/SKILL.md
+  used_by:
+  - council-assumption-auditor
+- name: cheapest-test-design
+  category: council
+  description: Find the least expensive way to check a critical assumption.
+  output: test-design.md
+  path: skills/cheapest-test-design/SKILL.md
+  used_by:
+  - council-assumption-auditor
+- name: pre-mortem
+  category: council
+  description: Assume the venture failed and reconstruct how.
+  output: pre-mortem.md
+  path: skills/pre-mortem/SKILL.md
+  used_by:
+  - chief-risk-officer-agent
+  - council-risk-and-failure-modes
+- name: failure-mode-cataloguing
+  category: council
+  description: Enumerate the distinct ways this can fail.
+  output: failure-catalogue.md
+  path: skills/failure-mode-cataloguing/SKILL.md
+  used_by:
+  - council-risk-and-failure-modes
+- name: cascade-analysis
+  category: council
+  description: Find failures that trigger other failures.
+  output: cascade-analysis.md
+  path: skills/cascade-analysis/SKILL.md
+  used_by:
+  - council-risk-and-failure-modes
+- name: recoverability-classification
+  category: council
+  description: Separate the failures you can come back from.
+  output: recoverability-report.md
+  path: skills/recoverability-classification/SKILL.md
+  used_by:
+  - council-risk-and-failure-modes
+- name: early-warning-indicator-design
+  category: council
+  description: Define signals that warn before the failure arrives.
+  output: early-warning-indicators.md
+  path: skills/early-warning-indicator-design/SKILL.md
+  used_by:
+  - council-risk-and-failure-modes
+- name: risk-scoring
+  category: risk
+  description: Score risks consistently so they can be ranked.
+  output: risk-scores.md
+  path: skills/risk-scoring/SKILL.md
+  used_by:
+  - chief-risk-officer-agent
+- name: risk-register-consolidation
+  category: risk
+  description: Merge domain risk registers into one ranked list.
+  output: risk-register.md
+  path: skills/risk-register-consolidation/SKILL.md
+  used_by:
+  - chief-risk-officer-agent
+- name: near-miss-analysis
+  category: risk
+  description: Learn from the failures that almost happened.
+  output: near-miss-log.md
+  path: skills/near-miss-analysis/SKILL.md
+  used_by:
+  - chief-risk-officer-agent
+- name: business-continuity-plan
+  category: risk
+  description: Plan for continuing to operate through a serious disruption.
+  output: continuity-plan.md
+  path: skills/business-continuity-plan/SKILL.md
+  used_by:
+  - chief-risk-officer-agent
+- name: stakeholder-harm-analysis
+  category: council
+  description: Identify who could be harmed, including those who never chose to be involved.
+  output: harm-analysis.md
+  path: skills/stakeholder-harm-analysis/SKILL.md
+  used_by:
+  - council-ethics-and-responsibility
+- name: dark-pattern-audit
+  category: council
+  description: Find design that works against the user's interest.
+  output: dark-pattern-audit.md
+  path: skills/dark-pattern-audit/SKILL.md
+  used_by:
+  - council-ethics-and-responsibility
+- name: reputational-stress-test
+  category: council
+  description: Test whether the plan survives public scrutiny.
+  output: reputation-test.md
+  path: skills/reputational-stress-test/SKILL.md
+  used_by:
+  - council-ethics-and-responsibility
+- name: remedy-design
+  category: council
+  description: Propose a fix alongside every criticism.
+  output: remedy-proposal.md
+  path: skills/remedy-design/SKILL.md
+  used_by:
+  - council-ethics-and-responsibility
+- name: council-debate-facilitation
+  category: council
+  description: Run a structured debate that produces a decision.
+  output: debate-record.md
+  path: skills/council-debate-facilitation/SKILL.md
+  used_by:
+  - council-director
+- name: severity-triage
+  category: council
+  description: Assign a severity that means the same thing to everyone.
+  output: severity-ratings.md
+  path: skills/severity-triage/SKILL.md
+  used_by:
+  - council-director
+  - council-red-team
+  - escalation-manager
+- name: severity-normalisation
+  category: council
+  description: Make severity consistent across different critics.
+  output: normalised-severities.md
+  path: skills/severity-normalisation/SKILL.md
+  used_by:
+  - council-synthesis-arbiter
+- name: finding-deduplication
+  category: council
+  description: Merge findings that are the same objection in different words.
+  output: deduplicated-findings.md
+  path: skills/finding-deduplication/SKILL.md
+  used_by:
+  - council-synthesis-arbiter
+- name: conflict-resolution
+  category: council
+  description: Resolve a direct disagreement between critics.
+  output: conflict-resolution.md
+  path: skills/conflict-resolution/SKILL.md
+  used_by:
+  - council-synthesis-arbiter
+- name: verdict-writing
+  category: council
+  description: Produce the decision-grade output of a review.
+  output: council-verdict.md
+  path: skills/verdict-writing/SKILL.md
+  used_by:
+  - council-director
+  - council-synthesis-arbiter
+- name: dissent-recording
+  category: council
+  description: Preserve minority positions on the record.
+  output: dissent-log.md
+  path: skills/dissent-recording/SKILL.md
+  used_by:
+  - council-director
+  - council-synthesis-arbiter
+- name: recurring-flaw-analysis
+  category: council
+  description: Find the mistakes this organisation keeps making.
+  output: recurring-flaws.md
+  path: skills/recurring-flaw-analysis/SKILL.md
+  used_by:
+  - council-director
+- name: ask-framing
+  category: council
+  description: Make a request specific enough to be acted on.
+  output: ask.md
+  path: skills/ask-framing/SKILL.md
+  used_by:
+  - investor-reporting-agent
+- name: contract-review
+  category: legal
+  description: Read an agreement for what it actually commits us to.
+  output: contract-review.md
+  path: skills/contract-review/SKILL.md
+  used_by:
+  - general-counsel-agent
+- name: legal-risk-register
+  category: legal
+  description: Track legal exposure in one place.
+  output: legal-risk-register.md
+  path: skills/legal-risk-register/SKILL.md
+  used_by:
+  - general-counsel-agent
+- name: entity-structure-review
+  category: legal
+  description: Check the corporate structure fits what the business actually does.
+  output: entity-review.md
+  path: skills/entity-structure-review/SKILL.md
+  used_by:
+  - general-counsel-agent
+- name: ip-assignment-check
+  category: legal
+  description: Verify the company actually owns what it built.
+  output: ip-assignment-audit.md
+  path: skills/ip-assignment-check/SKILL.md
+  used_by:
+  - general-counsel-agent
+- name: invention-disclosure
+  category: legal
+  description: Capture inventions while the detail still exists.
+  output: invention-disclosure.md
+  path: skills/invention-disclosure/SKILL.md
+  used_by:
+  - ip-counsel-agent
+- name: trademark-clearance
+  category: legal
+  description: Check a name can actually be used before committing to it.
+  output: clearance-memo.md
+  path: skills/trademark-clearance/SKILL.md
+  used_by:
+  - ip-counsel-agent
+- name: freedom-to-operate-search
+  category: legal
+  description: Check whether building this could infringe someone else's rights.
+  output: fto-memo.md
+  path: skills/freedom-to-operate-search/SKILL.md
+  used_by:
+  - ip-counsel-agent
+- name: oss-license-compliance
+  category: legal
+  description: Make sure dependency licences are compatible with the business model.
+  output: license-report.md
+  path: skills/oss-license-compliance/SKILL.md
+  used_by:
+  - ip-counsel-agent
+- name: trade-secret-hygiene
+  category: legal
+  description: Protect what is not worth patenting.
+  output: trade-secret-policy.md
+  path: skills/trade-secret-hygiene/SKILL.md
+  used_by:
+  - ip-counsel-agent
+- name: claims-substantiation-review
+  category: legal
+  description: Check that public claims can be backed up.
+  output: substantiation-file.md
+  path: skills/claims-substantiation-review/SKILL.md
+  used_by:
+  - council-legal-and-regulatory-critic
+  - general-counsel-agent
+- name: regulatory-applicability-mapping
+  category: legal
+  description: Determine which rules actually apply to this business.
+  output: applicability-map.md
+  path: skills/regulatory-applicability-mapping/SKILL.md
+  used_by:
+  - chief-compliance-officer-agent
+- name: regulatory-exposure-review
+  category: legal
+  description: Challenge a plan on what regulators would permit.
+  output: regulatory-exposure.md
+  path: skills/regulatory-exposure-review/SKILL.md
+  used_by:
+  - council-legal-and-regulatory-critic
+- name: jurisdiction-risk-review
+  category: legal
+  description: Treat each new market as a new risk surface.
+  output: jurisdiction-review.md
+  path: skills/jurisdiction-risk-review/SKILL.md
+  used_by:
+  - council-legal-and-regulatory-critic
+- name: platform-policy-review
+  category: legal
+  description: Check the plan against the rules of the platforms it depends on.
+  output: platform-policy-review.md
+  path: skills/platform-policy-review/SKILL.md
+  used_by:
+  - council-legal-and-regulatory-critic
+- name: counsel-escalation
+  category: legal
+  description: Mark clearly what needs a licensed professional.
+  output: counsel-request.md
+  path: skills/counsel-escalation/SKILL.md
+  used_by:
+  - council-legal-and-regulatory-critic
+- name: control-framework-design
+  category: compliance
+  description: Build the controls that make compliance demonstrable.
+  output: control-framework.md
+  path: skills/control-framework-design/SKILL.md
+  used_by:
+  - chief-compliance-officer-agent
+- name: policy-authoring
+  category: compliance
+  description: Write a policy people can actually follow.
+  output: policy.md
+  path: skills/policy-authoring/SKILL.md
+  used_by:
+  - chief-compliance-officer-agent
+- name: evidence-collection
+  category: compliance
+  description: Gather proof that controls actually operated.
+  output: evidence-register.md
+  path: skills/evidence-collection/SKILL.md
+  used_by:
+  - chief-compliance-officer-agent
+- name: audit-readiness-review
+  category: compliance
+  description: Find the gaps before an auditor does.
+  output: audit-readiness.md
+  path: skills/audit-readiness-review/SKILL.md
+  used_by:
+  - chief-compliance-officer-agent
+- name: metric-consistency-check
+  category: compliance
+  description: Verify a reported metric means the same thing it did last period.
+  output: consistency-check.md
+  path: skills/metric-consistency-check/SKILL.md
+  used_by:
+  - investor-reporting-agent
+- name: privacy-impact-assessment
+  category: compliance
+  description: Assess high-risk processing before it starts.
+  output: dpia.md
+  path: skills/privacy-impact-assessment/SKILL.md
+  used_by:
+  - data-protection-officer-agent
+- name: consent-design
+  category: compliance
+  description: Design consent that is genuine rather than assumed.
+  output: consent-design.md
+  path: skills/consent-design/SKILL.md
+  used_by:
+  - data-protection-officer-agent
+- name: data-subject-rights-process
+  category: compliance
+  description: Build a rights request process that actually works.
+  output: rights-process.md
+  path: skills/data-subject-rights-process/SKILL.md
+  used_by:
+  - data-protection-officer-agent
+- name: processor-due-diligence
+  category: compliance
+  description: Check a third party before sending them personal data.
+  output: processor-assessment.md
+  path: skills/processor-due-diligence/SKILL.md
+  used_by:
+  - data-protection-officer-agent
+- name: minute-taking
+  category: compliance
+  description: Record decisions so the corporate record is accurate.
+  output: minutes.md
+  path: skills/minute-taking/SKILL.md
+  used_by:
+  - corporate-secretary-agent
+- name: resolution-drafting
+  category: compliance
+  description: Draft a resolution that is unambiguous and effective.
+  output: resolution.md
+  path: skills/resolution-drafting/SKILL.md
+  used_by:
+  - corporate-secretary-agent
+- name: signature-authority-matrix
+  category: compliance
+  description: Make it unambiguous who may bind the company.
+  output: signature-authority.md
+  path: skills/signature-authority-matrix/SKILL.md
+  used_by:
+  - corporate-secretary-agent
+- name: design-research-planning
+  category: design
+  description: Plan research that answers a specific decision rather than producing general interest.
+  output: research-plan.md
+  path: skills/design-research-planning/SKILL.md
+  used_by:
+  - design-researcher
+- name: contextual-inquiry
+  category: design
+  description: Watch people do the real task in the real place, rather than asking them to describe it.
+  output: inquiry-notes.md
+  path: skills/contextual-inquiry/SKILL.md
+  used_by:
+  - design-researcher
+- name: journey-mapping
+  category: design
+  description: Map the customer's whole path, including the parts the product never sees.
+  output: journey-map.md
+  path: skills/journey-mapping/SKILL.md
+  used_by:
+  - design-researcher
+- name: insight-synthesis
+  category: design
+  description: Turn raw observation into insights that survive challenge.
+  output: insights.md
+  path: skills/insight-synthesis/SKILL.md
+  used_by:
+  - design-researcher
+- name: research-repository-management
+  category: design
+  description: Keep past research findable so the next project does not re-run it.
+  output: repository-entry.md
+  path: skills/research-repository-management/SKILL.md
+  used_by:
+  - design-researcher
+- name: usability-test-design
+  category: design
+  description: Design a test that produces findings rather than reassurance.
+  output: test-plan.md
+  path: skills/usability-test-design/SKILL.md
+  used_by:
+  - usability-tester
+- name: task-success-measurement
+  category: design
+  description: Measure whether people can actually complete the task.
+  output: task-metrics.md
+  path: skills/task-success-measurement/SKILL.md
+  used_by:
+  - usability-tester
+- name: moderation-discipline
+  category: design
+  description: Run the session without contaminating the data.
+  output: session-notes.md
+  path: skills/moderation-discipline/SKILL.md
+  used_by:
+  - usability-tester
+- name: finding-severity-rating
+  category: design
+  description: Rate usability findings so the team fixes the right ones first.
+  output: severity-ratings.md
+  path: skills/finding-severity-rating/SKILL.md
+  used_by:
+  - usability-tester
+- name: fix-verification
+  category: design
+  description: Confirm the fix actually fixed it.
+  output: retest-report.md
+  path: skills/fix-verification/SKILL.md
+  used_by:
+  - usability-tester
+- name: card-sorting
+  category: design
+  description: Learn how users group and name things, rather than imposing the internal structure.
+  output: card-sort-results.md
+  path: skills/card-sorting/SKILL.md
+  used_by:
+  - information-architect
+- name: tree-testing
+  category: design
+  description: Test whether people can find things in a structure before anything is designed on top of it.
+  output: tree-test-results.md
+  path: skills/tree-testing/SKILL.md
+  used_by:
+  - information-architect
+- name: taxonomy-design
+  category: design
+  description: Build the controlled vocabulary the whole organisation uses.
+  output: taxonomy.md
+  path: skills/taxonomy-design/SKILL.md
+  used_by:
+  - information-architect
+- name: navigation-design
+  category: design
+  description: Design how people move through the product and know where they are.
+  output: navigation-spec.md
+  path: skills/navigation-design/SKILL.md
+  used_by:
+  - information-architect
+- name: content-modeling
+  category: design
+  description: Define the content types and their relationships before designing pages.
+  output: content-model.md
+  path: skills/content-modeling/SKILL.md
+  used_by:
+  - information-architect
+- name: flow-design
+  category: design
+  description: Design the complete path through a task, including the ways it goes wrong.
+  output: flow-spec.md
+  path: skills/flow-design/SKILL.md
+  used_by:
+  - interaction-designer
+- name: state-specification
+  category: design
+  description: Specify every state a view can be in, so none is discovered in production.
+  output: state-spec.md
+  path: skills/state-specification/SKILL.md
+  used_by:
+  - interaction-designer
+- name: error-prevention-design
+  category: design
+  description: Stop the error happening rather than reporting it afterwards.
+  output: error-prevention-spec.md
+  path: skills/error-prevention-design/SKILL.md
+  used_by:
+  - interaction-designer
+- name: interaction-pattern-selection
+  category: design
+  description: Reuse an established pattern before inventing one.
+  output: pattern-decision.md
+  path: skills/interaction-pattern-selection/SKILL.md
+  used_by:
+  - interaction-designer
+- name: design-engineering-walkthrough
+  category: design
+  description: Walk the spec with engineering before handoff, not after.
+  output: walkthrough-notes.md
+  path: skills/design-engineering-walkthrough/SKILL.md
+  used_by:
+  - interaction-designer
+- name: visual-hierarchy-design
+  category: design
+  description: Make the order things are read match the order they matter.
+  output: hierarchy-spec.md
+  path: skills/visual-hierarchy-design/SKILL.md
+  used_by:
+  - visual-designer
+- name: typography-system
+  category: design
+  description: Set type so the product can be read comfortably.
+  output: type-system.md
+  path: skills/typography-system/SKILL.md
+  used_by:
+  - visual-designer
+- name: layout-composition
+  category: design
+  description: Arrange the screen so the structure is obvious without explanation.
+  output: layout-spec.md
+  path: skills/layout-composition/SKILL.md
+  used_by:
+  - visual-designer
+- name: design-token-application
+  category: design
+  description: Use the system's tokens rather than introducing one-off values.
+  output: token-usage-report.md
+  path: skills/design-token-application/SKILL.md
+  used_by:
+  - visual-designer
+- name: design-token-architecture
+  category: design
+  description: Structure tokens so themes, modes, and brands work without rework.
+  output: token-architecture.md
+  path: skills/design-token-architecture/SKILL.md
+  used_by:
+  - design-system-architect
+- name: component-api-design
+  category: design
+  description: Design a component's interface so it is hard to misuse.
+  output: component-spec.md
+  path: skills/component-api-design/SKILL.md
+  used_by:
+  - design-system-architect
+- name: system-contribution-process
+  category: design
+  description: Define how a component enters the system.
+  output: contribution-record.md
+  path: skills/system-contribution-process/SKILL.md
+  used_by:
+  - design-system-architect
+- name: component-deprecation
+  category: design
+  description: Remove a component without stranding the people using it.
+  output: deprecation-plan.md
+  path: skills/component-deprecation/SKILL.md
+  used_by:
+  - design-system-architect
+- name: design-code-parity-audit
+  category: design
+  description: Check that the design source and the shipped code still agree.
+  output: parity-report.md
+  path: skills/design-code-parity-audit/SKILL.md
+  used_by:
+  - design-system-architect
+- name: design-system-governance
+  category: design
+  description: Keep the system coherent as more people contribute to it.
+  output: governance-policy.md
+  path: skills/design-system-governance/SKILL.md
+  used_by:
+  - design-head
+- name: interface-copywriting
+  category: design
+  description: Write the words in the product so they do the explaining.
+  output: interface-copy.md
+  path: skills/interface-copywriting/SKILL.md
+  used_by:
+  - content-designer
+- name: error-message-design
+  category: design
+  description: Write errors that let the user recover.
+  output: error-catalogue.md
+  path: skills/error-message-design/SKILL.md
+  used_by:
+  - content-designer
+- name: plain-language-editing
+  category: design
+  description: Cut the text down to what people will actually read.
+  output: edited-copy.md
+  path: skills/plain-language-editing/SKILL.md
+  used_by:
+  - content-designer
+- name: terminology-governance
+  category: design
+  description: Keep one name per concept across every surface.
+  output: terminology-record.md
+  path: skills/terminology-governance/SKILL.md
+  used_by:
+  - content-designer
+- name: copy-comprehension-testing
+  category: design
+  description: Check that people understand the words before shipping them.
+  output: comprehension-results.md
+  path: skills/copy-comprehension-testing/SKILL.md
+  used_by:
+  - content-designer
+- name: accessibility-annotation
+  category: design
+  description: Give engineering everything it needs to build the interface accessibly.
+  output: a11y-annotations.md
+  path: skills/accessibility-annotation/SKILL.md
+  used_by:
+  - accessibility-designer
+- name: assistive-technology-testing
+  category: design
+  description: Test with the tools people actually use, not only with automated checkers.
+  output: at-test-report.md
+  path: skills/assistive-technology-testing/SKILL.md
+  used_by:
+  - accessibility-designer
+- name: contrast-and-colour-audit
+  category: design
+  description: Check colour works for everyone who has to read it.
+  output: contrast-audit.md
+  path: skills/contrast-and-colour-audit/SKILL.md
+  used_by:
+  - accessibility-designer
+- name: inclusive-design-review
+  category: design
+  description: Review the design for who it excludes before it is built.
+  output: inclusive-review.md
+  path: skills/inclusive-design-review/SKILL.md
+  used_by:
+  - accessibility-designer
+- name: conformance-auditing
+  category: design
+  description: Audit a shipped surface against the conformance target.
+  output: conformance-audit.md
+  path: skills/conformance-auditing/SKILL.md
+  used_by:
+  - accessibility-designer
+- name: accessibility-conformance-review
+  category: design
+  description: Decide whether a surface meets the bar to ship.
+  output: conformance-decision.md
+  path: skills/accessibility-conformance-review/SKILL.md
+  used_by:
+  - design-head
+- name: motion-principles
+  category: design
+  description: Define what motion is for in this product, and what it is not for.
+  output: motion-principles.md
+  path: skills/motion-principles/SKILL.md
+  used_by:
+  - motion-designer
+- name: transition-design
+  category: design
+  description: Move between states so the user can follow what happened.
+  output: transition-spec.md
+  path: skills/transition-design/SKILL.md
+  used_by:
+  - motion-designer
+- name: reduced-motion-design
+  category: design
+  description: Give an equivalent experience to people who have turned motion off.
+  output: reduced-motion-spec.md
+  path: skills/reduced-motion-design/SKILL.md
+  used_by:
+  - motion-designer
+- name: motion-performance-check
+  category: design
+  description: Confirm the animation does not cost more than it gives.
+  output: motion-performance.md
+  path: skills/motion-performance-check/SKILL.md
+  used_by:
+  - motion-designer
+- name: loading-feedback-design
+  category: design
+  description: Tell the user what is happening while they wait.
+  output: loading-spec.md
+  path: skills/loading-feedback-design/SKILL.md
+  used_by:
+  - motion-designer
+- name: prototype-fidelity-selection
+  category: design
+  description: Choose the cheapest fidelity that answers the question.
+  output: fidelity-decision.md
+  path: skills/prototype-fidelity-selection/SKILL.md
+  used_by:
+  - prototyper
+- name: rapid-prototyping
+  category: design
+  description: Build the testable artifact fast, without building the product.
+  output: prototype
+  path: skills/rapid-prototyping/SKILL.md
+  used_by:
+  - prototyper
+- name: prototype-scoping
+  category: design
+  description: Be explicit about what the prototype proves and what it fakes.
+  output: prototype-scope.md
+  path: skills/prototype-scoping/SKILL.md
+  used_by:
+  - prototyper
+- name: prototype-disposal
+  category: design
+  description: Retire the prototype instead of letting it become the product.
+  output: disposal-note.md
+  path: skills/prototype-disposal/SKILL.md
+  used_by:
+  - prototyper
+- name: realistic-content-testing
+  category: design
+  description: Test the design with the content it will actually hold.
+  output: content-stress-results.md
+  path: skills/realistic-content-testing/SKILL.md
+  used_by:
+  - prototyper
+  - visual-designer
+- name: identity-system-design
+  category: design
+  description: Design the identity as a system, not as a logo.
+  output: identity-system.md
+  path: skills/identity-system-design/SKILL.md
+  used_by:
+  - brand-identity-designer
+- name: brand-distinctiveness-check
+  category: design
+  description: Verify the identity is actually distinguishable from the competition.
+  output: distinctiveness-report.md
+  path: skills/brand-distinctiveness-check/SKILL.md
+  used_by:
+  - brand-identity-designer
+- name: identity-stress-testing
+  category: design
+  description: Test the identity where it is most likely to fail.
+  output: identity-stress.md
+  path: skills/identity-stress-testing/SKILL.md
+  used_by:
+  - brand-identity-designer
+- name: brand-guideline-authoring
+  category: design
+  description: Write guidelines people can actually follow.
+  output: brand-guidelines.md
+  path: skills/brand-guideline-authoring/SKILL.md
+  used_by:
+  - brand-identity-designer
+- name: asset-library-management
+  category: design
+  description: Keep brand and product assets available in the formats people need.
+  output: asset-library.md
+  path: skills/asset-library-management/SKILL.md
+  used_by:
+  - brand-identity-designer
+- name: chart-form-selection
+  category: design
+  description: Pick the chart form from the comparison being made.
+  output: chart-spec.md
+  path: skills/chart-form-selection/SKILL.md
+  used_by:
+  - data-visualization-designer
+- name: encoding-honesty-review
+  category: design
+  description: Check the chart does not mislead.
+  output: encoding-review.md
+  path: skills/encoding-honesty-review/SKILL.md
+  used_by:
+  - data-visualization-designer
+- name: dashboard-composition
+  category: design
+  description: Compose a dashboard that answers questions rather than displaying numbers.
+  output: dashboard-spec.md
+  path: skills/dashboard-composition/SKILL.md
+  used_by:
+  - data-visualization-designer
+- name: uncertainty-visualisation
+  category: design
+  description: Show how confident the numbers are.
+  output: uncertainty-spec.md
+  path: skills/uncertainty-visualisation/SKILL.md
+  used_by:
+  - data-visualization-designer
+- name: colourblind-safe-palette
+  category: design
+  description: Build a palette that works for everyone.
+  output: palette.md
+  path: skills/colourblind-safe-palette/SKILL.md
+  used_by:
+  - data-visualization-designer
+- name: service-blueprinting
+  category: design
+  description: Map the whole service, including everything the customer never sees.
+  output: service-blueprint.md
+  path: skills/service-blueprinting/SKILL.md
+  used_by:
+  - service-designer
+- name: channel-handoff-design
+  category: design
+  description: Design the moments where the service moves between channels or between machine and human.
+  output: handoff-spec.md
+  path: skills/channel-handoff-design/SKILL.md
+  used_by:
+  - service-designer
+- name: service-recovery-design
+  category: design
+  description: Design what happens when the service fails the customer.
+  output: recovery-plan.md
+  path: skills/service-recovery-design/SKILL.md
+  used_by:
+  - service-designer
+- name: back-stage-validation
+  category: design
+  description: Check the operation can actually deliver the designed experience.
+  output: validation-record.md
+  path: skills/back-stage-validation/SKILL.md
+  used_by:
+  - service-designer
+- name: touchpoint-instrumentation
+  category: design
+  description: Measure the service where the customer actually experiences it.
+  output: instrumentation-plan.md
+  path: skills/touchpoint-instrumentation/SKILL.md
+  used_by:
+  - service-designer
+- name: design-critique-facilitation
+  category: design
+  description: Run critique that improves the work rather than asserting rank.
+  output: critique-record.md
+  path: skills/design-critique-facilitation/SKILL.md
+  used_by:
+  - design-critic
+  - design-head
+- name: goal-anchored-feedback
+  category: design
+  description: Give feedback that can be acted on.
+  output: feedback-notes.md
+  path: skills/goal-anchored-feedback/SKILL.md
+  used_by:
+  - design-critic
+- name: taste-versus-principle-separation
+  category: design
+  description: Tell apart a real problem and a personal preference.
+  output: objection-triage.md
+  path: skills/taste-versus-principle-separation/SKILL.md
+  used_by:
+  - design-critic
+- name: critique-ground-rules
+  category: design
+  description: Set the rules that make critique safe and useful.
+  output: ground-rules.md
+  path: skills/critique-ground-rules/SKILL.md
+  used_by:
+  - design-critic
+- name: design-decision-record
+  category: design
+  description: Record a design decision so it is not re-argued every week.
+  output: design-decision.md
+  path: skills/design-decision-record/SKILL.md
+  used_by:
+  - design-critic
+- name: design-quality-bar
+  category: design
+  description: Define what finished means for a design.
+  output: quality-bar.md
+  path: skills/design-quality-bar/SKILL.md
+  used_by:
+  - design-head
+- name: research-evidence-review
+  category: design
+  description: Check that a design decision rests on evidence rather than assertion.
+  output: evidence-review.md
+  path: skills/research-evidence-review/SKILL.md
+  used_by:
+  - design-head
+- name: design-standard-definition
+  category: design
+  description: Define the experience standard the business strategy requires.
+  output: design-standard.md
+  path: skills/design-standard-definition/SKILL.md
+  used_by:
+  - chief-design-officer-agent
+- name: experience-quality-measurement
+  category: design
+  description: Measure experience quality so it can be argued for with evidence.
+  output: experience-metrics.md
+  path: skills/experience-quality-measurement/SKILL.md
+  used_by:
+  - chief-design-officer-agent
+- name: design-capability-planning
+  category: design
+  description: Plan the design capability the roadmap actually needs.
+  output: capability-plan.md
+  path: skills/design-capability-planning/SKILL.md
+  used_by:
+  - chief-design-officer-agent
+- name: design-strategy-alignment
+  category: design
+  description: Check the design direction actually serves the strategy.
+  output: alignment-review.md
+  path: skills/design-strategy-alignment/SKILL.md
+  used_by:
+  - chief-design-officer-agent
+- name: design-investment-review
+  category: design
+  description: Judge whether design effort is going where it pays.
+  output: investment-review.md
+  path: skills/design-investment-review/SKILL.md
+  used_by:
+  - chief-design-officer-agent
+- name: failure-attribution
+  category: improvement
+  description: Determine whether a failure was capability, context, or task definition — because the fixes are different.
+  output: attribution-report.md
+  path: skills/failure-attribution/SKILL.md
+  used_by:
+  - agent-performance-analyst
+- name: performance-trend-analysis
+  category: improvement
+  description: Distinguish a real trend from noise before acting on it.
+  output: trend-report.md
+  path: skills/performance-trend-analysis/SKILL.md
+  used_by:
+  - agent-performance-analyst
+- name: improvement-queue-ranking
+  category: improvement
+  description: Rank candidate fixes by what they are actually worth.
+  output: improvement-queue.md
+  path: skills/improvement-queue-ranking/SKILL.md
+  used_by:
+  - agent-performance-analyst
+- name: fix-effect-measurement
+  category: improvement
+  description: Measure whether the fix actually helped.
+  output: fix-effect.md
+  path: skills/fix-effect-measurement/SKILL.md
+  used_by:
+  - agent-performance-analyst
+- name: failure-corpus-mining
+  category: improvement
+  description: Gather everything that went wrong into one place worth analysing.
+  output: failure-corpus.md
+  path: skills/failure-corpus-mining/SKILL.md
+  used_by:
+  - failure-miner
+- name: root-cause-clustering
+  category: improvement
+  description: Group failures by what actually caused them.
+  output: cluster-report.md
+  path: skills/root-cause-clustering/SKILL.md
+  used_by:
+  - failure-miner
+- name: failure-cost-estimation
+  category: improvement
+  description: Put a number on what each failure pattern costs.
+  output: failure-costs.md
+  path: skills/failure-cost-estimation/SKILL.md
+  used_by:
+  - failure-miner
+- name: systemic-cause-identification
+  category: improvement
+  description: Find the cause that produces many different failures.
+  output: systemic-causes.md
+  path: skills/systemic-cause-identification/SKILL.md
+  used_by:
+  - failure-miner
+- name: golden-case-extraction
+  category: improvement
+  description: Turn a real failure into a test that stops it recurring.
+  output: golden-case.md
+  path: skills/golden-case-extraction/SKILL.md
+  used_by:
+  - failure-miner
+- name: prompt-variant-generation
+  category: improvement
+  description: Produce candidate instruction changes worth testing.
+  output: variants.md
+  path: skills/prompt-variant-generation/SKILL.md
+  used_by:
+  - prompt-optimizer
+- name: held-out-trial-design
+  category: improvement
+  description: Design the trial so its result means something.
+  output: trial-design.md
+  path: skills/held-out-trial-design/SKILL.md
+  used_by:
+  - prompt-optimizer
+- name: trial-execution
+  category: improvement
+  description: Run the comparison cleanly.
+  output: trial-results.md
+  path: skills/trial-execution/SKILL.md
+  used_by:
+  - ab-test-runner
+- name: sample-sizing
+  category: improvement
+  description: Work out how many cases the trial needs.
+  output: sample-plan.md
+  path: skills/sample-sizing/SKILL.md
+  used_by:
+  - ab-test-runner
+- name: early-stopping-discipline
+  category: improvement
+  description: Do not stop the trial when it starts looking good.
+  output: trial-log.md
+  path: skills/early-stopping-discipline/SKILL.md
+  used_by:
+  - ab-test-runner
+- name: effect-size-reporting
+  category: improvement
+  description: Report how much better, not just whether better.
+  output: effect-report.md
+  path: skills/effect-size-reporting/SKILL.md
+  used_by:
+  - ab-test-runner
+- name: negative-result-reporting
+  category: improvement
+  description: Report what did not work, as prominently as what did.
+  output: negative-results.md
+  path: skills/negative-result-reporting/SKILL.md
+  used_by:
+  - ab-test-runner
+- name: regression-sweep
+  category: improvement
+  description: Check the change did not break something else.
+  output: regression-sweep.md
+  path: skills/regression-sweep/SKILL.md
+  used_by:
+  - improvement-head
+  - prompt-optimizer
+- name: adoption-threshold-setting
+  category: improvement
+  description: Decide in advance what would justify adopting the change.
+  output: adoption-threshold.md
+  path: skills/adoption-threshold-setting/SKILL.md
+  used_by:
+  - improvement-head
+  - prompt-optimizer
+- name: prompt-change-logging
+  category: improvement
+  description: Keep the history of what changed and what it bought.
+  output: prompt-change-log.md
+  path: skills/prompt-change-logging/SKILL.md
+  used_by:
+  - prompt-optimizer
+- name: change-reversion
+  category: improvement
+  description: Undo a change that did not hold.
+  output: reversion-record.md
+  path: skills/change-reversion/SKILL.md
+  used_by:
+  - improvement-head
+- name: skill-step-revision
+  category: improvement
+  description: Fix the specific step that let the failure through.
+  output: step-revision.md
+  path: skills/skill-step-revision/SKILL.md
+  used_by:
+  - skill-refiner
+- name: library-overlap-analysis
+  category: improvement
+  description: Find skills that have blurred into each other, and gaps between them.
+  output: overlap-report.md
+  path: skills/library-overlap-analysis/SKILL.md
+  used_by:
+  - skill-refiner
+- name: skill-usage-telemetry
+  category: improvement
+  description: Find out which skills are actually used.
+  output: usage-report.md
+  path: skills/skill-usage-telemetry/SKILL.md
+  used_by:
+  - skill-refiner
+- name: skill-deprecation
+  category: improvement
+  description: Retire a skill without breaking the agents that name it.
+  output: deprecation-record.md
+  path: skills/skill-deprecation/SKILL.md
+  used_by:
+  - skill-refiner
+- name: step-concreteness-review
+  category: improvement
+  description: Check every step can actually be followed.
+  output: concreteness-review.md
+  path: skills/step-concreteness-review/SKILL.md
+  used_by:
+  - skill-refiner
+- name: rubric-design
+  category: improvement
+  description: Build a scoring scheme different reviewers apply the same way.
+  output: rubric.md
+  path: skills/rubric-design/SKILL.md
+  used_by:
+  - eval-designer
+- name: held-out-set-construction
+  category: improvement
+  description: Build a measurement set that stays honest.
+  output: held-out-set.md
+  path: skills/held-out-set-construction/SKILL.md
+  used_by:
+  - eval-designer
+- name: discrimination-analysis
+  category: improvement
+  description: Check the evaluation actually separates good from bad.
+  output: discrimination-report.md
+  path: skills/discrimination-analysis/SKILL.md
+  used_by:
+  - eval-designer
+- name: inter-rater-calibration
+  category: improvement
+  description: Get different scorers to agree.
+  output: calibration-report.md
+  path: skills/inter-rater-calibration/SKILL.md
+  used_by:
+  - eval-designer
+- name: evaluation-revalidation
+  category: improvement
+  description: Re-check the evaluation when the job changes.
+  output: revalidation-record.md
+  path: skills/evaluation-revalidation/SKILL.md
+  used_by:
+  - eval-designer
+- name: case-provenance-recording
+  category: improvement
+  description: Record where each case came from and why its answer is right.
+  output: case-provenance.md
+  path: skills/case-provenance-recording/SKILL.md
+  used_by:
+  - benchmark-curator
+- name: case-retirement
+  category: improvement
+  description: Remove cases that no longer teach anything.
+  output: retirement-log.md
+  path: skills/case-retirement/SKILL.md
+  used_by:
+  - benchmark-curator
+- name: coverage-mapping
+  category: improvement
+  description: Know what the evaluation does and does not cover.
+  output: coverage-map.md
+  path: skills/coverage-mapping/SKILL.md
+  used_by:
+  - benchmark-curator
+- name: contamination-auditing
+  category: improvement
+  description: Check the measurement set has not leaked into development.
+  output: contamination-audit.md
+  path: skills/contamination-auditing/SKILL.md
+  used_by:
+  - benchmark-curator
+- name: capability-mapping
+  category: improvement
+  description: Know what the organisation can and cannot currently do.
+  output: capability-map.md
+  path: skills/capability-mapping/SKILL.md
+  used_by:
+  - capability-gap-scout
+- name: gap-evidence-collection
+  category: improvement
+  description: Prove the gap is real before proposing to fill it.
+  output: gap-evidence.md
+  path: skills/gap-evidence-collection/SKILL.md
+  used_by:
+  - capability-gap-scout
+- name: minimal-intervention-selection
+  category: improvement
+  description: Choose the smallest change that closes the gap.
+  output: intervention-proposal.md
+  path: skills/minimal-intervention-selection/SKILL.md
+  used_by:
+  - capability-gap-scout
+- name: new-agent-justification
+  category: improvement
+  description: Justify a new agent by the accountability nobody currently holds.
+  output: agent-proposal.md
+  path: skills/new-agent-justification/SKILL.md
+  used_by:
+  - capability-gap-scout
+- name: sprawl-resistance
+  category: improvement
+  description: Recommend against filling a gap when that is the right answer.
+  output: non-proposal.md
+  path: skills/sprawl-resistance/SKILL.md
+  used_by:
+  - capability-gap-scout
+- name: lesson-distillation
+  category: improvement
+  description: Compress a lesson into the shortest instruction that prevents the failure.
+  output: distilled-lesson.md
+  path: skills/lesson-distillation/SKILL.md
+  used_by:
+  - knowledge-distiller
+- name: instruction-placement
+  category: improvement
+  description: Put the instruction where it will actually be read.
+  output: placement-record.md
+  path: skills/instruction-placement/SKILL.md
+  used_by:
+  - knowledge-distiller
+- name: instruction-pruning
+  category: improvement
+  description: Remove instructions that no longer earn their tokens.
+  output: pruning-record.md
+  path: skills/instruction-pruning/SKILL.md
+  used_by:
+  - knowledge-distiller
+- name: constraint-over-explanation
+  category: improvement
+  description: Write rules agents follow rather than rationale they interpret.
+  output: rule-text.md
+  path: skills/constraint-over-explanation/SKILL.md
+  used_by:
+  - knowledge-distiller
+- name: behaviour-change-verification
+  category: improvement
+  description: Check the instruction actually changed what agents do.
+  output: verification-record.md
+  path: skills/behaviour-change-verification/SKILL.md
+  used_by:
+  - knowledge-distiller
+- name: improvement-cycle-facilitation
+  category: improvement
+  description: Run the loop that makes the organisation better.
+  output: cycle-report.md
+  path: skills/improvement-cycle-facilitation/SKILL.md
+  used_by:
+  - improvement-head
+- name: improvement-backlog-ranking
+  category: improvement
+  description: Decide what to improve next.
+  output: improvement-backlog.md
+  path: skills/improvement-backlog-ranking/SKILL.md
+  used_by:
+  - improvement-head
+- name: improvement-return-analysis
+  category: improvement
+  description: Judge whether the improvement effort was worth it.
+  output: return-analysis.md
+  path: skills/improvement-return-analysis/SKILL.md
+  used_by:
+  - chief-learning-officer-agent
+- name: optimisation-drift-detection
+  category: improvement
+  description: Catch the system getting better at its metrics while getting worse at its job.
+  output: drift-report.md
+  path: skills/optimisation-drift-detection/SKILL.md
+  used_by:
+  - chief-learning-officer-agent
+- name: self-modification-policy
+  category: improvement
+  description: Define what the system may change about itself without human approval.
+  output: self-modification-policy.md
+  path: skills/self-modification-policy/SKILL.md
+  used_by:
+  - chief-learning-officer-agent
+- name: learning-strategy
+  category: improvement
+  description: Decide what the organisation must get better at, and ignore the rest.
+  output: learning-strategy.md
+  path: skills/learning-strategy/SKILL.md
+  used_by:
+  - chief-learning-officer-agent
+- name: capability-target-setting
+  category: improvement
+  description: Set improvement targets that can be judged.
+  output: capability-targets.md
+  path: skills/capability-target-setting/SKILL.md
+  used_by:
+  - chief-learning-officer-agent
+- name: token-accounting
+  category: efficiency
+  description: Know where the tokens actually go.
+  output: token-report.md
+  path: skills/token-accounting/SKILL.md
+  used_by:
+  - token-efficiency-analyst
+- name: context-bloat-analysis
+  category: efficiency
+  description: Find context that is loaded and never used.
+  output: bloat-report.md
+  path: skills/context-bloat-analysis/SKILL.md
+  used_by:
+  - token-efficiency-analyst
+- name: model-tier-assignment
+  category: efficiency
+  description: Put each agent on the cheapest tier that holds quality.
+  output: tier-assignment.md
+  path: skills/model-tier-assignment/SKILL.md
+  used_by:
+  - model-router-tuner
+  - token-efficiency-analyst
+- name: escalation-rule-design
+  category: efficiency
+  description: Define when a cheaper tier must hand up.
+  output: escalation-rules.md
+  path: skills/escalation-rule-design/SKILL.md
+  used_by:
+  - model-router-tuner
+- name: tier-quality-verification
+  category: efficiency
+  description: Prove a demotion did not cost quality.
+  output: tier-verification.md
+  path: skills/tier-quality-verification/SKILL.md
+  used_by:
+  - model-router-tuner
+- name: routing-telemetry-review
+  category: efficiency
+  description: Check the routing is working in practice.
+  output: routing-review.md
+  path: skills/routing-telemetry-review/SKILL.md
+  used_by:
+  - model-router-tuner
+- name: task-class-classification
+  category: efficiency
+  description: Classify work so it can be routed to the right tier.
+  output: task-classes.md
+  path: skills/task-class-classification/SKILL.md
+  used_by:
+  - model-router-tuner
+- name: cache-order-optimisation
+  category: efficiency
+  description: Order the prompt so the stable part stays cacheable.
+  output: cache-order.md
+  path: skills/cache-order-optimisation/SKILL.md
+  used_by:
+  - token-efficiency-analyst
+- name: efficiency-quality-tradeoff
+  category: efficiency
+  description: Decide whether a saving is worth it.
+  output: tradeoff-record.md
+  path: skills/efficiency-quality-tradeoff/SKILL.md
+  used_by:
+  - token-efficiency-analyst
+- name: step-value-analysis
+  category: improvement
+  description: Find workflow steps that change no outcome.
+  output: step-value.md
+  path: skills/step-value-analysis/SKILL.md
+  used_by:
+  - workflow-optimizer
+- name: fail-fast-resequencing
+  category: improvement
+  description: Move the cheap disconfirming step earlier.
+  output: resequencing.md
+  path: skills/fail-fast-resequencing/SKILL.md
+  used_by:
+  - workflow-optimizer
+- name: duplicate-review-elimination
+  category: improvement
+  description: Remove reviews that check the same thing twice.
+  output: review-map.md
+  path: skills/duplicate-review-elimination/SKILL.md
+  used_by:
+  - workflow-optimizer
+- name: workflow-change-measurement
+  category: improvement
+  description: Prove the workflow change helped.
+  output: workflow-change.md
+  path: skills/workflow-change-measurement/SKILL.md
+  used_by:
+  - workflow-optimizer
+- name: industrial-design-concepting
+  category: hardware
+  description: Generate and narrow physical product concepts against real use, not against a mood board.
+  output: concept-study.md
+  path: skills/industrial-design-concepting/SKILL.md
+  used_by:
+  - industrial-designer
+- name: ergonomics-and-human-factors
+  category: hardware
+  description: Fit the product to the range of people who will actually use it.
+  output: ergonomics-report.md
+  path: skills/ergonomics-and-human-factors/SKILL.md
+  used_by:
+  - industrial-designer
+- name: cmf-specification
+  category: hardware
+  description: Specify colour, material, and finish so the factory produces what was designed.
+  output: cmf-spec.md
+  path: skills/cmf-specification/SKILL.md
+  used_by:
+  - industrial-designer
+- name: physical-model-review
+  category: hardware
+  description: Judge form with a physical object, because screens flatter shapes that fail in the hand.
+  output: model-review.md
+  path: skills/physical-model-review/SKILL.md
+  used_by:
+  - industrial-designer
+- name: form-volume-negotiation
+  category: hardware
+  description: Settle the internal volume envelope before anyone refines a surface.
+  output: volume-envelope.md
+  path: skills/form-volume-negotiation/SKILL.md
+  used_by:
+  - industrial-designer
+- name: parametric-modeling
+  category: hardware
+  description: Build a 3D model that survives change.
+  output: cad-model
+  path: skills/parametric-modeling/SKILL.md
+  used_by:
+  - cad-modeler
+- name: assembly-modeling
+  category: hardware
+  description: Model the assembly so it reflects how the product is actually put together.
+  output: assembly-model
+  path: skills/assembly-modeling/SKILL.md
+  used_by:
+  - cad-modeler
+- name: interference-checking
+  category: hardware
+  description: Find the collisions before the parts are made.
+  output: interference-report.md
+  path: skills/interference-checking/SKILL.md
+  used_by:
+  - cad-modeler
+- name: gd-and-t-drafting
+  category: hardware
+  description: Dimension drawings so the part can be inspected and accepted unambiguously.
+  output: drawing
+  path: skills/gd-and-t-drafting/SKILL.md
+  used_by:
+  - cad-modeler
+- name: model-revision-control
+  category: hardware
+  description: Keep geometry versions unambiguous.
+  output: revision-log.md
+  path: skills/model-revision-control/SKILL.md
+  used_by:
+  - cad-modeler
+- name: tolerance-stackup-analysis
+  category: hardware
+  description: Work out whether the parts will actually assemble.
+  output: stackup.md
+  path: skills/tolerance-stackup-analysis/SKILL.md
+  used_by:
+  - mechanical-engineer
+- name: structural-analysis
+  category: hardware
+  description: Check the part survives the loads it will actually see.
+  output: analysis-report.md
+  path: skills/structural-analysis/SKILL.md
+  used_by:
+  - mechanical-engineer
+- name: fastener-and-joint-design
+  category: hardware
+  description: Choose how parts are held together and whether they can come apart.
+  output: joint-spec.md
+  path: skills/fastener-and-joint-design/SKILL.md
+  used_by:
+  - mechanical-engineer
+- name: drop-and-vibration-analysis
+  category: hardware
+  description: Check the product survives being dropped and shaken.
+  output: drop-vibration-report.md
+  path: skills/drop-and-vibration-analysis/SKILL.md
+  used_by:
+  - mechanical-engineer
+- name: analysis-test-correlation
+  category: hardware
+  description: Check the simulation actually predicted reality.
+  output: correlation-report.md
+  path: skills/analysis-test-correlation/SKILL.md
+  used_by:
+  - mechanical-engineer
+- name: dfm-review
+  category: hardware
+  description: Check every part can be made by the intended process.
+  output: dfm-report.md
+  path: skills/dfm-review/SKILL.md
+  used_by:
+  - dfm-engineer
+- name: process-selection
+  category: hardware
+  description: Choose the manufacturing process for the real volume.
+  output: process-decision.md
+  path: skills/process-selection/SKILL.md
+  used_by:
+  - dfm-engineer
+- name: tooling-design-review
+  category: hardware
+  description: Review the tool before it is cut.
+  output: tool-review.md
+  path: skills/tooling-design-review/SKILL.md
+  used_by:
+  - dfm-engineer
+- name: design-for-assembly
+  category: hardware
+  description: Reduce the cost and error rate of putting it together.
+  output: dfa-report.md
+  path: skills/design-for-assembly/SKILL.md
+  used_by:
+  - dfm-engineer
+- name: process-capability-analysis
+  category: hardware
+  description: Design inside what the supplier can actually hold.
+  output: capability-report.md
+  path: skills/process-capability-analysis/SKILL.md
+  used_by:
+  - dfm-engineer
+- name: enclosure-architecture
+  category: hardware
+  description: Decide how the housing splits, closes, and holds itself together.
+  output: enclosure-architecture.md
+  path: skills/enclosure-architecture/SKILL.md
+  used_by:
+  - enclosure-designer
+- name: ingress-protection-design
+  category: hardware
+  description: Keep water and dust out, to the rating the product claims.
+  output: ip-design.md
+  path: skills/ingress-protection-design/SKILL.md
+  used_by:
+  - enclosure-designer
+- name: board-mounting-design
+  category: hardware
+  description: Hold the board so its connectors land where they should.
+  output: mounting-spec.md
+  path: skills/board-mounting-design/SKILL.md
+  used_by:
+  - enclosure-designer
+- name: aperture-tolerancing
+  category: hardware
+  description: Size openings so the mating part actually fits every time.
+  output: aperture-spec.md
+  path: skills/aperture-tolerancing/SKILL.md
+  used_by:
+  - enclosure-designer
+- name: closure-and-retention-design
+  category: hardware
+  description: Make it close properly and stay closed.
+  output: closure-spec.md
+  path: skills/closure-and-retention-design/SKILL.md
+  used_by:
+  - enclosure-designer
+- name: thermal-budgeting
+  category: hardware
+  description: Account for every watt before designing the cooling.
+  output: thermal-budget.md
+  path: skills/thermal-budgeting/SKILL.md
+  used_by:
+  - thermal-engineer
+- name: thermal-path-analysis
+  category: hardware
+  description: Follow the heat from junction to ambient.
+  output: thermal-analysis.md
+  path: skills/thermal-path-analysis/SKILL.md
+  used_by:
+  - thermal-engineer
+- name: thermal-interface-selection
+  category: hardware
+  description: Choose the material at the contact, where most thermal designs fail.
+  output: interface-spec.md
+  path: skills/thermal-interface-selection/SKILL.md
+  used_by:
+  - thermal-engineer
+- name: touch-temperature-compliance
+  category: hardware
+  description: Keep the outside safe to touch.
+  output: touch-temp-report.md
+  path: skills/touch-temperature-compliance/SKILL.md
+  used_by:
+  - thermal-engineer
+- name: thermal-validation-testing
+  category: hardware
+  description: Measure what the product actually runs at.
+  output: thermal-test-report.md
+  path: skills/thermal-validation-testing/SKILL.md
+  used_by:
+  - thermal-engineer
+- name: schematic-capture
+  category: hardware
+  description: Draw the circuit so it can be reviewed, built, and debugged.
+  output: schematic
+  path: skills/schematic-capture/SKILL.md
+  used_by:
+  - pcb-schematic-designer
+- name: power-sequencing-design
+  category: hardware
+  description: Specify what powers up when, and what every output does at reset.
+  output: sequencing-spec.md
+  path: skills/power-sequencing-design/SKILL.md
+  used_by:
+  - pcb-schematic-designer
+- name: interface-protection-design
+  category: hardware
+  description: Protect every connection to the outside world.
+  output: protection-spec.md
+  path: skills/interface-protection-design/SKILL.md
+  used_by:
+  - pcb-schematic-designer
+- name: pin-accounting-review
+  category: hardware
+  description: Account for every pin on every part.
+  output: pin-review.md
+  path: skills/pin-accounting-review/SKILL.md
+  used_by:
+  - pcb-schematic-designer
+- name: design-for-test-provision
+  category: hardware
+  description: Build in the access debugging and production will need.
+  output: dft-spec.md
+  path: skills/design-for-test-provision/SKILL.md
+  used_by:
+  - pcb-schematic-designer
+- name: stackup-design
+  category: hardware
+  description: Decide the layer structure before anything is routed.
+  output: stackup.md
+  path: skills/stackup-design/SKILL.md
+  used_by:
+  - pcb-layout-designer
+- name: component-placement
+  category: hardware
+  description: Place parts for the signal path, the mechanics, and the build.
+  output: placement.md
+  path: skills/component-placement/SKILL.md
+  used_by:
+  - pcb-layout-designer
+- name: high-speed-routing
+  category: hardware
+  description: Route the fast signals so they still work when they arrive.
+  output: routing-report.md
+  path: skills/high-speed-routing/SKILL.md
+  used_by:
+  - pcb-layout-designer
+- name: ground-and-return-path-design
+  category: hardware
+  description: Design where the current comes back, not just where it goes.
+  output: return-path-review.md
+  path: skills/ground-and-return-path-design/SKILL.md
+  used_by:
+  - pcb-layout-designer
+- name: fabrication-output-review
+  category: hardware
+  description: Check the package before the fabricator does.
+  output: fab-package
+  path: skills/fabrication-output-review/SKILL.md
+  used_by:
+  - pcb-layout-designer
+- name: impedance-planning
+  category: hardware
+  description: Set impedance targets and make them achievable.
+  output: impedance-plan.md
+  path: skills/impedance-planning/SKILL.md
+  used_by:
+  - signal-integrity-engineer
+- name: termination-and-topology-design
+  category: hardware
+  description: Control reflections before they become errors.
+  output: termination-spec.md
+  path: skills/termination-and-topology-design/SKILL.md
+  used_by:
+  - signal-integrity-engineer
+- name: crosstalk-analysis
+  category: hardware
+  description: Keep signals from corrupting their neighbours.
+  output: crosstalk-report.md
+  path: skills/crosstalk-analysis/SKILL.md
+  used_by:
+  - signal-integrity-engineer
+- name: timing-budget-analysis
+  category: hardware
+  description: Prove the data arrives when the receiver expects it.
+  output: timing-budget.md
+  path: skills/timing-budget-analysis/SKILL.md
+  used_by:
+  - signal-integrity-engineer
+- name: si-simulation-and-measurement
+  category: hardware
+  description: Check the signals, first in simulation and then on the bench.
+  output: si-report.md
+  path: skills/si-simulation-and-measurement/SKILL.md
+  used_by:
+  - signal-integrity-engineer
+- name: power-tree-design
+  category: hardware
+  description: Lay out every rail, its source, and its headroom.
+  output: power-tree.md
+  path: skills/power-tree-design/SKILL.md
+  used_by:
+  - power-electronics-engineer
+- name: converter-topology-selection
+  category: hardware
+  description: Choose the right converter for each rail.
+  output: converter-decision.md
+  path: skills/converter-topology-selection/SKILL.md
+  used_by:
+  - power-electronics-engineer
+- name: transient-response-design
+  category: hardware
+  description: Make the rail hold up when the load steps.
+  output: transient-report.md
+  path: skills/transient-response-design/SKILL.md
+  used_by:
+  - power-electronics-engineer
+- name: power-protection-design
+  category: hardware
+  description: Define what happens when power goes wrong.
+  output: power-protection-spec.md
+  path: skills/power-protection-design/SKILL.md
+  used_by:
+  - power-electronics-engineer
+- name: power-measurement-validation
+  category: hardware
+  description: Measure the power system rather than quoting the datasheet.
+  output: power-measurement.md
+  path: skills/power-measurement-validation/SKILL.md
+  used_by:
+  - power-electronics-engineer
+- name: bom-management
+  category: hardware
+  description: Own the list of everything that goes into the product.
+  output: bom.csv
+  path: skills/bom-management/SKILL.md
+  used_by:
+  - electronics-component-engineer
+- name: second-source-qualification
+  category: hardware
+  description: Make sure one supplier cannot stop the line.
+  output: second-source-report.md
+  path: skills/second-source-qualification/SKILL.md
+  used_by:
+  - electronics-component-engineer
+- name: lifecycle-and-obsolescence-review
+  category: hardware
+  description: Avoid designing in a part that is about to disappear.
+  output: lifecycle-report.md
+  path: skills/lifecycle-and-obsolescence-review/SKILL.md
+  used_by:
+  - electronics-component-engineer
+- name: component-cost-analysis
+  category: hardware
+  description: Know what the parts really cost at the volume you will actually build.
+  output: component-cost.md
+  path: skills/component-cost-analysis/SKILL.md
+  used_by:
+  - electronics-component-engineer
+- name: authorised-sourcing-control
+  category: hardware
+  description: Buy only what you can trace.
+  output: sourcing-record.md
+  path: skills/authorised-sourcing-control/SKILL.md
+  used_by:
+  - electronics-component-engineer
+- name: firmware-architecture
+  category: hardware
+  description: Structure the embedded software so hardware changes do not rewrite the product.
+  output: firmware-architecture.md
+  path: skills/firmware-architecture/SKILL.md
+  used_by:
+  - embedded-firmware-engineer
+- name: board-bringup
+  category: hardware
+  description: Get the first board alive, in a defined order.
+  output: bringup-log.md
+  path: skills/board-bringup/SKILL.md
+  used_by:
+  - embedded-firmware-engineer
+- name: hardware-abstraction-design
+  category: hardware
+  description: Keep the product code independent of the parts underneath it.
+  output: hal-spec.md
+  path: skills/hardware-abstraction-design/SKILL.md
+  used_by:
+  - embedded-firmware-engineer
+- name: safe-field-update-design
+  category: hardware
+  description: Make sure an update cannot brick a unit in the field.
+  output: update-spec.md
+  path: skills/safe-field-update-design/SKILL.md
+  used_by:
+  - embedded-firmware-engineer
+- name: realtime-timing-verification
+  category: hardware
+  description: Measure the timing rather than reasoning about it.
+  output: timing-report.md
+  path: skills/realtime-timing-verification/SKILL.md
+  used_by:
+  - embedded-firmware-engineer
+- name: standards-applicability-matrix
+  category: hardware
+  description: Know which rules apply before designing, not before submitting.
+  output: standards-matrix.md
+  path: skills/standards-applicability-matrix/SKILL.md
+  used_by:
+  - compliance-emc-engineer
+- name: emc-design-review
+  category: hardware
+  description: Design for compliance while it is still cheap.
+  output: emc-review.md
+  path: skills/emc-design-review/SKILL.md
+  used_by:
+  - compliance-emc-engineer
+- name: pre-compliance-testing
+  category: hardware
+  description: Find the failures before the accredited lab does.
+  output: precompliance-report.md
+  path: skills/pre-compliance-testing/SKILL.md
+  used_by:
+  - compliance-emc-engineer
+- name: product-safety-review
+  category: hardware
+  description: Check the product cannot hurt anyone.
+  output: safety-review.md
+  path: skills/product-safety-review/SKILL.md
+  used_by:
+  - compliance-emc-engineer
+- name: technical-file-assembly
+  category: hardware
+  description: Keep the certification evidence current with what actually ships.
+  output: technical-file
+  path: skills/technical-file-assembly/SKILL.md
+  used_by:
+  - compliance-emc-engineer
+- name: test-strategy-hardware
+  category: hardware
+  description: Decide what gets tested at each build phase and why.
+  output: hw-test-strategy.md
+  path: skills/test-strategy-hardware/SKILL.md
+  used_by:
+  - hardware-test-engineer
+- name: verification-matrix
+  category: hardware
+  description: Prove every requirement was actually tested.
+  output: verification-matrix.csv
+  path: skills/verification-matrix/SKILL.md
+  used_by:
+  - hardware-test-engineer
+- name: environmental-testing
+  category: hardware
+  description: Test the conditions the product will actually meet.
+  output: environmental-report.md
+  path: skills/environmental-testing/SKILL.md
+  used_by:
+  - hardware-test-engineer
+- name: production-test-design
+  category: hardware
+  description: Design the test that every unit passes through.
+  output: production-test-spec.md
+  path: skills/production-test-design/SKILL.md
+  used_by:
+  - hardware-test-engineer
+- name: failure-analysis-hardware
+  category: hardware
+  description: Find out why the unit actually failed.
+  output: failure-analysis.md
+  path: skills/failure-analysis-hardware/SKILL.md
+  used_by:
+  - hardware-test-engineer
+- name: prototype-process-selection
+  category: hardware
+  description: Choose how to make the prototype from what it must prove.
+  output: prototype-process.md
+  path: skills/prototype-process-selection/SKILL.md
+  used_by:
+  - prototyping-fabrication-agent
+- name: fabrication-package-preparation
+  category: hardware
+  description: Send the supplier everything they need and nothing ambiguous.
+  output: fab-package
+  path: skills/fabrication-package-preparation/SKILL.md
+  used_by:
+  - prototyping-fabrication-agent
+- name: supplier-quoting
+  category: hardware
+  description: Compare quotes on more than price.
+  output: quote-comparison.md
+  path: skills/supplier-quoting/SKILL.md
+  used_by:
+  - prototyping-fabrication-agent
+- name: build-traceability
+  category: hardware
+  description: Know which parts are in which unit.
+  output: build-record.md
+  path: skills/build-traceability/SKILL.md
+  used_by:
+  - prototyping-fabrication-agent
+- name: prototype-learning-capture
+  category: hardware
+  description: Turn the build into evidence rather than anecdote.
+  output: build-learnings.md
+  path: skills/prototype-learning-capture/SKILL.md
+  used_by:
+  - prototyping-fabrication-agent
+- name: hardware-architecture
+  category: hardware
+  description: Settle how mechanical, electrical, and firmware fit together before detail work starts.
+  output: hw-architecture.md
+  path: skills/hardware-architecture/SKILL.md
+  used_by:
+  - hardware-head
+- name: build-phase-gating
+  category: hardware
+  description: Exit each build phase on evidence, not on schedule.
+  output: phase-gate.md
+  path: skills/build-phase-gating/SKILL.md
+  used_by:
+  - hardware-head
+- name: manufacturing-readiness-review
+  category: hardware
+  description: Check the factory can actually build it.
+  output: readiness-review.md
+  path: skills/manufacturing-readiness-review/SKILL.md
+  used_by:
+  - hardware-head
+- name: hardware-cost-rollup
+  category: hardware
+  description: Know what a unit actually costs to make.
+  output: cost-rollup.md
+  path: skills/hardware-cost-rollup/SKILL.md
+  used_by:
+  - hardware-head
+- name: interface-contract-definition
+  category: hardware
+  description: Write down the boundaries between disciplines so they stop moving.
+  output: interface-contract.md
+  path: skills/interface-contract-definition/SKILL.md
+  used_by:
+  - hardware-head
+- name: hardware-strategy
+  category: hardware
+  description: Decide whether and how to be a hardware company.
+  output: hardware-strategy.md
+  path: skills/hardware-strategy/SKILL.md
+  used_by:
+  - chief-hardware-officer-agent
+- name: tooling-capital-planning
+  category: hardware
+  description: Plan the money that gets locked into steel and inventory.
+  output: tooling-capital-plan.md
+  path: skills/tooling-capital-planning/SKILL.md
+  used_by:
+  - chief-hardware-officer-agent
+- name: manufacturing-partner-selection
+  category: hardware
+  description: Choose who builds it on more than price.
+  output: partner-selection.md
+  path: skills/manufacturing-partner-selection/SKILL.md
+  used_by:
+  - chief-hardware-officer-agent
+- name: supply-chain-resilience-review
+  category: hardware
+  description: Find where the supply chain would break.
+  output: resilience-review.md
+  path: skills/supply-chain-resilience-review/SKILL.md
+  used_by:
+  - chief-hardware-officer-agent
+- name: product-lifecycle-planning
+  category: hardware
+  description: Plan the product's whole life before shipping the first unit.
+  output: lifecycle-plan.md
+  path: skills/product-lifecycle-planning/SKILL.md
+  used_by:
+  - chief-hardware-officer-agent
+- name: research-question-scoping
+  category: research
+  description: Narrow a request until a finite search could actually answer it.
+  output: research-question.md
+  path: skills/research-question-scoping/SKILL.md
+  used_by:
+  - research-analyst
+- name: search-strategy-design
+  category: research
+  description: Plan the search so coverage is deliberate rather than accidental.
+  output: search-plan.md
+  path: skills/search-strategy-design/SKILL.md
+  used_by:
+  - research-analyst
+- name: multi-source-synthesis
+  category: research
+  description: Combine many sources into one answer without inventing consensus.
+  output: synthesis.md
+  path: skills/multi-source-synthesis/SKILL.md
+  used_by:
+  - research-analyst
+- name: residual-uncertainty-statement
+  category: research
+  description: Say plainly what the research did not establish.
+  output: uncertainty-statement.md
+  path: skills/residual-uncertainty-statement/SKILL.md
+  used_by:
+  - research-analyst
+- name: research-repository-lookup
+  category: research
+  description: Check what the organisation already knows before spending on finding out.
+  output: repository-check.md
+  path: skills/research-repository-lookup/SKILL.md
+  used_by:
+  - research-analyst
+- name: source-credibility-assessment
+  category: research
+  description: Decide how much a source can be trusted, and say why.
+  output: credibility-assessment.md
+  path: skills/source-credibility-assessment/SKILL.md
+  used_by:
+  - source-verifier
+- name: primary-source-tracing
+  category: research
+  description: Follow a claim back to where it actually originated.
+  output: source-trace.md
+  path: skills/primary-source-tracing/SKILL.md
+  used_by:
+  - source-verifier
+- name: circular-sourcing-detection
+  category: research
+  description: Spot many sources that are secretly one source.
+  output: circularity-report.md
+  path: skills/circular-sourcing-detection/SKILL.md
+  used_by:
+  - source-verifier
+- name: currency-and-retraction-check
+  category: research
+  description: Confirm the source is still true, not just still published.
+  output: currency-check.md
+  path: skills/currency-and-retraction-check/SKILL.md
+  used_by:
+  - source-verifier
+- name: claim-weight-proportionality
+  category: research
+  description: Match the evidence demanded to the weight the claim will carry.
+  output: weight-assessment.md
+  path: skills/claim-weight-proportionality/SKILL.md
+  used_by:
+  - source-verifier
+- name: prior-art-search
+  category: research
+  description: Find out whether this has been done before.
+  output: prior-art-report.md
+  path: skills/prior-art-search/SKILL.md
+  used_by:
+  - prior-art-researcher
+- name: standards-landscape-review
+  category: research
+  description: Find the standards that constrain or help the design.
+  output: standards-review.md
+  path: skills/standards-landscape-review/SKILL.md
+  used_by:
+  - prior-art-researcher
+- name: relevance-assessment
+  category: research
+  description: Judge honestly whether prior work is actually the same problem.
+  output: relevance-notes.md
+  path: skills/relevance-assessment/SKILL.md
+  used_by:
+  - prior-art-researcher
+- name: failed-approach-cataloguing
+  category: research
+  description: Record what was tried and did not work.
+  output: failed-approaches.md
+  path: skills/failed-approach-cataloguing/SKILL.md
+  used_by:
+  - prior-art-researcher
+- name: counsel-handoff
+  category: research
+  description: Route a legal question to counsel instead of answering it.
+  output: counsel-handoff.md
+  path: skills/counsel-handoff/SKILL.md
+  used_by:
+  - prior-art-researcher
+- name: evaluation-criteria-design
+  category: research
+  description: Decide what matters before looking at any candidate.
+  output: evaluation-criteria.md
+  path: skills/evaluation-criteria-design/SKILL.md
+  used_by:
+  - technology-evaluator
+- name: candidate-trial
+  category: research
+  description: Actually use the thing before recommending it.
+  output: trial-report.md
+  path: skills/candidate-trial/SKILL.md
+  used_by:
+  - technology-evaluator
+- name: total-cost-of-ownership
+  category: research
+  description: Cost the whole life, not the sticker.
+  output: tco-analysis.md
+  path: skills/total-cost-of-ownership/SKILL.md
+  used_by:
+  - technology-evaluator
+- name: project-health-assessment
+  category: research
+  description: Check whether the thing will still exist in three years.
+  output: health-assessment.md
+  path: skills/project-health-assessment/SKILL.md
+  used_by:
+  - technology-evaluator
+- name: exit-cost-analysis
+  category: research
+  description: Know what it would take to leave before you commit.
+  output: exit-analysis.md
+  path: skills/exit-cost-analysis/SKILL.md
+  used_by:
+  - technology-evaluator
+- name: dataset-discovery
+  category: research
+  description: Find the data that could answer the question.
+  output: dataset-candidates.md
+  path: skills/dataset-discovery/SKILL.md
+  used_by:
+  - data-sourcing-analyst
+- name: methodology-assessment
+  category: research
+  description: Read how the number was made before using it.
+  output: methodology-notes.md
+  path: skills/methodology-assessment/SKILL.md
+  used_by:
+  - data-sourcing-analyst
+- name: comparability-checking
+  category: research
+  description: Check two figures can honestly sit side by side.
+  output: comparability-notes.md
+  path: skills/comparability-checking/SKILL.md
+  used_by:
+  - data-sourcing-analyst
+- name: dataset-licence-review
+  category: research
+  description: Check we are allowed to use it the way we intend.
+  output: licence-record.md
+  path: skills/dataset-licence-review/SKILL.md
+  used_by:
+  - data-sourcing-analyst
+- name: figure-with-limits-reporting
+  category: research
+  description: Report a number with everything needed to use it responsibly.
+  output: figure-report.md
+  path: skills/figure-with-limits-reporting/SKILL.md
+  used_by:
+  - data-sourcing-analyst
+- name: watchlist-design
+  category: research
+  description: Decide what to watch, from what would break the plan.
+  output: watchlist.md
+  path: skills/watchlist-design/SKILL.md
+  used_by:
+  - horizon-scanner
+- name: weak-signal-detection
+  category: research
+  description: Notice a change before it is obvious, without inventing one.
+  output: signal-report.md
+  path: skills/weak-signal-detection/SKILL.md
+  used_by:
+  - horizon-scanner
+- name: regulatory-change-monitoring
+  category: research
+  description: Watch the rules as actively as the technology.
+  output: regulatory-watch.md
+  path: skills/regulatory-change-monitoring/SKILL.md
+  used_by:
+  - horizon-scanner
+- name: signal-threshold-setting
+  category: research
+  description: Define in advance what counts as a signal.
+  output: thresholds.md
+  path: skills/signal-threshold-setting/SKILL.md
+  used_by:
+  - horizon-scanner
+- name: indicator-retirement
+  category: research
+  description: Stop watching things that never taught you anything.
+  output: retirement-log.md
+  path: skills/indicator-retirement/SKILL.md
+  used_by:
+  - horizon-scanner
+- name: evidence-standard-setting
+  category: research
+  description: Decide what grade of evidence a claim needs before searching for it.
+  output: evidence-standard.md
+  path: skills/evidence-standard-setting/SKILL.md
+  used_by:
+  - research-head
+- name: research-intake-triage
+  category: research
+  description: Decide which questions are worth answering.
+  output: intake-decision.md
+  path: skills/research-intake-triage/SKILL.md
+  used_by:
+  - research-head
+- name: research-independence-review
+  category: research
+  description: Check the finding was not shaped by what someone wanted.
+  output: independence-review.md
+  path: skills/research-independence-review/SKILL.md
+  used_by:
+  - chief-research-officer-agent
+  - research-head
+- name: unknowns-register
+  category: research
+  description: Keep an explicit record of what the organisation does not know.
+  output: unknowns-register.md
+  path: skills/unknowns-register/SKILL.md
+  used_by:
+  - research-head
+- name: repository-reuse-measurement
+  category: research
+  description: Check the research repository is actually an asset.
+  output: reuse-report.md
+  path: skills/repository-reuse-measurement/SKILL.md
+  used_by:
+  - research-head
+- name: standard-of-proof-policy
+  category: research
+  description: Set how much evidence different decisions require.
+  output: proof-policy.md
+  path: skills/standard-of-proof-policy/SKILL.md
+  used_by:
+  - chief-research-officer-agent
+- name: research-agenda-setting
+  category: research
+  description: Choose which unknowns to resolve this period.
+  output: research-agenda.md
+  path: skills/research-agenda-setting/SKILL.md
+  used_by:
+  - chief-research-officer-agent
+- name: knowledge-asset-review
+  category: research
+  description: Ask what the organisation knows that others do not.
+  output: knowledge-assets.md
+  path: skills/knowledge-asset-review/SKILL.md
+  used_by:
+  - chief-research-officer-agent
+- name: decision-readiness-review
+  category: research
+  description: Check whether a decision has the evidence its consequence requires.
+  output: readiness-review.md
+  path: skills/decision-readiness-review/SKILL.md
+  used_by:
+  - chief-research-officer-agent

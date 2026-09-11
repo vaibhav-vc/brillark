@@ -1,0 +1,78 @@
+name: Upgrade and scale
+stage: upgrade
+owner: director
+purpose: Take a working MVP to the next version without breaking what worked.
+steps:
+- id: expand
+  agent: council-expansion-scout
+  skills:
+  - adjacency-mapping
+  - expansion-option-sizing
+  - network-effect-analysis
+  - leverage-identification
+  - sequencing-recommendation
+  does: Find what the plan is leaving on the table and sequence it honestly.
+  produces: expansion-options.md
+  done_when: Prerequisites named; nothing recommended ahead of its prerequisite.
+- id: moat
+  agent: chief-strategy-officer-agent
+  skills:
+  - moat-thesis
+  - market-structure-analysis
+  - scenario-planning
+  - trend-signal-monitoring
+  does: State defensibility as a compounding mechanism and instrument its indicators.
+  produces: moat-thesis.md
+  done_when: Formation evidence, not intention; indicators instrumented.
+- id: debt
+  agent: tech-debt-refactor-agent
+  skills:
+  - tech-debt-registry
+  - refactoring-planning
+  - behaviour-preserving-refactor
+  - code-health-metrics
+  does: Pay down the debt that is slowing the work actually coming next.
+  produces: tech-debt-register.md
+  done_when: Interest quantified; refactors follow imminent work.
+- id: scale
+  agent: system-architect
+  skills:
+  - scalability-stress-review
+  - capacity-planning
+  - load-testing
+  - performance-budgeting
+  does: Find the first breaking point and the cost curve before demand does.
+  produces: scalability-review.md
+  done_when: Breaking point per critical path known; cost curve modelled.
+- id: economics
+  agent: finance-head
+  skills:
+  - financial-model-build
+  - scenario-analysis
+  - stress-testing
+  - survival-analysis
+  does: Re-run the model at the new scale and state the survival requirement.
+  produces: financial-model.md
+  done_when: Breaking point recorded per driver; margin of safety stated in time.
+- id: council
+  agent: council-director
+  skills:
+  - council-debate-facilitation
+  - verdict-writing
+  - recurring-flaw-analysis
+  does: Attack the upgrade plan and check for the flaws we keep repeating.
+  produces: council-verdict.md
+  done_when: Recurring flaws traced to the artifact that permits them.
+- id: gate
+  agent: director
+  skills:
+  - stage-gate-review
+  - resource-allocation
+  - kill-criteria-definition
+  does: Fund the next stage, or stop.
+  produces: stage-gate-decision.md
+  done_when: Kill criteria set with numeric thresholds and deadlines.
+exit_criteria:
+- Expansion sequenced behind its prerequisites.
+- Scaling limits known and costed.
+- Kill criteria recorded before the work starts.

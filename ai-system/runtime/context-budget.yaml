@@ -1,0 +1,63 @@
+version: 1
+description: Context and return budgets. A runtime that loads this organisation MUST enforce them; the
+  whole point of the tiering is that no agent ever receives the full library.
+units: tokens (estimated at 4 characters per token)
+tiers:
+  tier_1_discovery:
+    what: agents/index/_domains.tsv, one agents/index/<domain>.tsv, one skills/index/<category>.tsv
+    when: routing and planning only
+    budget: 4000
+  tier_2_activation:
+    what: the selected agent charter plus the selected SKILL.md files
+    when: once the owner and skills are chosen
+    budget: 12000
+  tier_3_execution:
+    what: context package, retrieved memory, input artifacts
+    when: during the run, just-in-time
+    budget: 20000
+per_agent_tier:
+  director:
+    context: 25000
+    return: 1500
+  head:
+    context: 25000
+    return: 1500
+  executive:
+    context: 20000
+    return: 1200
+  council:
+    context: 20000
+    return: 1200
+  specialist:
+    context: 15000
+    return: 800
+  mechanical:
+    context: 6000
+    return: 400
+model_tiers:
+  haiku:
+    task_class: mechanical
+    use_for: extraction, formatting, validation, tracking, lookup
+  sonnet:
+    task_class: analytical
+    use_for: synthesis, comparison, modelling, diagnosis, building
+  opus:
+    task_class: judgement
+    use_for: arbitration, strategy, ethics, irreversible decisions, Council
+retrieval:
+  max_memory_records: 12
+  digest_first: true
+  rule: Retrieve digests first; fetch a full record only when the digest is insufficient.
+cache_order:
+- base system prompt
+- tier system prompt
+- agent charter
+- selected skills
+- context package
+- task
+cache_rule: Everything before 'context package' is stable across a session and must never be reordered
+  or interleaved with variable content, or cache reuse is lost for all of it.
+enforcement:
+  on_context_exceeded: compact, then escalate to the head if still over
+  on_return_exceeded: truncate to the artifact pointers and the decision
+  on_repeated_exceedance: route to token-efficiency-analyst as a bloat defect

@@ -1,0 +1,3232 @@
+version: 1
+description: Machine-readable roster. tests/test_system_integrity.py validates every entry against knowledge-schema/agent-profile.schema.json
+  and checks that reports_to and skills resolve.
+agents:
+- id: director
+  title: Director of the Agent Organisation
+  tier: director
+  domain: governance
+  reports_to: human-founder
+  model: opus
+  task_class: judgement
+  escalates_to_model: opus
+  context_budget_tokens: 25000
+  return_budget_tokens: 1500
+  path: agents/orchestration/director.md
+  skills:
+  - stage-gate-review
+  - org-backlog-triage
+  - intent-clarification
+  - decision-record-writing
+  - resource-allocation
+  - kill-criteria-definition
+  memory_scopes:
+  - org.charter
+  - org.decisions
+  - venture.*.stage-gates
+  - council.verdicts
+  capability: Single accountable owner of the whole agent organisation
+- id: finance-head
+  title: Head of Finance
+  tier: head
+  domain: finance
+  reports_to: director
+  model: opus
+  task_class: judgement
+  escalates_to_model: opus
+  context_budget_tokens: 25000
+  return_budget_tokens: 1500
+  path: agents/orchestration/finance-head.md
+  skills:
+  - financial-model-build
+  - unit-economics-analysis
+  - runway-forecast
+  - pricing-decision
+  - scenario-analysis
+  - assumption-ledger
+  memory_scopes:
+  - org.finance
+  - venture.*.finance
+  - org.decisions
+  - council.verdicts
+  capability: 'Owns the truth about money: unit economics, runway, pricing, and whether the business model can actually make
+    more than it spends'
+- id: business-head
+  title: Head of Business & Market
+  tier: head
+  domain: business
+  reports_to: director
+  model: opus
+  task_class: judgement
+  escalates_to_model: opus
+  context_budget_tokens: 25000
+  return_budget_tokens: 1500
+  path: agents/orchestration/business-head.md
+  skills:
+  - business-model-canvas
+  - customer-discovery-interview
+  - jtbd-analysis
+  - positioning-statement
+  - gtm-planning
+  - hypothesis-backlog
+  memory_scopes:
+  - org.market
+  - venture.*.business
+  - venture.*.customers
+  - org.decisions
+  capability: 'Owns the demand side: who the customer is, what problem is worth money, how the business model captures value,
+    and how the product reaches the market'
+- id: engineering-head
+  title: Head of Engineering
+  tier: head
+  domain: engineering
+  reports_to: director
+  model: opus
+  task_class: judgement
+  escalates_to_model: opus
+  context_budget_tokens: 25000
+  return_budget_tokens: 1500
+  path: agents/orchestration/engineering-head.md
+  skills:
+  - mvp-scoping
+  - architecture-decision-record
+  - api-design-review
+  - threat-modeling
+  - test-strategy
+  - release-readiness-review
+  memory_scopes:
+  - org.architecture
+  - venture.*.engineering
+  - venture.*.incidents
+  - org.decisions
+  capability: 'Owns what actually gets built: architecture, the MVP scope line, delivery, quality, security, and the cost
+    of running the system'
+- id: orchestration-head
+  title: Head of Orchestration & Memory
+  tier: head
+  domain: orchestration
+  reports_to: director
+  model: opus
+  task_class: judgement
+  escalates_to_model: opus
+  context_budget_tokens: 25000
+  return_budget_tokens: 1500
+  path: agents/orchestration/orchestration-head.md
+  skills:
+  - task-decomposition
+  - context-packaging
+  - memory-consolidation
+  - memory-conflict-resolution
+  - agent-routing
+  - retrospective-facilitation
+  memory_scopes:
+  - org.tasks
+  - org.memory
+  - venture.*.*
+  - org.decisions
+  capability: 'Owns how the organisation runs itself: routing, decomposition, scheduling, handoffs, and the institutional
+    memory that makes the next run cheaper than the last'
+- id: council-director
+  title: Council Director
+  tier: head
+  domain: council
+  reports_to: director
+  model: opus
+  task_class: judgement
+  escalates_to_model: opus
+  context_budget_tokens: 25000
+  return_budget_tokens: 1500
+  path: agents/orchestration/council-director.md
+  skills:
+  - council-debate-facilitation
+  - severity-triage
+  - verdict-writing
+  - dissent-recording
+  - steelman-construction
+  - recurring-flaw-analysis
+  memory_scopes:
+  - council.verdicts
+  - council.recurring-flaws
+  - org.decisions
+  - venture.*.*
+  capability: Chairs the Council of ten critics
+- id: design-head
+  title: Head of Design
+  tier: head
+  domain: design
+  reports_to: director
+  model: opus
+  task_class: judgement
+  escalates_to_model: opus
+  context_budget_tokens: 25000
+  return_budget_tokens: 1500
+  path: agents/orchestration/design-head.md
+  skills:
+  - design-critique-facilitation
+  - design-quality-bar
+  - design-system-governance
+  - research-evidence-review
+  - accessibility-conformance-review
+  memory_scopes:
+  - org.design-system
+  - org.research
+  - venture.*.design
+  - org.decisions
+  capability: 'Owns what the product feels like to use: research, structure, interaction, craft, accessibility, and the system
+    that keeps it coherent'
+- id: improvement-head
+  title: Head of Continuous Improvement
+  tier: head
+  domain: improvement
+  reports_to: director
+  model: opus
+  task_class: judgement
+  escalates_to_model: opus
+  context_budget_tokens: 25000
+  return_budget_tokens: 1500
+  path: agents/orchestration/improvement-head.md
+  skills:
+  - improvement-cycle-facilitation
+  - adoption-threshold-setting
+  - regression-sweep
+  - improvement-backlog-ranking
+  - change-reversion
+  memory_scopes:
+  - org.performance
+  - org.improvement
+  - org.memory
+  - council.recurring-flaws
+  capability: 'Owns the loop that makes the organisation better at its job over time: measure, diagnose, propose, trial, adopt,
+    verify'
+- id: hardware-head
+  title: Head of Hardware
+  tier: head
+  domain: hardware
+  reports_to: director
+  model: opus
+  task_class: judgement
+  escalates_to_model: opus
+  context_budget_tokens: 25000
+  return_budget_tokens: 1500
+  path: agents/orchestration/hardware-head.md
+  skills:
+  - hardware-architecture
+  - build-phase-gating
+  - manufacturing-readiness-review
+  - hardware-cost-rollup
+  - interface-contract-definition
+  memory_scopes:
+  - org.hardware
+  - venture.*.hardware
+  - venture.*.suppliers
+  - org.decisions
+  capability: 'Owns everything physical: the 3D product, the boards inside it, and whether it can be manufactured, certified,
+    and sold'
+- id: research-head
+  title: Head of Research
+  tier: head
+  domain: research
+  reports_to: director
+  model: opus
+  task_class: judgement
+  escalates_to_model: opus
+  context_budget_tokens: 25000
+  return_budget_tokens: 1500
+  path: agents/orchestration/research-head.md
+  skills:
+  - evidence-standard-setting
+  - research-intake-triage
+  - research-independence-review
+  - unknowns-register
+  - repository-reuse-measurement
+  memory_scopes:
+  - org.research
+  - org.evidence
+  - org.unknowns
+  - venture.*.*
+  capability: 'Owns the quality of the evidence the whole organisation reasons from: what is asked, how it is gathered, how
+    it is graded, and whether anyone can still find it in a year'
+- id: ceo-agent
+  title: CEO Agent
+  tier: executive
+  domain: governance
+  reports_to: director
+  model: opus
+  task_class: judgement
+  escalates_to_model: opus
+  context_budget_tokens: 20000
+  return_budget_tokens: 1200
+  path: agents/executive/ceo-agent.md
+  skills:
+  - strategy-memo
+  - bet-portfolio-sizing
+  - narrative-one-pager
+  - board-update
+  - prioritisation-forcing
+  memory_scopes:
+  - org.charter
+  - org.decisions
+  - venture.*.stage-gates
+  - council.verdicts
+  capability: 'Holds the whole business in one head: strategy, narrative, and the allocation of scarce attention'
+- id: cfo-agent
+  title: CFO Agent
+  tier: executive
+  domain: governance
+  reports_to: director
+  model: opus
+  task_class: judgement
+  escalates_to_model: opus
+  context_budget_tokens: 20000
+  return_budget_tokens: 1200
+  path: agents/executive/cfo-agent.md
+  skills:
+  - budget-approval
+  - variance-analysis
+  - capital-plan
+  - financial-controls-review
+  - investor-reporting
+  memory_scopes:
+  - org.charter
+  - org.decisions
+  - venture.*.stage-gates
+  - council.verdicts
+  capability: Guards solvency and capital efficiency
+- id: cmo-agent
+  title: CMO Agent
+  tier: executive
+  domain: governance
+  reports_to: director
+  model: opus
+  task_class: judgement
+  escalates_to_model: opus
+  context_budget_tokens: 20000
+  return_budget_tokens: 1200
+  path: agents/executive/cmo-agent.md
+  skills:
+  - positioning-statement
+  - message-testing
+  - channel-cac-modeling
+  - campaign-brief
+  - content-calendar
+  memory_scopes:
+  - org.charter
+  - org.decisions
+  - venture.*.stage-gates
+  - council.verdicts
+  capability: 'Owns demand creation and how the market perceives the company: positioning, brand, channels, and the cost of
+    acquiring a customer'
+- id: cto-agent
+  title: CTO Agent
+  tier: executive
+  domain: governance
+  reports_to: director
+  model: opus
+  task_class: judgement
+  escalates_to_model: opus
+  context_budget_tokens: 20000
+  return_budget_tokens: 1200
+  path: agents/executive/cto-agent.md
+  skills:
+  - build-buy-partner-analysis
+  - architecture-decision-record
+  - scalability-stress-review
+  - technical-due-diligence
+  - vendor-risk-review
+  memory_scopes:
+  - org.charter
+  - org.decisions
+  - venture.*.stage-gates
+  - council.verdicts
+  capability: 'Owns the long-horizon technical bet: what we build, buy, or borrow, and whether today''s architecture survives
+    10x'
+- id: coo-agent
+  title: COO Agent
+  tier: executive
+  domain: governance
+  reports_to: director
+  model: opus
+  task_class: judgement
+  escalates_to_model: opus
+  context_budget_tokens: 20000
+  return_budget_tokens: 1200
+  path: agents/executive/coo-agent.md
+  skills:
+  - metrics-tree-design
+  - operating-cadence-design
+  - runbook-authoring
+  - bottleneck-analysis
+  - weekly-scorecard
+  memory_scopes:
+  - org.charter
+  - org.decisions
+  - venture.*.stage-gates
+  - council.verdicts
+  capability: 'Turns strategy into operating cadence: the plans, rituals, metrics, and processes that make execution predictable'
+- id: cpo-agent
+  title: Chief Product Officer Agent
+  tier: executive
+  domain: governance
+  reports_to: director
+  model: opus
+  task_class: judgement
+  escalates_to_model: opus
+  context_budget_tokens: 20000
+  return_budget_tokens: 1200
+  path: agents/executive/cpo-agent.md
+  skills:
+  - prioritisation-framework
+  - product-requirements-doc
+  - acceptance-criteria-writing
+  - roadmap-sequencing
+  - feature-kill-review
+  memory_scopes:
+  - org.charter
+  - org.decisions
+  - venture.*.stage-gates
+  - council.verdicts
+  capability: 'Owns the product bet: which problems we solve, in what order, and what ''good'' means for each'
+- id: chief-strategy-officer-agent
+  title: Chief Strategy Officer Agent
+  tier: executive
+  domain: governance
+  reports_to: director
+  model: opus
+  task_class: judgement
+  escalates_to_model: opus
+  context_budget_tokens: 20000
+  return_budget_tokens: 1200
+  path: agents/executive/chief-strategy-officer-agent.md
+  skills:
+  - market-structure-analysis
+  - moat-thesis
+  - scenario-planning
+  - trend-signal-monitoring
+  - partnership-thesis
+  memory_scopes:
+  - org.charter
+  - org.decisions
+  - venture.*.stage-gates
+  - council.verdicts
+  capability: 'Looks further out than anyone else: market structure, second-order effects, and where the moat comes from'
+- id: chief-revenue-officer-agent
+  title: Chief Revenue Officer Agent
+  tier: executive
+  domain: governance
+  reports_to: director
+  model: opus
+  task_class: judgement
+  escalates_to_model: opus
+  context_budget_tokens: 20000
+  return_budget_tokens: 1200
+  path: agents/executive/chief-revenue-officer-agent.md
+  skills:
+  - revenue-plan-decomposition
+  - pipeline-model
+  - churn-analysis
+  - sales-playbook
+  - win-loss-analysis
+  memory_scopes:
+  - org.charter
+  - org.decisions
+  - venture.*.stage-gates
+  - council.verdicts
+  capability: 'Owns the revenue engine end to end: pipeline, conversion, expansion, and retention'
+- id: chief-data-officer-agent
+  title: Chief Data Officer Agent
+  tier: executive
+  domain: governance
+  reports_to: director
+  model: opus
+  task_class: judgement
+  escalates_to_model: opus
+  context_budget_tokens: 20000
+  return_budget_tokens: 1200
+  path: agents/executive/chief-data-officer-agent.md
+  skills:
+  - metric-dictionary
+  - data-lineage-audit
+  - experiment-design
+  - data-quality-scoring
+  - data-governance-policy
+  memory_scopes:
+  - org.charter
+  - org.decisions
+  - venture.*.stage-gates
+  - council.verdicts
+  capability: 'Owns data as an asset and a liability: what we collect, how it is governed, and whether decisions can trust
+    it'
+- id: ciso-agent
+  title: CISO Agent
+  tier: executive
+  domain: governance
+  reports_to: director
+  model: opus
+  task_class: judgement
+  escalates_to_model: opus
+  context_budget_tokens: 20000
+  return_budget_tokens: 1200
+  path: agents/executive/ciso-agent.md
+  skills:
+  - threat-modeling
+  - security-review
+  - vulnerability-triage
+  - incident-response-runbook
+  - vendor-security-review
+  memory_scopes:
+  - org.charter
+  - org.decisions
+  - venture.*.stage-gates
+  - council.verdicts
+  capability: Owns security posture and the authority to stop a release that would expose customers or the company
+- id: chro-agent
+  title: Chief People Officer Agent
+  tier: executive
+  domain: governance
+  reports_to: director
+  model: opus
+  task_class: judgement
+  escalates_to_model: opus
+  context_budget_tokens: 20000
+  return_budget_tokens: 1200
+  path: agents/executive/chro-agent.md
+  skills:
+  - role-scorecard
+  - hiring-plan
+  - interview-loop-design
+  - compensation-banding
+  - onboarding-plan
+  memory_scopes:
+  - org.charter
+  - org.decisions
+  - venture.*.stage-gates
+  - council.verdicts
+  capability: 'Owns the human side: what roles exist, how work is organised, how people are hired, levelled, and kept'
+- id: general-counsel-agent
+  title: General Counsel Agent
+  tier: executive
+  domain: governance
+  reports_to: director
+  model: opus
+  task_class: judgement
+  escalates_to_model: opus
+  context_budget_tokens: 20000
+  return_budget_tokens: 1200
+  path: agents/executive/general-counsel-agent.md
+  skills:
+  - contract-review
+  - legal-risk-register
+  - ip-assignment-check
+  - claims-substantiation-review
+  - entity-structure-review
+  memory_scopes:
+  - org.legal
+  - org.compliance
+  - venture.*.legal
+  - org.decisions
+  capability: Owns legal risk across entity, contracts, IP, employment, and product claims
+- id: chief-compliance-officer-agent
+  title: Chief Compliance Officer Agent
+  tier: executive
+  domain: governance
+  reports_to: director
+  model: opus
+  task_class: judgement
+  escalates_to_model: opus
+  context_budget_tokens: 20000
+  return_budget_tokens: 1200
+  path: agents/executive/chief-compliance-officer-agent.md
+  skills:
+  - regulatory-applicability-mapping
+  - control-framework-design
+  - policy-authoring
+  - audit-readiness-review
+  - evidence-collection
+  memory_scopes:
+  - org.legal
+  - org.compliance
+  - venture.*.legal
+  - org.decisions
+  capability: Maps which rules apply to this business and proves, with evidence, that we follow them
+- id: chief-risk-officer-agent
+  title: Chief Risk Officer Agent
+  tier: executive
+  domain: governance
+  reports_to: director
+  model: opus
+  task_class: judgement
+  escalates_to_model: opus
+  context_budget_tokens: 20000
+  return_budget_tokens: 1200
+  path: agents/executive/chief-risk-officer-agent.md
+  skills:
+  - risk-register-consolidation
+  - risk-scoring
+  - pre-mortem
+  - business-continuity-plan
+  - near-miss-analysis
+  memory_scopes:
+  - org.legal
+  - org.compliance
+  - venture.*.legal
+  - org.decisions
+  capability: Maintains one register of everything that could kill or badly hurt the venture, ranked and owned
+- id: data-protection-officer-agent
+  title: Data Protection Officer Agent
+  tier: executive
+  domain: governance
+  reports_to: director
+  model: opus
+  task_class: judgement
+  escalates_to_model: opus
+  context_budget_tokens: 20000
+  return_budget_tokens: 1200
+  path: agents/executive/data-protection-officer-agent.md
+  skills:
+  - data-inventory
+  - privacy-impact-assessment
+  - consent-design
+  - data-subject-rights-process
+  - processor-due-diligence
+  memory_scopes:
+  - org.legal
+  - org.compliance
+  - venture.*.legal
+  - org.decisions
+  capability: 'Owns privacy: what personal data is collected, on what basis, for how long, and how a person exercises their
+    rights'
+- id: ip-counsel-agent
+  title: IP Counsel Agent
+  tier: executive
+  domain: governance
+  reports_to: director
+  model: opus
+  task_class: judgement
+  escalates_to_model: opus
+  context_budget_tokens: 20000
+  return_budget_tokens: 1200
+  path: agents/executive/ip-counsel-agent.md
+  skills:
+  - invention-disclosure
+  - trademark-clearance
+  - oss-license-compliance
+  - freedom-to-operate-search
+  - trade-secret-hygiene
+  memory_scopes:
+  - org.legal
+  - org.compliance
+  - venture.*.legal
+  - org.decisions
+  capability: 'Protects what makes the company defensible: inventions, marks, code provenance, and freedom to operate'
+- id: corporate-secretary-agent
+  title: Corporate Secretary Agent
+  tier: executive
+  domain: governance
+  reports_to: director
+  model: haiku
+  task_class: mechanical
+  escalates_to_model: sonnet
+  context_budget_tokens: 6000
+  return_budget_tokens: 400
+  path: agents/executive/corporate-secretary-agent.md
+  skills:
+  - minute-taking
+  - resolution-drafting
+  - filing-calendar
+  - cap-table-reconciliation
+  - signature-authority-matrix
+  memory_scopes:
+  - org.legal
+  - org.compliance
+  - venture.*.legal
+  - org.decisions
+  capability: 'Keeps the corporate record clean: minutes, resolutions, cap table hygiene, and filing deadlines'
+- id: chief-design-officer-agent
+  title: Chief Design Officer Agent
+  tier: executive
+  domain: governance
+  reports_to: director
+  model: opus
+  task_class: judgement
+  escalates_to_model: opus
+  context_budget_tokens: 20000
+  return_budget_tokens: 1200
+  path: agents/executive/chief-design-officer-agent.md
+  skills:
+  - design-standard-definition
+  - experience-quality-measurement
+  - design-capability-planning
+  - design-strategy-alignment
+  - design-investment-review
+  memory_scopes:
+  - org.design-system
+  - org.research
+  - venture.*.design
+  - org.decisions
+  capability: 'Owns design as a company capability: the standard, the craft, and whether the experience is a reason customers
+    choose us'
+- id: chief-learning-officer-agent
+  title: Chief Learning Officer Agent
+  tier: executive
+  domain: governance
+  reports_to: director
+  model: opus
+  task_class: judgement
+  escalates_to_model: opus
+  context_budget_tokens: 20000
+  return_budget_tokens: 1200
+  path: agents/executive/chief-learning-officer-agent.md
+  skills:
+  - learning-strategy
+  - self-modification-policy
+  - improvement-return-analysis
+  - optimisation-drift-detection
+  - capability-target-setting
+  memory_scopes:
+  - org.performance
+  - org.improvement
+  - org.memory
+  - council.recurring-flaws
+  capability: 'Owns whether the organisation actually gets better: what it learns, what it retains, and what it is permitted
+    to change about itself'
+- id: chief-hardware-officer-agent
+  title: Chief Hardware Officer Agent
+  tier: executive
+  domain: governance
+  reports_to: director
+  model: opus
+  task_class: judgement
+  escalates_to_model: opus
+  context_budget_tokens: 20000
+  return_budget_tokens: 1200
+  path: agents/executive/chief-hardware-officer-agent.md
+  skills:
+  - hardware-strategy
+  - tooling-capital-planning
+  - manufacturing-partner-selection
+  - supply-chain-resilience-review
+  - product-lifecycle-planning
+  memory_scopes:
+  - org.hardware
+  - venture.*.hardware
+  - venture.*.suppliers
+  - org.decisions
+  capability: 'Owns the physical product as a business bet: what it costs to make, what it takes to scale, and whether hardware
+    is the right way to deliver the value at all'
+- id: chief-research-officer-agent
+  title: Chief Research Officer Agent
+  tier: executive
+  domain: governance
+  reports_to: director
+  model: opus
+  task_class: judgement
+  escalates_to_model: opus
+  context_budget_tokens: 20000
+  return_budget_tokens: 1200
+  path: agents/executive/chief-research-officer-agent.md
+  skills:
+  - standard-of-proof-policy
+  - research-agenda-setting
+  - knowledge-asset-review
+  - decision-readiness-review
+  - research-independence-review
+  memory_scopes:
+  - org.research
+  - org.evidence
+  - org.unknowns
+  - venture.*.*
+  capability: Owns what the organisation knows and how it knows it — the standard of proof, the research agenda, and the discipline
+    of admitting ignorance
+- id: council-red-team
+  title: Council — Red Team Adversary
+  tier: council
+  domain: council
+  reports_to: council-director
+  model: opus
+  task_class: judgement
+  escalates_to_model: opus
+  context_budget_tokens: 20000
+  return_budget_tokens: 1200
+  path: agents/council/council-red-team.md
+  skills:
+  - red-team-attack
+  - abuse-case-analysis
+  - competitive-kill-scenario
+  - severity-triage
+  - failure-scenario-writing
+  memory_scopes:
+  - council.verdicts
+  - council.recurring-flaws
+  - org.decisions
+  - venture.*.*
+  capability: Attacks the plan the way a competitor, a bad actor, or an unforgiving market would
+- id: council-devils-advocate
+  title: Council — Devil's Advocate
+  tier: council
+  domain: council
+  reports_to: council-director
+  model: opus
+  task_class: judgement
+  escalates_to_model: opus
+  context_budget_tokens: 20000
+  return_budget_tokens: 1200
+  path: agents/council/council-devils-advocate.md
+  skills:
+  - steelman-construction
+  - counter-case-argument
+  - groupthink-detection
+  - falsification-test-design
+  - alternative-revival
+  memory_scopes:
+  - council.verdicts
+  - council.recurring-flaws
+  - org.decisions
+  - venture.*.*
+  capability: Argues the opposite of whatever the room believes, so consensus has to be earned rather than assumed
+- id: council-first-principles
+  title: Council — First Principles Critic
+  tier: council
+  domain: council
+  reports_to: council-director
+  model: opus
+  task_class: judgement
+  escalates_to_model: opus
+  context_budget_tokens: 20000
+  return_budget_tokens: 1200
+  path: agents/council/council-first-principles.md
+  skills:
+  - first-principles-decomposition
+  - constraint-classification
+  - from-scratch-reconstruction
+  - analogy-audit
+  - simplification-challenge
+  memory_scopes:
+  - council.verdicts
+  - council.recurring-flaws
+  - org.decisions
+  - venture.*.*
+  capability: Strips a plan back to what is physically, economically, and logically necessary, then rebuilds it to see what
+    was cargo cult
+- id: council-assumption-auditor
+  title: Council — Assumption Auditor
+  tier: council
+  domain: council
+  reports_to: council-director
+  model: opus
+  task_class: judgement
+  escalates_to_model: opus
+  context_budget_tokens: 20000
+  return_budget_tokens: 1200
+  path: agents/council/council-assumption-auditor.md
+  skills:
+  - assumption-extraction
+  - assumption-ledger
+  - evidence-grading
+  - load-bearing-analysis
+  - cheapest-test-design
+  - prior-error-lookup
+  memory_scopes:
+  - council.verdicts
+  - council.recurring-flaws
+  - org.decisions
+  - venture.*.*
+  capability: Finds every unstated assumption, makes it explicit, and rates how much of the plan collapses if it is wrong
+- id: council-risk-and-failure-modes
+  title: Council — Risk & Failure Modes Critic
+  tier: council
+  domain: council
+  reports_to: council-director
+  model: opus
+  task_class: judgement
+  escalates_to_model: opus
+  context_budget_tokens: 20000
+  return_budget_tokens: 1200
+  path: agents/council/council-risk-and-failure-modes.md
+  skills:
+  - pre-mortem
+  - failure-mode-cataloguing
+  - cascade-analysis
+  - early-warning-indicator-design
+  - recoverability-classification
+  memory_scopes:
+  - council.verdicts
+  - council.recurring-flaws
+  - org.decisions
+  - venture.*.*
+  capability: 'Runs the pre-mortem: it is twelve months later and the venture failed — reconstructs exactly how'
+- id: council-ethics-and-responsibility
+  title: Council — Ethics & Responsibility Critic
+  tier: council
+  domain: council
+  reports_to: council-director
+  model: opus
+  task_class: judgement
+  escalates_to_model: opus
+  context_budget_tokens: 20000
+  return_budget_tokens: 1200
+  path: agents/council/council-ethics-and-responsibility.md
+  skills:
+  - stakeholder-harm-analysis
+  - dark-pattern-audit
+  - accessibility-review
+  - reputational-stress-test
+  - remedy-design
+  memory_scopes:
+  - council.verdicts
+  - council.recurring-flaws
+  - org.decisions
+  - venture.*.*
+  capability: Asks who is harmed, who is excluded, and what this plan looks like on the front page and to the people it affects
+- id: council-legal-and-regulatory-critic
+  title: Council — Legal & Regulatory Critic
+  tier: council
+  domain: council
+  reports_to: council-director
+  model: opus
+  task_class: judgement
+  escalates_to_model: opus
+  context_budget_tokens: 20000
+  return_budget_tokens: 1200
+  path: agents/council/council-legal-and-regulatory-critic.md
+  skills:
+  - regulatory-exposure-review
+  - platform-policy-review
+  - claims-substantiation-review
+  - jurisdiction-risk-review
+  - counsel-escalation
+  memory_scopes:
+  - council.verdicts
+  - council.recurring-flaws
+  - org.decisions
+  - venture.*.*
+  capability: Challenges the plan on what the law, regulators, and platform rules will actually permit
+- id: council-economics-skeptic
+  title: Council — Economics Skeptic
+  tier: council
+  domain: council
+  reports_to: council-director
+  model: opus
+  task_class: judgement
+  escalates_to_model: opus
+  context_budget_tokens: 20000
+  return_budget_tokens: 1200
+  path: agents/council/council-economics-skeptic.md
+  skills:
+  - model-recomputation
+  - sensitivity-analysis
+  - benchmark-comparison
+  - circular-logic-detection
+  - break-even-analysis
+  memory_scopes:
+  - council.verdicts
+  - council.recurring-flaws
+  - org.decisions
+  - venture.*.*
+  capability: Refuses to believe the numbers until they survive arithmetic, sensitivity, and comparison to reality
+- id: council-expansion-scout
+  title: Council — Expansion Scout
+  tier: council
+  domain: council
+  reports_to: council-director
+  model: opus
+  task_class: judgement
+  escalates_to_model: opus
+  context_budget_tokens: 20000
+  return_budget_tokens: 1200
+  path: agents/council/council-expansion-scout.md
+  skills:
+  - adjacency-mapping
+  - expansion-option-sizing
+  - network-effect-analysis
+  - leverage-identification
+  - sequencing-recommendation
+  memory_scopes:
+  - council.verdicts
+  - council.recurring-flaws
+  - org.decisions
+  - venture.*.*
+  capability: 'The Council''s constructive half: hunts for what the plan is leaving on the table — adjacent markets, bigger
+    versions, compounding advantages'
+- id: council-synthesis-arbiter
+  title: Council — Synthesis Arbiter
+  tier: council
+  domain: council
+  reports_to: council-director
+  model: opus
+  task_class: judgement
+  escalates_to_model: opus
+  context_budget_tokens: 20000
+  return_budget_tokens: 1200
+  path: agents/council/council-synthesis-arbiter.md
+  skills:
+  - verdict-writing
+  - finding-deduplication
+  - severity-normalisation
+  - conflict-resolution
+  - dissent-recording
+  memory_scopes:
+  - council.verdicts
+  - council.recurring-flaws
+  - org.decisions
+  - venture.*.*
+  capability: 'Turns nine critics arguing into one decision-grade verdict: what blocks, what improves, what is noise, and
+    who owns each item'
+- id: unit-economics-architect
+  title: Unit Economics Architect
+  tier: specialist
+  domain: finance
+  reports_to: finance-head
+  model: opus
+  task_class: judgement
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/finance/unit-economics-architect.md
+  skills:
+  - unit-economics-analysis
+  - cac-ltv-modeling
+  - contribution-margin-waterfall
+  - cohort-retention-analysis
+  - sensitivity-analysis
+  memory_scopes:
+  - org.finance
+  - venture.*.finance
+  - org.decisions
+  - council.verdicts
+  capability: Establishes whether a single unit of this business makes money, and how that changes with scale
+- id: financial-model-builder
+  title: Financial Model Builder
+  tier: specialist
+  domain: finance
+  reports_to: finance-head
+  model: sonnet
+  task_class: analytical
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/finance/financial-model-builder.md
+  skills:
+  - financial-model-build
+  - assumption-ledger
+  - three-statement-linking
+  - model-reconciliation
+  - scenario-analysis
+  memory_scopes:
+  - org.finance
+  - venture.*.finance
+  - org.decisions
+  - council.verdicts
+  capability: 'Builds and maintains the integrated financial model: the one file where every money assumption meets its consequences'
+- id: pricing-strategist
+  title: Pricing Strategist
+  tier: specialist
+  domain: finance
+  reports_to: finance-head
+  model: opus
+  task_class: judgement
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/finance/pricing-strategist.md
+  skills:
+  - pricing-decision
+  - willingness-to-pay-research
+  - value-metric-selection
+  - packaging-design
+  - price-testing
+  memory_scopes:
+  - org.finance
+  - venture.*.finance
+  - org.decisions
+  - council.verdicts
+  capability: Decides what to charge, on what basis, and why the customer will consider it fair
+- id: revenue-forecaster
+  title: Revenue Forecaster
+  tier: specialist
+  domain: finance
+  reports_to: finance-head
+  model: sonnet
+  task_class: analytical
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/finance/revenue-forecaster.md
+  skills:
+  - revenue-forecasting
+  - cohort-retention-analysis
+  - funnel-modeling
+  - forecast-accuracy-review
+  - scenario-analysis
+  memory_scopes:
+  - org.finance
+  - venture.*.finance
+  - org.decisions
+  - council.verdicts
+  capability: Produces revenue forecasts that are honest about uncertainty and useful for decisions
+- id: burn-runway-analyst
+  title: Burn & Runway Analyst
+  tier: specialist
+  domain: finance
+  reports_to: finance-head
+  model: sonnet
+  task_class: analytical
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/finance/burn-runway-analyst.md
+  skills:
+  - runway-forecast
+  - burn-categorisation
+  - spend-efficiency-analysis
+  - commitment-tracking
+  - cash-threshold-alerting
+  memory_scopes:
+  - org.finance
+  - venture.*.finance
+  - org.decisions
+  - council.verdicts
+  capability: Knows exactly how much cash is going out, where, and how long it lasts
+- id: fundraising-strategist
+  title: Fundraising Strategist
+  tier: specialist
+  domain: finance
+  reports_to: finance-head
+  model: sonnet
+  task_class: analytical
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/finance/fundraising-strategist.md
+  skills:
+  - fundraising-plan
+  - investor-targeting
+  - data-room-preparation
+  - dilution-modeling
+  - narrative-pressure-test
+  memory_scopes:
+  - org.finance
+  - venture.*.finance
+  - org.decisions
+  - council.verdicts
+  capability: 'Plans the raise: how much, when, from whom, against what milestone, and at what cost of dilution'
+- id: cap-table-steward
+  title: Cap Table Steward
+  tier: specialist
+  domain: finance
+  reports_to: finance-head
+  model: sonnet
+  task_class: analytical
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/finance/cap-table-steward.md
+  skills:
+  - cap-table-reconciliation
+  - dilution-modeling
+  - option-pool-planning
+  - convertible-conversion-modeling
+  - waterfall-analysis
+  memory_scopes:
+  - org.finance
+  - venture.*.finance
+  - org.decisions
+  - council.verdicts
+  capability: 'Keeps ownership accurate: every share, option, note, and the effect of the next round'
+- id: cost-optimization-analyst
+  title: Cost Optimisation Analyst
+  tier: specialist
+  domain: finance
+  reports_to: finance-head
+  model: sonnet
+  task_class: analytical
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/finance/cost-optimization-analyst.md
+  skills:
+  - cost-baseline
+  - spend-efficiency-analysis
+  - vendor-negotiation-prep
+  - infrastructure-rightsizing
+  - savings-verification
+  memory_scopes:
+  - org.finance
+  - venture.*.finance
+  - org.decisions
+  - council.verdicts
+  capability: Finds money being wasted and proves the saving is real before anyone celebrates it
+- id: billing-systems-designer
+  title: Billing Systems Designer
+  tier: specialist
+  domain: finance
+  reports_to: finance-head
+  model: sonnet
+  task_class: analytical
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/finance/billing-systems-designer.md
+  skills:
+  - billing-architecture-design
+  - metering-specification
+  - dunning-flow-design
+  - tax-handling-review
+  - revenue-recognition-mapping
+  memory_scopes:
+  - org.finance
+  - venture.*.finance
+  - org.decisions
+  - council.verdicts
+  capability: Designs how money actually gets collected — the plumbing between the pricing model and the bank account
+- id: tax-and-compliance-finance
+  title: Tax & Financial Compliance Agent
+  tier: specialist
+  domain: finance
+  reports_to: finance-head
+  model: sonnet
+  task_class: analytical
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/finance/tax-and-compliance-finance.md
+  skills:
+  - tax-obligation-mapping
+  - filing-calendar
+  - indirect-tax-determination
+  - bookkeeping-standard
+  - contractor-classification-review
+  memory_scopes:
+  - org.finance
+  - venture.*.finance
+  - org.decisions
+  - council.verdicts
+  capability: Tracks what the venture owes and files, where, and by when
+- id: investor-reporting-agent
+  title: Investor Reporting Agent
+  tier: specialist
+  domain: finance
+  reports_to: finance-head
+  model: sonnet
+  task_class: analytical
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/finance/investor-reporting-agent.md
+  skills:
+  - investor-reporting
+  - metric-consistency-check
+  - narrative-writing
+  - ask-framing
+  - figure-reconciliation
+  memory_scopes:
+  - org.finance
+  - venture.*.finance
+  - org.decisions
+  - council.verdicts
+  capability: Produces investor updates that are accurate, consistent, and useful — including the bad news
+- id: scenario-stress-tester
+  title: Scenario Stress Tester
+  tier: specialist
+  domain: finance
+  reports_to: finance-head
+  model: sonnet
+  task_class: analytical
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/finance/scenario-stress-tester.md
+  skills:
+  - scenario-analysis
+  - sensitivity-analysis
+  - stress-testing
+  - trigger-response-planning
+  - survival-analysis
+  memory_scopes:
+  - org.finance
+  - venture.*.finance
+  - org.decisions
+  - council.verdicts
+  capability: Breaks the financial plan on purpose to find out what actually kills it
+- id: market-researcher
+  title: Market Researcher
+  tier: specialist
+  domain: business
+  reports_to: business-head
+  model: sonnet
+  task_class: analytical
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/business/market-researcher.md
+  skills:
+  - market-sizing
+  - segmentation-analysis
+  - demand-signal-research
+  - source-grading
+  - why-now-analysis
+  memory_scopes:
+  - org.market
+  - venture.*.business
+  - venture.*.customers
+  - org.decisions
+  capability: Establishes how big the opportunity is, who is in it, and which parts are actually reachable
+- id: competitor-intel-analyst
+  title: Competitor Intelligence Analyst
+  tier: specialist
+  domain: business
+  reports_to: business-head
+  model: sonnet
+  task_class: analytical
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/business/competitor-intel-analyst.md
+  skills:
+  - competitive-landscape-mapping
+  - comparison-matrix
+  - review-mining
+  - competitor-strategy-inference
+  - differentiation-analysis
+  memory_scopes:
+  - org.market
+  - venture.*.business
+  - venture.*.customers
+  - org.decisions
+  capability: Knows the competitive field better than the competitors know themselves, including the substitutes nobody counts
+- id: customer-discovery-interviewer
+  title: Customer Discovery Interviewer
+  tier: specialist
+  domain: business
+  reports_to: business-head
+  model: sonnet
+  task_class: analytical
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/business/customer-discovery-interviewer.md
+  skills:
+  - customer-discovery-interview
+  - interview-guide-design
+  - evidence-extraction
+  - pattern-synthesis
+  - disconfirmation-reporting
+  memory_scopes:
+  - org.market
+  - venture.*.business
+  - venture.*.customers
+  - org.decisions
+  capability: Talks to real people about their real problems without leading them, and reports what they said rather than
+    what we hoped
+- id: icp-persona-builder
+  title: ICP & Persona Builder
+  tier: specialist
+  domain: business
+  reports_to: business-head
+  model: sonnet
+  task_class: analytical
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/business/icp-persona-builder.md
+  skills:
+  - icp-definition
+  - persona-development
+  - disqualification-criteria
+  - trigger-event-analysis
+  - reachability-mapping
+  memory_scopes:
+  - org.market
+  - venture.*.business
+  - venture.*.customers
+  - org.decisions
+  capability: Defines exactly who we sell to — specific enough to build a target list and disqualify everyone else
+- id: jtbd-analyst
+  title: Jobs-to-be-Done Analyst
+  tier: specialist
+  domain: business
+  reports_to: business-head
+  model: sonnet
+  task_class: analytical
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/business/jtbd-analyst.md
+  skills:
+  - jtbd-analysis
+  - job-mapping
+  - switching-analysis
+  - outcome-metric-extraction
+  - opportunity-scoring
+  memory_scopes:
+  - org.market
+  - venture.*.business
+  - venture.*.customers
+  - org.decisions
+  capability: Frames the problem as the job the customer is hiring a solution to do, and what they will fire to hire us
+- id: value-proposition-designer
+  title: Value Proposition Designer
+  tier: specialist
+  domain: business
+  reports_to: business-head
+  model: sonnet
+  task_class: analytical
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/business/value-proposition-designer.md
+  skills:
+  - value-proposition-canvas
+  - value-quantification
+  - fit-analysis
+  - claim-substantiation-planning
+  - alternative-comparison
+  memory_scopes:
+  - org.market
+  - venture.*.business
+  - venture.*.customers
+  - org.decisions
+  capability: Connects specific customer pains and gains to specific product capabilities, and refuses to claim more
+- id: business-model-canvas-agent
+  title: Business Model Canvas Agent
+  tier: specialist
+  domain: business
+  reports_to: business-head
+  model: opus
+  task_class: judgement
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/business/business-model-canvas-agent.md
+  skills:
+  - business-model-canvas
+  - model-coherence-check
+  - alternative-model-generation
+  - evidence-tagging
+  - model-change-logging
+  memory_scopes:
+  - org.market
+  - venture.*.business
+  - venture.*.customers
+  - org.decisions
+  capability: Maintains the business model as a single coherent picture, with evidence behind every block
+- id: gtm-strategist
+  title: Go-To-Market Strategist
+  tier: specialist
+  domain: business
+  reports_to: business-head
+  model: sonnet
+  task_class: analytical
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/business/gtm-strategist.md
+  skills:
+  - gtm-planning
+  - channel-test-design
+  - beachhead-selection
+  - motion-selection
+  - channel-cac-modeling
+  memory_scopes:
+  - org.market
+  - venture.*.business
+  - venture.*.customers
+  - org.decisions
+  capability: 'Decides how the product reaches customers: motion, channels, sequence, and the tests that prove it works'
+- id: positioning-messaging-agent
+  title: Positioning & Messaging Agent
+  tier: specialist
+  domain: business
+  reports_to: business-head
+  model: sonnet
+  task_class: analytical
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/business/positioning-messaging-agent.md
+  skills:
+  - positioning-statement
+  - message-hierarchy
+  - message-testing
+  - terminology-consistency-audit
+  - category-frame-selection
+  memory_scopes:
+  - org.market
+  - venture.*.business
+  - venture.*.customers
+  - org.decisions
+  capability: Decides what the product is in the customer's mind, and writes the words that put it there
+- id: growth-loop-designer
+  title: Growth Loop Designer
+  tier: specialist
+  domain: business
+  reports_to: business-head
+  model: sonnet
+  task_class: analytical
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/business/growth-loop-designer.md
+  skills:
+  - growth-loop-design
+  - loop-instrumentation
+  - amplification-analysis
+  - cycle-time-optimisation
+  - referral-mechanics-design
+  memory_scopes:
+  - org.market
+  - venture.*.business
+  - venture.*.customers
+  - org.decisions
+  capability: Designs mechanisms where output feeds back into input, so growth compounds instead of being bought each month
+- id: partnership-bd-agent
+  title: Partnerships & Business Development Agent
+  tier: specialist
+  domain: business
+  reports_to: business-head
+  model: sonnet
+  task_class: analytical
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/business/partnership-bd-agent.md
+  skills:
+  - partnership-thesis
+  - partner-qualification
+  - deal-structuring
+  - co-marketing-planning
+  - partnership-review
+  memory_scopes:
+  - org.market
+  - venture.*.business
+  - venture.*.customers
+  - org.decisions
+  capability: Finds and structures partnerships that create real distribution or capability, and avoids the ones that only
+    create meetings
+- id: sales-playbook-agent
+  title: Sales Playbook Agent
+  tier: specialist
+  domain: business
+  reports_to: business-head
+  model: sonnet
+  task_class: analytical
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/business/sales-playbook-agent.md
+  skills:
+  - sales-playbook
+  - qualification-framework
+  - objection-handling-library
+  - discovery-call-script
+  - win-loss-analysis
+  memory_scopes:
+  - org.market
+  - venture.*.business
+  - venture.*.customers
+  - org.decisions
+  capability: Turns successful selling into a repeatable process that someone other than the founder can run
+- id: customer-success-agent
+  title: Customer Success Agent
+  tier: specialist
+  domain: business
+  reports_to: business-head
+  model: sonnet
+  task_class: analytical
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/business/customer-success-agent.md
+  skills:
+  - onboarding-design
+  - health-scoring
+  - churn-analysis
+  - voice-of-customer-synthesis
+  - reference-development
+  memory_scopes:
+  - org.market
+  - venture.*.business
+  - venture.*.customers
+  - org.decisions
+  capability: 'Owns what happens after the sale: onboarding, adoption, retention, and turning users into evidence'
+- id: brand-narrative-agent
+  title: Brand & Narrative Agent
+  tier: specialist
+  domain: business
+  reports_to: business-head
+  model: sonnet
+  task_class: analytical
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/business/brand-narrative-agent.md
+  skills:
+  - narrative-writing
+  - brand-voice-guidelines
+  - audience-narrative-adaptation
+  - brand-consistency-audit
+  - origin-story-development
+  memory_scopes:
+  - org.market
+  - venture.*.business
+  - venture.*.customers
+  - org.decisions
+  capability: 'Owns the story: why this company exists, why anyone should care, and how it sounds everywhere it speaks'
+- id: product-requirements-agent
+  title: Product Requirements Agent
+  tier: specialist
+  domain: engineering
+  reports_to: engineering-head
+  model: sonnet
+  task_class: analytical
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/engineering/product-requirements-agent.md
+  skills:
+  - product-requirements-doc
+  - acceptance-criteria-writing
+  - non-functional-requirements
+  - scope-boundary-definition
+  - success-signal-definition
+  memory_scopes:
+  - org.architecture
+  - venture.*.engineering
+  - venture.*.incidents
+  - org.decisions
+  capability: Turns validated customer problems into requirements an engineer can build and a tester can verify
+- id: mvp-scoper
+  title: MVP Scoper
+  tier: specialist
+  domain: engineering
+  reports_to: engineering-head
+  model: opus
+  task_class: judgement
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/engineering/mvp-scoper.md
+  skills:
+  - mvp-scoping
+  - riskiest-assumption-testing
+  - concierge-mvp-design
+  - scope-cut-justification
+  - time-to-user-estimation
+  memory_scopes:
+  - org.architecture
+  - venture.*.engineering
+  - venture.*.incidents
+  - org.decisions
+  capability: Draws the line between what ships now and what waits, using learning value as the only criterion
+- id: system-architect
+  title: System Architect
+  tier: specialist
+  domain: engineering
+  reports_to: engineering-head
+  model: opus
+  task_class: judgement
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/engineering/system-architect.md
+  skills:
+  - architecture-decision-record
+  - system-diagramming
+  - boundary-design
+  - dependency-failure-analysis
+  - scalability-stress-review
+  memory_scopes:
+  - org.architecture
+  - venture.*.engineering
+  - venture.*.incidents
+  - org.decisions
+  capability: 'Designs the system: components, boundaries, data flow, and the trade-offs chosen deliberately'
+- id: api-designer
+  title: API Designer
+  tier: specialist
+  domain: engineering
+  reports_to: engineering-head
+  model: sonnet
+  task_class: analytical
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/engineering/api-designer.md
+  skills:
+  - api-design-review
+  - openapi-specification
+  - error-taxonomy-design
+  - api-versioning-policy
+  - idempotency-design
+  memory_scopes:
+  - org.architecture
+  - venture.*.engineering
+  - venture.*.incidents
+  - org.decisions
+  capability: Designs interfaces that are consistent, evolvable, and hard to misuse
+- id: data-model-designer
+  title: Data Model Designer
+  tier: specialist
+  domain: engineering
+  reports_to: engineering-head
+  model: sonnet
+  task_class: analytical
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/engineering/data-model-designer.md
+  skills:
+  - data-model-design
+  - migration-planning
+  - access-pattern-analysis
+  - data-classification
+  - backfill-strategy
+  memory_scopes:
+  - org.architecture
+  - venture.*.engineering
+  - venture.*.incidents
+  - org.decisions
+  capability: Designs how data is structured, related, and allowed to change over time
+- id: frontend-implementation-agent
+  title: Frontend Implementation Agent
+  tier: specialist
+  domain: engineering
+  reports_to: engineering-head
+  model: sonnet
+  task_class: analytical
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/engineering/frontend-implementation-agent.md
+  skills:
+  - ui-implementation
+  - component-library-management
+  - accessibility-review
+  - frontend-performance-budget
+  - state-handling-review
+  memory_scopes:
+  - org.architecture
+  - venture.*.engineering
+  - venture.*.incidents
+  - org.decisions
+  capability: 'Builds the interface: correct, accessible, fast, and consistent with the design system'
+- id: backend-implementation-agent
+  title: Backend Implementation Agent
+  tier: specialist
+  domain: engineering
+  reports_to: engineering-head
+  model: sonnet
+  task_class: analytical
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/engineering/backend-implementation-agent.md
+  skills:
+  - service-implementation
+  - idempotency-design
+  - transaction-design
+  - structured-logging
+  - input-validation-review
+  memory_scopes:
+  - org.architecture
+  - venture.*.engineering
+  - venture.*.incidents
+  - org.decisions
+  capability: 'Builds the server side: correct behaviour, safe data handling, and predictable failure'
+- id: infra-devops-agent
+  title: Infrastructure & DevOps Agent
+  tier: specialist
+  domain: engineering
+  reports_to: engineering-head
+  model: sonnet
+  task_class: analytical
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/engineering/infra-devops-agent.md
+  skills:
+  - infrastructure-as-code
+  - cicd-pipeline-design
+  - deployment-safety-review
+  - disaster-recovery-testing
+  - infrastructure-rightsizing
+  memory_scopes:
+  - org.architecture
+  - venture.*.engineering
+  - venture.*.incidents
+  - org.decisions
+  capability: Owns the environments, the pipeline, and the cost and reliability of running the system
+- id: security-engineer
+  title: Security Engineer
+  tier: specialist
+  domain: engineering
+  reports_to: engineering-head
+  model: opus
+  task_class: judgement
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/engineering/security-engineer.md
+  skills:
+  - threat-modeling
+  - authz-design-review
+  - secrets-management
+  - vulnerability-triage
+  - security-test-design
+  memory_scopes:
+  - org.architecture
+  - venture.*.engineering
+  - venture.*.incidents
+  - org.decisions
+  capability: 'Builds security into the system: threat models, secure defaults, and verification that controls work'
+- id: qa-test-strategist
+  title: QA & Test Strategist
+  tier: specialist
+  domain: engineering
+  reports_to: engineering-head
+  model: sonnet
+  task_class: analytical
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/engineering/qa-test-strategist.md
+  skills:
+  - test-strategy
+  - test-pyramid-balancing
+  - flaky-test-elimination
+  - test-data-management
+  - release-quality-reporting
+  memory_scopes:
+  - org.architecture
+  - venture.*.engineering
+  - venture.*.incidents
+  - org.decisions
+  capability: Decides what gets tested, how, and what quality signal the team can actually trust
+- id: performance-engineer
+  title: Performance Engineer
+  tier: specialist
+  domain: engineering
+  reports_to: engineering-head
+  model: sonnet
+  task_class: analytical
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/engineering/performance-engineer.md
+  skills:
+  - performance-budgeting
+  - load-testing
+  - profiling-analysis
+  - capacity-planning
+  - performance-regression-gating
+  memory_scopes:
+  - org.architecture
+  - venture.*.engineering
+  - venture.*.incidents
+  - org.decisions
+  capability: Makes the system fast enough where it matters and proves it with measurement
+- id: release-manager
+  title: Release Manager
+  tier: specialist
+  domain: engineering
+  reports_to: engineering-head
+  model: sonnet
+  task_class: analytical
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/engineering/release-manager.md
+  skills:
+  - release-readiness-review
+  - progressive-rollout-design
+  - rollback-verification
+  - feature-flag-management
+  - post-release-review
+  memory_scopes:
+  - org.architecture
+  - venture.*.engineering
+  - venture.*.incidents
+  - org.decisions
+  capability: Gets changes to users safely and predictably, and back out again when needed
+- id: tech-debt-refactor-agent
+  title: Technical Debt & Refactoring Agent
+  tier: specialist
+  domain: engineering
+  reports_to: engineering-head
+  model: sonnet
+  task_class: analytical
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/engineering/tech-debt-refactor-agent.md
+  skills:
+  - tech-debt-registry
+  - refactoring-planning
+  - code-health-metrics
+  - dead-code-removal
+  - behaviour-preserving-refactor
+  memory_scopes:
+  - org.architecture
+  - venture.*.engineering
+  - venture.*.incidents
+  - org.decisions
+  capability: 'Keeps the codebase changeable: tracks debt honestly and pays it down where it actually slows delivery'
+- id: observability-agent
+  title: Observability Agent
+  tier: specialist
+  domain: engineering
+  reports_to: engineering-head
+  model: sonnet
+  task_class: analytical
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/engineering/observability-agent.md
+  skills:
+  - instrumentation-standard
+  - slo-definition
+  - alert-design
+  - distributed-tracing-setup
+  - dashboard-design
+  memory_scopes:
+  - org.architecture
+  - venture.*.engineering
+  - venture.*.incidents
+  - org.decisions
+  capability: 'Makes the system explain itself: metrics, logs, traces, and alerts that lead to action'
+- id: intake-router
+  title: Intake Router
+  tier: specialist
+  domain: orchestration
+  reports_to: orchestration-head
+  model: sonnet
+  task_class: analytical
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/orchestration/intake-router.md
+  skills:
+  - agent-routing
+  - intent-clarification
+  - duplicate-detection
+  - request-classification
+  - context-packaging
+  memory_scopes:
+  - org.tasks
+  - org.memory
+  - venture.*.*
+  - org.decisions
+  capability: The front door
+- id: planning-decomposer
+  title: Planning Decomposer
+  tier: specialist
+  domain: orchestration
+  reports_to: orchestration-head
+  model: sonnet
+  task_class: analytical
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/orchestration/planning-decomposer.md
+  skills:
+  - task-decomposition
+  - definition-of-done-writing
+  - parallelisation-analysis
+  - work-breakdown-structure
+  - pattern-reuse-lookup
+  memory_scopes:
+  - org.tasks
+  - org.memory
+  - venture.*.*
+  - org.decisions
+  capability: Breaks big intent into tasks small enough for one agent to finish in one run with a checkable result
+- id: dependency-scheduler
+  title: Dependency Scheduler
+  tier: specialist
+  domain: orchestration
+  reports_to: orchestration-head
+  model: sonnet
+  task_class: analytical
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/orchestration/dependency-scheduler.md
+  skills:
+  - dependency-resolution
+  - critical-path-analysis
+  - budget-allocation
+  - schedule-optimisation
+  - cycle-detection
+  memory_scopes:
+  - org.tasks
+  - org.memory
+  - venture.*.*
+  - org.decisions
+  capability: 'Orders the work: dependencies, critical path, budgets, and what runs when'
+- id: context-memory-curator
+  title: Context & Memory Curator
+  tier: specialist
+  domain: orchestration
+  reports_to: orchestration-head
+  model: sonnet
+  task_class: analytical
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/orchestration/context-memory-curator.md
+  skills:
+  - memory-consolidation
+  - memory-write-standard
+  - memory-retrieval-tuning
+  - memory-decay-policy
+  - provenance-tracking
+  memory_scopes:
+  - org.tasks
+  - org.memory
+  - venture.*.*
+  - org.decisions
+  capability: 'Owns the memory itself: what gets remembered, in what form, for how long, and how it is retrieved'
+- id: knowledge-graph-librarian
+  title: Knowledge Graph Librarian
+  tier: specialist
+  domain: orchestration
+  reports_to: orchestration-head
+  model: sonnet
+  task_class: analytical
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/orchestration/knowledge-graph-librarian.md
+  skills:
+  - entity-resolution
+  - knowledge-graph-modeling
+  - contradiction-detection
+  - graph-query-design
+  - link-provenance
+  memory_scopes:
+  - org.tasks
+  - org.memory
+  - venture.*.*
+  - org.decisions
+  capability: Maintains the entity graph — customers, competitors, features, decisions, risks — and the links that make retrieval
+    smart
+- id: handoff-coordinator
+  title: Handoff Coordinator
+  tier: specialist
+  domain: orchestration
+  reports_to: orchestration-head
+  model: haiku
+  task_class: mechanical
+  escalates_to_model: sonnet
+  context_budget_tokens: 6000
+  return_budget_tokens: 400
+  path: agents/orchestration/handoff-coordinator.md
+  skills:
+  - handoff-validation
+  - handoff-contract-definition
+  - context-packaging
+  - open-question-tracking
+  - rework-attribution
+  memory_scopes:
+  - org.tasks
+  - org.memory
+  - venture.*.*
+  - org.decisions
+  capability: Makes sure work passed between agents arrives complete, so the receiver never has to rediscover context
+- id: progress-tracker
+  title: Progress Tracker
+  tier: specialist
+  domain: orchestration
+  reports_to: orchestration-head
+  model: haiku
+  task_class: mechanical
+  escalates_to_model: sonnet
+  context_budget_tokens: 6000
+  return_budget_tokens: 400
+  path: agents/orchestration/progress-tracker.md
+  skills:
+  - status-tracking
+  - blocker-detection
+  - cycle-time-analysis
+  - throughput-reporting
+  - variance-reporting
+  memory_scopes:
+  - org.tasks
+  - org.memory
+  - venture.*.*
+  - org.decisions
+  capability: Knows the true state of every task and reports it without optimism
+- id: escalation-manager
+  title: Escalation Manager
+  tier: specialist
+  domain: orchestration
+  reports_to: orchestration-head
+  model: sonnet
+  task_class: analytical
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/orchestration/escalation-manager.md
+  skills:
+  - escalation-criteria
+  - decision-request-framing
+  - severity-triage
+  - resolution-tracking
+  - escalation-pattern-analysis
+  memory_scopes:
+  - org.tasks
+  - org.memory
+  - venture.*.*
+  - org.decisions
+  capability: Decides what goes up, to whom, and how fast — so real problems surface early and noise does not
+- id: evaluation-harness-agent
+  title: Evaluation Harness Agent
+  tier: specialist
+  domain: orchestration
+  reports_to: orchestration-head
+  model: sonnet
+  task_class: analytical
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/orchestration/evaluation-harness-agent.md
+  skills:
+  - evaluation-suite-design
+  - golden-case-curation
+  - regression-detection
+  - agent-scorecard
+  - rubric-writing
+  memory_scopes:
+  - org.tasks
+  - org.memory
+  - venture.*.*
+  - org.decisions
+  capability: Measures whether agents and skills actually work, using repeatable tests rather than impressions
+- id: retrospective-agent
+  title: Retrospective Agent
+  tier: specialist
+  domain: orchestration
+  reports_to: orchestration-head
+  model: sonnet
+  task_class: analytical
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/orchestration/retrospective-agent.md
+  skills:
+  - retrospective-facilitation
+  - root-cause-analysis
+  - lesson-to-guardrail-conversion
+  - action-verification
+  - pattern-detection
+  memory_scopes:
+  - org.tasks
+  - org.memory
+  - venture.*.*
+  - org.decisions
+  capability: Extracts the lesson from every cycle and makes sure it changes behaviour rather than just being noted
+- id: design-researcher
+  title: Design Researcher
+  tier: specialist
+  domain: design
+  reports_to: design-head
+  model: sonnet
+  task_class: analytical
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/design/design-researcher.md
+  skills:
+  - design-research-planning
+  - contextual-inquiry
+  - journey-mapping
+  - research-repository-management
+  - insight-synthesis
+  memory_scopes:
+  - org.design-system
+  - org.research
+  - venture.*.design
+  - org.decisions
+  capability: Finds out how people actually behave before anyone draws a screen, and keeps the team honest about the difference
+    between what users say and what they do
+- id: usability-tester
+  title: Usability Tester
+  tier: specialist
+  domain: design
+  reports_to: design-head
+  model: sonnet
+  task_class: analytical
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/design/usability-tester.md
+  skills:
+  - usability-test-design
+  - task-success-measurement
+  - finding-severity-rating
+  - moderation-discipline
+  - fix-verification
+  memory_scopes:
+  - org.design-system
+  - org.research
+  - venture.*.design
+  - org.decisions
+  capability: Watches real people try to use the thing and reports what broke, without defending the design
+- id: information-architect
+  title: Information Architect
+  tier: specialist
+  domain: design
+  reports_to: design-head
+  model: sonnet
+  task_class: analytical
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/design/information-architect.md
+  skills:
+  - card-sorting
+  - tree-testing
+  - taxonomy-design
+  - navigation-design
+  - content-modeling
+  memory_scopes:
+  - org.design-system
+  - org.research
+  - venture.*.design
+  - org.decisions
+  capability: Decides how the product's content and functions are organised, named, and found
+- id: interaction-designer
+  title: Interaction Designer
+  tier: specialist
+  domain: design
+  reports_to: design-head
+  model: sonnet
+  task_class: analytical
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/design/interaction-designer.md
+  skills:
+  - flow-design
+  - state-specification
+  - error-prevention-design
+  - interaction-pattern-selection
+  - design-engineering-walkthrough
+  memory_scopes:
+  - org.design-system
+  - org.research
+  - venture.*.design
+  - org.decisions
+  capability: 'Designs how the product behaves: the flows, states, feedback, and what happens when things go wrong'
+- id: visual-designer
+  title: Visual Designer
+  tier: specialist
+  domain: design
+  reports_to: design-head
+  model: sonnet
+  task_class: analytical
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/design/visual-designer.md
+  skills:
+  - visual-hierarchy-design
+  - typography-system
+  - layout-composition
+  - design-token-application
+  - realistic-content-testing
+  memory_scopes:
+  - org.design-system
+  - org.research
+  - venture.*.design
+  - org.decisions
+  capability: Makes the interface legible, hierarchical, and coherent — and keeps taste subordinate to communication
+- id: design-system-architect
+  title: Design System Architect
+  tier: specialist
+  domain: design
+  reports_to: design-head
+  model: sonnet
+  task_class: analytical
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/design/design-system-architect.md
+  skills:
+  - design-token-architecture
+  - component-api-design
+  - system-contribution-process
+  - design-code-parity-audit
+  - component-deprecation
+  memory_scopes:
+  - org.design-system
+  - org.research
+  - venture.*.design
+  - org.decisions
+  capability: 'Owns the shared vocabulary of the interface: tokens, components, and the rules that keep them coherent as the
+    product grows'
+- id: content-designer
+  title: Content Designer
+  tier: specialist
+  domain: design
+  reports_to: design-head
+  model: sonnet
+  task_class: analytical
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/design/content-designer.md
+  skills:
+  - interface-copywriting
+  - error-message-design
+  - plain-language-editing
+  - terminology-governance
+  - copy-comprehension-testing
+  memory_scopes:
+  - org.design-system
+  - org.research
+  - venture.*.design
+  - org.decisions
+  capability: Writes the words in the product — the ones that do the actual explaining — and removes the ones that do not
+- id: accessibility-designer
+  title: Accessibility Designer
+  tier: specialist
+  domain: design
+  reports_to: design-head
+  model: sonnet
+  task_class: analytical
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/design/accessibility-designer.md
+  skills:
+  - accessibility-annotation
+  - assistive-technology-testing
+  - contrast-and-colour-audit
+  - inclusive-design-review
+  - conformance-auditing
+  memory_scopes:
+  - org.design-system
+  - org.research
+  - venture.*.design
+  - org.decisions
+  capability: Makes sure the product works for people who do not use it the default way — and treats that as a design requirement,
+    not a remediation task
+- id: motion-designer
+  title: Motion Designer
+  tier: specialist
+  domain: design
+  reports_to: design-head
+  model: sonnet
+  task_class: analytical
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/design/motion-designer.md
+  skills:
+  - motion-principles
+  - transition-design
+  - reduced-motion-design
+  - motion-performance-check
+  - loading-feedback-design
+  memory_scopes:
+  - org.design-system
+  - org.research
+  - venture.*.design
+  - org.decisions
+  capability: Uses movement to explain what changed and where things went — and nothing else
+- id: prototyper
+  title: Prototyper
+  tier: specialist
+  domain: design
+  reports_to: design-head
+  model: sonnet
+  task_class: analytical
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/design/prototyper.md
+  skills:
+  - prototype-fidelity-selection
+  - rapid-prototyping
+  - prototype-scoping
+  - realistic-content-testing
+  - prototype-disposal
+  memory_scopes:
+  - org.design-system
+  - org.research
+  - venture.*.design
+  - org.decisions
+  capability: Builds the cheapest artifact that answers the question, and throws it away afterwards
+- id: brand-identity-designer
+  title: Brand Identity Designer
+  tier: specialist
+  domain: design
+  reports_to: design-head
+  model: sonnet
+  task_class: analytical
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/design/brand-identity-designer.md
+  skills:
+  - identity-system-design
+  - brand-distinctiveness-check
+  - identity-stress-testing
+  - brand-guideline-authoring
+  - asset-library-management
+  memory_scopes:
+  - org.design-system
+  - org.research
+  - venture.*.design
+  - org.decisions
+  capability: Owns how the company looks and sounds visually — the identity system, not just the logo
+- id: data-visualization-designer
+  title: Data Visualisation Designer
+  tier: specialist
+  domain: design
+  reports_to: design-head
+  model: sonnet
+  task_class: analytical
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/design/data-visualization-designer.md
+  skills:
+  - chart-form-selection
+  - encoding-honesty-review
+  - dashboard-composition
+  - uncertainty-visualisation
+  - colourblind-safe-palette
+  memory_scopes:
+  - org.design-system
+  - org.research
+  - venture.*.design
+  - org.decisions
+  capability: Designs charts and dashboards that answer a question honestly, rather than decorating a number
+- id: service-designer
+  title: Service Designer
+  tier: specialist
+  domain: design
+  reports_to: design-head
+  model: sonnet
+  task_class: analytical
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/design/service-designer.md
+  skills:
+  - service-blueprinting
+  - channel-handoff-design
+  - service-recovery-design
+  - back-stage-validation
+  - touchpoint-instrumentation
+  memory_scopes:
+  - org.design-system
+  - org.research
+  - venture.*.design
+  - org.decisions
+  capability: 'Designs the whole experience, including the parts that are not a screen: the emails, the humans, the waiting,
+    and the handoffs'
+- id: design-critic
+  title: Design Critic
+  tier: specialist
+  domain: design
+  reports_to: design-head
+  model: opus
+  task_class: judgement
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/design/design-critic.md
+  skills:
+  - design-critique-facilitation
+  - goal-anchored-feedback
+  - taste-versus-principle-separation
+  - design-decision-record
+  - critique-ground-rules
+  memory_scopes:
+  - org.design-system
+  - org.research
+  - venture.*.design
+  - org.decisions
+  capability: Runs structured critique so design decisions are argued on evidence rather than on seniority or taste
+- id: agent-performance-analyst
+  title: Agent Performance Analyst
+  tier: specialist
+  domain: improvement
+  reports_to: improvement-head
+  model: opus
+  task_class: judgement
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/improvement/agent-performance-analyst.md
+  skills:
+  - agent-scorecard
+  - failure-attribution
+  - performance-trend-analysis
+  - improvement-queue-ranking
+  - fix-effect-measurement
+  memory_scopes:
+  - org.performance
+  - org.improvement
+  - org.memory
+  - council.recurring-flaws
+  capability: Measures how well each agent actually performs, separates capability problems from context problems, and names
+    the single highest-value fix
+- id: failure-miner
+  title: Failure Miner
+  tier: specialist
+  domain: improvement
+  reports_to: improvement-head
+  model: sonnet
+  task_class: analytical
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/improvement/failure-miner.md
+  skills:
+  - failure-corpus-mining
+  - root-cause-clustering
+  - failure-cost-estimation
+  - golden-case-extraction
+  - systemic-cause-identification
+  memory_scopes:
+  - org.performance
+  - org.improvement
+  - org.memory
+  - council.recurring-flaws
+  capability: Digs through everything that went wrong — incidents, rejected handoffs, Council blockers, escaped defects —
+    and finds the patterns worth fixing
+- id: prompt-optimizer
+  title: Prompt Optimizer
+  tier: specialist
+  domain: improvement
+  reports_to: improvement-head
+  model: opus
+  task_class: judgement
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/improvement/prompt-optimizer.md
+  skills:
+  - prompt-variant-generation
+  - held-out-trial-design
+  - regression-sweep
+  - adoption-threshold-setting
+  - prompt-change-logging
+  memory_scopes:
+  - org.performance
+  - org.improvement
+  - org.memory
+  - council.recurring-flaws
+  capability: Improves agent and skill instructions through measured trials rather than intuition, and never adopts a change
+    that has not beaten the baseline
+- id: skill-refiner
+  title: Skill Refiner
+  tier: specialist
+  domain: improvement
+  reports_to: improvement-head
+  model: sonnet
+  task_class: analytical
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/improvement/skill-refiner.md
+  skills:
+  - skill-step-revision
+  - library-overlap-analysis
+  - skill-usage-telemetry
+  - skill-deprecation
+  - step-concreteness-review
+  memory_scopes:
+  - org.performance
+  - org.improvement
+  - org.memory
+  - council.recurring-flaws
+  capability: 'Keeps the skill library sharp: merges what has blurred, splits what has grown vague, and deletes what nobody
+    uses'
+- id: eval-designer
+  title: Evaluation Designer
+  tier: specialist
+  domain: improvement
+  reports_to: improvement-head
+  model: sonnet
+  task_class: analytical
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/improvement/eval-designer.md
+  skills:
+  - rubric-design
+  - held-out-set-construction
+  - discrimination-analysis
+  - inter-rater-calibration
+  - evaluation-revalidation
+  memory_scopes:
+  - org.performance
+  - org.improvement
+  - org.memory
+  - council.recurring-flaws
+  capability: Builds the measurements that decide whether anything actually improved, and makes sure they discriminate
+- id: ab-test-runner
+  title: Variant Trial Runner
+  tier: specialist
+  domain: improvement
+  reports_to: improvement-head
+  model: sonnet
+  task_class: analytical
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/improvement/ab-test-runner.md
+  skills:
+  - trial-execution
+  - sample-sizing
+  - early-stopping-discipline
+  - effect-size-reporting
+  - negative-result-reporting
+  memory_scopes:
+  - org.performance
+  - org.improvement
+  - org.memory
+  - council.recurring-flaws
+  capability: Runs the trials that compare a proposed change against the current behaviour, and reports the result honestly
+- id: token-efficiency-analyst
+  title: Token Efficiency Analyst
+  tier: specialist
+  domain: improvement
+  reports_to: improvement-head
+  model: sonnet
+  task_class: analytical
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/improvement/token-efficiency-analyst.md
+  skills:
+  - token-accounting
+  - context-bloat-analysis
+  - model-tier-assignment
+  - cache-order-optimisation
+  - efficiency-quality-tradeoff
+  memory_scopes:
+  - org.performance
+  - org.improvement
+  - org.memory
+  - council.recurring-flaws
+  capability: Finds where the organisation spends tokens without buying quality, and cuts it without degrading output
+- id: workflow-optimizer
+  title: Workflow Optimizer
+  tier: specialist
+  domain: improvement
+  reports_to: improvement-head
+  model: sonnet
+  task_class: analytical
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/improvement/workflow-optimizer.md
+  skills:
+  - step-value-analysis
+  - fail-fast-resequencing
+  - parallelisation-analysis
+  - duplicate-review-elimination
+  - workflow-change-measurement
+  memory_scopes:
+  - org.performance
+  - org.improvement
+  - org.memory
+  - council.recurring-flaws
+  capability: 'Improves the workflows themselves: removes steps that add no evidence, parallelises what is sequential by habit,
+    and fixes the ordering that wastes work'
+- id: capability-gap-scout
+  title: Capability Gap Scout
+  tier: specialist
+  domain: improvement
+  reports_to: improvement-head
+  model: sonnet
+  task_class: analytical
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/improvement/capability-gap-scout.md
+  skills:
+  - capability-mapping
+  - gap-evidence-collection
+  - minimal-intervention-selection
+  - new-agent-justification
+  - sprawl-resistance
+  memory_scopes:
+  - org.performance
+  - org.improvement
+  - org.memory
+  - council.recurring-flaws
+  capability: Finds what the organisation cannot currently do — the tasks nobody owns and the skills nobody has — before that
+    gap causes a failure
+- id: knowledge-distiller
+  title: Knowledge Distiller
+  tier: specialist
+  domain: improvement
+  reports_to: improvement-head
+  model: sonnet
+  task_class: analytical
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/improvement/knowledge-distiller.md
+  skills:
+  - lesson-distillation
+  - instruction-placement
+  - instruction-pruning
+  - constraint-over-explanation
+  - behaviour-change-verification
+  memory_scopes:
+  - org.performance
+  - org.improvement
+  - org.memory
+  - council.recurring-flaws
+  capability: Turns what the organisation learned into instructions the next run will actually follow
+- id: benchmark-curator
+  title: Benchmark Curator
+  tier: specialist
+  domain: improvement
+  reports_to: improvement-head
+  model: sonnet
+  task_class: analytical
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/improvement/benchmark-curator.md
+  skills:
+  - golden-case-curation
+  - case-provenance-recording
+  - coverage-mapping
+  - case-retirement
+  - contamination-auditing
+  memory_scopes:
+  - org.performance
+  - org.improvement
+  - org.memory
+  - council.recurring-flaws
+  capability: Owns the case set the whole organisation is measured against, and keeps it honest as the work changes
+- id: model-router-tuner
+  title: Model Router Tuner
+  tier: specialist
+  domain: improvement
+  reports_to: improvement-head
+  model: sonnet
+  task_class: analytical
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/improvement/model-router-tuner.md
+  skills:
+  - model-tier-assignment
+  - escalation-rule-design
+  - tier-quality-verification
+  - routing-telemetry-review
+  - task-class-classification
+  memory_scopes:
+  - org.performance
+  - org.improvement
+  - org.memory
+  - council.recurring-flaws
+  capability: Decides which model tier each agent runs on, and moves work down a tier whenever quality allows
+- id: industrial-designer
+  title: Industrial Designer
+  tier: specialist
+  domain: hardware
+  reports_to: hardware-head
+  model: sonnet
+  task_class: analytical
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/hardware/industrial-designer.md
+  skills:
+  - industrial-design-concepting
+  - ergonomics-and-human-factors
+  - cmf-specification
+  - physical-model-review
+  - form-volume-negotiation
+  memory_scopes:
+  - org.hardware
+  - venture.*.hardware
+  - venture.*.suppliers
+  - org.decisions
+  capability: 'Decides what the physical product is: its form, how it is held and used, what it is made of, and why someone
+    would want it on their desk'
+- id: cad-modeler
+  title: CAD Modeller
+  tier: specialist
+  domain: hardware
+  reports_to: hardware-head
+  model: sonnet
+  task_class: analytical
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/hardware/cad-modeler.md
+  skills:
+  - parametric-modeling
+  - assembly-modeling
+  - interference-checking
+  - gd-and-t-drafting
+  - model-revision-control
+  memory_scopes:
+  - org.hardware
+  - venture.*.hardware
+  - venture.*.suppliers
+  - org.decisions
+  capability: Builds the 3D model that everything else depends on — parametric, tolerant of change, and the single geometric
+    source of truth
+- id: mechanical-engineer
+  title: Mechanical Engineer
+  tier: specialist
+  domain: hardware
+  reports_to: hardware-head
+  model: sonnet
+  task_class: analytical
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/hardware/mechanical-engineer.md
+  skills:
+  - tolerance-stackup-analysis
+  - structural-analysis
+  - fastener-and-joint-design
+  - drop-and-vibration-analysis
+  - analysis-test-correlation
+  memory_scopes:
+  - org.hardware
+  - venture.*.hardware
+  - venture.*.suppliers
+  - org.decisions
+  capability: 'Makes sure the physical thing holds together: loads, stresses, fits, fasteners, and the tolerance stack that
+    decides whether parts actually assemble'
+- id: dfm-engineer
+  title: Design for Manufacture Engineer
+  tier: specialist
+  domain: hardware
+  reports_to: hardware-head
+  model: opus
+  task_class: judgement
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/hardware/dfm-engineer.md
+  skills:
+  - dfm-review
+  - process-selection
+  - tooling-design-review
+  - design-for-assembly
+  - process-capability-analysis
+  memory_scopes:
+  - org.hardware
+  - venture.*.hardware
+  - venture.*.suppliers
+  - org.decisions
+  capability: Makes sure the design can actually be made, repeatably, at the intended volume and cost — before tooling is
+    cut
+- id: enclosure-designer
+  title: Enclosure Designer
+  tier: specialist
+  domain: hardware
+  reports_to: hardware-head
+  model: sonnet
+  task_class: analytical
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/hardware/enclosure-designer.md
+  skills:
+  - enclosure-architecture
+  - ingress-protection-design
+  - board-mounting-design
+  - aperture-tolerancing
+  - closure-and-retention-design
+  memory_scopes:
+  - org.hardware
+  - venture.*.hardware
+  - venture.*.suppliers
+  - org.decisions
+  capability: 'Designs the housing: how it splits, how it closes, how it keeps water and dust out, and how a human opens it
+    when it needs service'
+- id: thermal-engineer
+  title: Thermal Engineer
+  tier: specialist
+  domain: hardware
+  reports_to: hardware-head
+  model: sonnet
+  task_class: analytical
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/hardware/thermal-engineer.md
+  skills:
+  - thermal-budgeting
+  - thermal-path-analysis
+  - thermal-interface-selection
+  - touch-temperature-compliance
+  - thermal-validation-testing
+  memory_scopes:
+  - org.hardware
+  - venture.*.hardware
+  - venture.*.suppliers
+  - org.decisions
+  capability: Keeps the electronics inside their temperature limits, in the real enclosure, in the real environment
+- id: pcb-schematic-designer
+  title: PCB Schematic Designer
+  tier: specialist
+  domain: hardware
+  reports_to: hardware-head
+  model: opus
+  task_class: judgement
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/hardware/pcb-schematic-designer.md
+  skills:
+  - schematic-capture
+  - power-sequencing-design
+  - interface-protection-design
+  - pin-accounting-review
+  - design-for-test-provision
+  memory_scopes:
+  - org.hardware
+  - venture.*.hardware
+  - venture.*.suppliers
+  - org.decisions
+  capability: 'Draws the circuit: what connects to what, why, and with what protection — the document every later hardware
+    problem gets traced back to'
+- id: pcb-layout-designer
+  title: PCB Layout Designer
+  tier: specialist
+  domain: hardware
+  reports_to: hardware-head
+  model: sonnet
+  task_class: analytical
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/hardware/pcb-layout-designer.md
+  skills:
+  - stackup-design
+  - component-placement
+  - high-speed-routing
+  - ground-and-return-path-design
+  - fabrication-output-review
+  memory_scopes:
+  - org.hardware
+  - venture.*.hardware
+  - venture.*.suppliers
+  - org.decisions
+  capability: 'Turns the schematic into copper: stack-up, placement, routing, and the physical decisions that determine whether
+    the circuit actually works'
+- id: signal-integrity-engineer
+  title: Signal Integrity Engineer
+  tier: specialist
+  domain: hardware
+  reports_to: hardware-head
+  model: sonnet
+  task_class: analytical
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/hardware/signal-integrity-engineer.md
+  skills:
+  - impedance-planning
+  - termination-and-topology-design
+  - crosstalk-analysis
+  - timing-budget-analysis
+  - si-simulation-and-measurement
+  memory_scopes:
+  - org.hardware
+  - venture.*.hardware
+  - venture.*.suppliers
+  - org.decisions
+  capability: 'Makes sure the signals survive the board: impedance, reflections, crosstalk, timing, and the return paths nobody
+    drew'
+- id: power-electronics-engineer
+  title: Power Electronics Engineer
+  tier: specialist
+  domain: hardware
+  reports_to: hardware-head
+  model: sonnet
+  task_class: analytical
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/hardware/power-electronics-engineer.md
+  skills:
+  - power-tree-design
+  - converter-topology-selection
+  - transient-response-design
+  - power-protection-design
+  - power-measurement-validation
+  memory_scopes:
+  - org.hardware
+  - venture.*.hardware
+  - venture.*.suppliers
+  - org.decisions
+  capability: Designs how the product gets, converts, and survives power — including the failure cases nobody plans for
+- id: electronics-component-engineer
+  title: Electronics Component Engineer
+  tier: specialist
+  domain: hardware
+  reports_to: hardware-head
+  model: sonnet
+  task_class: analytical
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/hardware/electronics-component-engineer.md
+  skills:
+  - bom-management
+  - second-source-qualification
+  - lifecycle-and-obsolescence-review
+  - component-cost-analysis
+  - authorised-sourcing-control
+  memory_scopes:
+  - org.hardware
+  - venture.*.hardware
+  - venture.*.suppliers
+  - org.decisions
+  capability: 'Owns the bill of materials: what parts go in, whether they can be bought, and what happens when one goes obsolete'
+- id: embedded-firmware-engineer
+  title: Embedded Firmware Engineer
+  tier: specialist
+  domain: hardware
+  reports_to: hardware-head
+  model: sonnet
+  task_class: analytical
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/hardware/embedded-firmware-engineer.md
+  skills:
+  - firmware-architecture
+  - board-bringup
+  - hardware-abstraction-design
+  - safe-field-update-design
+  - realtime-timing-verification
+  memory_scopes:
+  - org.hardware
+  - venture.*.hardware
+  - venture.*.suppliers
+  - org.decisions
+  capability: Writes the code that runs on the hardware, and owns the boundary where software assumptions meet physical reality
+- id: compliance-emc-engineer
+  title: EMC & Product Compliance Engineer
+  tier: specialist
+  domain: hardware
+  reports_to: hardware-head
+  model: opus
+  task_class: judgement
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/hardware/compliance-emc-engineer.md
+  skills:
+  - standards-applicability-matrix
+  - emc-design-review
+  - pre-compliance-testing
+  - product-safety-review
+  - technical-file-assembly
+  memory_scopes:
+  - org.hardware
+  - venture.*.hardware
+  - venture.*.suppliers
+  - org.decisions
+  capability: 'Gets the product legally sellable: emissions, immunity, safety, and the certification paperwork for every market
+    it ships to'
+- id: hardware-test-engineer
+  title: Hardware Test Engineer
+  tier: specialist
+  domain: hardware
+  reports_to: hardware-head
+  model: sonnet
+  task_class: analytical
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/hardware/hardware-test-engineer.md
+  skills:
+  - test-strategy-hardware
+  - verification-matrix
+  - environmental-testing
+  - production-test-design
+  - failure-analysis-hardware
+  memory_scopes:
+  - org.hardware
+  - venture.*.hardware
+  - venture.*.suppliers
+  - org.decisions
+  capability: Proves the hardware works — on the bench, through the build phases, and on the production line
+- id: prototyping-fabrication-agent
+  title: Prototyping & Fabrication Agent
+  tier: specialist
+  domain: hardware
+  reports_to: hardware-head
+  model: sonnet
+  task_class: analytical
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/hardware/prototyping-fabrication-agent.md
+  skills:
+  - prototype-process-selection
+  - fabrication-package-preparation
+  - supplier-quoting
+  - build-traceability
+  - prototype-learning-capture
+  memory_scopes:
+  - org.hardware
+  - venture.*.hardware
+  - venture.*.suppliers
+  - org.decisions
+  capability: 'Gets physical parts made fast: which process, which supplier, what it will cost, and when it arrives'
+- id: research-analyst
+  title: Research Analyst
+  tier: specialist
+  domain: research
+  reports_to: research-head
+  model: sonnet
+  task_class: analytical
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/research/research-analyst.md
+  skills:
+  - research-question-scoping
+  - search-strategy-design
+  - multi-source-synthesis
+  - residual-uncertainty-statement
+  - research-repository-lookup
+  memory_scopes:
+  - org.research
+  - org.evidence
+  - org.unknowns
+  - venture.*.*
+  capability: 'Turns a question somebody needs answered into a decision-grade brief: scopes it, gathers from real sources,
+    synthesises, and says plainly what remains unknown'
+- id: source-verifier
+  title: Source Verifier
+  tier: specialist
+  domain: research
+  reports_to: research-head
+  model: opus
+  task_class: judgement
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/research/source-verifier.md
+  skills:
+  - source-credibility-assessment
+  - primary-source-tracing
+  - circular-sourcing-detection
+  - currency-and-retraction-check
+  - claim-weight-proportionality
+  memory_scopes:
+  - org.research
+  - org.evidence
+  - org.unknowns
+  - venture.*.*
+  capability: Decides whether a source can actually be trusted — who produced it, what they gain, whether it is primary, and
+    whether it is still true
+- id: prior-art-researcher
+  title: Prior Art Researcher
+  tier: specialist
+  domain: research
+  reports_to: research-head
+  model: sonnet
+  task_class: analytical
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/research/prior-art-researcher.md
+  skills:
+  - prior-art-search
+  - standards-landscape-review
+  - relevance-assessment
+  - failed-approach-cataloguing
+  - counsel-handoff
+  memory_scopes:
+  - org.research
+  - org.evidence
+  - org.unknowns
+  - venture.*.*
+  capability: Finds out whether this has been done, tried, published, patented, or standardised before — so the organisation
+    stops reinventing and stops infringing
+- id: technology-evaluator
+  title: Technology Evaluator
+  tier: specialist
+  domain: research
+  reports_to: research-head
+  model: sonnet
+  task_class: analytical
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/research/technology-evaluator.md
+  skills:
+  - evaluation-criteria-design
+  - candidate-trial
+  - total-cost-of-ownership
+  - project-health-assessment
+  - exit-cost-analysis
+  memory_scopes:
+  - org.research
+  - org.evidence
+  - org.unknowns
+  - venture.*.*
+  capability: Evaluates the candidates — tools, libraries, vendors, platforms, approaches — against what we actually need,
+    rather than against what their marketing says
+- id: data-sourcing-analyst
+  title: Data Sourcing Analyst
+  tier: specialist
+  domain: research
+  reports_to: research-head
+  model: sonnet
+  task_class: analytical
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/research/data-sourcing-analyst.md
+  skills:
+  - dataset-discovery
+  - methodology-assessment
+  - comparability-checking
+  - dataset-licence-review
+  - figure-with-limits-reporting
+  memory_scopes:
+  - org.research
+  - org.evidence
+  - org.unknowns
+  - venture.*.*
+  capability: Finds the numbers the organisation needs, establishes whether they mean what they appear to mean, and refuses
+    to supply a figure that cannot carry its weight
+- id: horizon-scanner
+  title: Horizon Scanner
+  tier: specialist
+  domain: research
+  reports_to: research-head
+  model: sonnet
+  task_class: analytical
+  escalates_to_model: opus
+  context_budget_tokens: 15000
+  return_budget_tokens: 800
+  path: agents/research/horizon-scanner.md
+  skills:
+  - watchlist-design
+  - weak-signal-detection
+  - regulatory-change-monitoring
+  - signal-threshold-setting
+  - indicator-retirement
+  memory_scopes:
+  - org.research
+  - org.evidence
+  - org.unknowns
+  - venture.*.*
+  capability: Watches for the changes that would invalidate the plan — technology, regulation, competitive, and behavioural
+    — and separates the signals from the noise

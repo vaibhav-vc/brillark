@@ -1,0 +1,8 @@
+# Tier-1 discovery index for the 'people' category. name	output	purpose
+# Tier 2 is skills/<name>/SKILL.md — load only the skills you selected.
+# Category anti-patterns: skills/antipatterns/people.md (load once at tier 2).
+compensation-banding	Set pay bands and apply them consistently.
+hiring-plan	Sequence hiring against the constraint that is actually binding.
+interview-loop-design	Design an assessment that measures the scorecard rather than likeability.
+onboarding-plan	Make a new team member productive in their first week.
+role-scorecard	Define a role by the outcomes it must produce.

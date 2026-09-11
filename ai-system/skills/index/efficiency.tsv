@@ -1,0 +1,12 @@
+# Tier-1 discovery index for the 'efficiency' category. name	output	purpose
+# Tier 2 is skills/<name>/SKILL.md — load only the skills you selected.
+# Category anti-patterns: skills/antipatterns/efficiency.md (load once at tier 2).
+cache-order-optimisation	Order the prompt so the stable part stays cacheable.
+context-bloat-analysis	Find context that is loaded and never used.
+efficiency-quality-tradeoff	Decide whether a saving is worth it.
+escalation-rule-design	Define when a cheaper tier must hand up.
+model-tier-assignment	Put each agent on the cheapest tier that holds quality.
+routing-telemetry-review	Check the routing is working in practice.
+task-class-classification	Classify work so it can be routed to the right tier.
+tier-quality-verification	Prove a demotion did not cost quality.
+token-accounting	Know where the tokens actually go.

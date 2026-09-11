@@ -1,0 +1,50 @@
+name: Intake and routing
+stage: any
+owner: orchestration-head
+purpose: Turn any incoming request into one owned, contextualised, non-duplicate task.
+steps:
+- id: restate
+  agent: intake-router
+  skills:
+  - intent-clarification
+  - request-classification
+  does: Restate the request, name the decision it supports, and classify it.
+  produces: clarified-brief.md
+  done_when: The requester confirmed the restatement, or the assumption is stated in writing.
+- id: dedupe
+  agent: intake-router
+  skills:
+  - duplicate-detection
+  - prior-error-lookup
+  does: Search memory and the live task graph for an existing answer or in-flight work.
+  produces: duplicate-check.md
+  done_when: Either no match, or the request is linked to prior work and only the delta proceeds.
+- id: decompose
+  agent: planning-decomposer
+  skills:
+  - task-decomposition
+  - definition-of-done-writing
+  - work-breakdown-structure
+  does: Break the request into single-run tasks with checkable outputs.
+  produces: task-graph.yaml
+  done_when: Every node produces a named artifact and carries a definition of done.
+- id: schedule
+  agent: dependency-scheduler
+  skills:
+  - dependency-resolution
+  - cycle-detection
+  - critical-path-analysis
+  - budget-allocation
+  does: Order the work, detect cycles, and give every task a budget.
+  produces: schedule.md
+  done_when: Graph is acyclic, the critical path is known, and no task is unbounded.
+- id: package
+  agent: intake-router
+  skills:
+  - context-packaging
+  does: Attach a context package so the owner never rediscovers known facts.
+  produces: context-package.json
+  done_when: Package validates against context-package.schema.json.
+exit_criteria:
+- Exactly one accountable owner per task.
+- No task without a definition of done or a budget.

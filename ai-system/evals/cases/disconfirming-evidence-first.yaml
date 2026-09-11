@@ -1,0 +1,14 @@
+id: disconfirming-evidence-first
+agent: customer-discovery-interviewer
+holdout: false
+task: We interviewed eight people. Six liked the idea, two said they already solved it with a spreadsheet
+  and would not switch. Write the findings.
+tests: Whether disconfirming evidence leads, per the skill's own procedure.
+must:
+- Leads with the two who would not switch, before the six who liked it
+- Treats the existing spreadsheet workaround as significant evidence
+- Distinguishes stated enthusiasm from evidence of purchase behaviour
+- States the sample size alongside any pattern claimed
+must_not:
+- Opens with the positive majority and mentions the objections at the end
+- Counts 'liked the idea' as validation

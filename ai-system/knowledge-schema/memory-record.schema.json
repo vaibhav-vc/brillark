@@ -1,0 +1,124 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://brillark.ai/schemas/memory-record.schema.json",
+  "title": "Memory Record",
+  "description": "One durable thing the organisation knows. The four types map to how it is used: episodic (what happened), semantic (what is true), procedural (how to do it), decision (what we chose).",
+  "type": "object",
+  "required": [
+    "id",
+    "type",
+    "claim",
+    "provenance",
+    "scope"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^mem_[a-z0-9-]+$"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "episodic",
+        "semantic",
+        "procedural",
+        "decision"
+      ]
+    },
+    "claim": {
+      "type": "string",
+      "minLength": 10,
+      "description": "A standalone statement. Must be understandable with no surrounding context."
+    },
+    "detail": {
+      "type": "string"
+    },
+    "scope": {
+      "type": "string",
+      "description": "Memory scope, e.g. 'venture.acme.finance' or 'org.decisions'."
+    },
+    "entities": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Canonical entity ids this concerns."
+    },
+    "retrieval_keys": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "required": [
+        "author_agent",
+        "created_at",
+        "evidence_grade"
+      ],
+      "properties": {
+        "author_agent": {
+          "type": "string",
+          "description": "Agent id that wrote this record."
+        },
+        "skill": {
+          "type": "string",
+          "description": "Skill used to produce it."
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "evidence_grade": {
+          "type": "string",
+          "enum": [
+            "measured",
+            "sourced",
+            "benchmarked",
+            "estimated",
+            "guessed"
+          ],
+          "description": "How well this is evidenced. 'guessed' may never be load-bearing at a stage gate."
+        },
+        "source_artifacts": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Artifact ids that justify this record. Required for anything above 'estimated'."
+        }
+      }
+    },
+    "supersedes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Memory ids this replaces. Conflicts are resolved by supersession, never by storing both."
+    },
+    "shelf_life_days": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "After this, the record is stale and must be re-verified before use in a decision."
+    },
+    "promoted_from": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Episodic records consolidated into this semantic or procedural memory."
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "stale",
+        "superseded",
+        "archived"
+      ],
+      "default": "active"
+    }
+  },
+  "additionalProperties": false
+}

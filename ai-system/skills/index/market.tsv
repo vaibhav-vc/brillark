@@ -1,0 +1,39 @@
+# Tier-1 discovery index for the 'market' category. name	output	purpose
+# Tier 2 is skills/<name>/SKILL.md — load only the skills you selected.
+# Category anti-patterns: skills/antipatterns/market.md (load once at tier 2).
+alternative-comparison	Compare against what the customer would actually do instead.
+alternative-model-generation	Generate genuinely different business models before committing to one.
+business-model-canvas	Describe the whole business model on one page with evidence per block.
+claim-substantiation-planning	Decide what proof each marketing claim needs before it is made.
+comparison-matrix	Compare alternatives on the dimensions that decide purchases.
+competitive-landscape-mapping	Map everyone competing for the same budget, including the ones nobody counts.
+competitor-strategy-inference	Work out what a competitor is trying to do from observable signals.
+customer-discovery-interview	Learn what customers actually do, without leading them or selling.
+demand-signal-research	Find evidence that demand exists in behaviour rather than in opinion.
+differentiation-analysis	State the reason a customer would switch, or admit there is none.
+disconfirmation-reporting	Report the evidence against your hypothesis first.
+disqualification-criteria	Define who we will not sell to, and stick to it.
+evidence-extraction	Turn raw conversation into structured, countable evidence.
+evidence-tagging	Mark how much each claim in an artifact is actually supported.
+fit-analysis	Assess honestly whether the offer matches the customer profile.
+hypothesis-backlog	Keep a ranked list of what we believe and how we will test it.
+icp-definition	Define the customer precisely enough to build a target list.
+interview-guide-design	Write questions that produce evidence instead of politeness.
+job-mapping	Map every step of the job, including the parts our product never touches.
+jtbd-analysis	Frame the problem as the job a customer hires a solution to do.
+market-sizing	Size a market bottom-up from countable inputs and sanity-check it top-down.
+model-change-logging	Record how the business model evolved and what caused each change.
+model-coherence-check	Check that the parts of the business model actually fit together.
+opportunity-scoring	Rank problems by how much unclaimed value they contain.
+outcome-metric-extraction	Capture how the customer measures success, in their own terms.
+pattern-synthesis	Find the signal across many conversations without inventing it.
+persona-development	Describe the people involved in the purchase and what each one needs.
+reachability-mapping	Establish where the ICP actually is and what it costs to get there.
+review-mining	Learn from what customers already say publicly about the alternatives.
+segmentation-analysis	Divide the market into groups that behave differently and can be served differently.
+source-grading	Rate how much a source can be trusted before using it in an argument.
+switching-analysis	Understand what it costs a customer to change, and who bears that cost.
+trigger-event-analysis	Find the moment that makes a buyer start looking.
+value-proposition-canvas	Connect specific customer pains and gains to specific product capabilities.
+value-quantification	Put a number on the value delivered and show the arithmetic.
+why-now-analysis	Explain what changed that makes this opportunity possible or urgent today.

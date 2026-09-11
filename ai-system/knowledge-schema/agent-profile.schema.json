@@ -1,0 +1,114 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://brillark.ai/schemas/agent-profile.schema.json",
+  "title": "Agent Profile",
+  "description": "The registry entry for one agent. Validated by tests/test_system_integrity.py.",
+  "type": "object",
+  "required": [
+    "id",
+    "title",
+    "tier",
+    "domain",
+    "reports_to",
+    "model",
+    "task_class",
+    "context_budget_tokens",
+    "return_budget_tokens",
+    "skills",
+    "memory_scopes"
+  ],
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "tier": {
+      "type": "string",
+      "enum": [
+        "director",
+        "head",
+        "executive",
+        "council",
+        "specialist"
+      ]
+    },
+    "domain": {
+      "type": "string",
+      "enum": [
+        "governance",
+        "finance",
+        "business",
+        "engineering",
+        "design",
+        "hardware",
+        "research",
+        "orchestration",
+        "improvement",
+        "council"
+      ]
+    },
+    "reports_to": {
+      "type": "string"
+    },
+    "model": {
+      "type": "string",
+      "enum": [
+        "haiku",
+        "sonnet",
+        "opus"
+      ],
+      "description": "Assigned from measured quality on golden cases, never from assumed difficulty."
+    },
+    "task_class": {
+      "type": "string",
+      "enum": [
+        "mechanical",
+        "analytical",
+        "judgement"
+      ],
+      "description": "Judgement work is never demoted to a cheaper tier to save money."
+    },
+    "escalates_to_model": {
+      "type": "string",
+      "enum": [
+        "haiku",
+        "sonnet",
+        "opus"
+      ]
+    },
+    "context_budget_tokens": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Ceiling on what may be loaded. Enforced by the runtime, not by good intentions."
+    },
+    "return_budget_tokens": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Ceiling on what this agent hands back to its parent. Always below the context budget."
+    },
+    "capability": {
+      "type": "string",
+      "description": "One line, used in the tier-1 discovery index."
+    },
+    "path": {
+      "type": "string"
+    },
+    "skills": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1
+    },
+    "memory_scopes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,123 @@
+name: Council review
+stage: any
+owner: council-director
+purpose: Attack any material plan before it is funded, and issue a verdict on time.
+steps:
+- id: accept
+  agent: council-director
+  skills:
+  - council-debate-facilitation
+  does: Accept the submission only with a stated decision, evidence pack, and deadline.
+  produces: debate-record.md
+  done_when: Requested decision, evidence, and deadline all present.
+- id: assumptions
+  agent: council-assumption-auditor
+  skills:
+  - assumption-extraction
+  - evidence-grading
+  - load-bearing-analysis
+  - cheapest-test-design
+  - prior-error-lookup
+  does: Surface every assumption, grade it, and score what it carries.
+  produces: assumption-list.md
+  done_when: High-load, low-evidence assumptions identified with tests.
+- id: firstprinciples
+  agent: council-first-principles
+  skills:
+  - first-principles-decomposition
+  - constraint-classification
+  - from-scratch-reconstruction
+  - analogy-audit
+  - simplification-challenge
+  does: Strip the plan to necessities and rebuild it.
+  produces: first-principles.md
+  done_when: Assumed constraints separated from real ones.
+- id: redteam
+  agent: council-red-team
+  skills:
+  - red-team-attack
+  - abuse-case-analysis
+  - competitive-kill-scenario
+  - failure-scenario-writing
+  does: Attack the strongest claim as a competitor or bad actor would.
+  produces: red-team-report.md
+  done_when: Attacks written as concrete sequences with proposed defences.
+- id: premortem
+  agent: council-risk-and-failure-modes
+  skills:
+  - pre-mortem
+  - failure-mode-cataloguing
+  - cascade-analysis
+  - recoverability-classification
+  - early-warning-indicator-design
+  does: Assume it failed and reconstruct how.
+  produces: pre-mortem.md
+  done_when: Terminal failures identified; indicators back-tested.
+- id: devil
+  agent: council-devils-advocate
+  skills:
+  - counter-case-argument
+  - steelman-construction
+  - groupthink-detection
+  - falsification-test-design
+  - alternative-revival
+  does: Argue the opposite and demand a falsification test.
+  produces: counter-case.md
+  done_when: Falsification test defined or its absence reported as a finding.
+- id: economics
+  agent: council-economics-skeptic
+  skills:
+  - model-recomputation
+  - sensitivity-analysis
+  - benchmark-comparison
+  - circular-logic-detection
+  - break-even-analysis
+  does: Recompute the numbers and compare them to observed reality.
+  produces: recomputation-report.md
+  done_when: Headline numbers independently rebuilt; optimistic gaps challenged.
+- id: ethics
+  agent: council-ethics-and-responsibility
+  skills:
+  - stakeholder-harm-analysis
+  - dark-pattern-audit
+  - accessibility-review
+  - reputational-stress-test
+  - remedy-design
+  does: Ask who is harmed and who is excluded, and propose remedies.
+  produces: harm-analysis.md
+  done_when: Non-users considered; every finding has a remedy.
+- id: legal
+  agent: council-legal-and-regulatory-critic
+  skills:
+  - regulatory-exposure-review
+  - platform-policy-review
+  - claims-substantiation-review
+  - jurisdiction-risk-review
+  - counsel-escalation
+  does: Challenge what the law and the platforms will actually permit.
+  produces: regulatory-exposure.md
+  done_when: Hidden regulated activities surfaced; counsel-grade items escalated.
+- id: expansion
+  agent: council-expansion-scout
+  skills:
+  - adjacency-mapping
+  - expansion-option-sizing
+  - leverage-identification
+  does: Make the strongest case that the plan is too small.
+  produces: expansion-options.md
+  done_when: Options sized with prerequisites stated.
+- id: synthesis
+  agent: council-synthesis-arbiter
+  skills:
+  - finding-deduplication
+  - severity-normalisation
+  - conflict-resolution
+  - verdict-writing
+  - dissent-recording
+  does: Turn ten critics into one decision-grade verdict.
+  produces: council-verdict.md
+  done_when: Blockers owned with acceptance criteria; dissent recorded verbatim.
+exit_criteria:
+- Verdict delivered within the requested window.
+- Every blocker has an owner and an acceptance criterion.
+- Minority positions preserved.

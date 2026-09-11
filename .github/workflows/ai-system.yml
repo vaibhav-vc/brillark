@@ -1,0 +1,105 @@
+name: ai-system
+
+on:
+  push:
+    branches: ["**"]
+    paths: ["ai-system/**", ".github/workflows/ai-system.yml"]
+  pull_request:
+    paths: ["ai-system/**", ".github/workflows/ai-system.yml"]
+  workflow_dispatch:
+
+jobs:
+  integrity:
+    name: Integrity tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install dependencies
+        run: pip install --quiet pyyaml
+      - name: Run integrity tests
+        run: python3 ai-system/tests/test_system_integrity.py
+      - name: Run conformance tests
+        run: python3 ai-system/tests/test_conformance.py
+
+  benchmark:
+    name: Context benchmark
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install dependencies
+        run: pip install --quiet pyyaml
+      - name: Check the measurement is deterministic
+        run: python3 ai-system/tests/benchmark.py --repeat 10
+      - name: Benchmark against the committed baseline
+        run: python3 ai-system/tests/benchmark.py
+      - name: Report context cost
+        run: python3 ai-system/tests/measure_context_cost.py
+
+  portability:
+    name: Portability and exports
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install dependencies
+        run: pip install --quiet pyyaml
+      - name: Validate the eval suite without a model
+        run: python3 ai-system/tools/eval.py --dry-run
+      - name: Export every format
+        run: python3 ai-system/tools/export.py
+      - name: Tool definitions must be valid JSON Schema objects
+        run: |
+          python3 - <<'PY'
+          import json, pathlib, sys
+          p = pathlib.Path("ai-system/dist/tool-definitions.json")
+          payload = json.loads(p.read_text())
+          assert payload["count"] == len(payload["tools"]), "count does not match tools"
+          for t in payload["tools"]:
+              assert t["name"] and t["description"], t
+              schema = t["input_schema"]
+              assert schema["type"] == "object", t["name"]
+              for field in schema["required"]:
+                  assert field in schema["properties"], (t["name"], field)
+          print(f"{payload['count']} tool definitions valid")
+          PY
+      - name: Loader assembles every agent within budget
+        run: |
+          python3 - <<'PY'
+          import pathlib, sys
+          sys.path.insert(0, "ai-system/tools")
+          from loader import Organisation
+          org = Organisation()
+          for agent_id in org.agents:
+              org.assemble(agent_id, task="")
+          print(f"all {len(org.agents)} agents assemble within budget")
+          PY
+
+  bootstrap:
+    name: Bootstrap a venture
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Scaffold and check the workspace
+        run: |
+          bash ai-system/bootstrap/init.sh ci-smoke-test
+          test -f workspace/ci-smoke-test/venture.yaml
+          test -d workspace/ci-smoke-test/memory/decisions
+          test -d workspace/ci-smoke-test/telemetry/token-ledger
+      - name: Refuse to overwrite an existing venture
+        run: |
+          if bash ai-system/bootstrap/init.sh ci-smoke-test 2>/dev/null; then
+            echo "init.sh overwrote an existing venture; it must refuse" && exit 1
+          fi
+      - name: Reject a malformed venture id
+        run: |
+          if bash ai-system/bootstrap/init.sh "Bad ID" 2>/dev/null; then
+            echo "init.sh accepted an invalid venture id" && exit 1
+          fi

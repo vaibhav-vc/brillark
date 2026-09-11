@@ -1,0 +1,72 @@
+name: Quarterly planning
+stage: any
+owner: director
+purpose: Reallocate attention and money on evidence rather than on momentum.
+steps:
+- id: review
+  agent: progress-tracker
+  skills:
+  - throughput-reporting
+  - cycle-time-analysis
+  - variance-reporting
+  does: Establish what actually got done and where time went.
+  produces: throughput-report.md
+  done_when: Only DoD-passed work counted; rework separated.
+- id: verify
+  agent: retrospective-agent
+  skills:
+  - action-verification
+  - pattern-detection
+  does: Check whether last quarter's decisions were implemented at all.
+  produces: action-verification.md
+  done_when: Verification from artifacts, not from reports.
+- id: finance
+  agent: finance-head
+  skills:
+  - runway-forecast
+  - burn-categorisation
+  - spend-efficiency-analysis
+  - forecast-accuracy-review
+  does: Refresh the runway date and score last quarter's forecast.
+  produces: runway.md
+  done_when: Committed obligations included; forecast bias identified.
+- id: strategy
+  agent: ceo-agent
+  skills:
+  - strategy-memo
+  - bet-portfolio-sizing
+  - prioritisation-forcing
+  does: State the choices, including what is deliberately not being done.
+  produces: strategy-memo.md
+  done_when: Every active bet carries a live kill criterion.
+- id: risk
+  agent: chief-risk-officer-agent
+  skills:
+  - risk-register-consolidation
+  - risk-scoring
+  - business-continuity-plan
+  does: Consolidate one ranked register and own the top risks.
+  produces: risk-register.md
+  done_when: Cross-domain duplicates merged; one owner per risk.
+- id: backlog
+  agent: orchestration-head
+  skills:
+  - org-backlog-triage
+  - resource-allocation
+  - metrics-tree-design
+  does: Produce one strictly ordered backlog and fund fewer things properly.
+  produces: org-backlog.md
+  done_when: Strict order with no ties; funding line published.
+- id: council
+  agent: council-director
+  skills:
+  - council-debate-facilitation
+  - verdict-writing
+  - recurring-flaw-analysis
+  does: Attack the plan before the quarter is committed to it.
+  produces: council-verdict.md
+  done_when: Verdict issued with owners on every blocker.
+exit_criteria:
+- One prioritised backlog exists.
+- Every bet has a kill criterion.
+- Runway refreshed and published.

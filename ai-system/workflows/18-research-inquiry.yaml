@@ -1,0 +1,97 @@
+name: Research inquiry
+stage: any
+owner: research-head
+purpose: Answer a question somebody has to make a decision on, with evidence graded to the weight the
+  answer will carry — and state plainly what remains unknown.
+steps:
+- id: intake
+  agent: research-head
+  skills:
+  - research-intake-triage
+  - evidence-standard-setting
+  - claim-weight-proportionality
+  does: Accept the question only with a named decision, and set the required evidence grade first.
+  produces: intake-decision.md
+  done_when: A decision and decision-maker are named; the required grade is recorded before searching.
+- id: reuse
+  agent: research-analyst
+  skills:
+  - research-repository-lookup
+  does: Check whether the organisation already knows this.
+  produces: repository-check.md
+  done_when: Existing findings checked for currency; partial matches reduced to a delta.
+- id: scope
+  agent: research-analyst
+  skills:
+  - research-question-scoping
+  - search-strategy-design
+  does: Narrow the question until a finite search could answer it, and plan the search.
+  produces: research-question.md
+  done_when: Question answerable by a finite search; stopping rule and opposite-terms recorded.
+- id: gather
+  agent: data-sourcing-analyst
+  skills:
+  - dataset-discovery
+  - methodology-assessment
+  - comparability-checking
+  - dataset-licence-review
+  does: Find the numbers and establish what they actually measured.
+  produces: dataset-candidates.md
+  done_when: Methodology read per figure; comparability checked before combining; licences recorded.
+- id: prior
+  agent: prior-art-researcher
+  skills:
+  - prior-art-search
+  - standards-landscape-review
+  - relevance-assessment
+  - failed-approach-cataloguing
+  does: Find out whether this has been done, published, patented, or abandoned before.
+  produces: prior-art-report.md
+  done_when: Closest prior work identified; differences stated honestly; failures catalogued.
+- id: verify
+  agent: source-verifier
+  skills:
+  - source-credibility-assessment
+  - primary-source-tracing
+  - circular-sourcing-detection
+  - currency-and-retraction-check
+  does: Trace every load-bearing claim to a primary source and grade it.
+  produces: source-trace.md
+  done_when: Every load-bearing claim traced or marked unverifiable; circular clusters collapsed.
+- id: synthesise
+  agent: research-analyst
+  skills:
+  - multi-source-synthesis
+  - residual-uncertainty-statement
+  - figure-with-limits-reporting
+  does: Produce one answer that preserves disagreement and names the gaps.
+  produces: research-brief.md
+  done_when: Disagreement preserved; unknowns stated with what would resolve them.
+- id: independence
+  agent: research-head
+  skills:
+  - research-independence-review
+  - unknowns-register
+  does: Check the finding was not shaped toward what someone wanted.
+  produces: independence-review.md
+  done_when: Disconfirming search effort verified; unwelcome findings intact between draft and final.
+- id: readiness
+  agent: chief-research-officer-agent
+  skills:
+  - decision-readiness-review
+  - standard-of-proof-policy
+  does: Say whether the decision now has the evidence its consequence requires.
+  produces: readiness-review.md
+  done_when: Load-bearing claims assessed against the required grade; below-standard decisions reported.
+- id: file
+  agent: research-analyst
+  skills:
+  - repository-reuse-measurement
+  does: File the brief so the next question starts from it.
+  produces: reuse-report.md
+  done_when: Brief tagged by question, entity, and decision; retrieval path verified.
+exit_criteria:
+- Every brief names the decision it serves and its decision-maker.
+- Every load-bearing claim is traced to a primary source or marked unverifiable.
+- What could not be established is stated in the body, not a footnote.
+- The brief is filed and retrievable, so it is not commissioned twice.

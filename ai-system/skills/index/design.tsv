@@ -1,0 +1,81 @@
+# Tier-1 discovery index for the 'design' category. name	output	purpose
+# Tier 2 is skills/<name>/SKILL.md — load only the skills you selected.
+# Category anti-patterns: skills/antipatterns/design.md (load once at tier 2).
+accessibility-annotation	Give engineering everything it needs to build the interface accessibly.
+accessibility-conformance-review	Decide whether a surface meets the bar to ship.
+asset-library-management	Keep brand and product assets available in the formats people need.
+assistive-technology-testing	Test with the tools people actually use, not only with automated checkers.
+back-stage-validation	Check the operation can actually deliver the designed experience.
+brand-distinctiveness-check	Verify the identity is actually distinguishable from the competition.
+brand-guideline-authoring	Write guidelines people can actually follow.
+card-sorting	Learn how users group and name things, rather than imposing the internal structure.
+channel-handoff-design	Design the moments where the service moves between channels or between machine and human.
+chart-form-selection	Pick the chart form from the comparison being made.
+colourblind-safe-palette	Build a palette that works for everyone.
+component-api-design	Design a component's interface so it is hard to misuse.
+component-deprecation	Remove a component without stranding the people using it.
+conformance-auditing	Audit a shipped surface against the conformance target.
+content-modeling	Define the content types and their relationships before designing pages.
+contextual-inquiry	Watch people do the real task in the real place, rather than asking them to describe it.
+contrast-and-colour-audit	Check colour works for everyone who has to read it.
+copy-comprehension-testing	Check that people understand the words before shipping them.
+critique-ground-rules	Set the rules that make critique safe and useful.
+dashboard-composition	Compose a dashboard that answers questions rather than displaying numbers.
+design-capability-planning	Plan the design capability the roadmap actually needs.
+design-code-parity-audit	Check that the design source and the shipped code still agree.
+design-critique-facilitation	Run critique that improves the work rather than asserting rank.
+design-decision-record	Record a design decision so it is not re-argued every week.
+design-engineering-walkthrough	Walk the spec with engineering before handoff, not after.
+design-investment-review	Judge whether design effort is going where it pays.
+design-quality-bar	Define what finished means for a design.
+design-research-planning	Plan research that answers a specific decision rather than producing general interest.
+design-standard-definition	Define the experience standard the business strategy requires.
+design-strategy-alignment	Check the design direction actually serves the strategy.
+design-system-governance	Keep the system coherent as more people contribute to it.
+design-token-application	Use the system's tokens rather than introducing one-off values.
+design-token-architecture	Structure tokens so themes, modes, and brands work without rework.
+encoding-honesty-review	Check the chart does not mislead.
+error-message-design	Write errors that let the user recover.
+error-prevention-design	Stop the error happening rather than reporting it afterwards.
+experience-quality-measurement	Measure experience quality so it can be argued for with evidence.
+finding-severity-rating	Rate usability findings so the team fixes the right ones first.
+fix-verification	Confirm the fix actually fixed it.
+flow-design	Design the complete path through a task, including the ways it goes wrong.
+goal-anchored-feedback	Give feedback that can be acted on.
+identity-stress-testing	Test the identity where it is most likely to fail.
+identity-system-design	Design the identity as a system, not as a logo.
+inclusive-design-review	Review the design for who it excludes before it is built.
+insight-synthesis	Turn raw observation into insights that survive challenge.
+interaction-pattern-selection	Reuse an established pattern before inventing one.
+interface-copywriting	Write the words in the product so they do the explaining.
+journey-mapping	Map the customer's whole path, including the parts the product never sees.
+layout-composition	Arrange the screen so the structure is obvious without explanation.
+loading-feedback-design	Tell the user what is happening while they wait.
+moderation-discipline	Run the session without contaminating the data.
+motion-performance-check	Confirm the animation does not cost more than it gives.
+motion-principles	Define what motion is for in this product, and what it is not for.
+navigation-design	Design how people move through the product and know where they are.
+plain-language-editing	Cut the text down to what people will actually read.
+prototype-disposal	Retire the prototype instead of letting it become the product.
+prototype-fidelity-selection	Choose the cheapest fidelity that answers the question.
+prototype-scoping	Be explicit about what the prototype proves and what it fakes.
+rapid-prototyping	Build the testable artifact fast, without building the product.
+realistic-content-testing	Test the design with the content it will actually hold.
+reduced-motion-design	Give an equivalent experience to people who have turned motion off.
+research-evidence-review	Check that a design decision rests on evidence rather than assertion.
+research-repository-management	Keep past research findable so the next project does not re-run it.
+service-blueprinting	Map the whole service, including everything the customer never sees.
+service-recovery-design	Design what happens when the service fails the customer.
+state-specification	Specify every state a view can be in, so none is discovered in production.
+system-contribution-process	Define how a component enters the system.
+task-success-measurement	Measure whether people can actually complete the task.
+taste-versus-principle-separation	Tell apart a real problem and a personal preference.
+taxonomy-design	Build the controlled vocabulary the whole organisation uses.
+terminology-governance	Keep one name per concept across every surface.
+touchpoint-instrumentation	Measure the service where the customer actually experiences it.
+transition-design	Move between states so the user can follow what happened.
+tree-testing	Test whether people can find things in a structure before anything is designed on top of it.
+typography-system	Set type so the product can be read comfortably.
+uncertainty-visualisation	Show how confident the numbers are.
+usability-test-design	Design a test that produces findings rather than reassurance.
+visual-hierarchy-design	Make the order things are read match the order they matter.

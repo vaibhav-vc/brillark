@@ -1,0 +1,195 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://brillark.ai/schemas/research-brief.schema.json",
+  "title": "Research Brief",
+  "description": "The output of a research inquiry. The required fields are the ones that are otherwise omitted under time pressure: the decision it serves, what could not be established, and a grade on every load-bearing claim.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "question",
+    "decision",
+    "decision_maker",
+    "answer",
+    "claims",
+    "not_established",
+    "filed_at"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^res_[a-z0-9-]+$"
+    },
+    "question": {
+      "type": "string",
+      "description": "Narrowed until a finite search could answer it."
+    },
+    "narrowed_away": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "What the scoping deliberately excluded, so the requester can object."
+    },
+    "decision": {
+      "type": "string",
+      "description": "The decision this informs. Research without one is a hobby."
+    },
+    "decision_maker": {
+      "type": "string"
+    },
+    "required_evidence_grade": {
+      "type": "string",
+      "enum": [
+        "measured",
+        "sourced",
+        "benchmarked",
+        "estimated",
+        "guessed"
+      ],
+      "description": "Set from the decision's consequence BEFORE the search, not after seeing results."
+    },
+    "answer": {
+      "type": "string",
+      "description": "The answer first. Reasoning follows it."
+    },
+    "confidence": {
+      "type": "string",
+      "enum": [
+        "measured",
+        "sourced",
+        "benchmarked",
+        "estimated",
+        "guessed"
+      ],
+      "description": "The weakest grade among the claims the answer actually rests on."
+    },
+    "claims": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "claim",
+          "grade",
+          "load_bearing"
+        ],
+        "properties": {
+          "claim": {
+            "type": "string"
+          },
+          "grade": {
+            "type": "string",
+            "enum": [
+              "measured",
+              "sourced",
+              "benchmarked",
+              "estimated",
+              "guessed"
+            ]
+          },
+          "load_bearing": {
+            "type": "boolean",
+            "description": "Does the answer collapse if this is wrong?"
+          },
+          "primary_source": {
+            "type": "string",
+            "description": "Required when load_bearing is true."
+          },
+          "source_chain": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Each hop from the citing document back to the origin, so the trace is auditable."
+          },
+          "independent_origins": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Distinct origins, not documents. Twelve outlets citing one release is 1."
+          },
+          "source_date": {
+            "type": "string",
+            "format": "date"
+          },
+          "unverifiable": {
+            "type": "boolean",
+            "description": "Set when the chain dead-ended. Better than quietly accepting the claim."
+          }
+        }
+      }
+    },
+    "disagreements": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "subject",
+          "positions"
+        ],
+        "properties": {
+          "subject": {
+            "type": "string"
+          },
+          "positions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "minItems": 2
+          }
+        },
+        "description": "Preserved, never averaged into a false consensus."
+      }
+    },
+    "not_established": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "unknown",
+          "absence_is_informative"
+        ],
+        "properties": {
+          "unknown": {
+            "type": "string"
+          },
+          "absence_is_informative": {
+            "type": "boolean",
+            "description": "Did we fail to find it because it is not there, or because we could not look?"
+          },
+          "cost_to_resolve": {
+            "type": "string"
+          },
+          "would_change_answer": {
+            "type": "string"
+          }
+        }
+      },
+      "description": "At least one entry. A brief claiming to have established everything has not looked hard enough."
+    },
+    "searched_and_not_found": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Absence is a result. Record it so it is not re-searched."
+    },
+    "retrieval_tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Question, entity, and decision tags \u2014 the repository is only an asset if it is retrievable."
+    },
+    "filed_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "shelf_life_days": {
+      "type": "integer",
+      "minimum": 1
+    }
+  }
+}

@@ -10,6 +10,8 @@ for i in $(seq 1 "$N"); do
   echo "──────────────────────────────────────── pass $i/$N"
   integrity="$(python3 "$ROOT/ai-system/tests/test_system_integrity.py" 2>&1)"
   echo "$integrity" | tail -3
+  conformance="$(python3 "$ROOT/ai-system/tests/test_conformance.py" 2>&1)"
+  echo "$conformance" | tail -3
   bench="$(python3 "$ROOT/ai-system/tests/benchmark.py")"
   echo "$bench" | tail -1
 done
@@ -17,6 +19,13 @@ done
 echo "──────────────────────────────────────── determinism"
 determinism="$(python3 "$ROOT/ai-system/tests/benchmark.py" --repeat 25)"
 echo "$determinism" | head -1
+
+echo "──────────────────────────────────────── portability"
+python3 "$ROOT/ai-system/tools/eval.py" --dry-run
+python3 "$ROOT/ai-system/tools/export.py" --out "$ROOT/ai-system/dist" >/dev/null
+echo "export ok (all formats)"
+python3 "$ROOT/ai-system/tools/loader.py" assemble --agent director --task smoke >/dev/null
+echo "loader ok (assembles within budget)"
 
 echo "──────────────────────────────────────── bootstrap smoke test"
 rm -rf "$ROOT/workspace/suite-check"

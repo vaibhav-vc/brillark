@@ -1,6 +1,12 @@
 # ai-system — a multi-agent organisation for building ventures
 
-130 agents, 590 skills, 18 workflows, 21 schemas, and a test suite that keeps them consistent.
+130 agents, 590 skills, 18 workflows, 21 schemas, and 79 tests that keep them consistent.
+
+**It runs on any model.** Agents declare a capability tier — `mechanical`, `analytical`,
+`judgement` — never a vendor's model name. One profile file maps those onto whatever models you
+have. A reference loader assembles context in cache order and enforces the budgets; an exporter
+renders the whole organisation as JSON, function-calling tool definitions, Claude subagents, or an
+MCP manifest. See [`docs/integration-guide.md`](docs/integration-guide.md).
 
 The system takes a founder's intent and runs it through the path a competent company would: design a
 business model, validate it against real customers, design the experience, scope an MVP to the
@@ -76,21 +82,25 @@ shape, or its own evaluation criteria — those need the human founder. See
 | `workflows/` | 18 workflow definitions, from intake to hardware development |
 | `knowledge-schema/` | 20 JSON Schemas: memory, decisions, verdicts, returns, proposals, design specs |
 | `integrations/` | Contracts for the external systems the organisation reads and writes |
-| `tests/` | Integrity tests, plus the context-cost measurement |
+| `tools/` | The executable contract: reference loader, multi-format exporter, eval harness |
+| `evals/` | Golden cases and an anchored rubric — output quality measured, not asserted |
+| `tests/` | Integrity, conformance, benchmark, and the context-cost measurement |
 | `bootstrap/` | Scaffold a venture and verify the wiring |
 | `docs/` | Org chart, memory model, token efficiency, self-improvement, design practice |
 
 ## Start here
 
 ```bash
+bash ai-system/tests/run_all.sh                     # everything; pass N to run it N times
 python3 ai-system/tests/test_system_integrity.py    # 46 tests: does everything still line up?
+python3 ai-system/tests/test_conformance.py         # 33 tests: does the loader obey the contract?
 python3 ai-system/tests/benchmark.py                # regression gate against a committed baseline
-python3 ai-system/tests/benchmark.py --repeat 25    # confirm the measurement is deterministic
-python3 ai-system/tests/measure_context_cost.py     # what does a run actually cost?
+python3 ai-system/tools/loader.py domains           # see the organisation from the outside
+python3 ai-system/tools/export.py                   # render it for your runtime
 bash ai-system/bootstrap/init.sh acme-corp          # scaffold a venture workspace
 ```
 
-All three run in CI on every push — see `.github/workflows/ai-system.yml`.
+All of it runs in CI on every push — see `.github/workflows/ai-system.yml`.
 
 1. **[`docs/getting-started.md`](docs/getting-started.md)** — run your first venture through it.
 2. **[`docs/org-chart.md`](docs/org-chart.md)** — who reports to whom, who decides what.
@@ -99,6 +109,7 @@ All three run in CI on every push — see `.github/workflows/ai-system.yml`.
 5. **[`docs/self-improvement.md`](docs/self-improvement.md)** — the loop, and its boundary.
 6. **[`docs/hardware-practice.md`](docs/hardware-practice.md)** — 3D, PCB, and why tooling is different.
 7. **[`docs/design-practice.md`](docs/design-practice.md)** — the design domain's rules.
+8. **[`docs/integration-guide.md`](docs/integration-guide.md)** — wiring it to your own models.
 
 ## Deliberate constraints
 

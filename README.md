@@ -3,7 +3,10 @@
 ## `ai-system/`
 
 A multi-agent organisation for planning, building, and upgrading ventures: 130 agents across nine
-domains, 590 skills, 18 workflows, 21 schemas, and a test suite that keeps them consistent.
+domains, 590 skills, 18 workflows, 21 schemas, and 79 tests that keep them consistent.
+
+Model-agnostic: agents declare a capability tier, never a vendor's model name. A reference loader,
+a multi-format exporter, and an eval harness make it usable from any runtime.
 
 Built to be cheap to run — a routed agent run loads about **3,155 tokens**, not the 278,000 the full
 library would cost. About 88x cheaper, verified by a benchmark that runs in CI.
@@ -11,9 +14,9 @@ library would cost. About 88x cheaper, verified by a benchmark that runs in CI.
 Start at **[`ai-system/README.md`](ai-system/README.md)**.
 
 ```bash
-python3 ai-system/tests/test_system_integrity.py   # 46 tests: does everything still line up?
-python3 ai-system/tests/benchmark.py               # regression gate against a committed baseline
-python3 ai-system/tests/measure_context_cost.py    # what does a run actually cost?
+bash ai-system/tests/run_all.sh                    # everything: integrity, conformance, benchmark
+python3 ai-system/tools/loader.py domains          # see the organisation from the outside
+python3 ai-system/tools/export.py                  # render it for your runtime
 bash ai-system/bootstrap/init.sh <venture-id>      # scaffold a venture workspace
 ```
 
@@ -30,4 +33,5 @@ Key reading: [org chart](ai-system/docs/org-chart.md) ·
 [self-improvement](ai-system/docs/self-improvement.md) ·
 [design practice](ai-system/docs/design-practice.md) ·
 [hardware practice](ai-system/docs/hardware-practice.md) ·
+[integration guide](ai-system/docs/integration-guide.md) ·
 [memory model](ai-system/docs/memory-model.md)

@@ -1,7 +1,9 @@
 # Tests
 
 ```bash
+bash    ai-system/tests/run_all.sh                     # everything (pass N to repeat N times)
 python3 ai-system/tests/test_system_integrity.py       # 46 integrity tests
+python3 ai-system/tests/test_conformance.py            # 33 conformance tests
 python3 ai-system/tests/benchmark.py                   # regression gate vs. committed baseline
 python3 ai-system/tests/benchmark.py --repeat 25       # confirm determinism
 python3 ai-system/tests/measure_context_cost.py        # what a run actually costs
@@ -55,6 +57,17 @@ time — it produces an agent that cannot do its job, discovered much later.
 
 If you change the shape of the organisation, `REQUIRED` at the top of the test file is where you say
 so — and an org-shape change is not something the improvement domain may make on its own.
+
+## Conformance
+
+`test_conformance.py` checks the reference loader against the written contract in
+`runtime/loader-spec.md`, clause by clause: model resolution through profiles (including that a null
+tier is a hard error rather than a silent upgrade), loading order, cache-prefix stability across
+different tasks, budget enforcement that raises rather than truncates, return validation, and export
+fidelity and determinism.
+
+If you port the loader to another language, port these tests with it. **They are the definition of
+correct**, not a description of one Python file.
 
 ## The benchmark
 

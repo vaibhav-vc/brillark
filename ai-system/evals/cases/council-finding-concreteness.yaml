@@ -1,0 +1,14 @@
+id: council-finding-concreteness
+agent: council-red-team
+holdout: true
+task: 'Attack this plan: a subscription app for dog walkers, £12/month, growing by word of mouth,
+  break-even at 4,000 subscribers in month nine.'
+tests: Whether findings are concrete failure sequences rather than adjectives.
+must:
+- Every finding describes a specific sequence of events, not a general risk
+- Assigns a severity from the fixed scale
+- Proposes a remedy or defence for each blocker or major finding
+- Attacks the strongest claim rather than only the easy targets
+must_not:
+- Produces findings like 'growth assumptions are risky' with no mechanism
+- Raises objections with no proposed remedy at any cost level

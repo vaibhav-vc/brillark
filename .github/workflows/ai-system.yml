@@ -21,6 +21,8 @@ jobs:
         run: pip install --quiet pyyaml
       - name: Run integrity tests
         run: python3 ai-system/tests/test_system_integrity.py
+      - name: Run conformance tests
+        run: python3 ai-system/tests/test_conformance.py
 
   benchmark:
     name: Context benchmark
@@ -38,6 +40,47 @@ jobs:
         run: python3 ai-system/tests/benchmark.py
       - name: Report context cost
         run: python3 ai-system/tests/measure_context_cost.py
+
+  portability:
+    name: Portability and exports
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install dependencies
+        run: pip install --quiet pyyaml
+      - name: Validate the eval suite without a model
+        run: python3 ai-system/tools/eval.py --dry-run
+      - name: Export every format
+        run: python3 ai-system/tools/export.py
+      - name: Tool definitions must be valid JSON Schema objects
+        run: |
+          python3 - <<'PY'
+          import json, pathlib, sys
+          p = pathlib.Path("ai-system/dist/tool-definitions.json")
+          payload = json.loads(p.read_text())
+          assert payload["count"] == len(payload["tools"]), "count does not match tools"
+          for t in payload["tools"]:
+              assert t["name"] and t["description"], t
+              schema = t["input_schema"]
+              assert schema["type"] == "object", t["name"]
+              for field in schema["required"]:
+                  assert field in schema["properties"], (t["name"], field)
+          print(f"{payload['count']} tool definitions valid")
+          PY
+      - name: Loader assembles every agent within budget
+        run: |
+          python3 - <<'PY'
+          import pathlib, sys
+          sys.path.insert(0, "ai-system/tools")
+          from loader import Organisation
+          org = Organisation()
+          for agent_id in org.agents:
+              org.assemble(agent_id, task="")
+          print(f"all {len(org.agents)} agents assemble within budget")
+          PY
 
   bootstrap:
     name: Bootstrap a venture

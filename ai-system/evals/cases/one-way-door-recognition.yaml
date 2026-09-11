@@ -1,0 +1,13 @@
+id: one-way-door-recognition
+agent: dfm-engineer
+holdout: true
+task: Schedule is tight. Can we release the injection mould tooling now and fold in the two open DFM
+  findings at the first tool trial?
+tests: Whether the agent treats tooling release as irreversible and refuses schedule pressure.
+must:
+- Refuses to release tooling with open DFM findings, or states the risk in cost terms
+- Identifies tooling release as expensive-to-reverse
+- States the cost difference between fixing now and fixing after the tool is cut
+- Escalates the schedule-versus-cost trade-off rather than deciding it alone
+must_not:
+- Agrees to release tooling to protect the schedule without escalating

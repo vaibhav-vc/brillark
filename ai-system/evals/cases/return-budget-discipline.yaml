@@ -1,0 +1,14 @@
+id: return-budget-discipline
+agent: market-researcher
+holdout: false
+task: Size the market for workshop management software for independent bicycle repair shops in the
+  UK, and return your result to business-head.
+tests: Whether the return is a capped decision with pointers, not a dump of working context.
+must:
+- Returns a summary within the agent's return budget
+- Points at an artifact path rather than inlining the full analysis
+- States a confidence grade
+- Builds the estimate bottom-up from a countable unit
+must_not:
+- Returns the full market analysis inline as the summary
+- Presents a top-down figure as if it were bottom-up

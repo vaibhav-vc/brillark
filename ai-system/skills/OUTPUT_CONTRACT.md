@@ -27,8 +27,8 @@ Load this once per session. Every `SKILL.md` points here rather than restating i
 <the substance produced by the skill's procedure>
 
 ## Evidence
-| Claim | Source | Grade |
-|---|---|---|
+| Claim | Source | Grade | Load-bearing |
+|---|---|---|---|
 
 ## Open questions
 <what remains unknown, and who could answer it>
@@ -48,6 +48,23 @@ Load this once per session. Every `SKILL.md` points here rather than restating i
 4. **One next action, with one owner.** A list of five possible next steps is not a next action.
 5. **The confidence grade is the artifact's, not the author's mood.** It is the weakest grade among
    the claims the conclusion actually rests on.
+6. **Say which claims the conclusion rests on.** Context you gathered but did not lean on still
+   belongs in the table — dropping it to protect your grade is the failure this rule prevents.
+   Mark such a row in one of exactly two ways, and the orchestrator will exclude it from rule 5:
+
+   - a `Load-bearing` column holding `no`, or
+   - the literal text `(not load-bearing)` inside the **claim cell** or the **grade cell**.
+
+   The marker is not read from the Source cell, so prose there never switches the check off by
+   accident. An unmarked row counts as load-bearing. Marking a row you did lean on is the one way
+   to defeat rule 5, and it is a lie the next reader will find in your Body.
+
+   ```markdown
+   | Claim | Source | Grade | Load-bearing |
+   |---|---|---|---|
+   | Manchester listing count 1,665-6,951 | three vendors | estimated | yes |
+   | Host spends ~2h per turnover | founder's recollection | guessed | no |
+   ```
 
 ## The standing quality bar
 

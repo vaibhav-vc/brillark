@@ -1,3 +1,7 @@
-workspace/
+workspace/*
 ai-system/dist/
 ai-system/evals/last-run.json
+!workspace/laundro/
+workspace/laundro/context/
+__pycache__/
+*.pyc

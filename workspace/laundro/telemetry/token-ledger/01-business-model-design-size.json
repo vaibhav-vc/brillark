@@ -1,0 +1,17 @@
+{
+  "agent": "market-researcher",
+  "attempts": 1,
+  "budget_exceeded": false,
+  "completed": true,
+  "escalated": false,
+  "model": "claude-sonnet-5",
+  "run_id": "01-business-model-design-size",
+  "task_id": "size",
+  "tokens": {
+    "context": 12,
+    "output": 1554,
+    "retrieved": 0,
+    "system": 4863,
+    "total": 6429
+  }
+}

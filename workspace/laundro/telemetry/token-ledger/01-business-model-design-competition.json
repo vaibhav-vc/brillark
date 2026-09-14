@@ -1,0 +1,17 @@
+{
+  "agent": "competitor-intel-analyst",
+  "attempts": 1,
+  "budget_exceeded": false,
+  "completed": true,
+  "escalated": false,
+  "model": "claude-sonnet-5",
+  "run_id": "01-business-model-design-competition",
+  "task_id": "competition",
+  "tokens": {
+    "context": 19,
+    "output": 1907,
+    "retrieved": 0,
+    "system": 5167,
+    "total": 7093
+  }
+}

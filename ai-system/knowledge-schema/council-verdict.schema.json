@@ -73,16 +73,56 @@
           },
           "remedy": {
             "type": "string",
-            "description": "Required for blocker and major severities."
+            "description": "What would fix it. Enforced as required for blocker and major findings."
           },
           "owner": {
             "type": "string"
           },
           "acceptance_criterion": {
             "type": "string",
-            "description": "Required for blockers: what clears it."
+            "description": "The observable condition that clears this blocker. Enforced as required for blockers."
           }
-        }
+        },
+        "allOf": [
+          {
+            "description": "A blocker without an owner, a remedy and a criterion that clears it is a complaint, not a gate.",
+            "if": {
+              "properties": {
+                "severity": {
+                  "const": "blocker"
+                }
+              },
+              "required": [
+                "severity"
+              ]
+            },
+            "then": {
+              "required": [
+                "remedy",
+                "owner",
+                "acceptance_criterion"
+              ]
+            }
+          },
+          {
+            "description": "A major finding names what would fix it.",
+            "if": {
+              "properties": {
+                "severity": {
+                  "const": "major"
+                }
+              },
+              "required": [
+                "severity"
+              ]
+            },
+            "then": {
+              "required": [
+                "remedy"
+              ]
+            }
+          }
+        ]
       }
     },
     "expansion_options": {
@@ -122,5 +162,62 @@
       "type": "boolean"
     }
   },
-  "additionalProperties": false
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "description": "A council that approves over its own blocker has not reviewed anything. An open blocker permits approve_with_conditions or reject, never approve.",
+      "if": {
+        "properties": {
+          "findings": {
+            "contains": {
+              "properties": {
+                "severity": {
+                  "const": "blocker"
+                }
+              },
+              "required": [
+                "severity"
+              ]
+            }
+          }
+        },
+        "required": [
+          "findings"
+        ]
+      },
+      "then": {
+        "properties": {
+          "verdict": {
+            "enum": [
+              "approve_with_conditions",
+              "reject"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "description": "Conditions are the conditions. approve_with_conditions requires at least one finding to carry them.",
+      "if": {
+        "properties": {
+          "verdict": {
+            "const": "approve_with_conditions"
+          }
+        },
+        "required": [
+          "verdict"
+        ]
+      },
+      "then": {
+        "properties": {
+          "findings": {
+            "minItems": 1
+          }
+        },
+        "required": [
+          "findings"
+        ]
+      }
+    }
+  ]
 }

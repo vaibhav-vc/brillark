@@ -1,0 +1,47 @@
+venture_id: laundro
+stage: business-model
+
+intent:
+  problem: |
+    Short-term rental hosts in Manchester with 1-3 properties change bedding and towels between
+    every guest. Hosts either do it themselves (two hours per turnover, plus storage of spare
+    linen) or use a cleaner who charges for the laundry time. Commercial linen hire exists but is
+    built for hotels: pallet volumes, contracts, and minimums that a three-property host cannot meet.
+  why_us: |
+    Nothing yet. This is a cold-start idea with no founder advantage identified.
+  why_now: |
+    Claimed: short-term rental supply has grown and cleaner availability has tightened.
+    UNVERIFIED — this is the first thing to test.
+
+constraints:
+  budget_usd: 15000
+  runway_months: 9
+  team: one founder, part-time
+  non_negotiables:
+    - Must not require a commercial laundry facility in year one.
+
+what_we_do_not_know:
+  - How many short-term rental listings in Manchester are run by hosts with 1-3 properties.
+  - What hosts currently pay for linen handling, and whether it is visible to them as a cost.
+  - Whether hosts perceive laundry as a problem worth paying to remove.
+  - Whether collection and return logistics can work at the density available.
+  - Whether existing commercial laundries would simply serve this segment if asked.
+
+riskiest_assumption: |
+  That enough hosts within a small enough radius will pay a subscription price that exceeds the
+  per-turnover cost of washing, driving, and replacing linen. The business is a density bet.
+
+kill_criteria:
+  - belief: Hosts will pay a premium over self-service for linen handling
+    disproven_if: Fewer than 3 of 15 qualifying hosts will state a price above our cost floor
+    threshold: 3 of 15
+    by: 2026-10-15
+
+success_looks_like: |
+  Twelve months in: 60+ recurring properties inside two postcode clusters, contribution margin
+  positive per turnover, and a route dense enough that one van serves the round in under four hours.
+
+stakeholders:
+  decision_maker: founder
+  affected_groups:
+    - hosts, guests, existing cleaners whose income includes laundry time, laundry workers

@@ -26,6 +26,7 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 WORKSPACE = ROOT.parent / "workspace"
 sys.path.insert(0, str(ROOT / "tools"))
 from loader import Organisation, tok  # noqa: E402
+import validate as schema_validate  # noqa: E402
 
 
 def now() -> str:
@@ -50,27 +51,51 @@ def save_run(venture: str, run: dict) -> None:
 GRADES = ["guessed", "estimated", "benchmarked", "sourced", "measured"]
 
 
+NOT_LOAD_BEARING = "not load-bearing"
+
+
 def parse_evidence_grades(body: str) -> list[tuple[str, str, bool]]:
     """Pull (claim, grade, load_bearing) out of the artifact's Evidence table.
 
-    A row is load-bearing unless it is explicitly marked otherwise. Conservative on purpose:
-    treating an unmarked claim as load-bearing errs toward demanding more evidence, not less.
+    A row is load-bearing unless it is explicitly marked otherwise, in one of two documented ways
+    (see skills/OUTPUT_CONTRACT.md, which is the only place an agent will look):
+
+        | Claim | Source | Grade |            | Claim | Source | Grade | Load-bearing |
+        | logo colour (not load-bearing) | ... | guessed |   ... | guessed | no |
+
+    The marker is read only from the claim cell, the grade cell, or a dedicated Load-bearing
+    column -- never from free prose in the Source cell, where an author may legitimately write
+    "this is why the figure is not load-bearing" without meaning to switch off the check.
+
+    Unmarked means load-bearing. Conservative on purpose: it errs toward demanding more evidence.
     """
     rows = []
     section = body.split("## Evidence", 1)
     if len(section) < 2:
         return rows
+    header: list[str] = []
     for line in section[1].split("##", 1)[0].splitlines():
         if not line.strip().startswith("|"):
             continue
         cells = [c.strip() for c in line.strip().strip("|").split("|")]
-        if len(cells) < 3 or cells[0].lower() in ("claim", "---") or set(cells[0]) <= {"-", " "}:
+        if len(cells) < 3 or set(cells[0]) <= {"-", " ", ":"}:
             continue
-        grade = cells[-1].lower().strip("*` ")
+        if cells[0].lower() == "claim":
+            header = [c.lower().strip("*` ") for c in cells]
+            continue
+        lb_col = next((i for i, h in enumerate(header) if h.startswith("load-bearing")), None)
+        grade_col = next((i for i, h in enumerate(header) if h.startswith("grade")), None)
+        grade_cell = cells[grade_col] if grade_col is not None and grade_col < len(cells) else cells[-1]
+        grade = grade_cell.lower().strip("*` ")
+        if grade not in GRADES:
+            grade = next((c.lower().strip("*` ") for c in reversed(cells)
+                          if c.lower().strip("*` ") in GRADES), "")
         if grade not in GRADES:
             continue
-        load_bearing = "not load-bearing" not in line.lower()
-        rows.append((cells[0], grade, load_bearing))
+        marked = NOT_LOAD_BEARING in cells[0].lower() or NOT_LOAD_BEARING in grade_cell.lower()
+        if lb_col is not None and lb_col < len(cells):
+            marked = marked or cells[lb_col].lower().strip("*` ") in ("no", "n", "false", "-")
+        rows.append((cells[0], grade, not marked))
     return rows
 
 
@@ -90,6 +115,70 @@ def parse_blocks(body: str) -> dict | None:
     if not isinstance(declared, dict) or not declared.get("blocks"):
         return None
     return declared
+
+
+def invalidate(run: dict, blocked_ids: list[str], declared_by: str) -> list[str]:
+    """A finding can land on a step that already finished. Recording a block and leaving the step
+    marked done produces a status line that says both at once, and lets downstream work keep
+    resting on an artifact the run has just contradicted.
+
+    So: a block on a completed step reopens it. The artifact stays on disk -- it is evidence of what
+    was believed and why it was wrong -- but the step stops counting as done, and any block that
+    step itself declared is marked as resting on invalidated ground, so `unblock` will not clear it
+    on the strength of the original reasoning alone.
+    """
+    reopened = []
+    for step in run["steps"]:
+        if step["id"] not in blocked_ids or step["status"] != "done":
+            continue
+        step["status"] = "invalidated"
+        step["invalidated_by"] = declared_by
+        step["invalidated_at"] = now()
+        step.setdefault("superseded_artifact", step.pop("artifact", None))
+        reopened.append(step["id"])
+    for target, block in run.get("blocks", {}).items():
+        if block["declared_by"] in reopened and target not in reopened:
+            block["declared_by_invalidated"] = True
+    return reopened
+
+
+def outstanding_blocks(run: dict) -> dict:
+    """Blocks that are still in force, plus the steps sitting invalidated. This is the run's health,
+    and a gate step must be handed it rather than left to infer it from an empty artifact list.
+    """
+    return {
+        "blocks": run.get("blocks", {}),
+        "invalidated": [s["id"] for s in run["steps"] if s["status"] == "invalidated"],
+    }
+
+
+def schema_for(produces: str) -> str | None:
+    """A step that produces `council-verdict.md` is governed by `council-verdict.schema.json`.
+
+    The workflows said `done_when: Schema-valid verdict exists`. Nothing checked it, because the
+    orchestrator only ever read the markdown envelope. The convention is the filename.
+    """
+    name = pathlib.Path(produces).stem
+    return name if (ROOT / "knowledge-schema" / f"{name}.schema.json").exists() else None
+
+
+def parse_structured(body: str, name: str) -> tuple[dict | None, str | None]:
+    """Pull the machine-readable record out of the artifact: a fenced ```<name> block of YAML.
+
+    Markdown is for the reader; the fenced record is what a schema can hold to account. An artifact
+    governed by a schema must carry both.
+    """
+    match = re.search(rf"```{re.escape(name)}\n(.*?)```", body, re.S)
+    if not match:
+        return None, (f"no ```{name}``` block. A step governed by {name}.schema.json must carry the "
+                      f"machine-readable record alongside the prose, or nothing can check it.")
+    try:
+        parsed = yaml.safe_load(match.group(1))
+    except yaml.YAMLError as exc:
+        return None, f"the ```{name}``` block is not parseable: {exc}"
+    if not isinstance(parsed, dict):
+        return None, f"the ```{name}``` block must be a mapping, got {type(parsed).__name__}"
+    return parsed, None
 
 
 def artifact_path(venture: str, org: Organisation, step: dict) -> pathlib.Path:
@@ -137,7 +226,23 @@ def next_step(venture: str, org: Organisation, write_context: bool) -> int:
         return 0
     step = pending[0]
     agent = org.agents[step["agent"]]
-    assembled = org.assemble(step["agent"], task=step["does"])
+    health = outstanding_blocks(run)
+    task = step["does"]
+    if health["blocks"] or health["invalidated"]:
+        # Offering a step in a broken run as though the run were healthy is how a gate gets asked
+        # to approve something nobody told it was unfinished.
+        lines = ["", "RUN IS NOT HEALTHY — this is mandatory input to the step below, not a footnote."]
+        for bid, b in health["blocks"].items():
+            stale = "  (declared by a step since invalidated)" if b.get("declared_by_invalidated") else ""
+            lines.append(f"  blocked: {bid} — by {b['declared_by']}{stale}")
+        for iid in health["invalidated"]:
+            lines.append(f"  invalidated: {iid} — completed, then contradicted by a later step")
+        lines.append("  A step that concludes without accounting for these is not done.")
+        print("\n".join(lines) + "\n")
+        task = (task + "\n\nRun health you must account for: "
+                + f"blocked={list(health['blocks'])}, invalidated={health['invalidated']}. "
+                + "Do not conclude as though these steps had completed.")
+    assembled = org.assemble(step["agent"], task=task)
     target = artifact_path(venture, org, step)
 
     print(f"STEP {step['id']}  ({run['steps'].index(step) + 1}/{len(run['steps'])})")
@@ -198,6 +303,16 @@ def done(venture: str, step_id: str, org: Organisation, tokens: int | None) -> i
                         f"graded '{weakest}'. OUTPUT_CONTRACT.md rule 5 — confidence is the weakest "
                         f"grade among the claims the conclusion rests on, not the author's mood.\n"
                         f"      weakest load-bearing claim: {weakest_claim[:70]}")
+    governing = schema_for(step["produces"])
+    if governing:
+        record, problem = parse_structured(body, governing)
+        if problem:
+            problems.append(problem)
+        else:
+            schema = schema_validate.load(ROOT, governing)
+            problems += [f"{governing}.schema.json: {e}"
+                         for e in schema_validate.validate(record, schema)]
+
     if problems:
         print(f"REFUSED — {target.name} does not meet the output contract:")
         for p in problems:
@@ -231,6 +346,9 @@ def done(venture: str, step_id: str, org: Organisation, tokens: int | None) -> i
             }
         print(f"  this step BLOCKS: {', '.join(declared_blocks['blocks'])}")
         print(f"  reason: {declared_blocks.get('reason', 'unstated')}")
+        for invalid in invalidate(run, declared_blocks["blocks"], step_id):
+            print(f"  INVALIDATED {invalid} — it was already done; its artifact is now suspect "
+                  f"and it no longer counts toward progress")
     save_run(venture, run)
 
     ledger = WORKSPACE / venture / "telemetry" / "token-ledger" / f"{run['workflow']}-{step_id}.json"
@@ -261,6 +379,14 @@ def unblock(venture: str, step_id: str, evidence: str) -> int:
         return 0
     if not evidence:
         raise SystemExit("unblock needs --evidence stating what actually changed")
+    block = blocks[step_id]
+    if block.get("declared_by_invalidated"):
+        # The original reasoning is no longer standing ground. Clearing on it would let a run walk
+        # out of a block by way of a step the run has already contradicted.
+        print(f"REFUSED — {step_id} is blocked by {block['declared_by']}, and {block['declared_by']} "
+              f"has itself been invalidated since.")
+        print("  Redo the invalidated step first. Its block cannot be cleared on its own reasoning.")
+        return 1
     cleared = blocks.pop(step_id)
     run.setdefault("cleared_blocks", []).append(
         {**cleared, "step": step_id, "cleared_at": now(), "evidence": evidence})
@@ -275,11 +401,21 @@ def status(venture: str) -> int:
     print(f"{run['name']} — {venture}  [{done_n}/{len(run['steps'])} steps]")
     blocks = run.get("blocks", {})
     for s in run["steps"]:
-        mark = "x" if s["status"] == "done" else "!" if s["id"] in blocks else " "
-        extra = f"  {s.get('artifact', '')}" if s["status"] == "done" else ""
-        if s["id"] in blocks:
-            extra = f"  BLOCKED by {blocks[s['id']]['declared_by']}: {blocks[s['id']]['reason'][:50]}"
+        if s["status"] == "invalidated":
+            mark, extra = "~", (f"  INVALIDATED by {s['invalidated_by']} — "
+                                f"{s.get('superseded_artifact', '?')} is superseded")
+        elif s["id"] in blocks:
+            mark, extra = "!", (f"  BLOCKED by {blocks[s['id']]['declared_by']}: "
+                                f"{blocks[s['id']]['reason'][:50]}")
+        elif s["status"] == "done":
+            mark, extra = "x", f"  {s.get('artifact', '')}"
+        else:
+            mark, extra = " ", ""
         print(f"  [{mark}] {s['id']:<12} {s['agent']:<32}{extra}")
+    invalid = [s["id"] for s in run["steps"] if s["status"] == "invalidated"]
+    if invalid:
+        print(f"\n{len(invalid)} step(s) invalidated after completion: {', '.join(invalid)}")
+        print("Their artifacts remain on disk as the record of what was believed. They do not count.")
     if done_n == len(run["steps"]):
         print("\nexit criteria — these are attested, not auto-checked:")
         for c in run["exit_criteria"]:

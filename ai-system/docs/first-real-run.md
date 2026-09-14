@@ -109,6 +109,59 @@ the strawman.
 
 ---
 
+## Finding 5 — a block could land on a step already marked done, and the run stayed inconsistent
+
+Running `competition` after `size` produced the first case where a later step's finding contradicts
+an *earlier, completed* one, rather than a future one. `competitive-map.md` found the venture's
+stated market gap does not exist, which invalidates the reasoning `market-analysis.md` was built on
+— not just the steps ahead of it. `run_workflow.py` recorded the new block correctly but left `size`
+marked `done`, with its artifact still counted toward progress. `status` would have shown a step both
+finished and contradicted at once, and nothing stopped `unblock` from later clearing `pricing` and
+`economics` by citing `size`'s own reasoning — the very reasoning that had just been overturned.
+
+**Fixed.** A block landing on a completed step now reopens it: `status = invalidated`, the artifact
+path moves to `superseded_artifact` (kept, not deleted — it is the record of what was believed and
+why it was wrong), and it stops counting as done. Any block that step itself declared is flagged
+`declared_by_invalidated`, and `unblock` refuses to clear such a block until the invalidated step is
+redone. `next` now hands a gate step the run's full health — every open block and every invalidated
+step — as mandatory input rather than presenting a broken run as though it were routine. Nine tests.
+
+## Finding 6 — the load-bearing marker could be gamed from the wrong cell
+
+Rule 5's exemption ("rows marked `not load-bearing` don't cap confidence") was implemented as a
+substring check across the whole table row, which meant the marker could appear in the *Source*
+column — an author explaining, in prose, why a claim shouldn't count — and it would work exactly like
+the deliberate marker rule 6 was meant to require. That is the confidence check's own escape hatch,
+reachable by accident.
+
+**Fixed.** OUTPUT_CONTRACT.md now documents rule 6 explicitly with two sanctioned forms — a
+`Load-bearing` column, or `(not load-bearing)` inside the claim or grade cell — and the parser reads
+the marker only from those, never from Source-column prose. Four tests, including one that writes
+"this figure explains why it is not load-bearing" into a Source cell and confirms the claim still
+counts.
+
+## Finding 7 — "schema-valid verdict" was never actually checked
+
+Every workflow step's `done_when` is prose a human reads; `run_workflow.py done` never parsed it, and
+`council-verdict.md`'s `done_when: Schema-valid verdict exists` had no schema check behind it at all.
+The council step would have passed on any markdown file with the right sections and confidence
+grade, `approve` written over its own blocker findings included — the exact failure the Council
+exists to prevent, undetectable in its own output format. There was also no schema validator in the
+toolchain: the 22 knowledge schemas were written and never checked against a real document, because
+`jsonschema` is not a dependency here.
+
+**Fixed.** `tools/validate.py` is a small draft-2020-12 validator covering the keyword subset the
+schemas actually use (confirmed by a full sweep of all 22 schema files) and failing loudly on
+anything else. `run_workflow.py done` now matches a step's `produces` filename against a schema of
+the same name, requires a fenced ` ```<schema-name> ` block carrying the machine-readable record, and
+validates it. `council-verdict.schema.json` gained two `allOf`/`if`/`then` rules making the Council's
+core discipline load-bearing in the schema itself, not just in prose: a verdict cannot be `approve`
+while any finding is a `blocker`, and `approve_with_conditions` requires at least one finding. Six
+new schema-integrity tests plus nineteen tests for the validator itself.
+
+The real `council-verdict.md` produced for `laundro` (reject, three blockers, two majors, one
+recorded dissent) validates clean against the hardened schema.
+
 ## What the system got right
 
 Worth recording, because it would be easy to read the above as a failure.
@@ -123,9 +176,18 @@ Worth recording, because it would be easy to read the above as a failure.
 - **The budget enforcement was never the binding constraint.** Every step ran at ~4,900 of 15,000
   tokens. The efficiency work was not the hard part; the honesty machinery was.
 
+This session also ran `competition` and `council` — two more of the eight `01-business-model-design`
+steps, and the first time any step reached the Council. Both surfaced real defects (Findings 5–7
+above) before either could be trusted.
+
 ## What is still not validated
 
-- Only **one step of one workflow** has been run. Seven steps and eighteen workflows remain untouched.
+- Two of eight steps remain unattempted (`jobs`, `value`, `model` are blocked pending F1/F2 below;
+  `pricing` and `economics` stay blocked behind a redone `size`). Eighteen other workflows are
+  entirely untouched.
 - The model executing and the model assessing were the same. This is a working session, not an eval.
 - The hardware, legal and compliance domains remain unreviewed by anyone qualified in them.
 - The eval suite still has never been run against a model.
+- The Council's own verdict schema is new as of this run (Finding 7) and has been exercised on
+  exactly one real verdict. It has not yet been tried against a genuinely close call — a plan with
+  only minor findings, where `approve` is the correct verdict and the schema must permit it.

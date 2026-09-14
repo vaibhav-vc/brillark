@@ -3,6 +3,7 @@
     "economics": {
       "declared_at": "2026-09-11T05:49:27+00:00",
       "declared_by": "size",
+      "declared_by_invalidated": true,
       "reason": "Sizing rests on three guessed load-bearing inputs (1-3 property share, stay length, price point). A price or a unit-economics model built on this would inherit the guess and hide it behind arithmetic.\n",
       "resolved_by": [
         "source-verifier",
@@ -10,14 +11,55 @@
         "customer-discovery-interviewer"
       ]
     },
+    "jobs": {
+      "declared_at": "2026-09-11T09:17:13+00:00",
+      "declared_by": "competition",
+      "reason": "The venture premise is contradicted. `venture.yaml` states that commercial linen hire \"is built for hotels: pallet volumes, contracts, and minimums that a three-property host cannot meet\". A Manchester-based provider runs weekly linen rounds for Airbnb hosts, organised by changeover day and postcode, from GBP 6.65 per pack, and at least two UK providers advertise pay-as-you-go with no contract. The whitespace this venture was pointed at is occupied. The sizing artifact also assumes GBP 18 per turnover, roughly 2.7x the incumbent's advertised pack price, so the SOM range is built on a price the market appears already to undercut.\n",
+      "resolved_by": [
+        "source-verifier",
+        "customer-discovery-interviewer",
+        "business-head"
+      ]
+    },
+    "model": {
+      "declared_at": "2026-09-11T09:17:13+00:00",
+      "declared_by": "competition",
+      "reason": "The venture premise is contradicted. `venture.yaml` states that commercial linen hire \"is built for hotels: pallet volumes, contracts, and minimums that a three-property host cannot meet\". A Manchester-based provider runs weekly linen rounds for Airbnb hosts, organised by changeover day and postcode, from GBP 6.65 per pack, and at least two UK providers advertise pay-as-you-go with no contract. The whitespace this venture was pointed at is occupied. The sizing artifact also assumes GBP 18 per turnover, roughly 2.7x the incumbent's advertised pack price, so the SOM range is built on a price the market appears already to undercut.\n",
+      "resolved_by": [
+        "source-verifier",
+        "customer-discovery-interviewer",
+        "business-head"
+      ]
+    },
     "pricing": {
       "declared_at": "2026-09-11T05:49:27+00:00",
       "declared_by": "size",
+      "declared_by_invalidated": true,
       "reason": "Sizing rests on three guessed load-bearing inputs (1-3 property share, stay length, price point). A price or a unit-economics model built on this would inherit the guess and hide it behind arithmetic.\n",
       "resolved_by": [
         "source-verifier",
         "data-sourcing-analyst",
         "customer-discovery-interviewer"
+      ]
+    },
+    "size": {
+      "declared_at": "2026-09-11T09:17:13+00:00",
+      "declared_by": "competition",
+      "reason": "The venture premise is contradicted. `venture.yaml` states that commercial linen hire \"is built for hotels: pallet volumes, contracts, and minimums that a three-property host cannot meet\". A Manchester-based provider runs weekly linen rounds for Airbnb hosts, organised by changeover day and postcode, from GBP 6.65 per pack, and at least two UK providers advertise pay-as-you-go with no contract. The whitespace this venture was pointed at is occupied. The sizing artifact also assumes GBP 18 per turnover, roughly 2.7x the incumbent's advertised pack price, so the SOM range is built on a price the market appears already to undercut.\n",
+      "resolved_by": [
+        "source-verifier",
+        "customer-discovery-interviewer",
+        "business-head"
+      ]
+    },
+    "value": {
+      "declared_at": "2026-09-11T09:17:13+00:00",
+      "declared_by": "competition",
+      "reason": "The venture premise is contradicted. `venture.yaml` states that commercial linen hire \"is built for hotels: pallet volumes, contracts, and minimums that a three-property host cannot meet\". A Manchester-based provider runs weekly linen rounds for Airbnb hosts, organised by changeover day and postcode, from GBP 6.65 per pack, and at least two UK providers advertise pay-as-you-go with no contract. The whitespace this venture was pointed at is occupied. The sizing artifact also assumes GBP 18 per turnover, roughly 2.7x the incumbent's advertised pack price, so the SOM range is built on a price the market appears already to undercut.\n",
+      "resolved_by": [
+        "source-verifier",
+        "customer-discovery-interviewer",
+        "business-head"
       ]
     }
   },
@@ -32,12 +74,13 @@
   "steps": [
     {
       "agent": "market-researcher",
-      "artifact": "laundro/market/market-analysis.md",
       "artifact_tokens": 1554,
       "completed_at": "2026-09-11T05:49:27+00:00",
       "does": "Size the market bottom-up and establish why now.",
       "done_when": "Every figure traceable to a counted input; SOM justified by a real channel.",
       "id": "size",
+      "invalidated_at": "2026-09-11T09:17:13+00:00",
+      "invalidated_by": "competition",
       "produces": "market-analysis.md",
       "run_tokens": null,
       "skills": [
@@ -47,21 +90,26 @@
         "source-grading",
         "why-now-analysis"
       ],
-      "status": "done"
+      "status": "invalidated",
+      "superseded_artifact": "laundro/market/market-analysis.md"
     },
     {
       "agent": "competitor-intel-analyst",
+      "artifact": "laundro/market/competitive-map.md",
+      "artifact_tokens": 1907,
+      "completed_at": "2026-09-11T09:17:13+00:00",
       "does": "Map competitors, substitutes, and the status quo; state our switching reason.",
       "done_when": "Status quo included; differentiation stated as a reason to switch.",
       "id": "competition",
       "produces": "competitive-map.md",
+      "run_tokens": null,
       "skills": [
         "competitive-landscape-mapping",
         "comparison-matrix",
         "review-mining",
         "differentiation-analysis"
       ],
-      "status": "pending"
+      "status": "done"
     },
     {
       "agent": "jtbd-analyst",
@@ -135,16 +183,20 @@
     },
     {
       "agent": "council-director",
+      "artifact": "laundro/council/council-verdict.md",
+      "artifact_tokens": 3882,
+      "completed_at": "2026-09-11T09:20:19+00:00",
       "does": "Submit the model for structured attack before any spend is justified by it.",
       "done_when": "Schema-valid verdict exists with severities, owners, and dissent.",
       "id": "council",
       "produces": "council-verdict.md",
+      "run_tokens": null,
       "skills": [
         "council-debate-facilitation",
         "verdict-writing",
         "dissent-recording"
       ],
-      "status": "pending"
+      "status": "done"
     }
   ],
   "venture": "laundro",

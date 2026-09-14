@@ -17,6 +17,8 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "tools"))
 import memory  # noqa: E402
 import run_workflow as rw  # noqa: E402
+import validate as schema_validate  # noqa: E402
+from loader import Organisation  # noqa: E402
 
 
 def artifact(confidence: str, rows: list[tuple[str, str]], blocks: str = "") -> str:
@@ -249,6 +251,275 @@ class TestConsolidation(unittest.TestCase):
                 self.assertEqual(len(semantic[0]["promoted_from"]), 3)
             finally:
                 memory.WORKSPACE = original
+
+
+def artifact_lb(confidence: str, rows: list[tuple[str, str, str]]) -> str:
+    """Like `artifact()`, but with an explicit Load-bearing column — rows are
+    (claim, grade, 'yes'|'no')."""
+    table = "\n".join(f"| {claim} | src | {grade} | {lb} |" for claim, grade, lb in rows)
+    return f"""# Test artifact
+- **Skill:** market-sizing
+- **Confidence:** {confidence}
+
+## Summary
+A summary long enough to clear the minimum-length check that rejects stubs pretending to be work.
+
+## Body
+Body text.
+
+## Evidence
+| Claim | Source | Grade | Load-bearing |
+|---|---|---|---|
+{table}
+
+## Open questions
+Something unresolved.
+
+## Next action
+Someone does something.
+"""
+
+
+class TestLoadBearingColumn(unittest.TestCase):
+    """rule 6 of OUTPUT_CONTRACT.md: a row is only excluded from the confidence check when marked,
+    and the marker must come from the claim or grade cell, never from prose in the Source cell —
+    an author should not be able to switch the check off by writing an explanation there."""
+
+    def test_a_dedicated_column_marks_a_row_not_load_bearing(self):
+        body = artifact_lb("sourced", [("headline number", "sourced", "yes"),
+                                       ("logo colour", "guessed", "no")])
+        rows = rw.parse_evidence_grades(body)
+        load_bearing = [(c, g) for c, g, lb in rows if lb]
+        self.assertEqual(len(load_bearing), 1)
+        self.assertEqual(load_bearing[0][1], "sourced")
+
+    def test_inline_marker_in_the_claim_cell_still_works(self):
+        body = artifact("sourced", [("a", "sourced"),
+                                    ("colour of the logo (not load-bearing)", "guessed")])
+        rows = rw.parse_evidence_grades(body)
+        load_bearing = [(c, g) for c, g, lb in rows if lb]
+        self.assertEqual(len(load_bearing), 1)
+
+    def test_prose_in_the_source_cell_does_not_switch_off_the_check(self):
+        """An author writing 'this is why it is not load-bearing' in the Source column must not
+        exempt the row -- only the claim cell, the grade cell, or a dedicated column may."""
+        table = ('| a headline claim | this figure explains why it is not load-bearing here | '
+                 'guessed |')
+        body = f"""# Test artifact
+- **Skill:** market-sizing
+- **Confidence:** sourced
+
+## Summary
+A summary long enough to clear the minimum-length check that rejects stubs pretending to be work.
+
+## Body
+Body text.
+
+## Evidence
+| Claim | Source | Grade |
+|---|---|---|
+{table}
+
+## Open questions
+Something unresolved.
+
+## Next action
+Someone does something.
+"""
+        rows = rw.parse_evidence_grades(body)
+        load_bearing = [(c, g) for c, g, lb in rows if lb]
+        self.assertEqual(len(load_bearing), 1, "the guessed row must still count as load-bearing")
+        self.assertEqual(load_bearing[0][1], "guessed")
+
+    def test_confidence_check_uses_the_dedicated_column(self):
+        body = artifact_lb("sourced", [("headline number", "sourced", "yes"),
+                                       ("logo colour", "guessed", "no")])
+        with tempfile.TemporaryDirectory() as tmp:
+            venture_dir = pathlib.Path(tmp) / "v"
+            original = rw.WORKSPACE
+            try:
+                rw.WORKSPACE = pathlib.Path(tmp)
+                (venture_dir / "market").mkdir(parents=True)
+                target = venture_dir / "market" / "out.md"
+                target.write_text(body)
+                run = {"venture": "v", "workflow": "wf", "steps": [
+                    {"id": "s", "agent": "market-researcher", "skills": ["market-sizing"],
+                     "does": "x", "produces": "out.md", "done_when": "x", "status": "pending"}]}
+                (venture_dir / "run.json").write_text(json.dumps(run))
+                org = Organisation()
+                rc = rw.done("v", "s", org, tokens=None)
+                self.assertEqual(rc, 0, "a not-load-bearing guess must not cap the confidence")
+            finally:
+                rw.WORKSPACE = original
+
+
+class TestStepInvalidation(unittest.TestCase):
+    """A finding can land on a step that already finished. The run must stop counting that step as
+    done rather than showing 'done' and 'blocked' at once, and a block declared by a step that is
+    itself invalidated must not be clearable on its own say-so."""
+
+    def _run(self):
+        return {
+            "venture": "v", "workflow": "wf", "blocks": {},
+            "steps": [
+                {"id": "size", "agent": "a", "status": "done", "artifact": "market/size.md"},
+                {"id": "competition", "agent": "b", "status": "done",
+                 "artifact": "market/competition.md"},
+                {"id": "pricing", "agent": "c", "status": "pending"},
+            ],
+        }
+
+    def test_a_block_on_a_completed_step_reopens_it(self):
+        run = self._run()
+        reopened = rw.invalidate(run, ["size"], declared_by="competition")
+        self.assertEqual(reopened, ["size"])
+        step = next(s for s in run["steps"] if s["id"] == "size")
+        self.assertEqual(step["status"], "invalidated")
+        self.assertEqual(step["invalidated_by"], "competition")
+        self.assertNotIn("artifact", step)
+        self.assertEqual(step["superseded_artifact"], "market/size.md")
+
+    def test_a_pending_step_is_not_invalidated_only_blocked(self):
+        run = self._run()
+        reopened = rw.invalidate(run, ["pricing"], declared_by="competition")
+        self.assertEqual(reopened, [])
+        self.assertEqual(next(s for s in run["steps"] if s["id"] == "pricing")["status"], "pending")
+
+    def test_a_block_declared_by_a_now_invalidated_step_is_flagged_stale(self):
+        run = self._run()
+        run["blocks"]["pricing"] = {"declared_by": "size", "reason": "guessed inputs",
+                                    "resolved_by": []}
+        rw.invalidate(run, ["size"], declared_by="competition")
+        self.assertTrue(run["blocks"]["pricing"].get("declared_by_invalidated"))
+
+    def test_unblock_refuses_when_the_declaring_step_is_invalidated(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            venture_dir = pathlib.Path(tmp) / "v"
+            venture_dir.mkdir(parents=True)
+            run = self._run()
+            run["blocks"]["pricing"] = {"declared_by": "size", "reason": "guessed inputs",
+                                        "resolved_by": [], "declared_by_invalidated": True}
+            (venture_dir / "run.json").write_text(json.dumps(run))
+            original = rw.WORKSPACE
+            try:
+                rw.WORKSPACE = pathlib.Path(tmp)
+                rc = rw.unblock("v", "pricing", evidence="trying it anyway")
+                self.assertEqual(rc, 1)
+                after = json.loads((venture_dir / "run.json").read_text())
+                self.assertIn("pricing", after["blocks"], "the block must remain in force")
+            finally:
+                rw.WORKSPACE = original
+
+    def test_outstanding_blocks_reports_both_blocks_and_invalidated_steps(self):
+        run = self._run()
+        run["blocks"]["pricing"] = {"declared_by": "size", "reason": "x", "resolved_by": []}
+        rw.invalidate(run, ["size"], declared_by="competition")
+        health = rw.outstanding_blocks(run)
+        self.assertIn("pricing", health["blocks"])
+        self.assertIn("size", health["invalidated"])
+
+
+class TestGovernedArtifactsAreSchemaChecked(unittest.TestCase):
+    """A step whose done_when says 'schema-valid verdict' produced no schema check at all -- any
+    markdown file of the right length and shape would pass. A step is only governed when a schema
+    of the same name as its `produces` file exists; everything else is unaffected."""
+
+    def test_schema_for_matches_by_produces_filename(self):
+        self.assertEqual(rw.schema_for("council-verdict.md"), "council-verdict")
+        self.assertIsNone(rw.schema_for("competitive-map.md"),
+                          "most artifacts have no governing schema and must not require one")
+
+    def test_a_governed_artifact_without_a_structured_block_is_refused(self):
+        record, problem = rw.parse_structured("no fenced block here", "council-verdict")
+        self.assertIsNone(record)
+        self.assertIn("council-verdict", problem)
+
+    def test_an_unparseable_structured_block_is_refused(self):
+        body = "```council-verdict\nnot: [valid, yaml: broken\n```"
+        record, problem = rw.parse_structured(body, "council-verdict")
+        self.assertIsNone(record)
+        self.assertIsNotNone(problem)
+
+    def test_a_well_formed_block_parses(self):
+        body = "```council-verdict\nverdict: reject\nfindings: []\n```"
+        record, problem = rw.parse_structured(body, "council-verdict")
+        self.assertIsNone(problem)
+        self.assertEqual(record["verdict"], "reject")
+
+    def test_council_step_completion_enforces_the_schema(self):
+        """A council-verdict.md with no ```council-verdict block, or one that violates the schema,
+        must be refused by `done` even though it otherwise satisfies the output contract."""
+        prose = artifact("sourced", [("a", "sourced")])
+        with tempfile.TemporaryDirectory() as tmp:
+            venture_dir = pathlib.Path(tmp) / "v"
+            original = rw.WORKSPACE
+            try:
+                rw.WORKSPACE = pathlib.Path(tmp)
+                (venture_dir / "council").mkdir(parents=True)
+                target = venture_dir / "council" / "council-verdict.md"
+                target.write_text(prose)
+                run = {"venture": "v", "workflow": "wf", "steps": [
+                    {"id": "council", "agent": "council-director",
+                     "skills": ["verdict-writing"], "does": "x",
+                     "produces": "council-verdict.md", "done_when": "x", "status": "pending"}]}
+                (venture_dir / "run.json").write_text(json.dumps(run))
+                org = Organisation()
+                rc = rw.done("v", "council", org, tokens=None)
+                self.assertEqual(rc, 1, "prose with no structured verdict block must be refused")
+            finally:
+                rw.WORKSPACE = original
+
+
+class TestCouncilVerdictSchemaIntegrity(unittest.TestCase):
+    """The Council exists to say no. A schema that lets it write 'approve' over its own blocker
+    findings would let a single verdict document contradict itself and still pass."""
+
+    def setUp(self):
+        root = pathlib.Path(__file__).resolve().parent.parent
+        self.schema = schema_validate.load(root, "council-verdict")
+
+    def _base(self, verdict: str, findings: list[dict]) -> dict:
+        return {"id": "ver_x", "subject_artifact": "a.md", "requested_decision": "spend",
+                "verdict": verdict, "findings": findings, "issued_by": "council-director",
+                "issued_at": "2026-09-11T00:00:00Z"}
+
+    def _blocker(self, **overrides) -> dict:
+        finding = {"id": "F1", "severity": "blocker", "finding": "x",
+                  "failure_scenario": "a concrete sequence of events leading to harm",
+                  "raised_by": ["a"], "remedy": "r", "owner": "o", "acceptance_criterion": "c"}
+        finding.update(overrides)
+        return finding
+
+    def test_approve_over_an_open_blocker_is_rejected(self):
+        errors = schema_validate.validate(self._base("approve", [self._blocker()]), self.schema)
+        self.assertTrue(errors)
+
+    def test_reject_over_a_blocker_is_accepted(self):
+        errors = schema_validate.validate(self._base("reject", [self._blocker()]), self.schema)
+        self.assertEqual(errors, [])
+
+    def test_a_blocker_without_an_acceptance_criterion_is_rejected(self):
+        finding = self._blocker()
+        del finding["acceptance_criterion"]
+        errors = schema_validate.validate(self._base("reject", [finding]), self.schema)
+        self.assertTrue(any("acceptance_criterion" in e for e in errors))
+
+    def test_a_major_finding_without_a_remedy_is_rejected(self):
+        finding = self._blocker(severity="major", id="F2")
+        del finding["remedy"]
+        errors = schema_validate.validate(self._base("reject", [finding]), self.schema)
+        self.assertTrue(any("remedy" in e for e in errors))
+
+    def test_approve_with_conditions_requires_at_least_one_finding(self):
+        errors = schema_validate.validate(self._base("approve_with_conditions", []), self.schema)
+        self.assertTrue(errors)
+
+    def test_a_note_finding_does_not_block_approval(self):
+        note = {"id": "F1", "severity": "note", "finding": "x",
+               "failure_scenario": "a concrete sequence of events leading to harm",
+               "raised_by": ["a"]}
+        errors = schema_validate.validate(self._base("approve", [note]), self.schema)
+        self.assertEqual(errors, [])
 
 
 if __name__ == "__main__":
